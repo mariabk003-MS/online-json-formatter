@@ -9,66 +9,39 @@ function App() {
   const [success, setSuccess] = useState('')
 
   function formatJSON() {
-    setError('')
-    setSuccess('')
-
-    if (!json.trim()) {
-      setResult('')
-      setError('Please enter JSON to format.')
-      return
-    }
-
     try {
-      const data = JSON.parse(json)
-      setResult(JSON.stringify(data, null, 2))
+      const parsed = JSON.parse(json)
+      setResult(JSON.stringify(parsed, null, 2))
+      setError('')
       setSuccess('JSON formatted successfully!')
-    } catch (err) {
+    } catch {
+      setError('Invalid JSON. Please check your input.')
+      setSuccess('')
       setResult('')
-      setError(
-        err instanceof Error ? `Invalid JSON: ${err.message}` : 'Invalid JSON.'
-      )
     }
   }
 
   function minifyJSON() {
-    setError('')
-    setSuccess('')
-
-    if (!json.trim()) {
-      setResult('')
-      setError('Please enter JSON to minify.')
-      return
-    }
-
     try {
-      const data = JSON.parse(json)
-      setResult(JSON.stringify(data))
+      const parsed = JSON.parse(json)
+      setResult(JSON.stringify(parsed))
+      setError('')
       setSuccess('JSON minified successfully!')
-    } catch (err) {
+    } catch {
+      setError('Invalid JSON. Please check your input.')
+      setSuccess('')
       setResult('')
-      setError(
-        err instanceof Error ? `Invalid JSON: ${err.message}` : 'Invalid JSON.'
-      )
     }
   }
 
   function validateJSON() {
-    setError('')
-    setSuccess('')
-    setResult('')
-
-    if (!json.trim()) {
-      setError('Please enter JSON to validate.')
-      return
-    }
-
     try {
       JSON.parse(json)
-      setSuccess('Valid JSON! Your JSON syntax is correct.')
-    } catch (err) {
-      setError(
-        err instanceof Error ? `Invalid JSON: ${err.message}` : 'Invalid JSON.'
-      )
+      setError('')
+      setSuccess('Valid JSON!')
+    } catch {
+      setError('Invalid JSON. Please check your input.')
+      setSuccess('')
     }
   }
 
@@ -83,7 +56,7 @@ function App() {
     setJson(JSON.stringify(sample, null, 2))
     setResult('')
     setError('')
-    setSuccess('Sample JSON loaded successfully!')
+    setSuccess('')
   }
 
   function clearAll() {
@@ -95,7 +68,7 @@ function App() {
 
   async function copyResult() {
     if (!result) {
-      setError('Please format or minify JSON before copying.')
+      setError('Please format or minify JSON first.')
       setSuccess('')
       return
     }
@@ -103,105 +76,80 @@ function App() {
     try {
       await navigator.clipboard.writeText(result)
       setError('')
-      setSuccess('JSON copied successfully!')
+      setSuccess('Result copied successfully!')
     } catch {
-      setError('Could not copy. Please try again.')
+      setError('Could not copy. Please copy the result manually.')
       setSuccess('')
     }
   }
 
   function downloadJSON() {
-    try {
-      const content = result || json
-
-      if (!content.trim()) {
-        setError('Please enter JSON before downloading.')
-        setSuccess('')
-        return
-      }
-
-      const data = JSON.parse(content)
-      const formatted = JSON.stringify(data, null, 2)
-      const blob = new Blob([formatted], {
-        type: 'application/json',
-      })
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-
-      link.href = url
-      link.download = 'formatted.json'
-      link.click()
-      URL.revokeObjectURL(url)
-
-      setError('')
-      setSuccess('JSON downloaded successfully!')
-    } catch {
-      setError('Please enter valid JSON before downloading.')
+    if (!result) {
+      setError('Please format or minify JSON first.')
       setSuccess('')
+      return
     }
+
+    const blob = new Blob([result], {
+      type: 'application/json',
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+
+    link.href = url
+    link.download = 'formatted.json'
+    link.click()
+
+    URL.revokeObjectURL(url)
+    setError('')
+    setSuccess('JSON downloaded successfully!')
   }
 
   return (
-    
-<div className="app">
-  <h1>Online JSON Formatter</h1>
-  <p>Format and validate your JSON easily.</p>
+    <div className="app">
+      <h1>Online JSON Formatter</h1>
+      <p>Format, minify, and validate your JSON easily.</p>
 
-  <div className="editor-layout">
-    <section className="editor-panel">
-      <h2>Input JSON</h2>
-      <textarea
-        placeholder="Paste your JSON here..."
-        value={json}
-        onChange={(e) => {
-          setJson(e.target.value)
-          setError('')
-          setSuccess('')
-          setResult('')
-        }}
-      />
+      <div className="editor-layout">
+        <section className="editor-panel">
+          <h2>Input JSON</h2>
 
-      <div className="buttons">
-        <button onClick={formatJSON}>Format JSON</button>
-        <button onClick={minifyJSON}>Minify JSON</button>
-        <button onClick={validateJSON}>Validate JSON</button>
-        <button onClick={loadSample}>Load Sample</button>
-        <button onClick={clearAll}>Clear</button>
-      </div>
-    </section>
+          <textarea
+            placeholder="Paste your JSON here..."
+            value={json}
+            onChange={(event) => {
+              setJson(event.target.value)
+              setError('')
+              setSuccess('')
+              setResult('')
+            }}
+          />
 
-    <section className="editor-panel">
-      <h2>Formatted Result</h2>
-      <pre className="result-output">
-        {result || 'Your formatted JSON will appear here...'}
-      </pre>
+          <div className="buttons">
+            <button onClick={formatJSON}>Format JSON</button>
+            <button onClick={minifyJSON}>Minify JSON</button>
+            <button onClick={validateJSON}>Validate JSON</button>
+            <button onClick={loadSample}>Load Sample</button>
+            <button onClick={clearAll}>Clear</button>
+          </div>
+        </section>
 
-      <div className="buttons">
-        <button onClick={copyResult}>Copy Result</button>
-        <button onClick={downloadJSON}>Download JSON</button>
-      </div>
-    </section>
-  </div>
+        <section className="editor-panel">
+          <h2>Formatted Result</h2>
 
-  {error && <p className="error">{error}</p>}
-  {success && <p className="success">{success}</p>}
-</div>
-
-
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
-
-      {result && (
-        <>
-          <h2>Result</h2>
-          <pre>{result}</pre>
+          <pre className="result-output">
+            {result || 'Your formatted JSON will appear here...'}
+          </pre>
 
           <div className="buttons">
             <button onClick={copyResult}>Copy Result</button>
             <button onClick={downloadJSON}>Download JSON</button>
           </div>
-        </>
-      )}
+        </section>
+      </div>
+
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
     </div>
   )
 }
