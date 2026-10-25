@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import './App.css'
-import PrivacyPolicy from './PrivacyPolicy'
+
 function App() {
   const [json, setJson] = useState('')
   const [result, setResult] = useState('')
@@ -190,6 +190,9 @@ function App() {
           Yes. Click Download JSON to save the formatted result as a JSON file.
         </p>
       </section>
+            <footer className="site-footer">
+        <a href="/privacy-policy">Privacy Policy</a>
+      </footer>
     </div>
   )
 }
