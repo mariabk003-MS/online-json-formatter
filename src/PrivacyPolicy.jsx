@@ -1,7 +1,25 @@
-
+import { useEffect } from 'react'
 import './PrivacyPolicy.css'
 
 function PrivacyPolicy() {
+    useEffect(() => {
+    const oldTitle = document.title
+    const meta = document.querySelector('meta[name="description"]')
+    const oldDescription = meta ? meta.getAttribute('content') : ''
+
+    document.title = 'Privacy Policy - Online JSON Formatter'
+    if (meta) {
+      meta.setAttribute(
+        'content',
+        'Read the Privacy Policy of Online JSON Formatter. Your JSON data is processed in your browser and is not uploaded to our servers.'
+      )
+    }
+
+    return () => {
+      document.title = oldTitle
+      if (meta) meta.setAttribute('content', oldDescription)
+    }
+  }, [])
   return (
     <main className="privacy-policy">
       <h1>Privacy Policy</h1>
