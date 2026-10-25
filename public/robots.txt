@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://online-json-formatter-ten.vercel.app/sitemap.xml

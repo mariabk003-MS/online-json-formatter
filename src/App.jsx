@@ -1,47 +1,46 @@
 
 import { useState } from 'react'
 import './App.css'
-
+import PrivacyPolicy from './PrivacyPolicy'
 function App() {
   const [json, setJson] = useState('')
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
-  function formatJSON() {
+  function fixAndFormatJSON() {
+    if (!json.trim()) {
+      setError('Please paste your JSON first.')
+      setSuccess('')
+      setResult('')
+      return
+    }
+
     try {
       const parsed = JSON.parse(json)
       setResult(JSON.stringify(parsed, null, 2))
       setError('')
-      setSuccess('JSON formatted successfully!')
+      setSuccess('Valid JSON! Fixed and formatted successfully.')
+      return
     } catch {
-      setError('Invalid JSON. Please check your input.')
-      setSuccess('')
-      setResult('')
+      // Try correcting a common trailing-comma mistake.
     }
-  }
 
-  function minifyJSON() {
+    let fixed = json.trim()
+    fixed = fixed.replace(/,\s*([}\]])/g, '$1')
+
     try {
-      const parsed = JSON.parse(json)
-      setResult(JSON.stringify(parsed))
+      const parsed = JSON.parse(fixed)
+      setResult(JSON.stringify(parsed, null, 2))
+      setJson(fixed)
       setError('')
-      setSuccess('JSON minified successfully!')
-    } catch {
-      setError('Invalid JSON. Please check your input.')
-      setSuccess('')
+      setSuccess('A common syntax mistake was fixed and JSON formatted.')
+    } catch (err) {
       setResult('')
-    }
-  }
-
-  function validateJSON() {
-    try {
-      JSON.parse(json)
-      setError('')
-      setSuccess('Valid JSON!')
-    } catch {
-      setError('Invalid JSON. Please check your input.')
       setSuccess('')
+      setError(
+        `Could not safely fix this JSON. ${err.message} Please check the error and correct the input.`
+      )
     }
   }
 
@@ -68,7 +67,7 @@ function App() {
 
   async function copyResult() {
     if (!result) {
-      setError('Please format or minify JSON first.')
+      setError('Please fix and format JSON first.')
       setSuccess('')
       return
     }
@@ -85,22 +84,20 @@ function App() {
 
   function downloadJSON() {
     if (!result) {
-      setError('Please format or minify JSON first.')
+      setError('Please fix and format JSON first.')
       setSuccess('')
       return
     }
 
-    const blob = new Blob([result], {
-      type: 'application/json',
-    })
+    const blob = new Blob([result], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
 
     link.href = url
     link.download = 'formatted.json'
     link.click()
-
     URL.revokeObjectURL(url)
+
     setError('')
     setSuccess('JSON downloaded successfully!')
   }
@@ -108,7 +105,7 @@ function App() {
   return (
     <div className="app">
       <h1>Online JSON Formatter</h1>
-      <p>Format, minify, and validate your JSON easily.</p>
+      <p>Fix, format, and validate your JSON easily.</p>
 
       <div className="editor-layout">
         <section className="editor-panel">
@@ -126,19 +123,19 @@ function App() {
           />
 
           <div className="buttons">
-            <button onClick={formatJSON}>Format JSON</button>
-            <button onClick={minifyJSON}>Minify JSON</button>
-            <button onClick={validateJSON}>Validate JSON</button>
+            <button onClick={fixAndFormatJSON}>
+              Fix &amp; Format JSON
+            </button>
             <button onClick={loadSample}>Load Sample</button>
             <button onClick={clearAll}>Clear</button>
           </div>
         </section>
 
         <section className="editor-panel">
-          <h2>Formatted Result</h2>
+          <h2>Corrected JSON Result</h2>
 
           <pre className="result-output">
-            {result || 'Your formatted JSON will appear here...'}
+            {result || 'Your corrected JSON will appear here...'}
           </pre>
 
           <div className="buttons">
@@ -150,6 +147,49 @@ function App() {
 
       {error && <p className="error">{error}</p>}
       {success && <p className="success">{success}</p>}
+
+      <section className="seo-content">
+        <h2>What Is a JSON Formatter?</h2>
+        <p>
+          A JSON formatter is a free online tool that makes JSON data easier
+          to read by adding consistent spacing and indentation. Use this
+          Online JSON Formatter to format JSON and check whether your data
+          has valid JSON syntax.
+        </p>
+
+        <h2>How to Use This JSON Formatter</h2>
+        <ol>
+          <li>Paste your JSON data into the Input JSON box.</li>
+          <li>Click Fix &amp; Format JSON to format your data.</li>
+          <li>Review the output in the result panel.</li>
+          <li>Click Copy Result or Download JSON to save your output.</li>
+        </ol>
+
+        <h2>Benefits of Our Online JSON Formatter</h2>
+        <ul>
+          <li>Format JSON into a readable structure.</li>
+          <li>Check JSON syntax by parsing your input.</li>
+          <li>Correct common trailing-comma mistakes automatically.</li>
+          <li>Copy or download the formatted JSON result.</li>
+          <li>Process JSON directly in your browser.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Is this JSON formatter free?</h3>
+        <p>Yes. You can use this online JSON formatter for free.</p>
+
+        <h3>Can this tool fix invalid JSON?</h3>
+        <p>
+          It can correct common trailing-comma mistakes. Other syntax
+          errors may need to be corrected manually.
+        </p>
+
+        <h3>Can I download formatted JSON?</h3>
+        <p>
+          Yes. Click Download JSON to save the formatted result as a JSON file.
+        </p>
+      </section>
     </div>
   )
 }
