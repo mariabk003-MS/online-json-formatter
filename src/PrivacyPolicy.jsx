@@ -2,10 +2,12 @@ import { useEffect } from 'react'
 import './PrivacyPolicy.css'
 
 function PrivacyPolicy() {
-    useEffect(() => {
+  useEffect(() => {
     const oldTitle = document.title
     const meta = document.querySelector('meta[name="description"]')
     const oldDescription = meta ? meta.getAttribute('content') : ''
+    const canonical = document.querySelector('link[rel="canonical"]')
+    const oldCanonical = canonical ? canonical.getAttribute('href') : ''
 
     document.title = 'Privacy Policy - Online JSON Formatter'
     if (meta) {
@@ -14,12 +16,20 @@ function PrivacyPolicy() {
         'Read the Privacy Policy of Online JSON Formatter. Your JSON data is processed in your browser and is not uploaded to our servers.'
       )
     }
+    if (canonical) {
+      canonical.setAttribute(
+        'href',
+        'https://online-json-formatter-ten.vercel.app/privacy-policy'
+      )
+    }
 
     return () => {
       document.title = oldTitle
       if (meta) meta.setAttribute('content', oldDescription)
+      if (canonical) canonical.setAttribute('href', oldCanonical)
     }
   }, [])
+
   return (
     <main className="privacy-policy">
       <h1>Privacy Policy</h1>
@@ -97,4 +107,3 @@ function PrivacyPolicy() {
 }
 
 export default PrivacyPolicy
-
