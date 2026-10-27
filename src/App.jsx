@@ -24,8 +24,6 @@ function App() {
     setSuccess(message)
   }
 
-  // Parses JSON. If it fails, tries removing trailing commas once.
-  // Returns { parsed, fixedText } or throws the parse error.
   function parseWithFix(text) {
     try {
       return { parsed: JSON.parse(text), fixedText: null }
@@ -279,9 +277,17 @@ function App() {
         <p>
           Yes. Click Download JSON to save the formatted result as a JSON file.
         </p>
+
+        <h3>Can I convert JSON to CSV?</h3>
+        <p>
+          Yes. Use our free <a href="/json-to-csv">JSON to CSV Converter</a> to
+          turn JSON data into a CSV file for Excel or Google Sheets.
+        </p>
       </section>
 
       <footer className="site-footer">
+        <a href="/json-to-csv">JSON to CSV Converter</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>

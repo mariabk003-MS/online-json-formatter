@@ -7,6 +7,10 @@
     {
       "source": "/privacy-policy",
       "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/json-to-csv",
+      "destination": "/json-to-csv.html"
     }
   ]
 }

@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         privacy: fileURLToPath(new URL('./privacy-policy.html', import.meta.url)),
+        jsonToCsv: fileURLToPath(new URL('./json-to-csv.html', import.meta.url)),
       },
     },
   },
