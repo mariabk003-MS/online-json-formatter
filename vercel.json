@@ -6,7 +6,7 @@
     },
     {
       "source": "/privacy-policy",
-      "destination": "/index.html"
+      "destination": "/privacy-policy.html"
     }
   ]
 }
