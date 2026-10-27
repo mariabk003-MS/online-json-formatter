@@ -1,5 +1,4 @@
-
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -7,45 +6,70 @@ function App() {
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-    const [indent, setIndent] = useState('2')
+  const [indent, setIndent] = useState('2')
+  const fileInputRef = useRef(null)
 
   function getIndent() {
     return indent === 'tab' ? '\t' : Number(indent)
   }
 
+  function showError(message) {
+    setResult('')
+    setSuccess('')
+    setError(message)
+  }
+
+  function showSuccess(message) {
+    setError('')
+    setSuccess(message)
+  }
+
+  // Parses JSON. If it fails, tries removing trailing commas once.
+  // Returns { parsed, fixedText } or throws the parse error.
+  function parseWithFix(text) {
+    try {
+      return { parsed: JSON.parse(text), fixedText: null }
+    } catch {
+      const fixed = text.trim().replace(/,\s*([}\]])/g, '$1')
+      return { parsed: JSON.parse(fixed), fixedText: fixed }
+    }
+  }
+
   function fixAndFormatJSON() {
     if (!json.trim()) {
-      setError('Please paste your JSON first.')
-      setSuccess('')
-      setResult('')
+      showError('Please paste your JSON first.')
       return
     }
 
     try {
-      const parsed = JSON.parse(json)
+      const { parsed, fixedText } = parseWithFix(json)
       setResult(JSON.stringify(parsed, null, getIndent()))
-      setError('')
-      setSuccess('Valid JSON! Fixed and formatted successfully.')
-      return
-    } catch {
-      // Try correcting a common trailing-comma mistake.
-    }
 
-    let fixed = json.trim()
-    fixed = fixed.replace(/,\s*([}\]])/g, '$1')
-
-    try {
-      const parsed = JSON.parse(fixed)
-         setResult(JSON.stringify(parsed, null, getIndent()))
-      setJson(fixed)
-      setError('')
-      setSuccess('A common syntax mistake was fixed and JSON formatted.')
+      if (fixedText) {
+        setJson(fixedText)
+        showSuccess('A common syntax mistake was fixed and JSON formatted.')
+      } else {
+        showSuccess('Valid JSON! Fixed and formatted successfully.')
+      }
     } catch (err) {
-      setResult('')
-      setSuccess('')
-      setError(
+      showError(
         `Could not safely fix this JSON. ${err.message} Please check the error and correct the input.`
       )
+    }
+  }
+
+  function minifyJSON() {
+    if (!json.trim()) {
+      showError('Please paste your JSON first.')
+      return
+    }
+
+    try {
+      const { parsed } = parseWithFix(json)
+      setResult(JSON.stringify(parsed))
+      showSuccess('JSON minified successfully!')
+    } catch (err) {
+      showError(`Could not minify this JSON. ${err.message}`)
     }
   }
 
@@ -70,6 +94,32 @@ function App() {
     setSuccess('')
   }
 
+  function openFilePicker() {
+    fileInputRef.current?.click()
+  }
+
+  async function handleFileUpload(event) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+
+    if (!file) return
+
+    const maxSize = 5 * 1024 * 1024
+    if (file.size > maxSize) {
+      showError('File is too large. Please upload a file smaller than 5 MB.')
+      return
+    }
+
+    try {
+      const text = await file.text()
+      setJson(text)
+      setResult('')
+      showSuccess(`"${file.name}" loaded. Now click Fix & Format JSON or Minify JSON.`)
+    } catch {
+      showError('Could not read this file. Please try another .json or .txt file.')
+    }
+  }
+
   async function copyResult() {
     if (!result) {
       setError('Please fix and format JSON first.')
@@ -79,8 +129,7 @@ function App() {
 
     try {
       await navigator.clipboard.writeText(result)
-      setError('')
-      setSuccess('Result copied successfully!')
+      showSuccess('Result copied successfully!')
     } catch {
       setError('Could not copy. Please copy the result manually.')
       setSuccess('')
@@ -103,14 +152,13 @@ function App() {
     link.click()
     URL.revokeObjectURL(url)
 
-    setError('')
-    setSuccess('JSON downloaded successfully!')
+    showSuccess('JSON downloaded successfully!')
   }
 
   return (
     <div className="app">
       <h1>Online JSON Formatter</h1>
-      <p>Fix, format, and validate your JSON easily.</p>
+      <p>Fix, format, minify, and validate your JSON easily.</p>
 
       <div className="editor-layout">
         <section className="editor-panel">
@@ -127,13 +175,23 @@ function App() {
             }}
           />
 
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,.txt,application/json,text/plain"
+            onChange={handleFileUpload}
+            style={{ display: 'none' }}
+          />
+
           <div className="buttons">
             <button onClick={fixAndFormatJSON}>
               Fix &amp; Format JSON
             </button>
+            <button onClick={minifyJSON}>Minify JSON</button>
+            <button onClick={openFilePicker}>Upload File</button>
             <button onClick={loadSample}>Load Sample</button>
             <button onClick={clearAll}>Clear</button>
-                        <label className="indent-label">
+            <label className="indent-label">
               Indent:{' '}
               <select
                 value={indent}
@@ -175,8 +233,9 @@ function App() {
 
         <h2>How to Use This JSON Formatter</h2>
         <ol>
-          <li>Paste your JSON data into the Input JSON box.</li>
-          <li>Click Fix &amp; Format JSON to format your data.</li>
+          <li>Paste your JSON data into the Input JSON box, or click Upload File to open a .json or .txt file.</li>
+          <li>Choose 2 spaces, 4 spaces, or Tab indentation.</li>
+          <li>Click Fix &amp; Format JSON to format your data, or Minify JSON to compress it into one line.</li>
           <li>Review the output in the result panel.</li>
           <li>Click Copy Result or Download JSON to save your output.</li>
         </ol>
@@ -184,6 +243,9 @@ function App() {
         <h2>Benefits of Our Online JSON Formatter</h2>
         <ul>
           <li>Format JSON into a readable structure.</li>
+          <li>Choose your preferred indentation: 2 spaces, 4 spaces, or Tab.</li>
+          <li>Minify JSON to remove extra spaces and reduce file size.</li>
+          <li>Upload JSON files directly from your computer.</li>
           <li>Check JSON syntax by parsing your input.</li>
           <li>Correct common trailing-comma mistakes automatically.</li>
           <li>Copy or download the formatted JSON result.</li>
@@ -201,12 +263,25 @@ function App() {
           errors may need to be corrected manually.
         </p>
 
+        <h3>What does Minify JSON do?</h3>
+        <p>
+          Minify removes all extra spaces and line breaks, so your JSON fits
+          on a single line. This makes the data smaller, which is useful for
+          APIs and configuration files.
+        </p>
+
+        <h3>Is my uploaded JSON file sent to a server?</h3>
+        <p>
+          No. Uploaded files are read and processed inside your browser.
+        </p>
+
         <h3>Can I download formatted JSON?</h3>
         <p>
           Yes. Click Download JSON to save the formatted result as a JSON file.
         </p>
       </section>
-            <footer className="site-footer">
+
+      <footer className="site-footer">
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>
