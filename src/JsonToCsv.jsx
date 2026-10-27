@@ -282,6 +282,8 @@ function JsonToCsv() {
       <footer className="site-footer">
         <a href="/">JSON Formatter</a>
         {' | '}
+                <a href="/about">About</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>

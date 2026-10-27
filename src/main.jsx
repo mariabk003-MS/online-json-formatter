@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import PrivacyPolicy from './PrivacyPolicy.jsx'
 import JsonToCsv from './JsonToCsv.jsx'
+import About from './About.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/json-to-csv" element={<JsonToCsv />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

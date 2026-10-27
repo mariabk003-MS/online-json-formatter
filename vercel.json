@@ -11,6 +11,10 @@
     {
       "source": "/json-to-csv",
       "destination": "/json-to-csv.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
     }
   ]
 }

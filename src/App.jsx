@@ -288,6 +288,8 @@ function App() {
       <footer className="site-footer">
         <a href="/json-to-csv">JSON to CSV Converter</a>
         {' | '}
+                <a href="/about">About</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>
