@@ -7,6 +7,11 @@ function App() {
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+    const [indent, setIndent] = useState('2')
+
+  function getIndent() {
+    return indent === 'tab' ? '\t' : Number(indent)
+  }
 
   function fixAndFormatJSON() {
     if (!json.trim()) {
@@ -18,7 +23,7 @@ function App() {
 
     try {
       const parsed = JSON.parse(json)
-      setResult(JSON.stringify(parsed, null, 2))
+      setResult(JSON.stringify(parsed, null, getIndent()))
       setError('')
       setSuccess('Valid JSON! Fixed and formatted successfully.')
       return
@@ -128,6 +133,17 @@ function App() {
             </button>
             <button onClick={loadSample}>Load Sample</button>
             <button onClick={clearAll}>Clear</button>
+                        <label className="indent-label">
+              Indent:{' '}
+              <select
+                value={indent}
+                onChange={(event) => setIndent(event.target.value)}
+              >
+                <option value="2">2 spaces</option>
+                <option value="4">4 spaces</option>
+                <option value="tab">Tab</option>
+              </select>
+            </label>
           </div>
         </section>
 
