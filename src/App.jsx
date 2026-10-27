@@ -36,7 +36,7 @@ function App() {
 
     try {
       const parsed = JSON.parse(fixed)
-      setResult(JSON.stringify(parsed, null, 2))
+         setResult(JSON.stringify(parsed, null, getIndent()))
       setJson(fixed)
       setError('')
       setSuccess('A common syntax mistake was fixed and JSON formatted.')

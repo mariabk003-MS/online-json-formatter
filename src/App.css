@@ -274,3 +274,7 @@ pre {
     padding-left: 22px;
   }
 }
+
+   .result-output {
+     text-align: left;
+   }
