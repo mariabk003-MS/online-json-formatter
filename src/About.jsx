@@ -16,24 +16,17 @@ function About() {
 
         <h2>Who Built This Site</h2>
         <p>
-          Hi, I'm Maria. I am learning web development and search engine
-          optimization (SEO), and this website is my hands-on project.
-          Instead of only reading about how websites work, I decided to build
-          a real tool that people can use every day.
-        </p>
-
-        <h2>Why I Built It</h2>
-        <p>
-          Many JSON tools are full of ads, slow, or confusing. My goal is to
-          keep this site simple, fast, and private, so you can format or
-          convert JSON in seconds.
+          Hi, I'm Maria. I created Online JSON Formatter after seeing how many
+          JSON tools were slow, cluttered with ads, or hard to use. I build and
+          improve each tool on this site myself, so you can format, validate,
+          and convert JSON in seconds.
         </p>
 
         <h2>How the Site Keeps Improving</h2>
         <p>
           Every feature here was added step by step: formatting, validation,
-          minifying, file upload, and a JSON to CSV converter. I keep adding
-          new tools and improving existing ones based on what users need.
+          minifying, file upload, and converters between JSON and CSV. I keep
+          adding new tools and improving existing ones based on what users need.
         </p>
 
         <h2>Tools Available</h2>
@@ -45,6 +38,10 @@ function About() {
           <li>
             <a href="/json-to-csv">JSON to CSV Converter</a>: turn JSON data
             into a CSV file for Excel or Google Sheets.
+          </li>
+          <li>
+            <a href="/csv-to-json">CSV to JSON Converter</a>: turn spreadsheet
+            data into clean JSON, with nested objects and real data types.
           </li>
         </ul>
 
@@ -59,6 +56,8 @@ function About() {
         <a href="/">JSON Formatter</a>
         {' | '}
         <a href="/json-to-csv">JSON to CSV Converter</a>
+        {' | '}
+        <a href="/csv-to-json">CSV to JSON Converter</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
