@@ -1,4 +1,4 @@
-﻿{
+{
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap-final.xml" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
