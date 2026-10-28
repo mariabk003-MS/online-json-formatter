@@ -12,6 +12,7 @@ export default defineConfig({
         privacy: fileURLToPath(new URL('./privacy-policy.html', import.meta.url)),
         jsonToCsv: fileURLToPath(new URL('./json-to-csv.html', import.meta.url)),
         about: fileURLToPath(new URL('./about.html', import.meta.url)),
+        csvToJson: fileURLToPath(new URL('./csv-to-json.html', import.meta.url)),
       },
     },
   },
