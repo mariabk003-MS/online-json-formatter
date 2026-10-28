@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+﻿import { useRef, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -288,6 +288,8 @@ function App() {
       <footer className="site-footer">
         <a href="/json-to-csv">JSON to CSV Converter</a>
         {' | '}
+                <a href="/csv-to-json">CSV to JSON Converter</a>
+                {' | '}
                 <a href="/about">About</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>

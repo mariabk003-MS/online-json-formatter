@@ -1,20 +1,9 @@
-{
+﻿{
   "rewrites": [
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap-final.xml"
-    },
-    {
-      "source": "/privacy-policy",
-      "destination": "/privacy-policy.html"
-    },
-    {
-      "source": "/json-to-csv",
-      "destination": "/json-to-csv.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    }
+    { "source": "/sitemap.xml", "destination": "/sitemap-final.xml" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/json-to-csv", "destination": "/json-to-csv.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/csv-to-json", "destination": "/csv-to-json.html" }
   ]
 }
