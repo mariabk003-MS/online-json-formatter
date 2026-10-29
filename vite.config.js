@@ -14,6 +14,7 @@ export default defineConfig({
         about: fileURLToPath(new URL('./about.html', import.meta.url)),
         csvToJson: fileURLToPath(new URL('./csv-to-json.html', import.meta.url)),
         jsonValidator: fileURLToPath(new URL('./json-validator.html', import.meta.url)),
+        jsonErrors: fileURLToPath(new URL('./common-json-errors.html', import.meta.url)),
       },
     },
   },

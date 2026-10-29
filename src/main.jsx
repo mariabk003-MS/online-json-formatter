@@ -8,6 +8,7 @@ import JsonToCsv from './JsonToCsv.jsx'
 import About from './About.jsx'
 import CsvToJson from './CsvToJson.jsx'
 import JsonValidator from './JsonValidator.jsx'
+import JsonErrorsGuide from './JsonErrorsGuide.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/about" element={<About />} />
         <Route path="/csv-to-json" element={<CsvToJson />} />
         <Route path="/json-validator" element={<JsonValidator />} />
+        <Route path="/common-json-errors" element={<JsonErrorsGuide />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

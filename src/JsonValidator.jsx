@@ -205,6 +205,10 @@ function JsonValidator() {
           <li>Comments, which are not allowed in standard JSON.</li>
           <li>Missing closing bracket {'}'} or ].</li>
         </ul>
+        <p>
+          See wrong and correct examples for each error in our{' '}
+          <a href="/common-json-errors">Common JSON Errors guide</a>.
+        </p>
 
         <h2>Frequently Asked Questions</h2>
 
@@ -236,6 +240,8 @@ function JsonValidator() {
         <a href="/csv-to-json">CSV to JSON Converter</a>
         {' | '}
         <a href="/about">About</a>
+        {' | '}
+        <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>

@@ -290,6 +290,8 @@ function JsonToCsv() {
         {' | '}
         <a href="/json-validator">JSON Validator</a>
         {' | '}
+        <a href="/common-json-errors">JSON Errors Guide</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>
