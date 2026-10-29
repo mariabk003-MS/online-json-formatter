@@ -145,7 +145,7 @@ function JsonValidator() {
           {status?.valid === true && (
             <>
               <p className="success">Valid JSON! No errors found.</p>
-              <ul className="seo-content">
+              <ul className="stats-list">
                 <li>Type: {status.type}</li>
                 {status.count !== null && (
                   <li>{status.type === 'Array' ? 'Items' : 'Top-level keys'}: {status.count}</li>

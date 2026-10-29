@@ -289,3 +289,10 @@ pre {
 .seo-content li {
   margin-bottom: 6px;
 }
+
+.stats-list {
+  text-align: left;
+  max-width: 760px;
+  margin: 0 auto 16px;
+  padding-left: 24px;
+}
