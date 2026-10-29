@@ -59,6 +59,8 @@ function About() {
         {' | '}
         <a href="/csv-to-json">CSV to JSON Converter</a>
         {' | '}
+        <a href="/json-validator">JSON Validator</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>

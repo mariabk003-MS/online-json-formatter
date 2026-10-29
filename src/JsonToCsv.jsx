@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 // Turns nested objects into flat keys, e.g. { user: { name: 'Ali' } } -> { 'user.name': 'Ali' }
@@ -285,6 +285,8 @@ function JsonToCsv() {
                 <a href="/csv-to-json">CSV to JSON Converter</a>
                 {' | '}
                 <a href="/about">About</a>
+        {' | '}
+        <a href="/json-validator">JSON Validator</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>

@@ -353,6 +353,8 @@ function CsvToJson() {
         {' | '}
         <a href="/about">About</a>
         {' | '}
+        <a href="/json-validator">JSON Validator</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>

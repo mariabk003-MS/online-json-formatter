@@ -1,4 +1,4 @@
-﻿import { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -291,6 +291,8 @@ function App() {
                 <a href="/csv-to-json">CSV to JSON Converter</a>
                 {' | '}
                 <a href="/about">About</a>
+        {' | '}
+        <a href="/json-validator">JSON Validator</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
