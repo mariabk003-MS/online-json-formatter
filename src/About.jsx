@@ -1,8 +1,10 @@
 import './App.css'
+import NavBar from './NavBar.jsx'
 
 function About() {
   return (
     <div className="app">
+      <NavBar />
       <h1>About Online JSON Formatter</h1>
       <p>Free, fast, and private tools for working with JSON data.</p>
 

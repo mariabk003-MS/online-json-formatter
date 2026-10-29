@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import NavBar from './NavBar.jsx'
 
 // Picks the separator that appears most in the first line.
 function detectDelimiter(text) {
@@ -218,6 +219,7 @@ function CsvToJson() {
 
   return (
     <div className="app">
+      <NavBar />
       <h1>CSV to JSON Converter</h1>
       <p>Convert CSV data from Excel or Google Sheets into clean JSON.</p>
 

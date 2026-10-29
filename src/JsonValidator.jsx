@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import NavBar from './NavBar.jsx'
 
 // Finds the line and column of a JSON error from the browser's message.
 function getErrorLocation(text, message) {
@@ -109,6 +110,7 @@ function JsonValidator() {
 
   return (
     <div className="app">
+      <NavBar />
       <h1>JSON Validator</h1>
       <p>Check if your JSON is valid and find the exact line and column of any error.</p>
 

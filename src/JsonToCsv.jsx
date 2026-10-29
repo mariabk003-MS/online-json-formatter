@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import NavBar from './NavBar.jsx'
 
 // Turns nested objects into flat keys, e.g. { user: { name: 'Ali' } } -> { 'user.name': 'Ali' }
 function flattenObject(obj, prefix = '', output = {}) {
@@ -172,6 +173,7 @@ function JsonToCsv() {
 
   return (
     <div className="app">
+      <NavBar />
       <h1>JSON to CSV Converter</h1>
       <p>Convert JSON data into a CSV file you can open in Excel or Google Sheets.</p>
 

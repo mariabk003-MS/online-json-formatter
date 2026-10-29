@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import './App.css'
+import NavBar from './NavBar.jsx'
 
 function App() {
   const [json, setJson] = useState('')
@@ -155,6 +156,7 @@ function App() {
 
   return (
     <div className="app">
+      <NavBar />
       <h1>Online JSON Formatter</h1>
       <p>Fix, format, minify, and validate your JSON easily.</p>
 
