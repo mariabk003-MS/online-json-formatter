@@ -278,3 +278,14 @@ pre {
    .result-output {
      text-align: left;
    }
+.seo-content ul,
+.seo-content ol {
+  text-align: left;
+  max-width: 760px;
+  margin: 0 auto 16px;
+  padding-left: 24px;
+}
+
+.seo-content li {
+  margin-bottom: 6px;
+}
