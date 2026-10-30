@@ -1,0 +1,62 @@
+.jv-tree {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: ui-monospace, Consolas, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+  overflow: auto;
+  min-height: 200px;
+  max-height: 560px;
+}
+
+.jv-row {
+  overflow-wrap: anywhere;
+}
+
+.jv-children {
+  margin-left: 10px;
+  padding-left: 14px;
+  border-left: 1px dashed #334155;
+}
+
+.jv-tree .jv-toggle {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  vertical-align: middle;
+}
+
+.jv-tree .jv-toggle:hover {
+  background: none;
+  color: #ffffff;
+  transform: none;
+}
+
+.jv-spacer {
+  display: inline-block;
+  width: 24px;
+}
+
+.jv-key { color: #93c5fd; }
+.jv-colon { color: #94a3b8; }
+.jv-string { color: #86efac; }
+.jv-number { color: #fdba74; }
+.jv-boolean { color: #c4b5fd; }
+.jv-null { color: #f87171; }
+
+.jv-summary {
+  color: #94a3b8;
+  cursor: pointer;
+}

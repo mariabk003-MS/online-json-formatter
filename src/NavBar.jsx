@@ -1,12 +1,12 @@
 const links = [
   ['/', 'JSON Formatter'],
+  ['/json-viewer', 'JSON Viewer'],
   ['/json-validator', 'JSON Validator'],
   ['/json-to-csv', 'JSON to CSV'],
   ['/csv-to-json', 'CSV to JSON'],
   ['/common-json-errors', 'JSON Errors'],
   ['/about', 'About'],
 ]
-
 function NavBar() {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
 
