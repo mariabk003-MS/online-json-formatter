@@ -206,6 +206,7 @@ function JsonErrorsGuide() {
       </section>
 
       <footer className="site-footer">
+        <a href="/json-viewer">JSON Viewer</a>{' | '}
         <a href="/">JSON Formatter</a>
         {' | '}
         <a href="/json-validator">JSON Validator</a>
