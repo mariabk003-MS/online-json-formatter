@@ -10,6 +10,7 @@ import CsvToJson from './CsvToJson.jsx'
 import JsonValidator from './JsonValidator.jsx'
 import JsonErrorsGuide from './JsonErrorsGuide.jsx'
 import JsonViewer from './JsonViewer.jsx'
+import JsonToXml from './JsonToXml.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/json-validator" element={<JsonValidator />} />
         <Route path="/common-json-errors" element={<JsonErrorsGuide />} />
         <Route path="/json-viewer" element={<JsonViewer />} />
+        <Route path="/json-to-xml" element={<JsonToXml />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

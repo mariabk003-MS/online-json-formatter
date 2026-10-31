@@ -7,6 +7,7 @@
     { "source": "/csv-to-json", "destination": "/csv-to-json.html" },
     { "source": "/json-validator", "destination": "/json-validator.html" },
     { "source": "/common-json-errors", "destination": "/common-json-errors.html" },
-    { "source": "/json-viewer", "destination": "/json-viewer.html" }
+    { "source": "/json-viewer", "destination": "/json-viewer.html" },
+    { "source": "/json-to-xml", "destination": "/json-to-xml.html" }
   ]
 }

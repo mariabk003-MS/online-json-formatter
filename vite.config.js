@@ -16,6 +16,7 @@ export default defineConfig({
         jsonValidator: fileURLToPath(new URL('./json-validator.html', import.meta.url)),
         jsonErrors: fileURLToPath(new URL('./common-json-errors.html', import.meta.url)),
         jsonViewer: fileURLToPath(new URL('./json-viewer.html', import.meta.url)),
+        jsonToXml: fileURLToPath(new URL('./json-to-xml.html', import.meta.url)),
       },
     },
   },
