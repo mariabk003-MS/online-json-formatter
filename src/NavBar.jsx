@@ -4,6 +4,7 @@ const links = [
   ['/json-validator', 'JSON Validator'],
   ['/json-to-csv', 'JSON to CSV'],
   ['/csv-to-json', 'CSV to JSON'],
+  ['/json-to-xml', 'JSON to XML'],
   ['/common-json-errors', 'JSON Errors'],
   ['/about', 'About'],
 ]
