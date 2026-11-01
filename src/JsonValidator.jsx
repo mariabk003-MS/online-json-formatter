@@ -111,8 +111,12 @@ function JsonValidator() {
   return (
     <div className="app">
       <NavBar />
-      <h1>JSON Validator</h1>
-      <p>Check if your JSON is valid and find the exact line and column of any error.</p>
+      <h1>JSON Validator Online</h1>
+      <p>
+        Free online JSON validator and syntax checker. Paste your JSON to check
+        if it is valid and find the exact line and column of any error. Your
+        data stays in your browser.
+      </p>
 
       <div className="editor-layout">
         <section className="editor-panel">
@@ -225,6 +229,22 @@ function JsonValidator() {
           <a href="/">JSON Formatter</a>.
         </p>
 
+        <h3>What is the difference between a JSON validator and a JSON formatter?</h3>
+        <p>
+          A JSON validator checks if your data is correct and shows where any
+          error is. A JSON formatter makes valid JSON easier to read by adding
+          spacing and indentation. Validate first, then use the{' '}
+          <a href="/">JSON Formatter</a> or the{' '}
+          <a href="/json-viewer">JSON Viewer</a> to read the result.
+        </p>
+
+        <h3>Does this tool check JSON Schema?</h3>
+        <p>
+          No. This validator checks JSON syntax, which means it confirms the
+          data follows the JSON format rules. It does not compare your data
+          against a JSON Schema.
+        </p>
+
         <h3>Can I convert valid JSON to CSV?</h3>
         <p>
           Yes. Use our <a href="/json-to-csv">JSON to CSV Converter</a> to
@@ -239,6 +259,8 @@ function JsonValidator() {
         <a href="/json-to-csv">JSON to CSV Converter</a>
         {' | '}
         <a href="/csv-to-json">CSV to JSON Converter</a>
+        {' | '}
+        <a href="/json-to-xml">JSON to XML Converter</a>
         {' | '}
         <a href="/about">About</a>
         {' | '}
