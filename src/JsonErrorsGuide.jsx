@@ -108,7 +108,7 @@ function JsonErrorsGuide() {
 }`}
         />
 
-        <h2>6. Missing or Mismatched Brackets</h2>
+        <h2 id="missing-brackets">6. Missing or Mismatched Brackets</h2>
         <p>
           Every opening brace must have a closing brace, and every opening
           square bracket must have a closing square bracket. This often
@@ -173,6 +173,71 @@ function JsonErrorsGuide() {
   "code": "007"
 }`}
         />
+        <h2>Common JSON Error Messages and What They Mean</h2>
+        <p>
+          Browsers and programming languages describe the same mistakes with
+          different messages. Here is what the most common ones mean and how
+          to fix them.
+        </p>
+
+        <h3>{'Unexpected token < in JSON at position 0'}</h3>
+        <p>
+          Your code expected JSON but received an HTML page instead. The{' '}
+          <code>{'<'}</code> is the start of a tag like{' '}
+          <code>{'<!DOCTYPE html>'}</code>. This usually means the API URL is
+          wrong, the server returned an error page, or you are not logged in.
+          Open the URL in your browser to see what it really returns.
+        </p>
+
+        <h3>Unexpected end of JSON input</h3>
+        <p>
+          The JSON stopped before it was complete, or it was completely
+          empty. Check for a missing closing brace or bracket, and make sure
+          the response is not an empty string. See{' '}
+          <a href="#missing-brackets">missing or mismatched brackets</a> above.
+        </p>
+
+        <h3>{"Unexpected token ' in JSON"} or Expected property name</h3>
+        <p>
+          The parser found a key that is not wrapped in double quotes. This
+          is caused by single quotes or keys without quotes. Firefox shows
+          this as <code>{"JSON.parse: expected property name or '}'"}</code>.
+        </p>
+
+        <h3>{"Expected ',' or '}' after property value"}</h3>
+        <p>
+          A comma is missing between two properties, or there is extra text
+          after a value. Look at the end of the line before the position in
+          the message.
+        </p>
+
+        <h3>Bad control character in string literal</h3>
+        <p>
+          A text value contains a real line break or tab. Inside JSON
+          strings, write a new line as <code>{'\\n'}</code> and a tab as{' '}
+          <code>{'\\t'}</code>.
+        </p>
+
+        <h3>{"Python: Expecting value: line 1 column 1 (char 0)"}</h3>
+        <p>
+          Python&apos;s <code>json</code> module received an empty string or
+          something that is not JSON, often an HTML error page. Print the raw
+          text before parsing it to see what you actually received.
+        </p>
+
+        <h3>{"Python: Expecting property name enclosed in double quotes"}</h3>
+        <p>
+          A key uses single quotes or has no quotes, or there is a trailing
+          comma before a closing brace. Python&apos;s dictionaries allow single
+          quotes, but JSON does not.
+        </p>
+
+        <h3>{"Python: Expecting ',' delimiter"}</h3>
+        <p>
+          A comma is missing between two items or properties. Check the line
+          and column shown in the message, and the end of the line before it.
+        </p>
+
         <h2>How to Find JSON Errors Quickly</h2>
         <ol>
           <li>Paste your data into the <a href="/json-validator">JSON Validator</a>.</li>
@@ -214,6 +279,8 @@ function JsonErrorsGuide() {
         <a href="/json-to-csv">JSON to CSV Converter</a>
         {' | '}
         <a href="/csv-to-json">CSV to JSON Converter</a>
+        {' | '}
+        <a href="/json-to-xml">JSON to XML Converter</a>
         {' | '}
         <a href="/about">About</a>
         {' | '}
