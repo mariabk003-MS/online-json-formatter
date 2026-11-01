@@ -1,16 +1,49 @@
-# React + Vite
+# Online JSON Formatter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live site: [online-json-formatter-ten.vercel.app](https://online-json-formatter-ten.vercel.app/)**
 
-Currently, two official plugins are available:
+A free, fast online JSON formatter, beautifier and validator. Paste your JSON to format, validate or minify it instantly. Everything runs in your browser, so your data is never uploaded to a server.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tools
 
-## React Compiler
+| Tool | What it does |
+|---|---|
+| [JSON Formatter](https://online-json-formatter-ten.vercel.app/) | Format and beautify JSON with 2 spaces, 4 spaces or tab indentation, minify JSON, and fix common trailing-comma mistakes |
+| [JSON Viewer](https://online-json-formatter-ten.vercel.app/json-viewer) | Explore JSON as a collapsible tree |
+| [JSON Validator](https://online-json-formatter-ten.vercel.app/json-validator) | Check JSON syntax and see the line and column of any error |
+| [JSON to CSV Converter](https://online-json-formatter-ten.vercel.app/json-to-csv) | Turn a JSON array into a CSV file for Excel or Google Sheets |
+| [CSV to JSON Converter](https://online-json-formatter-ten.vercel.app/csv-to-json) | Convert CSV data into JSON |
+| [JSON to XML Converter](https://online-json-formatter-ten.vercel.app/json-to-xml) | Convert JSON into clean, well-formatted XML |
+| [Common JSON Errors Guide](https://online-json-formatter-ten.vercel.app/common-json-errors) | Examples of common JSON mistakes and how to fix them |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Free to use, no sign-up
+- Upload `.json` or `.txt` files
+- Copy the result or download it as a file
+- Works on desktop and mobile
+- Privacy-friendly: JSON is processed locally in your browser
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Built with
+
+- [React](https://react.dev/)
+- [Vite](https://vite.dev/)
+- Hosted on [Vercel](https://vercel.com/)
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+## Links
+
+- [About](https://online-json-formatter-ten.vercel.app/about)
+- [Privacy Policy](https://online-json-formatter-ten.vercel.app/privacy-policy)
