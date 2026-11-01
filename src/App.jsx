@@ -157,8 +157,12 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      <h1>Online JSON Formatter</h1>
-      <p>Fix, format, minify, and validate your JSON easily.</p>
+      <h1>JSON Formatter &amp; Beautifier Online</h1>
+      <p>
+        Free online JSON formatter, beautifier and validator. Paste your JSON
+        to format, validate or minify it instantly. Your data stays in your
+        browser and is never uploaded.
+      </p>
 
       <div className="editor-layout">
         <section className="editor-panel">
