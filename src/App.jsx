@@ -303,6 +303,8 @@ function App() {
         {' | '}
         <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}
+        <a href="/json-to-xml">JSON to XML Converter</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>
