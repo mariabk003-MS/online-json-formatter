@@ -301,6 +301,7 @@ function JsonToXml() {
       </section>
 
       <footer className="site-footer">
+        <a href="/what-is-json">What Is JSON?</a>{' | '}
         <a href="/">JSON Formatter</a>
         {' | '}
         <a href="/json-viewer">JSON Viewer</a>

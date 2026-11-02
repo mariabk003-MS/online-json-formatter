@@ -11,6 +11,7 @@ import JsonValidator from './JsonValidator.jsx'
 import JsonErrorsGuide from './JsonErrorsGuide.jsx'
 import JsonViewer from './JsonViewer.jsx'
 import JsonToXml from './JsonToXml.jsx'
+import WhatIsJson from './WhatIsJson.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/common-json-errors" element={<JsonErrorsGuide />} />
         <Route path="/json-viewer" element={<JsonViewer />} />
         <Route path="/json-to-xml" element={<JsonToXml />} />
+        <Route path="/what-is-json" element={<WhatIsJson />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

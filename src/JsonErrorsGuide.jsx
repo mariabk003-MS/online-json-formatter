@@ -271,6 +271,7 @@ function JsonErrorsGuide() {
       </section>
 
       <footer className="site-footer">
+        <a href="/what-is-json">What Is JSON?</a>{' | '}
         <a href="/json-viewer">JSON Viewer</a>{' | '}
         <a href="/">JSON Formatter</a>
         {' | '}

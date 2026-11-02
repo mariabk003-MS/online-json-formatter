@@ -292,6 +292,7 @@ function App() {
       </section>
 
       <footer className="site-footer">
+        <a href="/what-is-json">What Is JSON?</a>{' | '}
         <a href="/json-viewer">JSON Viewer</a>{' | '}
         <a href="/json-to-csv">JSON to CSV Converter</a>
         {' | '}

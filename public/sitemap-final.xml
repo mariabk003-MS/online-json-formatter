@@ -1,4 +1,4 @@
-﻿<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/</loc>
 </url>
@@ -9,21 +9,24 @@
 <loc>https://online-json-formatter-ten.vercel.app/json-validator</loc>
 </url>
 <url>
+<loc>https://online-json-formatter-ten.vercel.app/json-to-xml</loc>
+</url>
+<url>
 <loc>https://online-json-formatter-ten.vercel.app/json-to-csv</loc>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/csv-to-json</loc>
 </url>
 <url>
-<loc>https://online-json-formatter-ten.vercel.app/json-to-xml</loc>
+<loc>https://online-json-formatter-ten.vercel.app/what-is-json</loc>
+</url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/common-json-errors</loc>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/about</loc>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/privacy-policy</loc>
-</url>
-<url>
-<loc>https://online-json-formatter-ten.vercel.app/common-json-errors</loc>
 </url>
 </urlset>
