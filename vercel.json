@@ -9,6 +9,7 @@
     { "source": "/common-json-errors", "destination": "/common-json-errors.html" },
     { "source": "/json-viewer", "destination": "/json-viewer.html" },
     { "source": "/json-to-xml", "destination": "/json-to-xml.html" },
-    { "source": "/what-is-json", "destination": "/what-is-json.html" }
+    { "source": "/what-is-json", "destination": "/what-is-json.html" },
+    { "source": "/how-to-open-json-file", "destination": "/how-to-open-json-file.html" }
   ]
 }

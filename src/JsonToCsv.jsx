@@ -282,6 +282,7 @@ function JsonToCsv() {
       </section>
 
       <footer className="site-footer">
+        <a href="/how-to-open-json-file">How to Open JSON</a>{' | '}
         <a href="/what-is-json">What Is JSON?</a>{' | '}
         <a href="/json-to-xml">JSON to XML</a>{' | '}
         <a href="/json-viewer">JSON Viewer</a>{' | '}

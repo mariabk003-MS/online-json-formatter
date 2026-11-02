@@ -12,6 +12,7 @@ import JsonErrorsGuide from './JsonErrorsGuide.jsx'
 import JsonViewer from './JsonViewer.jsx'
 import JsonToXml from './JsonToXml.jsx'
 import WhatIsJson from './WhatIsJson.jsx'
+import HowToOpenJson from './HowToOpenJson.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/json-viewer" element={<JsonViewer />} />
         <Route path="/json-to-xml" element={<JsonToXml />} />
         <Route path="/what-is-json" element={<WhatIsJson />} />
+        <Route path="/how-to-open-json-file" element={<HowToOpenJson />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
