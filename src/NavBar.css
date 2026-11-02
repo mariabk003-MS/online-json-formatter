@@ -1,0 +1,94 @@
+.site-nav .nav-group {
+  position: relative;
+}
+
+.site-nav .nav-group-button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #1d4ed8;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  line-height: inherit;
+  margin: 0;
+  min-height: 0;
+  padding: 4px 2px;
+  transform: none;
+  width: auto;
+}
+
+.site-nav .nav-group-button:hover {
+  background: none;
+  color: #1d4ed8;
+  text-decoration: underline;
+  transform: none;
+}
+
+.site-nav .nav-group-button.active {
+  color: #111827;
+  border-bottom: 2px solid #1d4ed8;
+}
+
+.site-nav .nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  text-align: left;
+  z-index: 50;
+}
+
+.site-nav .nav-group.is-open .nav-dropdown {
+  display: block;
+}
+
+@media (hover: hover) {
+  .site-nav .nav-group:hover .nav-dropdown {
+    display: block;
+  }
+}
+
+.site-nav .nav-dropdown a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.site-nav .nav-dropdown a:hover {
+  background: #eff6ff;
+  text-decoration: none;
+}
+
+.site-nav .nav-dropdown a.active {
+  background: #eff6ff;
+  border-bottom: none;
+}
+
+/* On small screens, the open list appears below the menu row. */
+@media (max-width: 600px) {
+  .site-nav .nav-group.is-open {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .site-nav .nav-dropdown {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    margin-top: 6px;
+  }
+
+  .site-nav .nav-dropdown a {
+    white-space: normal;
+  }
+}
