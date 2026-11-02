@@ -17,6 +17,7 @@ export default defineConfig({
         jsonErrors: fileURLToPath(new URL('./common-json-errors.html', import.meta.url)),
         jsonViewer: fileURLToPath(new URL('./json-viewer.html', import.meta.url)),
         jsonToXml: fileURLToPath(new URL('./json-to-xml.html', import.meta.url)),
+        whatIsJson: fileURLToPath(new URL('./what-is-json.html', import.meta.url)),
       },
     },
   },
