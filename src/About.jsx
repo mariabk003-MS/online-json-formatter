@@ -46,6 +46,7 @@ function About() {
             <a href="/json-validator">JSON Validator</a>: find the exact line
             and column of any JSON error, with tips to fix it.
           </li>
+          <li><a href="/json-to-xml">JSON to XML Converter</a>: convert JSON data into clean, well-formed XML.</li>
           <li>
             <a href="/json-to-csv">JSON to CSV Converter</a>: turn JSON data
             into a CSV file for Excel or Google Sheets.
@@ -68,6 +69,7 @@ function About() {
       </section>
 
       <footer className="site-footer">
+        <a href="/json-to-xml">JSON to XML</a>{' | '}
         <a href="/">JSON Formatter</a>
         {' | '}
         <a href="/json-viewer">JSON Viewer</a>

@@ -232,6 +232,7 @@ function JsonViewer() {
       </section>
 
       <footer className="site-footer">
+        <a href="/json-to-xml">JSON to XML</a>{' | '}
         <a href="/">JSON Formatter</a>
         {' | '}
         <a href="/json-validator">JSON Validator</a>
