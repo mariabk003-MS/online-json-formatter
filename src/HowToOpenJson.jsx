@@ -140,6 +140,7 @@ function HowToOpenJson() {
       </section>
 
       <footer className="site-footer">
+        <a href="/convert-json-to-excel">JSON to Excel</a>{' | '}
         <a href="/json-vs-xml">JSON vs XML</a>{' | '}
         <a href="/what-is-json">What Is JSON?</a>
         {' | '}

@@ -20,6 +20,7 @@ export default defineConfig({
         whatIsJson: fileURLToPath(new URL('./what-is-json.html', import.meta.url)),
         howToOpenJson: fileURLToPath(new URL('./how-to-open-json-file.html', import.meta.url)),
         jsonVsXml: fileURLToPath(new URL('./json-vs-xml.html', import.meta.url)),
+        jsonToExcel: fileURLToPath(new URL('./convert-json-to-excel.html', import.meta.url)),
       },
     },
   },

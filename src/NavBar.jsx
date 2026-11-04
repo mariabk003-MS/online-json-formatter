@@ -19,6 +19,7 @@ const items = [
       { href: '/what-is-json', label: 'What Is JSON?' },
       { href: '/how-to-open-json-file', label: 'How to Open a JSON File' },
       { href: '/json-vs-xml', label: 'JSON vs XML' },
+      { href: '/convert-json-to-excel', label: 'Convert JSON to Excel' },
       { href: '/common-json-errors', label: 'Common JSON Errors' },
     ],
   },

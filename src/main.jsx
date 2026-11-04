@@ -14,6 +14,7 @@ import JsonToXml from './JsonToXml.jsx'
 import WhatIsJson from './WhatIsJson.jsx'
 import HowToOpenJson from './HowToOpenJson.jsx'
 import JsonVsXml from './JsonVsXml.jsx'
+import JsonToExcelGuide from './JsonToExcelGuide.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/what-is-json" element={<WhatIsJson />} />
         <Route path="/how-to-open-json-file" element={<HowToOpenJson />} />
         <Route path="/json-vs-xml" element={<JsonVsXml />} />
+        <Route path="/convert-json-to-excel" element={<JsonToExcelGuide />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
