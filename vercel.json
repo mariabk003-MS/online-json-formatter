@@ -10,6 +10,7 @@
     { "source": "/json-viewer", "destination": "/json-viewer.html" },
     { "source": "/json-to-xml", "destination": "/json-to-xml.html" },
     { "source": "/what-is-json", "destination": "/what-is-json.html" },
-    { "source": "/how-to-open-json-file", "destination": "/how-to-open-json-file.html" }
+    { "source": "/how-to-open-json-file", "destination": "/how-to-open-json-file.html" },
+    { "source": "/json-vs-xml", "destination": "/json-vs-xml.html" }
   ]
 }

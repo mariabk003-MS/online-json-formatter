@@ -69,6 +69,7 @@ function About() {
       </section>
 
       <footer className="site-footer">
+        <a href="/json-vs-xml">JSON vs XML</a>{' | '}
         <a href="/how-to-open-json-file">How to Open JSON</a>{' | '}
         <a href="/what-is-json">What Is JSON?</a>{' | '}
         <a href="/json-to-xml">JSON to XML</a>{' | '}
