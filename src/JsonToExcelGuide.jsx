@@ -22,6 +22,17 @@ function JsonToExcelGuide() {
           JSON directly with Power Query.
         </p>
 
+        <h2>Why I Built This Tool</h2>
+        <p>
+          I once received a data file in JSON format, and when I opened it in
+          Excel, it showed up as a confusing mess instead of a clean table. The
+          online converters I tried were full of ads, and some asked me to
+          upload my data to their servers. That is why I built my own{' '}
+          <a href="/json-to-csv">JSON to CSV Converter</a>, which works right in
+          your browser. When I tested it with three sample records, the CSV was
+          ready in about a second.
+        </p>
+
         <h2>What JSON Works Best in Excel?</h2>
         <p>
           Excel shows data as rows and columns. JSON converts most cleanly when
