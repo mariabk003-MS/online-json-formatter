@@ -12,7 +12,7 @@ function JsonToExcelGuide() {
       </p>
 
       <section className="seo-content">
-        <p>Last updated: November 4, 2026</p>
+        <p>Last updated: November 5, 2026</p>
 
         <h2>Quick Answer</h2>
         <p>
@@ -57,6 +57,25 @@ Sara     Islamabad  2`}</pre>
             Excel Workbook (.xlsx).
           </li>
         </ol>
+        <figure style={{ margin: '1.5rem 0' }}>
+          <img
+            src="/images/json-to-excel-step1.png"
+            alt="JSON to CSV Converter showing a CSV result with name, city and age columns for three rows, ready to download and open in Excel"
+            width="1500"
+            height="530"
+            loading="lazy"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+            }}
+          />
+          <figcaption style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '0.5rem' }}>
+            Example: three JSON records converted to CSV with our tool. Click
+            Download CSV, then open the file in Excel.
+          </figcaption>
+        </figure>
         <p>
           This works in every version of Excel, and your data is converted in
           your browser without being uploaded.
