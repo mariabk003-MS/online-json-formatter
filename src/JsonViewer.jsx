@@ -13,7 +13,8 @@ function ValueText({ value }) {
 }
 
 // One line of the tree. Objects and arrays can be opened and closed.
-function TreeNode({ name, value, depth, openAll }) {
+// Also used by the JSON Formatter page (App.jsx) for its Tree tab.
+export function TreeNode({ name, value, depth, openAll }) {
   const isContainer = value !== null && typeof value === 'object'
   const [open, setOpen] = useState(openAll === null ? depth < 2 : openAll)
 
