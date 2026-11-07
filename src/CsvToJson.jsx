@@ -67,13 +67,14 @@ function parseCsv(text, delimiter) {
 }
 
 // Turns "25" into 25, "true" into true, and keeps values like "007" as text.
+// Extra spaces around values (common when copying from Excel or emails) are removed.
 function convertValue(value) {
   const trimmed = value.trim()
   if (trimmed === 'true') return true
   if (trimmed === 'false') return false
   if (trimmed === 'null') return null
   if (/^-?(0|[1-9]\d*)(\.\d+)?$/.test(trimmed)) return Number(trimmed)
-  return value
+  return trimmed
 }
 
 // Puts a value at a path like "contact.email" inside an object.
