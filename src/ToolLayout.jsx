@@ -201,6 +201,38 @@ export function DataTable({ headers, rows, limit = 200 }) {
   )
 }
 
+// The "Frequently Asked Questions" part of a page. faqs: [[question, answer], ...]
+export function FaqSection({ faqs }) {
+  return (
+    <>
+      <h2>Frequently Asked Questions</h2>
+      {faqs.map(([question, answer]) => (
+        <div key={question}>
+          <h3>{question}</h3>
+          <p>{answer}</p>
+        </div>
+      ))}
+    </>
+  )
+}
+
+// A short "Related tools" line with links, good for visitors and for SEO.
+export function RelatedTools({ links }) {
+  return (
+    <>
+      <h2>Related Tools</h2>
+      <p className="related-tools">
+        {links.map(([href, label], index) => (
+          <span key={href}>
+            {index > 0 && ' · '}
+            <a href={href}>{label}</a>
+          </span>
+        ))}
+      </p>
+    </>
+  )
+}
+
 // Error / success messages under the tool, with the error line and a ^ pointer.
 export function Messages({ error, success, location, hint }) {
   return (

@@ -60,6 +60,15 @@ function About() {
             <a href="/csv-to-json">CSV to JSON Converter</a>: turn spreadsheet
             data into clean JSON, with nested objects and real data types.
           </li>
+          <li><a href="/xml-to-json">XML to JSON Converter</a>: convert XML documents into JSON.</li>
+          <li>
+            <a href="/json-to-yaml">JSON to YAML</a> and{' '}
+            <a href="/yaml-to-json">YAML to JSON</a>: convert between JSON and YAML config files.
+          </li>
+          <li><a href="/json-minifier">JSON Minifier</a>: make JSON smaller and see how many bytes you saved.</li>
+          <li><a href="/json-repair">JSON Repair</a>: fix broken JSON automatically.</li>
+          <li><a href="/json-escape">JSON Escape / Unescape</a>: turn JSON into a safe string, or back.</li>
+          <li><a href="/tools">All Tools</a>: every tool on one page.</li>
           <li>
             <a href="/common-json-errors">Common JSON Errors Guide</a>: wrong
             and correct examples of the mistakes that break JSON.

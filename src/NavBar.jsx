@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import './NavBar.css'
+import { TOOL_GROUPS, GUIDES } from './toolsList.js'
+
+// The "More Tools" menu shows the Convert / Compare / Clean up groups in columns.
+const moreToolGroups = TOOL_GROUPS.filter((group) => group.title !== 'Format & check')
 
 const items = [
   { href: '/', label: 'JSON Formatter' },
@@ -7,23 +11,11 @@ const items = [
   { href: '/json-validator', label: 'JSON Validator' },
   { href: '/json-compare', label: 'JSON Compare' },
   {
-    label: 'Converters',
-    children: [
-      { href: '/json-to-csv', label: 'JSON to CSV' },
-      { href: '/csv-to-json', label: 'CSV to JSON' },
-      { href: '/json-to-xml', label: 'JSON to XML' },
-    ],
+    label: 'More Tools',
+    groups: moreToolGroups,
+    children: [...moreToolGroups.flatMap((group) => group.tools), { href: '/tools', label: 'All tools' }],
   },
-  {
-    label: 'Guides',
-    children: [
-      { href: '/what-is-json', label: 'What Is JSON?' },
-      { href: '/how-to-open-json-file', label: 'How to Open a JSON File' },
-      { href: '/json-vs-xml', label: 'JSON vs XML' },
-      { href: '/convert-json-to-excel', label: 'Convert JSON to Excel' },
-      { href: '/common-json-errors', label: 'Common JSON Errors' },
-    ],
-  },
+  { label: 'Guides', children: GUIDES },
   { href: '/about', label: 'About' },
 ]
 
@@ -50,6 +42,7 @@ function NavBar() {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
   const [openMenu, setOpenMenu] = useState(null)
   const [theme, setTheme] = useState(getStartTheme)
+  const [mobileOpen, setMobileOpen] = useState(false) // ☰ menu on phones
   const navRef = useRef(null)
 
   // Dark mode for every page: a class on <body> switches the colors.
@@ -81,7 +74,7 @@ function NavBar() {
   }, [])
 
   return (
-    <header className="site-header">
+    <header className={'site-header' + (mobileOpen ? ' menu-open' : '')}>
     <a href="/" className="brand" aria-label="Online JSON Formatter home">
       <span className="brand-mark" aria-hidden="true">{'{ }'}</span>
       <span className="brand-name">
@@ -120,6 +113,28 @@ function NavBar() {
             >
               {item.label} <span aria-hidden="true">▾</span>
             </button>
+            {item.groups ? (
+              <div className="nav-dropdown nav-mega">
+                <div className="nav-mega-columns">
+                  {item.groups.map((group) => (
+                    <div key={group.title} className="nav-mega-column">
+                      <p className="nav-mega-title">{group.title}</p>
+                      {group.tools.map((tool) => (
+                        <a
+                          key={tool.href}
+                          href={tool.href}
+                          className={path === tool.href ? 'active' : undefined}
+                          aria-current={path === tool.href ? 'page' : undefined}
+                        >
+                          {tool.label}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <a href="/tools" className="nav-mega-all">All tools →</a>
+              </div>
+            ) : (
             <div className="nav-dropdown">
               {item.children.map((child) => {
                 const active = path === child.href
@@ -135,10 +150,20 @@ function NavBar() {
                 )
               })}
             </div>
+            )}
           </div>
         )
       })}
     </nav>
+    <button
+      type="button"
+      className="menu-button"
+      onClick={() => setMobileOpen(!mobileOpen)}
+      aria-expanded={mobileOpen}
+      aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+    >
+      {mobileOpen ? '✕' : '☰'}
+    </button>
     <button
       type="button"
       className="theme-switch"

@@ -238,3 +238,126 @@ body.dark .site-header .site-nav .nav-group-button.active {
     white-space: normal;
   }
 }
+/* ---------- "More Tools" mega menu ---------- */
+.site-nav .nav-mega {
+  left: auto;
+  right: -120px;
+  min-width: 560px;
+  padding: 18px 20px 12px;
+  transform: none;
+}
+
+.nav-mega-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 22px;
+}
+
+.site-nav .nav-mega-title {
+  margin: 0 0 6px;
+  padding: 0 12px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.site-nav .nav-mega a.nav-mega-all {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  border-radius: 0;
+  color: #2458d3;
+  font-weight: 700;
+}
+
+body.dark .site-nav .nav-mega a.nav-mega-all {
+  border-color: #334155;
+  color: #93b4ff;
+}
+
+@media (max-width: 760px) {
+  .site-nav .nav-mega {
+    min-width: 0;
+  }
+
+  .nav-mega-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Phones: ☰ button instead of a tall menu ---------- */
+.site-header .menu-button {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    justify-content: flex-start;
+  }
+
+  .site-header .brand {
+    margin-right: auto;
+  }
+
+  .site-header .menu-button,
+  .site-header .theme-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #dbe4f2;
+    border-radius: 9px;
+    background: #fff;
+    color: #0f172a;
+    font-size: 17px;
+    transform: none;
+  }
+
+  body.dark .site-header .menu-button {
+    border-color: #334155;
+    background: #1a2335;
+    color: #f1f5f9;
+  }
+
+  /* The menu is hidden until ☰ is pressed, then shows as a list */
+  .site-header .site-nav {
+    display: none;
+    order: 10;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .site-header.menu-open .site-nav {
+    display: flex;
+  }
+
+  .site-header .site-nav > a,
+  .site-header .site-nav .nav-group-button {
+    width: 100%;
+    padding: 10px 4px;
+    border-bottom: 1px solid #eef2f7 !important;
+    text-align: left;
+  }
+
+  body.dark .site-header .site-nav > a,
+  body.dark .site-header .site-nav .nav-group-button {
+    border-color: #1f2a3d !important;
+  }
+
+  .site-header .site-nav .nav-group.is-open {
+    text-align: left;
+  }
+
+  .site-nav .nav-mega {
+    padding: 8px 0;
+  }
+}

@@ -16,6 +16,13 @@ import HowToOpenJson from './HowToOpenJson.jsx'
 import JsonVsXml from './JsonVsXml.jsx'
 import JsonToExcelGuide from './JsonToExcelGuide.jsx'
 import JsonCompare from './JsonCompare.jsx'
+import XmlToJson from './XmlToJson.jsx'
+import JsonToYaml from './JsonToYaml.jsx'
+import YamlToJson from './YamlToJson.jsx'
+import JsonEscape from './JsonEscape.jsx'
+import JsonMinifier from './JsonMinifier.jsx'
+import JsonRepair from './JsonRepair.jsx'
+import AllTools from './AllTools.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -35,6 +42,13 @@ createRoot(document.getElementById('root')).render(
         <Route path="/json-vs-xml" element={<JsonVsXml />} />
         <Route path="/convert-json-to-excel" element={<JsonToExcelGuide />} />
         <Route path="/json-compare" element={<JsonCompare />} />
+        <Route path="/xml-to-json" element={<XmlToJson />} />
+        <Route path="/json-to-yaml" element={<JsonToYaml />} />
+        <Route path="/yaml-to-json" element={<YamlToJson />} />
+        <Route path="/json-escape" element={<JsonEscape />} />
+        <Route path="/json-minifier" element={<JsonMinifier />} />
+        <Route path="/json-repair" element={<JsonRepair />} />
+        <Route path="/tools" element={<AllTools />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

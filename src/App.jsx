@@ -14,36 +14,8 @@ import {
   formatSize,
   downloadText,
   readTextFile,
+  describeFixes,
 } from './toolUtils.js'
-
-// Friendly names for each kind of fix that safeFix can make.
-const FIX_LABELS = {
-  trailingCommas: 'trailing comma removed',
-  missingCommas: 'missing comma added',
-  missingColons: 'missing colon added',
-  wrongColons: '"," or "=" changed to ":"',
-  lineBreaks: 'line break inside a string escaped',
-  controlChars: 'tab or control character escaped',
-  comments: 'comment removed',
-  singleQuotes: 'single quote changed to double quote',
-  smartQuotes: 'curly quote changed to straight quote',
-  unquotedKeys: 'quotes added around a key',
-  pythonValues: 'True/False/None changed to true/false/null',
-  missingBrackets: 'missing closing bracket added',
-  missingQuotes: 'missing closing quote added',
-}
-
-// Turns a safeFix report into a sentence like:
-// "Fixed 3 problems: trailing comma removed (×2), missing colon added."
-function describeFixes(report) {
-  const parts = Object.entries(report).map(([kind, count]) => {
-    const label = FIX_LABELS[kind] || kind
-    return count > 1 ? `${label} (×${count})` : label
-  })
-  const total = Object.values(report).reduce((sum, count) => sum + count, 0)
-  if (total === 0) return 'JSON was cleaned up and formatted.'
-  return `Fixed ${total} problem${total > 1 ? 's' : ''}: ${parts.join(', ')}.`
-}
 
 function App() {
   const [json, setJson] = useState('')
@@ -435,6 +407,14 @@ function App() {
         <a href="/json-validator">JSON Validator</a>
         {' | '}
         <a href="/json-compare">JSON Compare</a>
+        {' | '}
+        <a href="/json-repair">JSON Repair</a>
+        {' | '}
+        <a href="/json-to-yaml">JSON to YAML</a>
+        {' | '}
+        <a href="/xml-to-json">XML to JSON</a>
+        {' | '}
+        <a href="/tools">All Tools</a>
         {' | '}
         <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}

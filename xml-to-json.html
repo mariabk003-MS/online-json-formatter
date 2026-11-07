@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>XML to JSON Converter Online - Free &amp; Instant</title>
+    <meta name="description" content="Free online XML to JSON converter. Convert XML to clean, formatted JSON with attributes, repeated tags and nested elements kept. Fast, private, no sign-up." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/xml-to-json" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="XML to JSON Converter Online - Free &amp; Instant" />
+    <meta property="og:description" content="Free online XML to JSON converter. Convert XML to clean, formatted JSON with attributes, repeated tags and nested elements kept. Fast, private, no sign-up." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/xml-to-json" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="XML to JSON Converter Online - Free &amp; Instant" />
+    <meta name="twitter:description" content="Free online XML to JSON converter. Convert XML to clean, formatted JSON with attributes, repeated tags and nested elements kept. Fast, private, no sign-up." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "XML to JSON Converter",
+      "url": "https://online-json-formatter-ten.vercel.app/xml-to-json",
+      "description": "Free online XML to JSON converter. Convert XML to clean, formatted JSON with attributes, repeated tags and nested elements kept. Fast, private, no sign-up.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this XML to JSON converter free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is free, needs no sign-up, and has no limits on how often you use it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are XML attributes converted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Attributes become keys that start with @, for example <book id=\"7\"> becomes {\"book\": {\"@id\": 7}}. Text next to child elements is stored under #text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to repeated tags?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When the same tag appears more than once inside a parent, the values are collected into a JSON array, so no data is lost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my XML uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The conversion runs completely inside your browser using its built-in XML reader."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "XML to JSON Converter",
+          "item": "https://online-json-formatter-ten.vercel.app/xml-to-json"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

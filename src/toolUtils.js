@@ -1,5 +1,6 @@
 // Small helpers shared by all tool pages (Formatter, Viewer, Validator, converters).
 import { useMemo } from 'react'
+import { safeFix } from './safeFix.js'
 
 // Finds the line and column of a JSON.parse error, and the text of that line.
 // Returns { line, column, snippet, pointer } or null.
@@ -95,4 +96,65 @@ export async function readTextFile(file, maxMB = 5) {
   } catch {
     throw new Error('Could not read this file. Please try another file.')
   }
+}
+
+// Friendly names for each kind of fix that safeFix can make.
+export const FIX_LABELS = {
+  trailingCommas: 'trailing comma removed',
+  missingCommas: 'missing comma added',
+  missingColons: 'missing colon added',
+  wrongColons: '"," or "=" changed to ":"',
+  lineBreaks: 'line break inside a string escaped',
+  controlChars: 'tab or control character escaped',
+  comments: 'comment removed',
+  singleQuotes: 'single quote changed to double quote',
+  smartQuotes: 'curly quote changed to straight quote',
+  unquotedKeys: 'quotes added around a key',
+  pythonValues: 'True/False/None changed to true/false/null',
+  missingBrackets: 'missing closing bracket added',
+  missingQuotes: 'missing closing quote added',
+}
+
+// Turns a safeFix report into a sentence like:
+// "Fixed 3 problems: trailing comma removed (×2), missing colon added."
+export function describeFixes(report) {
+  const parts = Object.entries(report).map(([kind, count]) => {
+    const label = FIX_LABELS[kind] || kind
+    return count > 1 ? `${label} (×${count})` : label
+  })
+  const total = Object.values(report).reduce((sum, count) => sum + count, 0)
+  if (total === 0) return 'JSON was cleaned up and formatted.'
+  return `Fixed ${total} problem${total > 1 ? 's' : ''}: ${parts.join(', ')}.`
+}
+
+// Parses JSON. On failure throws an Error with a friendly message and
+// err.location (line/column) so the page can mark the broken line.
+export function parseJsonOrThrow(text, what = 'input') {
+  try {
+    return JSON.parse(text)
+  } catch (err) {
+    const location = getErrorLocation(text, err)
+    const where = location && !/line \d+/.test(err.message) ? ` (line ${location.line}, column ${location.column})` : ''
+    const error = new Error(`The ${what} is not valid JSON${where}. ${err.message}`)
+    error.location = location
+    throw error
+  }
+}
+
+// Like parseJsonOrThrow, but first quietly repairs common mistakes
+// (trailing commas, single quotes, comments ...). Returns { data, report }:
+// report is null when the JSON was already valid, else safeFix's fix counts.
+export function parseJsonLenient(text, what = 'input') {
+  try {
+    return { data: JSON.parse(text), report: null }
+  } catch {
+    try {
+      const report = {}
+      const data = JSON.parse(safeFix(text.trim(), report))
+      return { data, report }
+    } catch {
+      parseJsonOrThrow(text, what) // throws with the error location of the original text
+    }
+  }
+  return { data: undefined, report: null }
 }

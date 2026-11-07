@@ -1,18 +1,88 @@
 {
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap-final.xml" },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/json-to-csv", "destination": "/json-to-csv.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/csv-to-json", "destination": "/csv-to-json.html" },
-    { "source": "/json-validator", "destination": "/json-validator.html" },
-    { "source": "/common-json-errors", "destination": "/common-json-errors.html" },
-    { "source": "/json-viewer", "destination": "/json-viewer.html" },
-    { "source": "/json-to-xml", "destination": "/json-to-xml.html" },
-    { "source": "/what-is-json", "destination": "/what-is-json.html" },
-    { "source": "/how-to-open-json-file", "destination": "/how-to-open-json-file.html" },
-    { "source": "/json-vs-xml", "destination": "/json-vs-xml.html" },
-    { "source": "/convert-json-to-excel", "destination": "/convert-json-to-excel.html" },
-    { "source": "/json-compare", "destination": "/json-compare.html" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-final.xml"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/json-to-csv",
+      "destination": "/json-to-csv.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/csv-to-json",
+      "destination": "/csv-to-json.html"
+    },
+    {
+      "source": "/json-validator",
+      "destination": "/json-validator.html"
+    },
+    {
+      "source": "/common-json-errors",
+      "destination": "/common-json-errors.html"
+    },
+    {
+      "source": "/json-viewer",
+      "destination": "/json-viewer.html"
+    },
+    {
+      "source": "/json-to-xml",
+      "destination": "/json-to-xml.html"
+    },
+    {
+      "source": "/what-is-json",
+      "destination": "/what-is-json.html"
+    },
+    {
+      "source": "/how-to-open-json-file",
+      "destination": "/how-to-open-json-file.html"
+    },
+    {
+      "source": "/json-vs-xml",
+      "destination": "/json-vs-xml.html"
+    },
+    {
+      "source": "/convert-json-to-excel",
+      "destination": "/convert-json-to-excel.html"
+    },
+    {
+      "source": "/json-compare",
+      "destination": "/json-compare.html"
+    },
+    {
+      "source": "/xml-to-json",
+      "destination": "/xml-to-json.html"
+    },
+    {
+      "source": "/json-to-yaml",
+      "destination": "/json-to-yaml.html"
+    },
+    {
+      "source": "/yaml-to-json",
+      "destination": "/yaml-to-json.html"
+    },
+    {
+      "source": "/json-escape",
+      "destination": "/json-escape.html"
+    },
+    {
+      "source": "/json-minifier",
+      "destination": "/json-minifier.html"
+    },
+    {
+      "source": "/json-repair",
+      "destination": "/json-repair.html"
+    },
+    {
+      "source": "/tools",
+      "destination": "/tools.html"
+    }
   ]
 }

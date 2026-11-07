@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON Repair Online - Fix Broken JSON Instantly</title>
+    <meta name="description" content="Free online JSON repair tool. Automatically fix missing commas, quotes, comments, brackets and Python values in broken JSON. Private and instant." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-repair" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON Repair Online - Fix Broken JSON Instantly" />
+    <meta property="og:description" content="Free online JSON repair tool. Automatically fix missing commas, quotes, comments, brackets and Python values in broken JSON. Private and instant." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-repair" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON Repair Online - Fix Broken JSON Instantly" />
+    <meta name="twitter:description" content="Free online JSON repair tool. Automatically fix missing commas, quotes, comments, brackets and Python values in broken JSON. Private and instant." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON Repair",
+      "url": "https://online-json-formatter-ten.vercel.app/json-repair",
+      "description": "Free online JSON repair tool. Automatically fix missing commas, quotes, comments, brackets and Python values in broken JSON. Private and instant.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What can the JSON repair tool fix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It fixes missing or extra commas, missing colons, single or curly quotes, keys without quotes, // and /* */ comments, line breaks inside strings, Python True/False/None, missing quotes and missing closing brackets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it change my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Text inside your strings is never changed, except that real line breaks and tabs are turned into \\n and \\t, which JSON requires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the JSON cannot be repaired?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tool shows the line and column where the problem is and highlights it, so you can fix the rest by hand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON sent to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The repair runs in your browser. Your JSON stays on your device."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Repair",
+          "item": "https://online-json-formatter-ten.vercel.app/json-repair"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
