@@ -12,6 +12,7 @@
     { "source": "/what-is-json", "destination": "/what-is-json.html" },
     { "source": "/how-to-open-json-file", "destination": "/how-to-open-json-file.html" },
     { "source": "/json-vs-xml", "destination": "/json-vs-xml.html" },
-    { "source": "/convert-json-to-excel", "destination": "/convert-json-to-excel.html" }
+    { "source": "/convert-json-to-excel", "destination": "/convert-json-to-excel.html" },
+    { "source": "/json-compare", "destination": "/json-compare.html" }
   ]
 }

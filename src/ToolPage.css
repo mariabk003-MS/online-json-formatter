@@ -1,22 +1,22 @@
-/* Styles for the JSON Formatter page (App.jsx) only. */
+/* Shared styles for all tool pages (Formatter, Viewer, Validator, converters). */
 
-.app.formatter {
+.app.tool-page {
   max-width: 1280px;
 }
 
-.formatter .editor-layout {
+.tool-page .editor-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: start;
 }
 
-.formatter .editor-panel {
+.tool-page .editor-panel {
   min-width: 0;
 }
 
 @media (max-width: 900px) {
-  .formatter .editor-layout {
+  .tool-page .editor-layout {
     grid-template-columns: 1fr;
   }
 }
@@ -48,7 +48,7 @@
 }
 
 /* Small, flat buttons used in toolbars */
-.formatter .tool {
+.tool-page .tool {
   min-height: 32px;
   padding: 5px 12px;
   border: 1px solid #dbe4f2;
@@ -60,24 +60,24 @@
   transform: none;
 }
 
-.formatter .tool:hover {
+.tool-page .tool:hover {
   border-color: #b9c7de;
   background: #f1f5f9;
   transform: none;
 }
 
-.formatter .tool-icon {
+.tool-page .tool-icon {
   width: 32px;
   padding: 0;
   font-size: 15px;
 }
 
-.formatter button:disabled {
+.tool-page button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-.formatter button:disabled:hover {
+.tool-page button:disabled:hover {
   background: #fff;
 }
 
@@ -89,7 +89,7 @@
   border-radius: 8px;
 }
 
-.formatter .tabs .tab {
+.tool-page .tabs .tab {
   min-height: 30px;
   padding: 4px 14px;
   border: none;
@@ -101,7 +101,7 @@
   transform: none;
 }
 
-.formatter .tabs .tab.active {
+.tool-page .tabs .tab.active {
   background: #1e293b;
   color: #fff;
 }
@@ -340,7 +340,7 @@
   border-bottom: 1px solid #24324d;
 }
 
-.formatter .tree-actions .tool {
+.tool-page .tree-actions .tool {
   min-height: 28px;
   padding: 3px 10px;
   border-color: #334155;
@@ -349,16 +349,201 @@
   font-size: 12px;
 }
 
-.formatter .tree-actions .tool:hover {
+.tool-page .tree-actions .tool:hover {
   background: #273449;
 }
 
-.formatter .jv-tree {
+.tool-page .jv-tree {
   flex: 1;
   min-height: 0;
   max-height: none;
   border-radius: 0;
   background: transparent;
+}
+
+/* ---------- Report box (Validator) ---------- */
+.report {
+  height: 380px;
+  overflow: auto;
+  padding: 20px 22px;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.report-title {
+  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.report-ok {
+  color: #86efac;
+}
+
+.report-bad {
+  color: #fca5a5;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 24px;
+  margin: 0 0 16px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+}
+
+.report-grid dt {
+  color: #7c8aa5;
+}
+
+.report-grid dd {
+  margin: 0;
+  color: #f1f5f9;
+}
+
+.report-where,
+.report-message,
+.report-tip,
+.report-note {
+  margin: 0 0 12px;
+}
+
+.report-where strong {
+  color: #fca5a5;
+}
+
+.report pre.report-code {
+  min-height: 0;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid #3b1d24;
+  border-radius: 8px;
+  background: #0c1424;
+  color: #fecaca;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.report-message {
+  color: #94a3b8;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+}
+
+.report-note {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.report a {
+  color: #93b4ff;
+}
+
+/* ---------- Table preview (CSV tools) ---------- */
+.table-box {
+  height: 380px;
+  overflow: auto;
+  scrollbar-color: #334155 transparent;
+  scrollbar-width: thin;
+}
+
+.data-table {
+  min-width: 100%;
+  border-collapse: collapse;
+  color: #e2e8f0;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+  max-width: 260px;
+  padding: 7px 12px;
+  overflow: hidden;
+  border-right: 1px solid #1e2a42;
+  border-bottom: 1px solid #1e2a42;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #1a2540;
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.data-table tbody tr:hover td {
+  background: rgba(147, 197, 253, 0.06);
+}
+
+.data-table .row-number {
+  width: 1%;
+  background: #0c1424;
+  color: #4b5b78;
+  text-align: right;
+}
+
+.data-table th.row-number {
+  z-index: 2;
+  left: 0;
+}
+
+.table-more {
+  margin: 0;
+  padding: 10px 12px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* Tip line under the tool (Messages component) */
+.hint-box {
+  padding: 10px 14px;
+  border: 1px solid #dbe4f2;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #334155 !important;
+  font-size: 14px;
+  text-align: left !important;
+}
+
+/* Text link in the action bar */
+.action-link {
+  color: #2458d3;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.action-link:hover {
+  text-decoration: underline;
+}
+
+/* Small options (checkboxes / text fields) in the action bar */
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.option input[type="text"] {
+  width: 110px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #dbe4f2;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 500;
 }
 
 /* ---------- Main actions under the boxes ---------- */
@@ -370,7 +555,7 @@
   margin: 16px 0;
 }
 
-.formatter .action-primary {
+.tool-page .action-primary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -384,7 +569,7 @@
   box-shadow: 0 4px 14px rgba(36, 88, 211, 0.25);
 }
 
-.formatter .action-primary:hover {
+.tool-page .action-primary:hover {
   background: #1945ad;
 }
 
@@ -397,7 +582,7 @@
   font-weight: 600;
 }
 
-.formatter .action-secondary {
+.tool-page .action-secondary {
   min-height: 44px;
   padding: 10px 18px;
   border: 1px solid #dbe4f2;
@@ -407,7 +592,7 @@
   font-size: 15px;
 }
 
-.formatter .action-secondary:hover {
+.tool-page .action-secondary:hover {
   background: #f1f5f9;
 }
 
@@ -431,7 +616,7 @@
   font-weight: 500;
 }
 
-.formatter .theme-toggle {
+.tool-page .theme-toggle {
   margin-left: auto;
 }
 
@@ -455,17 +640,17 @@
     height: 300px;
   }
 
-  .formatter .action-primary kbd {
+  .tool-page .action-primary kbd {
     display: none;
   }
 
-  .formatter .theme-toggle {
+  .tool-page .theme-toggle {
     margin-left: 0;
   }
 }
 
 /* ---------- Full screen ---------- */
-.formatter .panel-fullscreen {
+.tool-page .panel-fullscreen {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -509,7 +694,10 @@ body.dark .app {
   color: #cbd5e1;
 }
 
-body.dark h1,
+body.dark h1 {
+  color: #f1f5f9;
+}
+
 body.dark .seo-content h2 {
   color: #93b4ff;
 }
@@ -564,21 +752,21 @@ body.dark button {
   color: #cbd5e1;
 }
 
-body.dark .formatter .tool,
-body.dark .formatter .tabs .tab,
-body.dark .formatter .action-secondary {
+body.dark .tool-page .tool,
+body.dark .tool-page .tabs .tab,
+body.dark .tool-page .action-secondary {
   border-color: #334155;
   background: #1a2335;
   color: #cbd5e1;
 }
 
-body.dark .formatter .tool:hover,
-body.dark .formatter .action-secondary:hover,
+body.dark .tool-page .tool:hover,
+body.dark .tool-page .action-secondary:hover,
 body.dark button:hover {
   background: #273449;
 }
 
-body.dark .formatter button:disabled:hover {
+body.dark .tool-page button:disabled:hover {
   background: #1a2335;
 }
 
@@ -586,19 +774,19 @@ body.dark .tabs {
   border-color: #334155;
 }
 
-body.dark .formatter .tabs .tab.active {
+body.dark .tool-page .tabs .tab.active {
   background: #e2e8f0;
   color: #0f172a;
 }
 
-body.dark .formatter .action-primary {
+body.dark .tool-page .action-primary {
   border-color: #2458d3;
   background: #2458d3;
   color: #fff;
   box-shadow: none;
 }
 
-body.dark .formatter .action-primary:hover {
+body.dark .tool-page .action-primary:hover {
   background: #1945ad;
 }
 
@@ -645,6 +833,137 @@ body.dark .error-location {
   color: #fecaca;
 }
 
-body.dark .formatter .panel-fullscreen {
+body.dark .tool-page .panel-fullscreen {
   background: #111827;
+}
+
+/* A second row of small options under the action bar (e.g. checkboxes) */
+.options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: -6px 0 16px;
+}
+
+.options-row .option {
+  font-weight: 500;
+}
+
+/* ---------- JSON Compare page ---------- */
+.compare-page .code-editor {
+  height: 300px;
+}
+
+.compare-page > .editor-panel {
+  margin-top: 4px;
+}
+
+.diff-list {
+  max-height: 420px;
+  min-height: 160px;
+  overflow: auto;
+  padding: 6px 0;
+  font-size: 14px;
+  scrollbar-color: #334155 transparent;
+  scrollbar-width: thin;
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 90px minmax(140px, 260px) 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 16px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #1a2540;
+}
+
+.diff-type {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.diff-path {
+  overflow-wrap: anywhere;
+  color: #93c5fd;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.diff-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.diff-values code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+}
+
+.diff-old {
+  background: rgba(248, 113, 113, 0.14);
+  color: #fca5a5;
+  text-decoration: line-through;
+  text-decoration-color: rgba(252, 165, 165, 0.5);
+}
+
+.diff-new {
+  background: rgba(134, 239, 172, 0.12);
+  color: #86efac;
+}
+
+.diff-arrow {
+  color: #64748b;
+}
+
+.diff-added {
+  border-left-color: #22c55e;
+}
+
+.diff-added .diff-type {
+  color: #86efac;
+}
+
+.diff-removed {
+  border-left-color: #ef4444;
+}
+
+.diff-removed .diff-type {
+  color: #fca5a5;
+}
+
+.diff-changed {
+  border-left-color: #f59e0b;
+}
+
+.diff-changed .diff-type {
+  color: #fcd34d;
+}
+
+@media (max-width: 600px) {
+  .diff-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+/* Undo the site-wide light "code" style inside the dark differences list */
+.diff-row code.diff-path {
+  display: inline;
+  padding: 0;
+  background: transparent;
+  color: #93c5fd;
+  font-size: 14px;
+}
+
+.diff-values code {
+  display: inline;
+  line-height: 1.6;
 }

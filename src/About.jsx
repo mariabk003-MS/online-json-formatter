@@ -36,7 +36,8 @@ function About() {
         <ul>
           <li>
             <a href="/">JSON Formatter &amp; Validator</a>: format, validate,
-            and minify JSON, with automatic trailing-comma fixes.
+            and minify JSON. It automatically fixes common mistakes like
+            missing commas, single quotes, comments and missing brackets.
           </li>
           <li>
             <a href="/json-viewer">JSON Viewer</a>: explore JSON as a
@@ -45,6 +46,10 @@ function About() {
           <li>
             <a href="/json-validator">JSON Validator</a>: find the exact line
             and column of any JSON error, with tips to fix it.
+          </li>
+          <li>
+            <a href="/json-compare">JSON Compare</a>: compare two JSON files and
+            see what was added, removed or changed.
           </li>
           <li><a href="/json-to-xml">JSON to XML Converter</a>: convert JSON data into clean, well-formed XML.</li>
           <li>

@@ -1,6 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
+import './ToolPage.css'
 import NavBar from './NavBar.jsx'
+import CodeEditor from './CodeEditor.jsx'
+import JsonHighlight from './JsonHighlight.jsx'
+import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages } from './ToolLayout.jsx'
+import { describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 
 // Picks the separator that appears most in the first line.
 function detectDelimiter(text) {
@@ -134,14 +139,19 @@ function delimiterName(delimiter) {
 function CsvToJson() {
   const [csv, setCsv] = useState('')
   const [result, setResult] = useState('')
+  const [records, setRecords] = useState(null)
+  const [tab, setTab] = useState('json')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [delimiterChoice, setDelimiterChoice] = useState('auto')
   const [convertTypes, setConvertTypes] = useState(true)
   const [nestKeys, setNestKeys] = useState(true)
+  const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const fileInputRef = useRef(null)
 
   function showError(message) {
     setResult('')
+    setRecords(null)
     setSuccess('')
     setError(message)
   }
@@ -151,22 +161,31 @@ function CsvToJson() {
     setSuccess(message)
   }
 
-  function convert() {
-    if (!csv.trim()) {
+  function handleInputChange(text) {
+    setCsv(text)
+    setError('')
+    setSuccess('')
+    setResult('')
+    setRecords(null)
+  }
+
+  function convert(text = csv) {
+    if (!text.trim()) {
       showError('Please paste your CSV first.')
       return
     }
 
     // People sometimes paste JSON here by mistake. Point them to the right tool.
-    const firstChar = csv.trim().charAt(0)
+    const firstChar = text.trim().charAt(0)
     if (firstChar === '{' || firstChar === '[') {
       showError(JSON_INPUT_MESSAGE)
       return
     }
 
     try {
-      const { data, delimiter } = csvToJson(csv, delimiterChoice, convertTypes, nestKeys)
+      const { data, delimiter } = csvToJson(text, delimiterChoice, convertTypes, nestKeys)
       setResult(JSON.stringify(data, null, 2))
+      setRecords(data)
       showSuccess(
         `Converted successfully! ${data.length} record(s) created using ${delimiterName(delimiter)} separator.`
       )
@@ -178,29 +197,28 @@ function CsvToJson() {
   function loadSample() {
     const sample = [
       'id,name,city,contact.email,active',
-      '1,Ayesha,"Lahore, Pakistan",ayesha@example.com,true',
-      '2,Rahul,"Mumbai, India",rahul@example.com,false',
-      '3,Sara,"Dubai, UAE",sara@example.com,true',
+      '1,Emily Clark,"London, UK",emily@example.com,true',
+      '2,James Smith,"Manchester, UK",james@example.com,false',
+      '3,Olivia Brown,"Bristol, UK",olivia@example.com,true',
     ].join('\n')
-    setCsv(sample)
-    setResult('')
-    setError('')
-    setSuccess('')
+    handleInputChange(sample)
   }
 
   function clearAll() {
-    setCsv('')
-    setResult('')
-    setError('')
-    setSuccess('')
+    handleInputChange('')
+  }
+
+  async function readFile(file) {
+    try {
+      const text = await readTextFile(file)
+      handleInputChange(text)
+      showSuccess(`"${file.name}" loaded. Click Convert to JSON.`)
+    } catch (err) {
+      showError(err.message)
+    }
   }
 
   async function copyResult() {
-    if (!result) {
-      setError('Please convert your CSV first.')
-      setSuccess('')
-      return
-    }
     try {
       await navigator.clipboard.writeText(result)
       showSuccess('JSON copied successfully!')
@@ -211,104 +229,141 @@ function CsvToJson() {
   }
 
   function downloadJson() {
-    if (!result) {
-      setError('Please convert your CSV first.')
-      setSuccess('')
-      return
-    }
-
-    const blob = new Blob([result], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'converted.json'
-    link.click()
-    URL.revokeObjectURL(url)
-
+    downloadText(result, 'converted.json', 'application/json')
     showSuccess('JSON downloaded successfully!')
   }
 
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault()
+      convert()
+    }
+  }
+
+  // Columns for the table preview: every key used by any record.
+  const tableHeaders = []
+  if (records) {
+    for (const record of records) {
+      for (const key of Object.keys(record)) {
+        if (!tableHeaders.includes(key)) tableHeaders.push(key)
+      }
+    }
+  }
+
+  const csvLines = csv ? csv.split('\n').filter((line) => line.trim()).length : 0
+
   return (
-    <div className="app">
+    <div className="app tool-page">
       <NavBar />
       <h1>CSV to JSON Converter</h1>
       <p>Convert CSV data from Excel or Google Sheets into clean JSON.</p>
 
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".csv,.txt,text/csv,text/plain"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          event.target.value = ''
+          if (file) readFile(file)
+        }}
+        style={{ display: 'none' }}
+      />
+
       <div className="editor-layout">
-        <section className="editor-panel">
-          <h2>Input CSV</h2>
-
-          <textarea
-            placeholder={'Paste your CSV here, for example:\nname,city\nAli,Lahore'}
+        <ToolPanel
+          title="CSV Input"
+          badge={csvLines > 1 ? <span className="status-badge status-ok">{csvLines - 1} data rows</span> : null}
+          tools={
+            <>
+              <Tool onClick={loadSample}>Sample</Tool>
+              <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={clearAll}>Clear</Tool>
+            </>
+          }
+          statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}
+          statusRight={describeText(csv)}
+          footer={
+            <>
+              <div className="action-bar">
+                <button type="button" className="action-primary" onClick={() => convert()} title="Shortcut: Ctrl + Enter">
+                  Convert to JSON
+                </button>
+                <label className="indent-select">
+                  Separator
+                  <select value={delimiterChoice} onChange={(event) => setDelimiterChoice(event.target.value)}>
+                    <option value="auto">Auto detect</option>
+                    <option value=",">Comma (,)</option>
+                    <option value=";">Semicolon (;)</option>
+                    <option value={'\t'}>Tab</option>
+                  </select>
+                </label>
+              </div>
+              <div className="options-row">
+                <label className="option">
+                  <input
+                    type="checkbox"
+                    checked={convertTypes}
+                    onChange={(event) => setConvertTypes(event.target.checked)}
+                  />
+                  Convert numbers and true/false
+                </label>
+                <label className="option">
+                  <input
+                    type="checkbox"
+                    checked={nestKeys}
+                    onChange={(event) => setNestKeys(event.target.checked)}
+                  />
+                  Nested objects from dot columns (contact.email)
+                </label>
+              </div>
+            </>
+          }
+        >
+          <CodeEditor
             value={csv}
-            onChange={(event) => {
-              setCsv(event.target.value)
-              setError('')
-              setSuccess('')
-              setResult('')
-            }}
+            placeholder={'Paste your CSV here, or drop a .csv file. For example:\nname,city\nEmily,London\n\nTip: press Ctrl + Enter to convert.'}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            onCursor={setCursor}
+            onFileDrop={readFile}
           />
+        </ToolPanel>
 
-          <div className="buttons">
-            <button onClick={convert}>Convert to JSON</button>
-            <button onClick={loadSample}>Load Sample</button>
-            <button onClick={clearAll}>Clear</button>
-            <label className="indent-label">
-              Separator:{' '}
-              <select
-                value={delimiterChoice}
-                onChange={(event) => setDelimiterChoice(event.target.value)}
-              >
-                <option value="auto">Auto detect</option>
-                <option value=",">Comma (,)</option>
-                <option value=";">Semicolon (;)</option>
-                <option value={'\t'}>Tab</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="buttons">
-            <label className="indent-label">
-              <input
-                type="checkbox"
-                checked={convertTypes}
-                onChange={(event) => setConvertTypes(event.target.checked)}
-              />{' '}
-              Convert numbers and true/false
-            </label>
-            <label className="indent-label">
-              <input
-                type="checkbox"
-                checked={nestKeys}
-                onChange={(event) => setNestKeys(event.target.checked)}
-              />{' '}
-              Create nested objects from dot columns
-            </label>
-          </div>
-        </section>
-
-        <section className="editor-panel">
-          <h2>JSON Result</h2>
-
-          <pre className="result-output">
-            {result || 'Your JSON will appear here...'}
-          </pre>
-
-          <div className="buttons">
-            <button onClick={copyResult}>Copy JSON</button>
-            <button onClick={downloadJson}>Download JSON</button>
-          </div>
-        </section>
+        <ToolPanel
+          title="JSON Result"
+          tabs={
+            <Tabs
+              value={tab}
+              onChange={setTab}
+              options={[
+                { value: 'json', label: 'JSON' },
+                { value: 'table', label: 'Table' },
+              ]}
+            />
+          }
+          tools={
+            <>
+              <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
+              <Tool onClick={downloadJson} disabled={!result}>Download</Tool>
+            </>
+          }
+          statusLeft={records ? `${records.length} records` : 'No result yet'}
+          statusRight={result ? formatSize(result) : ''}
+        >
+          {!result && <EmptyBox>Your JSON will appear here.</EmptyBox>}
+          {result && tab === 'json' && <JsonHighlight text={result} />}
+          {result && tab === 'table' && records && <DataTable headers={tableHeaders} rows={records} />}
+        </ToolPanel>
       </div>
 
-      {error && <p className="error">{error}</p>}
+      <Messages error={error} success={success} />
       {error === JSON_INPUT_MESSAGE && (
-        <p>
+        <p className="hint-box">
           Want to turn JSON into a table? Use our{' '}
           <a href="/json-to-csv">JSON to CSV Converter</a>.
         </p>
       )}
-      {success && <p className="success">{success}</p>}
 
       <section className="seo-content">
         <h2>What Is a CSV to JSON Converter?</h2>
@@ -321,11 +376,11 @@ function CsvToJson() {
 
         <h2>How to Convert CSV to JSON</h2>
         <ol>
-          <li>Paste your CSV into the Input CSV box, or click Load Sample to try an example.</li>
+          <li>Paste your CSV into the CSV Input box, click Upload, or click Sample to try an example.</li>
           <li>Keep the separator on Auto detect, or choose comma, semicolon, or tab.</li>
           <li>Choose whether to convert numbers and true/false values.</li>
           <li>Click Convert to JSON.</li>
-          <li>Click Copy JSON or Download JSON to save the result.</li>
+          <li>Check the JSON or Table tab, then click Copy or Download to save the result.</li>
         </ol>
 
         <h2>What I Found While Testing</h2>

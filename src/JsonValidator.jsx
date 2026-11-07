@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
+import './ToolPage.css'
 import NavBar from './NavBar.jsx'
-
-// Finds the line and column of a JSON error from the browser's message.
-function getErrorLocation(text, message) {
-  const lineCol = message.match(/line (\d+) column (\d+)/i)
-  if (lineCol) return { line: Number(lineCol[1]), column: Number(lineCol[2]) }
-
-  const pos = message.match(/position (\d+)/i)
-  if (pos) {
-    const before = text.slice(0, Number(pos[1]))
-    const lines = before.split('\n')
-    return { line: lines.length, column: lines[lines.length - 1].length + 1 }
-  }
-  return null
-}
+import CodeEditor from './CodeEditor.jsx'
+import JsonHighlight from './JsonHighlight.jsx'
+import { JsonTreeView } from './JsonTree.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox } from './ToolLayout.jsx'
+import {
+  getErrorLocation,
+  useLiveJsonCheck,
+  describeText,
+  formatSize,
+  readTextFile,
+} from './toolUtils.js'
 
 // Gives a simple tip for the most common JSON mistakes.
 function getHint(text, message) {
@@ -31,12 +29,12 @@ function getHint(text, message) {
     return 'JSON does not allow comments. Remove any // or /* */ comments.'
   }
   if (/[{,]\s*[A-Za-z_$][\w$]*\s*:/.test(text)) {
-    return 'Every key must be in double quotes, for example "name": "Ali".'
+    return 'Every key must be in double quotes, for example "name": "Emily".'
   }
   if (/end of|unexpected end/i.test(message)) {
     return 'The JSON ends too early. Check for a missing } or ].'
   }
-  return 'Check the shown line for a missing comma, quote, or bracket.'
+  return 'Check the marked line for a missing comma, quote, or bracket.'
 }
 
 function getDepth(value) {
@@ -49,138 +47,223 @@ function getDepth(value) {
   return max + 1
 }
 
+// One sample with a single missing comma, so visitors can see how errors are shown.
+const SAMPLE = [
+  '{',
+  '  "id": 1024,',
+  '  "name": "Emily Clark",',
+  '  "email": "emily.clark@example.com"',
+  '  "isActive": true,',
+  '  "skills": ["JSON", "React", "API"],',
+  '  "address": {',
+  '    "city": "London",',
+  '    "country": "United Kingdom"',
+  '  }',
+  '}',
+].join('\n')
+
 function JsonValidator() {
   const [json, setJson] = useState('')
   const [status, setStatus] = useState(null)
+  const [tab, setTab] = useState('report')
+  const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const fileInputRef = useRef(null)
+  const liveCheck = useLiveJsonCheck(json)
 
-  function validate() {
-    if (!json.trim()) {
+  function handleInputChange(text) {
+    setJson(text)
+    setStatus(null)
+  }
+
+  function validate(text = json) {
+    if (!text.trim()) {
       setStatus({ empty: true })
+      setTab('report')
       return
     }
 
     try {
-      const parsed = JSON.parse(json)
+      const parsed = JSON.parse(text)
       const isArray = Array.isArray(parsed)
       const isObject = parsed !== null && typeof parsed === 'object' && !isArray
       setStatus({
         valid: true,
+        parsed,
         formatted: JSON.stringify(parsed, null, 2),
         type: isArray ? 'Array' : isObject ? 'Object' : typeof parsed,
         count: isArray ? parsed.length : isObject ? Object.keys(parsed).length : null,
         depth: getDepth(parsed),
-        size: new Blob([json]).size,
+        size: formatSize(text),
+        lines: text.split('\n').length,
       })
     } catch (err) {
-      const location = getErrorLocation(json, err.message)
-      let lineText = ''
-      if (location) {
-        lineText = json.split('\n')[location.line - 1] ?? ''
-      }
       setStatus({
         valid: false,
         message: err.message,
-        location,
-        lineText,
-        hint: getHint(json, err.message),
+        location: getErrorLocation(text, err),
+        hint: getHint(text, err.message),
       })
+      setTab('report')
     }
   }
 
-  function loadValidSample() {
-    const sample = {
-      name: 'Ayesha',
-      city: 'Lahore',
-      skills: ['JSON', 'CSV'],
-      contact: { email: 'ayesha@example.com' },
-    }
-    setJson(JSON.stringify(sample, null, 2))
-    setStatus(null)
-  }
-
-  function loadInvalidSample() {
-    setJson('{\n  "name": "Ayesha",\n  "city": "Lahore"\n  "skills": ["JSON", "CSV"]\n}')
-    setStatus(null)
+  function loadSample() {
+    handleInputChange(SAMPLE)
   }
 
   function clearAll() {
-    setJson('')
-    setStatus(null)
+    handleInputChange('')
   }
 
+  async function readFile(file) {
+    try {
+      const text = await readTextFile(file)
+      handleInputChange(text)
+      validate(text)
+    } catch (err) {
+      setStatus({ valid: false, message: err.message, location: null, hint: '' })
+    }
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault()
+      validate()
+    }
+  }
+
+  // Formatted / Tree tabs only make sense for valid JSON.
+  const tabs = status?.valid
+    ? [
+        { value: 'report', label: 'Report' },
+        { value: 'code', label: 'Formatted' },
+        { value: 'tree', label: 'Tree' },
+      ]
+    : [{ value: 'report', label: 'Report' }]
+  const activeTab = status?.valid ? tab : 'report'
+
+  let statusLeft = 'Not checked yet'
+  if (status?.valid) statusLeft = '✓ Valid'
+  if (status?.valid === false) statusLeft = '✗ Invalid'
+
   return (
-    <div className="app">
+    <div className="app tool-page">
       <NavBar />
       <h1>JSON Validator Online</h1>
       <p>
-        Free online JSON validator and syntax checker. Paste your JSON to check
-        if it is valid and find the exact line and column of any error. Your
-        data stays in your browser.
+        Free online JSON validator and syntax checker. Find the exact line and
+        column of any error. Your data stays in your browser.
       </p>
 
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,.txt,application/json,text/plain"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          event.target.value = ''
+          if (file) readFile(file)
+        }}
+        style={{ display: 'none' }}
+      />
+
       <div className="editor-layout">
-        <section className="editor-panel">
-          <h2>Input JSON</h2>
-
-          <textarea
-            placeholder="Paste your JSON here to check it..."
-            value={json}
-            onChange={(event) => {
-              setJson(event.target.value)
-              setStatus(null)
-            }}
-          />
-
-          <div className="buttons">
-            <button onClick={validate}>Validate JSON</button>
-            <button onClick={loadValidSample}>Valid Sample</button>
-            <button onClick={loadInvalidSample}>Invalid Sample</button>
-            <button onClick={clearAll}>Clear</button>
-          </div>
-        </section>
-
-        <section className="editor-panel">
-          <h2>Validation Result</h2>
-
-          {!status && (
-            <pre className="result-output">Your validation result will appear here...</pre>
-          )}
-
-          {status?.empty && <p className="error">Please paste your JSON first.</p>}
-
-          {status?.valid === true && (
+        <ToolPanel
+          title="Input"
+          badge={<StatusBadge check={liveCheck} />}
+          tools={
             <>
-              <p className="success">Valid JSON! No errors found.</p>
-              <ul className="stats-list">
-                <li>Type: {status.type}</li>
-                {status.count !== null && (
-                  <li>{status.type === 'Array' ? 'Items' : 'Top-level keys'}: {status.count}</li>
-                )}
-                <li>Nesting depth: {status.depth}</li>
-                <li>Size: {status.size} bytes</li>
-              </ul>
-              <pre className="result-output">{status.formatted}</pre>
+              <Tool onClick={loadSample}>Sample</Tool>
+              <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={clearAll}>Clear</Tool>
             </>
+          }
+          statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}
+          statusRight={describeText(json)}
+          footer={
+            <div className="action-bar">
+              <button type="button" className="action-primary" onClick={() => validate()} title="Shortcut: Ctrl + Enter">
+                Validate JSON
+              </button>
+              <a className="action-link" href="/">
+                Auto-fix errors in the JSON Formatter →
+              </a>
+            </div>
+          }
+        >
+          <CodeEditor
+            value={json}
+            placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to validate.'}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            errorLine={liveCheck?.location?.line || status?.location?.line || null}
+            onCursor={setCursor}
+            onFileDrop={readFile}
+          />
+        </ToolPanel>
+
+        <ToolPanel
+          title="Result"
+          tabs={<Tabs value={activeTab} onChange={setTab} options={tabs} />}
+          statusLeft={statusLeft}
+          statusRight={status?.valid ? `${status.lines} lines · ${status.size}` : ''}
+        >
+          {!status && <EmptyBox>Your validation result will appear here.</EmptyBox>}
+
+          {status?.empty && <EmptyBox>Please paste your JSON first.</EmptyBox>}
+
+          {status?.valid === true && activeTab === 'report' && (
+            <div className="report">
+              <div className="report-title report-ok">✓ Valid JSON. No errors found.</div>
+              <dl className="report-grid">
+                <dt>Type</dt>
+                <dd>{status.type}</dd>
+                {status.count !== null && (
+                  <>
+                    <dt>{status.type === 'Array' ? 'Items' : 'Top-level keys'}</dt>
+                    <dd>{status.count}</dd>
+                  </>
+                )}
+                <dt>Nesting depth</dt>
+                <dd>{status.depth}</dd>
+                <dt>Lines</dt>
+                <dd>{status.lines}</dd>
+                <dt>Size</dt>
+                <dd>{status.size}</dd>
+              </dl>
+              <p className="report-note">Open the Formatted or Tree tab to read your JSON.</p>
+            </div>
           )}
+
+          {status?.valid === true && activeTab === 'code' && <JsonHighlight text={status.formatted} />}
+          {status?.valid === true && activeTab === 'tree' && <JsonTreeView data={status.parsed} />}
 
           {status?.valid === false && (
-            <>
-              <p className="error">Invalid JSON: {status.message}</p>
+            <div className="report">
+              <div className="report-title report-bad">✗ Invalid JSON</div>
               {status.location && (
                 <>
-                  <p>
-                    Error at <strong>line {status.location.line}</strong>, column{' '}
-                    {status.location.column}:
+                  <p className="report-where">
+                    Error at <strong>line {status.location.line}</strong>, column {status.location.column}
                   </p>
-                  <pre className="result-output">
-                    {status.lineText + '\n' + ' '.repeat(Math.max(status.location.column - 1, 0)) + '^'}
+                  <pre className="report-code">
+                    {`${status.location.snippet}\n${status.location.pointer}`}
                   </pre>
                 </>
               )}
-              <p><strong>Tip:</strong> {status.hint}</p>
-            </>
+              <p className="report-message">{status.message}</p>
+              {status.hint && (
+                <p className="report-tip">
+                  <strong>Tip:</strong> {status.hint}
+                </p>
+              )}
+              <p className="report-note">
+                Want it fixed for you? Paste it into the <a href="/">JSON Formatter</a> and click
+                Fix &amp; Format JSON.
+              </p>
+            </div>
           )}
-        </section>
+        </ToolPanel>
       </div>
 
       <section className="seo-content">
@@ -194,7 +277,7 @@ function JsonValidator() {
 
         <h2>How to Validate JSON</h2>
         <ol>
-          <li>Paste your JSON into the Input JSON box, or try the Valid or Invalid sample.</li>
+          <li>Paste your JSON into the Input box, click Upload, or click Sample.</li>
           <li>Click Validate JSON.</li>
           <li>If the JSON is valid, you will see its type, size, and a formatted copy.</li>
           <li>If it is invalid, read the line number, the marked position, and the tip to fix it.</li>

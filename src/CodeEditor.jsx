@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-// Must match the CSS values in Formatter.css (.ce-*), so lines stay aligned.
+// Must match the CSS values in ToolPage.css (.ce-*), so lines stay aligned.
 const LINE_HEIGHT = 22
 const PADDING_TOP = 14
 

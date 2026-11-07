@@ -5,6 +5,7 @@ const items = [
   { href: '/', label: 'JSON Formatter' },
   { href: '/json-viewer', label: 'JSON Viewer' },
   { href: '/json-validator', label: 'JSON Validator' },
+  { href: '/json-compare', label: 'JSON Compare' },
   {
     label: 'Converters',
     children: [
@@ -26,10 +27,40 @@ const items = [
   { href: '/about', label: 'About' },
 ]
 
+// Light or dark: the saved choice, else the computer's setting.
+function getStartTheme() {
+  let saved = ''
+  try {
+    saved = localStorage.getItem('theme') || ''
+  } catch {
+    // Storage can be blocked (private window). Then we just use the default.
+  }
+  const theme =
+    saved === 'dark' || saved === 'light'
+      ? saved
+      : window.matchMedia?.('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+  // Set it right away, so the page does not flash light before turning dark.
+  document.body.classList.toggle('dark', theme === 'dark')
+  return theme
+}
+
 function NavBar() {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
   const [openMenu, setOpenMenu] = useState(null)
+  const [theme, setTheme] = useState(getStartTheme)
   const navRef = useRef(null)
+
+  // Dark mode for every page: a class on <body> switches the colors.
+  useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark')
+    try {
+      localStorage.setItem('theme', theme)
+    } catch {
+      // Storage can be blocked. Dark mode still works until the page is closed.
+    }
+  }, [theme])
 
   // Close the open list when clicking outside the menu or pressing Escape.
   useEffect(() => {
@@ -50,6 +81,13 @@ function NavBar() {
   }, [])
 
   return (
+    <header className="site-header">
+    <a href="/" className="brand" aria-label="Online JSON Formatter home">
+      <span className="brand-mark" aria-hidden="true">{'{ }'}</span>
+      <span className="brand-name">
+        Online<span className="brand-accent">JSON</span>
+      </span>
+    </a>
     <nav className="site-nav" aria-label="Main" ref={navRef}>
       {items.map((item) => {
         if (!item.children) {
@@ -101,6 +139,16 @@ function NavBar() {
         )
       })}
     </nav>
+    <button
+      type="button"
+      className="theme-switch"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+    >
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+    </header>
   )
 }
 

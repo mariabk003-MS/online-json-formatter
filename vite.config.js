@@ -21,6 +21,7 @@ export default defineConfig({
         howToOpenJson: fileURLToPath(new URL('./how-to-open-json-file.html', import.meta.url)),
         jsonVsXml: fileURLToPath(new URL('./json-vs-xml.html', import.meta.url)),
         jsonToExcel: fileURLToPath(new URL('./convert-json-to-excel.html', import.meta.url)),
+        jsonCompare: fileURLToPath(new URL('./json-compare.html', import.meta.url)),
       },
     },
   },

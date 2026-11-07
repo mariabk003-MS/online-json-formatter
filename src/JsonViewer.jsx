@@ -1,91 +1,58 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
-import './JsonViewer.css'
+import './ToolPage.css'
 import NavBar from './NavBar.jsx'
+import CodeEditor from './CodeEditor.jsx'
+import { JsonTreeView } from './JsonTree.jsx'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages } from './ToolLayout.jsx'
+import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile } from './toolUtils.js'
 
-// Shows a simple value (text, number, true/false, null) in its own color.
-function ValueText({ value }) {
-  if (value === null) return <span className="jv-null">null</span>
-  if (typeof value === 'string') return <span className="jv-string">"{value}"</span>
-  if (typeof value === 'number') return <span className="jv-number">{String(value)}</span>
-  if (typeof value === 'boolean') return <span className="jv-boolean">{String(value)}</span>
-  return <span>{String(value)}</span>
+const SAMPLE = {
+  store: 'City Electronics',
+  open: true,
+  rating: 4.7,
+  address: { city: 'London', country: 'United Kingdom' },
+  products: [
+    { id: 1, name: 'Keyboard', price: 49.99, inStock: true },
+    { id: 2, name: 'Mouse', price: 19.99, inStock: false },
+  ],
+  discount: null,
 }
 
-// One line of the tree. Objects and arrays can be opened and closed.
-// Also used by the JSON Formatter page (App.jsx) for its Tree tab.
-export function TreeNode({ name, value, depth, openAll }) {
-  const isContainer = value !== null && typeof value === 'object'
-  const [open, setOpen] = useState(openAll === null ? depth < 2 : openAll)
-
-  const label =
-    name === undefined ? null : (
-      <>
-        <span className="jv-key">{typeof name === 'number' ? name : `"${name}"`}</span>
-        <span className="jv-colon">: </span>
-      </>
-    )
-
-  if (!isContainer) {
-    return (
-      <div className="jv-row">
-        <span className="jv-spacer" />
-        {label}
-        <ValueText value={value} />
-      </div>
-    )
+// Counts keys/items and finds the deepest level, for the status bar.
+function getStats(value) {
+  let nodes = 0
+  let depth = 0
+  function walk(item, level) {
+    nodes++
+    if (level > depth) depth = level
+    if (item && typeof item === 'object') {
+      for (const child of Object.values(item)) walk(child, level + 1)
+    }
   }
-
-  const isArray = Array.isArray(value)
-  const entries = isArray
-    ? value.map((item, index) => [index, item])
-    : Object.entries(value)
-  const summary = isArray
-    ? `[ ${entries.length} ${entries.length === 1 ? 'item' : 'items'} ]`
-    : `{ ${entries.length} ${entries.length === 1 ? 'key' : 'keys'} }`
-
-  return (
-    <div>
-      <div className="jv-row">
-        <button
-          type="button"
-          className="jv-toggle"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-label={open ? 'Collapse' : 'Expand'}
-        >
-          {open ? '▾' : '▸'}
-        </button>
-        {label}
-        <span className="jv-summary" onClick={() => setOpen(!open)}>
-          {summary}
-        </span>
-      </div>
-      {open && entries.length > 0 && (
-        <div className="jv-children">
-          {entries.map(([key, child]) => (
-            <TreeNode
-              key={key}
-              name={key}
-              value={child}
-              depth={depth + 1}
-              openAll={openAll}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  walk(value, 0)
+  return `${nodes} values · depth ${depth}`
 }
 
 function JsonViewer() {
   const [json, setJson] = useState('')
   const [data, setData] = useState(null)
+  const [version, setVersion] = useState(0)
   const [error, setError] = useState('')
-  const [openAll, setOpenAll] = useState(null)
-  const [treeVersion, setTreeVersion] = useState(0)
+  const [errorLocation, setErrorLocation] = useState(null)
+  const [success, setSuccess] = useState('')
+  const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const fileInputRef = useRef(null)
+  const liveCheck = useLiveJsonCheck(json)
 
-  function showTree(text) {
+  function handleInputChange(text) {
+    setJson(text)
+    setError('')
+    setErrorLocation(null)
+    setSuccess('')
+  }
+
+  function showTree(text = json) {
     if (!text.trim()) {
       setData(null)
       setError('Please paste your JSON first.')
@@ -93,50 +60,48 @@ function JsonViewer() {
     }
     try {
       setData({ value: JSON.parse(text) })
+      setVersion((v) => v + 1)
       setError('')
-      setOpenAll(null)
-      setTreeVersion((v) => v + 1)
+      setErrorLocation(null)
     } catch (err) {
+      const location = getErrorLocation(text, err)
       setData(null)
-      setError('Invalid JSON: ' + err.message)
+      setError(`Invalid JSON: ${err.message}`)
+      setErrorLocation(location)
     }
-  }
-
-  function expandAll() {
-    setOpenAll(true)
-    setTreeVersion((v) => v + 1)
-  }
-
-  function collapseAll() {
-    setOpenAll(false)
-    setTreeVersion((v) => v + 1)
   }
 
   function loadSample() {
-    const sample = {
-      store: 'Online Shop',
-      open: true,
-      rating: 4.7,
-      address: { city: 'Lahore', country: 'Pakistan' },
-      products: [
-        { id: 1, name: 'Keyboard', price: 2500, inStock: true },
-        { id: 2, name: 'Mouse', price: 1200, inStock: false },
-      ],
-      discount: null,
-    }
-    const text = JSON.stringify(sample, null, 2)
-    setJson(text)
+    const text = JSON.stringify(SAMPLE, null, 2)
+    handleInputChange(text)
     showTree(text)
   }
 
   function clearAll() {
-    setJson('')
+    handleInputChange('')
     setData(null)
-    setError('')
+  }
+
+  async function readFile(file) {
+    try {
+      const text = await readTextFile(file)
+      handleInputChange(text)
+      showTree(text)
+      setSuccess(`"${file.name}" loaded.`)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault()
+      showTree()
+    }
   }
 
   return (
-    <div className="app">
+    <div className="app tool-page">
       <NavBar />
       <h1>JSON Viewer</h1>
       <p>
@@ -144,46 +109,63 @@ function JsonViewer() {
         arrays to explore your data.
       </p>
 
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,.txt,application/json,text/plain"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          event.target.value = ''
+          if (file) readFile(file)
+        }}
+        style={{ display: 'none' }}
+      />
+
       <div className="editor-layout">
-        <section className="editor-panel">
-          <h2>Input JSON</h2>
-
-          <textarea
-            placeholder="Paste your JSON here to view it as a tree..."
+        <ToolPanel
+          title="Input"
+          badge={<StatusBadge check={liveCheck} />}
+          tools={
+            <>
+              <Tool onClick={loadSample}>Sample</Tool>
+              <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={clearAll}>Clear</Tool>
+            </>
+          }
+          statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}
+          statusRight={describeText(json)}
+          footer={
+            <div className="action-bar">
+              <button type="button" className="action-primary" onClick={() => showTree()} title="Shortcut: Ctrl + Enter">
+                View Tree
+              </button>
+            </div>
+          }
+        >
+          <CodeEditor
             value={json}
-            onChange={(event) => setJson(event.target.value)}
+            placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to view the tree.'}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            errorLine={liveCheck?.location?.line || errorLocation?.line || null}
+            onCursor={setCursor}
+            onFileDrop={readFile}
           />
+        </ToolPanel>
 
-          <div className="buttons">
-            <button onClick={() => showTree(json)}>View Tree</button>
-            <button onClick={loadSample}>Load Sample</button>
-            <button onClick={clearAll}>Clear</button>
-          </div>
-        </section>
-
-        <section className="editor-panel">
-          <h2>Tree View</h2>
-
-          {data && (
-            <div className="buttons">
-              <button onClick={expandAll}>Expand All</button>
-              <button onClick={collapseAll}>Collapse All</button>
-            </div>
+        <ToolPanel
+          title="Tree View"
+          statusLeft={data ? getStats(data.value) : 'No tree yet'}
+        >
+          {data ? (
+            <JsonTreeView key={version} data={data.value} />
+          ) : (
+            <EmptyBox>Your JSON tree will appear here.</EmptyBox>
           )}
-
-          {error && <p className="error">{error}</p>}
-
-          {!data && !error && (
-            <pre className="result-output">Your JSON tree will appear here...</pre>
-          )}
-
-          {data && (
-            <div className="jv-tree" key={treeVersion}>
-              <TreeNode value={data.value} depth={0} openAll={openAll} />
-            </div>
-          )}
-        </section>
+        </ToolPanel>
       </div>
+
+      <Messages error={error} success={success} location={errorLocation} />
 
       <section className="seo-content">
         <h2>What Is a JSON Viewer?</h2>
@@ -195,7 +177,7 @@ function JsonViewer() {
 
         <h2>How to Use the JSON Viewer</h2>
         <ol>
-          <li>Paste your JSON into the Input JSON box, or click Load Sample.</li>
+          <li>Paste your JSON into the Input box, click Upload, or click Sample.</li>
           <li>Click View Tree.</li>
           <li>Click the arrows to open or close objects and arrays.</li>
           <li>Use Expand All or Collapse All to see everything or just the top level.</li>
@@ -206,6 +188,8 @@ function JsonViewer() {
           <li>Collapsible tree view for objects and arrays.</li>
           <li>Item and key counts for every branch.</li>
           <li>Different colors for text, numbers, true/false, and null values.</li>
+          <li>Line numbers and a live Valid / Invalid check while you type.</li>
+          <li>Upload or drag &amp; drop a .json file, and full screen view.</li>
           <li>Works in your browser. Your data is not uploaded.</li>
         </ul>
 
@@ -219,9 +203,9 @@ function JsonViewer() {
 
         <h3>What if my JSON has an error?</h3>
         <p>
-          The viewer will show an error message. To find the exact line and
-          column of the problem, use our{' '}
-          <a href="/json-validator">JSON Validator</a>, or read the{' '}
+          The viewer shows the error and highlights the broken line in red.
+          To repair common mistakes automatically, use our{' '}
+          <a href="/">JSON Formatter</a>, or read the{' '}
           <a href="/common-json-errors">Common JSON Errors guide</a>.
         </p>
 

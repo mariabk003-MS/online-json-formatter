@@ -27,8 +27,8 @@ textarea {
 .app {
   width: calc(100% - 32px);
   max-width: 1050px;
-  margin: 48px auto;
-  padding: 36px;
+  margin: 24px auto;
+  padding: 28px 32px;
   background: #fff;
   border: 1px solid #e4eaf3;
   border-radius: 20px;
@@ -37,18 +37,18 @@ textarea {
 
 h1 {
   margin: 0;
-  color: #173b8f;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
-  letter-spacing: -1.2px;
+  color: #0f172a;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 750;
+  letter-spacing: -0.6px;
   line-height: 1.2;
   text-align: center;
 }
 
 .app > p {
-  margin: 12px 0 26px;
+  margin: 8px 0 24px;
   color: #64748b;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.7;
   text-align: center;
 }

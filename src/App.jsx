@@ -1,11 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import { safeFix } from './safeFix.js'
-import './Formatter.css'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
-import { TreeNode } from './JsonViewer.jsx'
+import { JsonTreeView } from './JsonTree.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages } from './ToolLayout.jsx'
+import {
+  getErrorLocation,
+  useLiveJsonCheck,
+  describeText,
+  formatSize,
+  downloadText,
+  readTextFile,
+} from './toolUtils.js'
 
 // Friendly names for each kind of fix that safeFix can make.
 const FIX_LABELS = {
@@ -36,117 +45,21 @@ function describeFixes(report) {
   return `Fixed ${total} problem${total > 1 ? 's' : ''}: ${parts.join(', ')}.`
 }
 
-// Finds the line and column of a JSON.parse error, and the text of that line.
-function getErrorLocation(text, err) {
-  let line
-  let column
-  const lineMatch = err.message.match(/line (\d+) column (\d+)/)
-  const posMatch = err.message.match(/position (\d+)/)
-  let position = posMatch ? Number(posMatch[1]) : -1
-
-  // Chrome sometimes gives no position, only a short piece of the text, like:
-  // Unexpected token 'h', ..."1,\n  "b": hello\n}" is not valid JSON
-  // The piece starts 10 characters before the problem when it begins with "...".
-  const tokenMatch = err.message.match(/^Unexpected token '(.)', (\.\.\.)?"([\s\S]*?)"(\.\.\.)? is not valid JSON/)
-  if (!lineMatch && position === -1 && tokenMatch) {
-    const [, token, cutAtStart, piece] = tokenMatch
-    const pieceStart = text.indexOf(piece)
-    if (pieceStart !== -1) {
-      position = cutAtStart ? pieceStart + 10 : pieceStart + piece.indexOf(token)
-    }
-  }
-
-  if (lineMatch) {
-    line = Number(lineMatch[1])
-    column = Number(lineMatch[2])
-  } else if (position !== -1) {
-    const before = text.slice(0, position)
-    line = before.split('\n').length
-    column = before.length - before.lastIndexOf('\n')
-  } else {
-    return null
-  }
-
-  // Show at most 60 characters around the problem, so long lines still fit.
-  const fullLine = (text.split('\n')[line - 1] || '').replace(/\t/g, ' ')
-  const start = Math.max(0, column - 40)
-  const snippet = fullLine.slice(start, start + 60)
-  const pointer = ' '.repeat(Math.max(0, column - 1 - start)) + '^'
-
-  return { line, column, snippet, pointer }
-}
-
-// Reads a saved value from the browser. Returns '' if storage is blocked.
-function loadSaved(key) {
-  try {
-    return localStorage.getItem(key) || ''
-  } catch {
-    return ''
-  }
-}
-
-function save(key, value) {
-  try {
-    localStorage.setItem(key, value)
-  } catch {
-    // Storage can be blocked (private window). The tool still works without it.
-  }
-}
-
-function formatSize(text) {
-  const bytes = new Blob([text]).size
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
-  return `${(bytes / 1024 / 1024).toFixed(2)} MB`
-}
-
-function getStartTheme() {
-  const saved = loadSaved('theme')
-  let theme = saved
-  if (saved !== 'dark' && saved !== 'light') {
-    theme = window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  }
-  // Set it right away, so the page does not flash light before turning dark.
-  document.body.classList.toggle('dark', theme === 'dark')
-  return theme
-}
-
-// Inputs bigger than this are not checked while typing, to keep typing fast.
-const LIVE_CHECK_LIMIT = 500 * 1024
-
 function App() {
   const [json, setJson] = useState('')
   const [result, setResult] = useState('')
   const [parsed, setParsed] = useState(undefined)
+  const [resultVersion, setResultVersion] = useState(0)
   const [error, setError] = useState('')
   const [errorLocation, setErrorLocation] = useState(null)
   const [success, setSuccess] = useState('')
   const [indent, setIndent] = useState('2')
   const [outputTab, setOutputTab] = useState('code')
-  const [openAll, setOpenAll] = useState(null)
-  const [treeVersion, setTreeVersion] = useState(0)
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
-  const [theme, setTheme] = useState(getStartTheme)
-  const [fullscreen, setFullscreen] = useState(null) // null, 'input' or 'output'
   const fileInputRef = useRef(null)
 
   // Checks the input while the user types, so we can show ✓ / ✗ and the error line.
-  const liveCheck = useMemo(() => {
-    if (!json.trim() || json.length > LIVE_CHECK_LIMIT) return null
-    try {
-      JSON.parse(json)
-      return { valid: true }
-    } catch (err) {
-      return { valid: false, location: getErrorLocation(json, err) }
-    }
-  }, [json])
-
-  // Dark mode: add a class to <body> so the whole page changes color.
-  useEffect(() => {
-    document.body.classList.toggle('dark', theme === 'dark')
-    save('theme', theme)
-    return () => document.body.classList.remove('dark')
-  }, [theme])
+  const liveCheck = useLiveJsonCheck(json)
 
   // The input is NOT saved, for privacy. Remove any copy an older version saved.
   useEffect(() => {
@@ -156,16 +69,6 @@ function App() {
       // Storage can be blocked. Nothing to remove then.
     }
   }, [])
-
-  // Esc closes full screen.
-  useEffect(() => {
-    if (!fullscreen) return
-    function onKey(event) {
-      if (event.key === 'Escape') setFullscreen(null)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [fullscreen])
 
   function getIndent() {
     return indent === 'tab' ? '\t' : Number(indent)
@@ -188,8 +91,7 @@ function App() {
   function showResult(text, data) {
     setResult(text)
     setParsed(data)
-    setOpenAll(null)
-    setTreeVersion((v) => v + 1)
+    setResultVersion((v) => v + 1)
   }
 
   function parseWithFix(text) {
@@ -305,24 +207,14 @@ function App() {
     handleInputChange('')
   }
 
-  function openFilePicker() {
-    fileInputRef.current?.click()
-  }
-
   // Used by both the Upload button and drag & drop.
   async function readFile(file) {
-    const maxSize = 5 * 1024 * 1024
-    if (file.size > maxSize) {
-      showError('File is too large. Please upload a file smaller than 5 MB.')
-      return
-    }
-
     try {
-      const text = await file.text()
+      const text = await readTextFile(file)
       handleInputChange(text)
-      showSuccess(`"${file.name}" loaded. Now click Fix & Format JSON or Minify JSON.`)
-    } catch {
-      showError('Could not read this file. Please try another .json or .txt file.')
+      showSuccess(`"${file.name}" loaded. Now click Fix & Format JSON or Minify.`)
+    } catch (err) {
+      showError(err.message)
     }
   }
 
@@ -333,12 +225,6 @@ function App() {
   }
 
   async function copyResult() {
-    if (!result) {
-      setError('Please fix and format JSON first.')
-      setSuccess('')
-      return
-    }
-
     try {
       await navigator.clipboard.writeText(result)
       showSuccess('Result copied successfully!')
@@ -349,67 +235,26 @@ function App() {
   }
 
   function downloadJSON() {
-    if (!result) {
-      setError('Please fix and format JSON first.')
-      setSuccess('')
-      return
-    }
-
-    const blob = new Blob([result], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-
-    link.href = url
-    link.download = 'formatted.json'
-    link.click()
-    URL.revokeObjectURL(url)
-
+    downloadText(result, 'formatted.json', 'application/json')
     showSuccess('JSON downloaded successfully!')
   }
 
   // Puts the result back into the input box, e.g. to keep editing it.
   function useResultAsInput() {
-    if (!result) return
     handleInputChange(result)
     showSuccess('Result moved to the input box.')
-  }
-
-  function expandAll() {
-    setOpenAll(true)
-    setTreeVersion((v) => v + 1)
-  }
-
-  function collapseAll() {
-    setOpenAll(false)
-    setTreeVersion((v) => v + 1)
-  }
-
-  function toggleFullscreen(panel) {
-    setFullscreen(fullscreen === panel ? null : panel)
   }
 
   // The red line in the editor: the live check, or the last error shown.
   const errorLine = liveCheck?.location?.line || errorLocation?.line || null
 
-  let status = null
-  if (liveCheck?.valid) {
-    status = <span className="status-badge status-ok">✓ Valid JSON</span>
-  } else if (liveCheck && !liveCheck.valid) {
-    status = (
-      <span className="status-badge status-bad">
-        ✗ Invalid JSON{liveCheck.location ? ` – line ${liveCheck.location.line}` : ''}
-      </span>
-    )
-  }
-
   return (
-    <div className="app formatter">
+    <div className="app tool-page">
       <NavBar />
       <h1>JSON Formatter &amp; Beautifier Online</h1>
       <p>
-        Free online JSON formatter, beautifier and validator. Paste your JSON
-        to format, validate or minify it instantly. Your data stays in your
-        browser and is never uploaded.
+        Free JSON formatter, beautifier and validator that auto-fixes errors.
+        Private: your data never leaves your browser.
       </p>
 
       <input
@@ -421,156 +266,82 @@ function App() {
       />
 
       <div className="editor-layout">
-        <section className={`editor-panel${fullscreen === 'input' ? ' panel-fullscreen' : ''}`}>
-          <div className="panel-header">
-            <h2>Input</h2>
-            {status}
-            <div className="toolbar">
-              <button type="button" className="tool" onClick={loadSample}>Sample</button>
-              <button type="button" className="tool" onClick={openFilePicker}>Upload</button>
-              <button type="button" className="tool" onClick={clearAll}>Clear</button>
-              <button
-                type="button"
-                className="tool tool-icon"
-                onClick={() => toggleFullscreen('input')}
-                title={fullscreen === 'input' ? 'Exit full screen (Esc)' : 'Full screen'}
-                aria-label={fullscreen === 'input' ? 'Exit full screen' : 'Full screen'}
-              >
-                {fullscreen === 'input' ? '✕' : '⛶'}
+        <ToolPanel
+          title="Input"
+          badge={<StatusBadge check={liveCheck} />}
+          tools={
+            <>
+              <Tool onClick={loadSample}>Sample</Tool>
+              <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={clearAll}>Clear</Tool>
+            </>
+          }
+          statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}
+          statusRight={describeText(json)}
+          footer={
+            // Main actions, right under the input so they are easy to find on phones too
+            <div className="action-bar">
+              <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
+                Fix &amp; Format JSON
               </button>
+              <button type="button" className="action-secondary" onClick={minifyJSON}>
+                Minify
+              </button>
+              <label className="indent-select">
+                Indent
+                <select value={indent} onChange={(event) => setIndent(event.target.value)}>
+                  <option value="2">2 spaces</option>
+                  <option value="4">4 spaces</option>
+                  <option value="tab">Tab</option>
+                </select>
+              </label>
             </div>
-          </div>
+          }
+        >
+          <CodeEditor
+            value={json}
+            placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to fix and format.'}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            errorLine={errorLine}
+            onCursor={setCursor}
+            onFileDrop={readFile}
+          />
+        </ToolPanel>
 
-          <div className="panel-box">
-            <CodeEditor
-              value={json}
-              placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to fix and format.'}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              errorLine={errorLine}
-              onCursor={setCursor}
-              onFileDrop={readFile}
+        <ToolPanel
+          title="Result"
+          tabs={
+            <Tabs
+              value={outputTab}
+              onChange={setOutputTab}
+              options={[
+                { value: 'code', label: 'Code' },
+                { value: 'tree', label: 'Tree' },
+              ]}
             />
-            <div className="status-bar">
-              <span>
-                Ln {cursor.line}, Col {cursor.column}
-              </span>
-              <span>
-                {json ? `${json.split('\n').length} lines · ${formatSize(json)}` : 'Empty'}
-              </span>
-            </div>
-          </div>
-
-          {/* Main actions, right under the input so they are easy to find on phones too */}
-          <div className="action-bar">
-            <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
-              Fix &amp; Format JSON
-            </button>
-            <button type="button" className="action-secondary" onClick={minifyJSON}>
-              Minify
-            </button>
-            <label className="indent-select">
-              Indent
-              <select value={indent} onChange={(event) => setIndent(event.target.value)}>
-                <option value="2">2 spaces</option>
-                <option value="4">4 spaces</option>
-                <option value="tab">Tab</option>
-              </select>
-            </label>
-            <button
-              type="button"
-              className="tool tool-icon theme-toggle"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
-          </div>
-        </section>
-
-        <section className={`editor-panel${fullscreen === 'output' ? ' panel-fullscreen' : ''}`}>
-          <div className="panel-header">
-            <h2>Result</h2>
-            <div className="tabs" role="tablist">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={outputTab === 'code'}
-                className={outputTab === 'code' ? 'tab active' : 'tab'}
-                onClick={() => setOutputTab('code')}
-              >
-                Code
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={outputTab === 'tree'}
-                className={outputTab === 'tree' ? 'tab active' : 'tab'}
-                onClick={() => setOutputTab('tree')}
-              >
-                Tree
-              </button>
-            </div>
-            <div className="toolbar">
-              <button type="button" className="tool" onClick={copyResult} disabled={!result}>Copy</button>
-              <button type="button" className="tool" onClick={downloadJSON} disabled={!result}>Download</button>
-              <button
-                type="button"
-                className="tool"
-                onClick={useResultAsInput}
-                disabled={!result}
-                title="Move the result into the input box"
-              >
+          }
+          tools={
+            <>
+              <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
+              <Tool onClick={downloadJSON} disabled={!result}>Download</Tool>
+              <Tool onClick={useResultAsInput} disabled={!result} title="Move the result into the input box">
                 Edit
-              </button>
-              <button
-                type="button"
-                className="tool tool-icon"
-                onClick={() => toggleFullscreen('output')}
-                title={fullscreen === 'output' ? 'Exit full screen (Esc)' : 'Full screen'}
-                aria-label={fullscreen === 'output' ? 'Exit full screen' : 'Full screen'}
-              >
-                {fullscreen === 'output' ? '✕' : '⛶'}
-              </button>
-            </div>
-          </div>
-
-          <div className="panel-box">
-            {!result && (
-              <div className="result-empty">Your formatted JSON will appear here.</div>
-            )}
-
-            {result && outputTab === 'code' && <JsonHighlight text={result} />}
-
-            {result && outputTab === 'tree' && parsed !== undefined && (
-              <div className="tree-wrap">
-                <div className="tree-actions">
-                  <button type="button" className="tool" onClick={expandAll}>Expand all</button>
-                  <button type="button" className="tool" onClick={collapseAll}>Collapse all</button>
-                </div>
-                <div className="jv-tree" key={treeVersion}>
-                  <TreeNode value={parsed} depth={0} openAll={openAll} />
-                </div>
-              </div>
-            )}
-
-            <div className="status-bar">
-              <span>{result ? `${result.split('\n').length} lines` : 'No result yet'}</span>
-              <span>{result ? formatSize(result) : ''}</span>
-            </div>
-          </div>
-        </section>
+              </Tool>
+            </>
+          }
+          statusLeft={result ? `${result.split('\n').length} lines` : 'No result yet'}
+          statusRight={result ? formatSize(result) : ''}
+        >
+          {!result && <EmptyBox>Your formatted JSON will appear here.</EmptyBox>}
+          {result && outputTab === 'code' && <JsonHighlight text={result} />}
+          {result && outputTab === 'tree' && parsed !== undefined && (
+            <JsonTreeView key={resultVersion} data={parsed} />
+          )}
+        </ToolPanel>
       </div>
 
-      {error &&<p className="error">{error}</p>}
-      {errorLocation && (
-        <pre className="error-location">
-          {`Line ${errorLocation.line}: ${errorLocation.snippet}\n`}
-          {' '.repeat(`Line ${errorLocation.line}: `.length) + errorLocation.pointer}
-        </pre>
-      )}
-      {success && <p className="success">{success}</p>}
+      <Messages error={error} success={success} location={errorLocation} />
 
       <section className="seo-content">
         <h2>What Is a JSON Formatter?</h2>
@@ -662,6 +433,8 @@ function App() {
                 <a href="/about">About</a>
         {' | '}
         <a href="/json-validator">JSON Validator</a>
+        {' | '}
+        <a href="/json-compare">JSON Compare</a>
         {' | '}
         <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}

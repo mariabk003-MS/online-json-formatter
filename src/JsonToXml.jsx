@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
+import './ToolPage.css'
 import NavBar from './NavBar.jsx'
+import CodeEditor from './CodeEditor.jsx'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, XmlOutput, Messages } from './ToolLayout.jsx'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
 
 // Makes any JSON key safe to use as an XML tag name.
@@ -84,6 +88,9 @@ function JsonToXml() {
   const [rootName, setRootName] = useState('root')
   const [indentSize, setIndentSize] = useState('2')
   const [addDeclaration, setAddDeclaration] = useState(true)
+  const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const fileInputRef = useRef(null)
+  const liveCheck = useLiveJsonCheck(json)
 
   function showError(message) {
     setResult('')
@@ -96,15 +103,22 @@ function JsonToXml() {
     setSuccess(message)
   }
 
-  function convert() {
-    if (!json.trim()) {
+  function handleInputChange(text) {
+    setJson(text)
+    setError('')
+    setSuccess('')
+    setResult('')
+  }
+
+  function convert(text = json) {
+    if (!text.trim()) {
       showError('Please paste your JSON first.')
       return
     }
 
     let data
     try {
-      data = parseWithFix(json)
+      data = parseWithFix(text)
     } catch (err) {
       showError(`This is not valid JSON. ${err.message}`)
       return
@@ -124,32 +138,31 @@ function JsonToXml() {
     const sample = {
       store: {
         name: 'Book Corner',
-        city: 'Lahore',
+        city: 'London',
         books: [
-          { title: 'Learn JSON', price: 499, inStock: true },
-          { title: 'XML Basics', price: 350, inStock: false },
+          { title: 'Learn JSON', price: 12.99, inStock: true },
+          { title: 'XML Basics', price: 9.5, inStock: false },
         ],
       },
     }
-    setJson(JSON.stringify(sample, null, 2))
-    setResult('')
-    setError('')
-    setSuccess('')
+    handleInputChange(JSON.stringify(sample, null, 2))
   }
 
   function clearAll() {
-    setJson('')
-    setResult('')
-    setError('')
-    setSuccess('')
+    handleInputChange('')
+  }
+
+  async function readFile(file) {
+    try {
+      const text = await readTextFile(file)
+      handleInputChange(text)
+      showSuccess(`"${file.name}" loaded. Click Convert to XML.`)
+    } catch (err) {
+      showError(err.message)
+    }
   }
 
   async function copyResult() {
-    if (!result) {
-      setError('Please convert your JSON first.')
-      setSuccess('')
-      return
-    }
     try {
       await navigator.clipboard.writeText(result)
       showSuccess('XML copied successfully!')
@@ -160,92 +173,110 @@ function JsonToXml() {
   }
 
   function downloadXml() {
-    if (!result) {
-      setError('Please convert your JSON first.')
-      setSuccess('')
-      return
-    }
-    const blob = new Blob([result], { type: 'application/xml;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'converted.xml'
-    link.click()
-    URL.revokeObjectURL(url)
+    downloadText(result, 'converted.xml', 'application/xml;charset=utf-8')
     showSuccess('XML downloaded successfully!')
   }
 
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault()
+      convert()
+    }
+  }
+
   return (
-    <div className="app">
+    <div className="app tool-page">
       <NavBar />
       <h1>JSON to XML Converter</h1>
       <p>Convert JSON data into clean, well-formatted XML in your browser.</p>
 
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,.txt,application/json,text/plain"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          event.target.value = ''
+          if (file) readFile(file)
+        }}
+        style={{ display: 'none' }}
+      />
+
       <div className="editor-layout">
-        <section className="editor-panel">
-          <h2>Input JSON</h2>
-
-          <textarea
-            placeholder='Paste your JSON here, for example: {"name": "Ali", "city": "Lahore"}'
+        <ToolPanel
+          title="JSON Input"
+          badge={<StatusBadge check={liveCheck} />}
+          tools={
+            <>
+              <Tool onClick={loadSample}>Sample</Tool>
+              <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={clearAll}>Clear</Tool>
+            </>
+          }
+          statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}
+          statusRight={describeText(json)}
+          footer={
+            <>
+              <div className="action-bar">
+                <button type="button" className="action-primary" onClick={() => convert()} title="Shortcut: Ctrl + Enter">
+                  Convert to XML
+                </button>
+                <label className="indent-select">
+                  Indent
+                  <select value={indentSize} onChange={(event) => setIndentSize(event.target.value)}>
+                    <option value="2">2 spaces</option>
+                    <option value="4">4 spaces</option>
+                  </select>
+                </label>
+              </div>
+              <div className="options-row">
+                <label className="option">
+                  Root tag
+                  <input
+                    type="text"
+                    value={rootName}
+                    onChange={(event) => setRootName(event.target.value)}
+                  />
+                </label>
+                <label className="option">
+                  <input
+                    type="checkbox"
+                    checked={addDeclaration}
+                    onChange={(event) => setAddDeclaration(event.target.checked)}
+                  />
+                  Add XML declaration
+                </label>
+              </div>
+            </>
+          }
+        >
+          <CodeEditor
             value={json}
-            onChange={(event) => {
-              setJson(event.target.value)
-              setError('')
-              setSuccess('')
-              setResult('')
-            }}
+            placeholder={'Paste your JSON here, or drop a .json file. For example:\n{"name": "Emily", "city": "London"}\n\nTip: press Ctrl + Enter to convert.'}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            errorLine={liveCheck?.location?.line || null}
+            onCursor={setCursor}
+            onFileDrop={readFile}
           />
+        </ToolPanel>
 
-          <div className="buttons">
-            <button onClick={convert}>Convert to XML</button>
-            <button onClick={loadSample}>Load Sample</button>
-            <button onClick={clearAll}>Clear</button>
-            <label className="indent-label">
-              Root tag:{' '}
-              <input
-                type="text"
-                value={rootName}
-                onChange={(event) => setRootName(event.target.value)}
-                style={{ width: '90px' }}
-              />
-            </label>
-            <label className="indent-label">
-              Indent:{' '}
-              <select
-                value={indentSize}
-                onChange={(event) => setIndentSize(event.target.value)}
-              >
-                <option value="2">2 spaces</option>
-                <option value="4">4 spaces</option>
-              </select>
-            </label>
-            <label className="indent-label">
-              <input
-                type="checkbox"
-                checked={addDeclaration}
-                onChange={(event) => setAddDeclaration(event.target.checked)}
-              />{' '}
-              XML declaration
-            </label>
-          </div>
-        </section>
-
-        <section className="editor-panel">
-          <h2>XML Result</h2>
-
-          <pre className="result-output">
-            {result || 'Your XML will appear here...'}
-          </pre>
-
-          <div className="buttons">
-            <button onClick={copyResult}>Copy XML</button>
-            <button onClick={downloadXml}>Download XML</button>
-          </div>
-        </section>
+        <ToolPanel
+          title="XML Result"
+          tools={
+            <>
+              <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
+              <Tool onClick={downloadXml} disabled={!result}>Download</Tool>
+            </>
+          }
+          statusLeft={result ? `${result.split('\n').length} lines` : 'No result yet'}
+          statusRight={result ? formatSize(result) : ''}
+        >
+          {result ? <XmlOutput text={result} /> : <EmptyBox>Your XML will appear here.</EmptyBox>}
+        </ToolPanel>
       </div>
 
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
+      <Messages error={error} success={success} />
 
       <section className="seo-content">
         <h2>What Is a JSON to XML Converter?</h2>
@@ -258,10 +289,10 @@ function JsonToXml() {
 
         <h2>How to Convert JSON to XML</h2>
         <ol>
-          <li>Paste your JSON into the Input JSON box, or click Load Sample to try an example.</li>
+          <li>Paste your JSON into the JSON Input box, click Upload, or click Sample to try an example.</li>
           <li>Optionally change the root tag name and indentation.</li>
           <li>Click Convert to XML.</li>
-          <li>Click Copy XML or Download XML to save the result.</li>
+          <li>Click Copy or Download to save the XML.</li>
         </ol>
 
         <h2>Features</h2>
