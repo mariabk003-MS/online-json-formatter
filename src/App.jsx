@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import './App.css'
-import NavBar from './NavBar.jsx'
 
 function App() {
   const [json, setJson] = useState('')
@@ -25,6 +24,8 @@ function App() {
     setSuccess(message)
   }
 
+  // Parses JSON. If it fails, tries removing trailing commas once.
+  // Returns { parsed, fixedText } or throws the parse error.
   function parseWithFix(text) {
     try {
       return { parsed: JSON.parse(text), fixedText: null }
@@ -156,13 +157,8 @@ function App() {
 
   return (
     <div className="app">
-      <NavBar />
-      <h1>JSON Formatter &amp; Beautifier Online</h1>
-      <p>
-        Free online JSON formatter, beautifier and validator. Paste your JSON
-        to format, validate or minify it instantly. Your data stays in your
-        browser and is never uploaded.
-      </p>
+      <h1>Online JSON Formatter</h1>
+      <p>Fix, format, minify, and validate your JSON easily.</p>
 
       <div className="editor-layout">
         <section className="editor-panel">
@@ -283,32 +279,9 @@ function App() {
         <p>
           Yes. Click Download JSON to save the formatted result as a JSON file.
         </p>
-
-        <h3>Can I convert JSON to CSV?</h3>
-        <p>
-          Yes. Use our free <a href="/json-to-csv">JSON to CSV Converter</a> to
-          turn JSON data into a CSV file for Excel or Google Sheets.
-        </p>
       </section>
 
       <footer className="site-footer">
-        <a href="/convert-json-to-excel">JSON to Excel</a>{' | '}
-        <a href="/json-vs-xml">JSON vs XML</a>{' | '}
-        <a href="/how-to-open-json-file">How to Open JSON</a>{' | '}
-        <a href="/what-is-json">What Is JSON?</a>{' | '}
-        <a href="/json-viewer">JSON Viewer</a>{' | '}
-        <a href="/json-to-csv">JSON to CSV Converter</a>
-        {' | '}
-                <a href="/csv-to-json">CSV to JSON Converter</a>
-                {' | '}
-                <a href="/about">About</a>
-        {' | '}
-        <a href="/json-validator">JSON Validator</a>
-        {' | '}
-        <a href="/common-json-errors">JSON Errors Guide</a>
-        {' | '}
-        <a href="/json-to-xml">JSON to XML Converter</a>
-        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>
