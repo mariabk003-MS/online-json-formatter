@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import NavBar from './NavBar.jsx'
+import { safeFix } from './safeFix.js'
 
 // Turns nested objects into flat keys, e.g. { user: { name: 'Ali' } } -> { 'user.name': 'Ali' }
 function flattenObject(obj, prefix = '', output = {}) {
@@ -35,7 +36,7 @@ function parseWithFix(text) {
   try {
     return JSON.parse(text)
   } catch {
-    const fixed = text.trim().replace(/,\s*([}\]])/g, '$1')
+    const fixed = safeFix(text.trim())
     return JSON.parse(fixed)
   }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import NavBar from './NavBar.jsx'
+import { safeFix } from './safeFix.js'
 
 // Makes any JSON key safe to use as an XML tag name.
 function safeTagName(key) {
@@ -24,7 +25,7 @@ function parseWithFix(text) {
   try {
     return JSON.parse(text)
   } catch {
-    const fixed = text.trim().replace(/,\s*([}\]])/g, '$1')
+    const fixed = safeFix(text.trim())
     return JSON.parse(fixed)
   }
 }
