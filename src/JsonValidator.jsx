@@ -200,6 +200,35 @@ function JsonValidator() {
           <li>If it is invalid, read the line number, the marked position, and the tip to fix it.</li>
         </ol>
 
+        <h2>My Quick Test</h2>
+        <p>
+          To check the tool myself, I pasted a small JSON object with one
+          common mistake: an extra comma after the last value. As soon as I
+          clicked Validate JSON, the red error message told me the problem was
+          on line 5, column 4, so I knew exactly where to look. The tool also
+          marked the spot with a ^ symbol and showed a tip to remove the last
+          comma.
+        </p>
+        <figure style={{ margin: '1.5rem 0' }}>
+          <img
+            src="/images/json-validator-error.png"
+            alt="JSON Validator showing an Invalid JSON error at line 5 column 4, with the position marked and a tip to remove a trailing comma"
+            width="1500"
+            height="385"
+            loading="lazy"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+            }}
+          />
+          <figcaption style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '0.5rem' }}>
+            Example: a trailing comma caught by our JSON Validator, with the
+            exact line and column.
+          </figcaption>
+        </figure>
+
         <h2>Common JSON Errors</h2>
         <ul>
           <li>Missing comma between two values or properties.</li>
