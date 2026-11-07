@@ -115,7 +115,7 @@ function getStartTheme() {
 const LIVE_CHECK_LIMIT = 500 * 1024
 
 function App() {
-  const [json, setJson] = useState(() => loadSaved('formatter-input'))
+  const [json, setJson] = useState('')
   const [result, setResult] = useState('')
   const [parsed, setParsed] = useState(undefined)
   const [error, setError] = useState('')
@@ -148,13 +148,14 @@ function App() {
     return () => document.body.classList.remove('dark')
   }, [theme])
 
-  // Remember the input, so it is still there after a page refresh.
+  // The input is NOT saved, for privacy. Remove any copy an older version saved.
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (json.length < 1024 * 1024) save('formatter-input', json)
-    }, 500)
-    return () => clearTimeout(timer)
-  }, [json])
+    try {
+      localStorage.removeItem('formatter-input')
+    } catch {
+      // Storage can be blocked. Nothing to remove then.
+    }
+  }, [])
 
   // Esc closes full screen.
   useEffect(() => {
@@ -277,45 +278,27 @@ function App() {
     setParsed(undefined)
   }
 
+  // A short, real-looking customer record with 2 small mistakes, so visitors
+  // see the red error line and can fix it with one click.
   function loadSample() {
-    // A small customer record that shows every kind of JSON value.
-    const sample = {
-      id: 1024,
-      name: 'Ayesha Khan',
-      email: 'ayesha@example.com',
-      isActive: true,
-      balance: 2500.75,
-      manager: null,
-      skills: ['JSON', 'React', 'API'],
-      address: {
-        city: 'Lahore',
-        country: 'Pakistan',
-        zip: '54000',
-      },
-    }
-
-    handleInputChange(JSON.stringify(sample))
-    setSuccess('Sample loaded. Click Fix & Format JSON to make it easy to read.')
-  }
-
-  // The same record with common mistakes, so visitors can see the auto-fix work.
-  function loadBrokenSample() {
     handleInputChange(
       [
         '{',
-        '  // Customer record with 6 common mistakes',
-        '  id: 1024,',
-        "  'name': 'Ayesha Khan',",
-        '  "email": "ayesha@example.com"',
-        '  "isActive": True,',
+        '  "id": 1024,',
+        '  "name": "Emily Clark",',
+        '  "email": "emily.clark@example.com",',
+        '  "isActive": true,',
         '  "balance": 2500.75,',
-        '  "manager": None,',
-        '  "skills": ["JSON" "React", "API",],',
-        '  "address": {"city": "Lahore", "country": "Pakistan", "zip": "54000",},',
+        '  "manager": null,',
+        '  "skills": ["JSON", "React", "API"]',
+        '  "address": {',
+        '    "city": "London",',
+        '    "country": "United Kingdom",',
+        '  }',
         '}',
       ].join('\n')
     )
-    setSuccess('Broken sample loaded. Click Fix & Format JSON to repair it.')
+    setSuccess('Sample loaded with 2 small mistakes. Click Fix & Format JSON to repair them.')
   }
 
   function clearAll() {
@@ -326,7 +309,7 @@ function App() {
     fileInputRef.current?.click()
   }
 
-  // Used by both the Upload File button and drag & drop.
+  // Used by both the Upload button and drag & drop.
   async function readFile(file) {
     const maxSize = 5 * 1024 * 1024
     if (file.size > maxSize) {
@@ -429,86 +412,86 @@ function App() {
         browser and is never uploaded.
       </p>
 
-      <div className="formatter-topbar">
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode'}
-        </button>
-      </div>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,.txt,application/json,text/plain"
+        onChange={handleFileUpload}
+        style={{ display: 'none' }}
+      />
 
       <div className="editor-layout">
         <section className={`editor-panel${fullscreen === 'input' ? ' panel-fullscreen' : ''}`}>
           <div className="panel-header">
-            <h2>Input JSON</h2>
+            <h2>Input</h2>
             {status}
-            <button
-              type="button"
-              className="icon-button"
-              onClick={() => toggleFullscreen('input')}
-              title={fullscreen === 'input' ? 'Exit full screen (Esc)' : 'Full screen'}
-            >
-              {fullscreen === 'input' ? '✕ Exit' : '⛶ Full screen'}
-            </button>
+            <div className="toolbar">
+              <button type="button" className="tool" onClick={loadSample}>Sample</button>
+              <button type="button" className="tool" onClick={openFilePicker}>Upload</button>
+              <button type="button" className="tool" onClick={clearAll}>Clear</button>
+              <button
+                type="button"
+                className="tool tool-icon"
+                onClick={() => toggleFullscreen('input')}
+                title={fullscreen === 'input' ? 'Exit full screen (Esc)' : 'Full screen'}
+                aria-label={fullscreen === 'input' ? 'Exit full screen' : 'Full screen'}
+              >
+                {fullscreen === 'input' ? '✕' : '⛶'}
+              </button>
+            </div>
           </div>
 
-          <CodeEditor
-            value={json}
-            placeholder="Paste your JSON here, or drag & drop a .json file..."
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            errorLine={errorLine}
-            onCursor={setCursor}
-            onFileDrop={readFile}
-          />
-
-          <div className="status-bar">
-            <span>
-              Ln {cursor.line}, Col {cursor.column}
-            </span>
-            <span>
-              {json ? `${json.split('\n').length} lines · ${formatSize(json)}` : 'Empty'}
-            </span>
+          <div className="panel-box">
+            <CodeEditor
+              value={json}
+              placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to fix and format.'}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              errorLine={errorLine}
+              onCursor={setCursor}
+              onFileDrop={readFile}
+            />
+            <div className="status-bar">
+              <span>
+                Ln {cursor.line}, Col {cursor.column}
+              </span>
+              <span>
+                {json ? `${json.split('\n').length} lines · ${formatSize(json)}` : 'Empty'}
+              </span>
+            </div>
           </div>
-          <p className="hint">Tip: press Ctrl + Enter to fix and format. You can also drop a file on the box.</p>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".json,.txt,application/json,text/plain"
-            onChange={handleFileUpload}
-            style={{ display: 'none' }}
-          />
-
-          <div className="buttons">
-            <button onClick={fixAndFormatJSON}>
+          {/* Main actions, right under the input so they are easy to find on phones too */}
+          <div className="action-bar">
+            <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
               Fix &amp; Format JSON
             </button>
-            <button onClick={minifyJSON}>Minify JSON</button>
-            <button onClick={openFilePicker}>Upload File</button>
-            <button onClick={loadSample}>Load Sample</button>
-            <button onClick={loadBrokenSample}>Broken Sample</button>
-            <button onClick={clearAll}>Clear</button>
-            <label className="indent-label">
-              Indent:{' '}
-              <select
-                value={indent}
-                onChange={(event) => setIndent(event.target.value)}
-              >
+            <button type="button" className="action-secondary" onClick={minifyJSON}>
+              Minify
+            </button>
+            <label className="indent-select">
+              Indent
+              <select value={indent} onChange={(event) => setIndent(event.target.value)}>
                 <option value="2">2 spaces</option>
                 <option value="4">4 spaces</option>
                 <option value="tab">Tab</option>
               </select>
             </label>
+            <button
+              type="button"
+              className="tool tool-icon theme-toggle"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
           </div>
         </section>
 
         <section className={`editor-panel${fullscreen === 'output' ? ' panel-fullscreen' : ''}`}>
           <div className="panel-header">
-            <h2>Corrected JSON Result</h2>
+            <h2>Result</h2>
             <div className="tabs" role="tablist">
               <button
                 type="button"
@@ -529,50 +512,58 @@ function App() {
                 Tree
               </button>
             </div>
-            <button
-              type="button"
-              className="icon-button"
-              onClick={() => toggleFullscreen('output')}
-              title={fullscreen === 'output' ? 'Exit full screen (Esc)' : 'Full screen'}
-            >
-              {fullscreen === 'output' ? '✕ Exit' : '⛶ Full screen'}
-            </button>
+            <div className="toolbar">
+              <button type="button" className="tool" onClick={copyResult} disabled={!result}>Copy</button>
+              <button type="button" className="tool" onClick={downloadJSON} disabled={!result}>Download</button>
+              <button
+                type="button"
+                className="tool"
+                onClick={useResultAsInput}
+                disabled={!result}
+                title="Move the result into the input box"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                className="tool tool-icon"
+                onClick={() => toggleFullscreen('output')}
+                title={fullscreen === 'output' ? 'Exit full screen (Esc)' : 'Full screen'}
+                aria-label={fullscreen === 'output' ? 'Exit full screen' : 'Full screen'}
+              >
+                {fullscreen === 'output' ? '✕' : '⛶'}
+              </button>
+            </div>
           </div>
 
-          {!result && (
-            <pre className="result-output result-empty">Your corrected JSON will appear here...</pre>
-          )}
+          <div className="panel-box">
+            {!result && (
+              <div className="result-empty">Your formatted JSON will appear here.</div>
+            )}
 
-          {result && outputTab === 'code' && <JsonHighlight text={result} />}
+            {result && outputTab === 'code' && <JsonHighlight text={result} />}
 
-          {result && outputTab === 'tree' && parsed !== undefined && (
-            <>
-              <div className="tree-actions">
-                <button type="button" onClick={expandAll}>Expand All</button>
-                <button type="button" onClick={collapseAll}>Collapse All</button>
+            {result && outputTab === 'tree' && parsed !== undefined && (
+              <div className="tree-wrap">
+                <div className="tree-actions">
+                  <button type="button" className="tool" onClick={expandAll}>Expand all</button>
+                  <button type="button" className="tool" onClick={collapseAll}>Collapse all</button>
+                </div>
+                <div className="jv-tree" key={treeVersion}>
+                  <TreeNode value={parsed} depth={0} openAll={openAll} />
+                </div>
               </div>
-              <div className="jv-tree" key={treeVersion}>
-                <TreeNode value={parsed} depth={0} openAll={openAll} />
-              </div>
-            </>
-          )}
+            )}
 
-          <div className="status-bar">
-            <span>{result ? `${result.split('\n').length} lines` : 'No result yet'}</span>
-            <span>{result ? formatSize(result) : ''}</span>
-          </div>
-
-          <div className="buttons">
-            <button onClick={copyResult}>Copy Result</button>
-            <button onClick={downloadJSON}>Download JSON</button>
-            <button onClick={useResultAsInput} disabled={!result}>
-              Use as Input
-            </button>
+            <div className="status-bar">
+              <span>{result ? `${result.split('\n').length} lines` : 'No result yet'}</span>
+              <span>{result ? formatSize(result) : ''}</span>
+            </div>
           </div>
         </section>
       </div>
 
-      {error && <p className="error">{error}</p>}
+      {error &&<p className="error">{error}</p>}
       {errorLocation && (
         <pre className="error-location">
           {`Line ${errorLocation.line}: ${errorLocation.snippet}\n`}
@@ -592,11 +583,11 @@ function App() {
 
         <h2>How to Use This JSON Formatter</h2>
         <ol>
-          <li>Paste your JSON data into the Input JSON box, or click Upload File to open a .json or .txt file.</li>
+          <li>Paste your JSON data into the Input box, or click Upload to open a .json or .txt file.</li>
           <li>Choose 2 spaces, 4 spaces, or Tab indentation.</li>
-          <li>Click Fix &amp; Format JSON to format your data, or Minify JSON to compress it into one line.</li>
+          <li>Click Fix &amp; Format JSON to format your data, or Minify to compress it into one line.</li>
           <li>Review the output in the result panel.</li>
-          <li>Click Copy Result or Download JSON to save your output.</li>
+          <li>Click Copy or Download to save your output.</li>
         </ol>
 
         <h2>Benefits of Our Online JSON Formatter</h2>
