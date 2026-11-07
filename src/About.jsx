@@ -68,6 +68,17 @@ function About() {
           <li><a href="/json-minifier">JSON Minifier</a>: make JSON smaller and see how many bytes you saved.</li>
           <li><a href="/json-repair">JSON Repair</a>: fix broken JSON automatically.</li>
           <li><a href="/json-escape">JSON Escape / Unescape</a>: turn JSON into a safe string, or back.</li>
+          <li><a href="/json-sorter">JSON Sorter</a>: sort JSON keys from A to Z.</li>
+          <li><a href="/json-to-typescript">JSON to TypeScript</a>: generate TypeScript interfaces from JSON.</li>
+          <li>
+            <a href="/xml-formatter">XML Formatter</a> and{' '}
+            <a href="/yaml-formatter">YAML Formatter</a>: validate and beautify XML and YAML.
+          </li>
+          <li>
+            <a href="/base64-encode-decode">Base64</a> and{' '}
+            <a href="/url-encode-decode">URL</a> Encode / Decode: encode text for APIs and links.
+          </li>
+          <li><a href="/text-compare">Text Compare</a>: compare any two texts line by line.</li>
           <li><a href="/tools">All Tools</a>: every tool on one page.</li>
           <li>
             <a href="/common-json-errors">Common JSON Errors Guide</a>: wrong

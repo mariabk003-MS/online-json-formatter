@@ -18,12 +18,14 @@ export const TOOL_GROUPS = [
       { href: '/xml-to-json', label: 'XML to JSON', text: 'Convert XML documents into JSON.' },
       { href: '/json-to-yaml', label: 'JSON to YAML', text: 'Convert JSON into readable YAML.' },
       { href: '/yaml-to-json', label: 'YAML to JSON', text: 'Convert YAML config files into JSON.' },
+      { href: '/json-to-typescript', label: 'JSON to TypeScript', text: 'Generate TypeScript interfaces from JSON.' },
     ],
   },
   {
     title: 'Compare',
     tools: [
       { href: '/json-compare', label: 'JSON Compare', text: 'See what was added, removed or changed.' },
+      { href: '/text-compare', label: 'Text Compare', text: 'Compare any two texts line by line.' },
     ],
   },
   {
@@ -31,7 +33,17 @@ export const TOOL_GROUPS = [
     tools: [
       { href: '/json-minifier', label: 'JSON Minifier', text: 'Remove spaces to make JSON smaller.' },
       { href: '/json-repair', label: 'JSON Repair', text: 'Fix broken JSON automatically.' },
+      { href: '/json-sorter', label: 'JSON Sorter', text: 'Sort JSON keys from A to Z.' },
+      { href: '/xml-formatter', label: 'XML Formatter', text: 'Beautify, validate or minify XML.' },
+      { href: '/yaml-formatter', label: 'YAML Formatter', text: 'Validate and beautify YAML.' },
+    ],
+  },
+  {
+    title: 'Encode',
+    tools: [
       { href: '/json-escape', label: 'JSON Escape / Unescape', text: 'Escape JSON into a string, or back.' },
+      { href: '/base64-encode-decode', label: 'Base64 Encode / Decode', text: 'Encode text to Base64, or decode it.' },
+      { href: '/url-encode-decode', label: 'URL Encode / Decode', text: 'Percent-encode text for links, or decode it.' },
     ],
   },
 ]

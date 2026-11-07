@@ -64,6 +64,56 @@ export function Tool({ children, ...props }) {
   )
 }
 
+// A "⋯" button that opens a small list of extra actions.
+// items: [{ label, onClick, disabled }]
+export function MoreMenu({ items }) {
+  const [open, setOpen] = useState(false)
+
+  // Close when clicking anywhere else.
+  useEffect(() => {
+    if (!open) return
+    const close = () => setOpen(false)
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [open])
+
+  return (
+    <span className="more-menu">
+      <button
+        type="button"
+        className="tool tool-icon"
+        aria-label="More actions"
+        aria-expanded={open}
+        title="More actions"
+        onClick={(event) => {
+          event.stopPropagation()
+          setOpen(!open)
+        }}
+      >
+        ⋯
+      </button>
+      {open && (
+        <span className="more-menu-list" role="menu">
+          {items.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              role="menuitem"
+              disabled={item.disabled}
+              onClick={() => {
+                setOpen(false)
+                item.onClick()
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </span>
+      )}
+    </span>
+  )
+}
+
 // ✓ Valid JSON / ✗ Invalid JSON – line 4  (check comes from useLiveJsonCheck)
 export function StatusBadge({ check, validText = 'Valid JSON', invalidText = 'Invalid JSON' }) {
   if (!check) return null
@@ -114,21 +164,43 @@ export function PlainOutput({ text }) {
   )
 }
 
-// Colors one line of XML: tags blue, text green, the <?xml ?> line purple.
-const XML_TOKEN = /(<\?[^>]*\?>)|(<\/?)([\w.:-]+)(\s*\/?>)|([^<]+)/g
+// Colors one line of XML: tag names blue, attribute values and text green,
+// <?xml ?> purple, comments grey. Every character is kept (nothing is dropped).
+const XML_TOKEN =
+  /(<\?[^>]*\?>)|(<!--.*?-->)|(<!\[CDATA\[.*?\]\]>)|(<\/?)([\w.:-]+)((?:\s+[^\s=>/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'))?)*)(\s*\/?>)|([^<]+)|(<)/g
+const XML_ATTR = /(\s+)([^\s=]+)(?:(\s*=\s*)("[^"]*"|'[^']*'))?/g
+
+function colorAttributes(attrs) {
+  return [...attrs.matchAll(XML_ATTR)].map((match) => {
+    const [, space, name, equals, value] = match
+    return (
+      <span key={match.index}>
+        {space}
+        <span className="jv-number">{name}</span>
+        {equals && <span className="jv-colon">{equals}</span>}
+        {value && <span className="jv-string">{value}</span>}
+      </span>
+    )
+  })
+}
 
 function colorXmlLine(line) {
   const parts = []
   for (const match of line.matchAll(XML_TOKEN)) {
-    const [text, declaration, open, name, close, content] = match
+    const [text, declaration, comment, cdata, open, name, attrs, close, content] = match
     const key = match.index
     if (declaration) {
       parts.push(<span key={key} className="jv-boolean">{declaration}</span>)
+    } else if (comment) {
+      parts.push(<span key={key} className="jv-colon">{comment}</span>)
+    } else if (cdata) {
+      parts.push(<span key={key} className="jv-string">{cdata}</span>)
     } else if (name) {
       parts.push(
         <span key={key}>
           <span className="jv-colon">{open}</span>
           <span className="jv-key">{name}</span>
+          {attrs && colorAttributes(attrs)}
           <span className="jv-colon">{close}</span>
         </span>
       )

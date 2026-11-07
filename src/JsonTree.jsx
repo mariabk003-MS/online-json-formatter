@@ -2,9 +2,31 @@
 import { useState } from 'react'
 import './JsonViewer.css'
 
+const IMAGE_LINK = /^https?:\/\/\S+\.(png|jpe?g|gif|webp|svg|avif)(\?\S*)?$/i
+
+// An image link: hovering shows a small preview. The image is only loaded on hover.
+function ImageLink({ value }) {
+  const [show, setShow] = useState(false)
+  return (
+    <span
+      className="jv-string jv-image"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
+      "{value}"
+      {show && (
+        <span className="jv-image-preview">
+          <img src={value} alt="Preview" referrerPolicy="no-referrer" />
+        </span>
+      )}
+    </span>
+  )
+}
+
 // Shows a simple value (text, number, true/false, null) in its own color.
 function ValueText({ value }) {
   if (value === null) return <span className="jv-null">null</span>
+  if (typeof value === 'string' && IMAGE_LINK.test(value)) return <ImageLink value={value} />
   if (typeof value === 'string') return <span className="jv-string">"{value}"</span>
   if (typeof value === 'number') return <span className="jv-number">{String(value)}</span>
   if (typeof value === 'boolean') return <span className="jv-boolean">{String(value)}</span>

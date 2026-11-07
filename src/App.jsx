@@ -6,7 +6,7 @@ import { safeFix } from './safeFix.js'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages } from './ToolLayout.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, MoreMenu } from './ToolLayout.jsx'
 import {
   getErrorLocation,
   useLiveJsonCheck,
@@ -15,7 +15,14 @@ import {
   downloadText,
   readTextFile,
   describeFixes,
+  makeShareCode,
+  readShareCode,
+  fetchText,
+  printText,
 } from './toolUtils.js'
+
+// Links longer than this may not work in every browser or chat app.
+const MAX_SHARE_LINK = 30000
 
 function App() {
   const [json, setJson] = useState('')
@@ -28,6 +35,10 @@ function App() {
   const [indent, setIndent] = useState('2')
   const [outputTab, setOutputTab] = useState('code')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const [autoFormat, setAutoFormat] = useState(true)
+  const [urlBoxOpen, setUrlBoxOpen] = useState(false)
+  const [urlValue, setUrlValue] = useState('')
+  const [shareUrl, setShareUrl] = useState('')
   const fileInputRef = useRef(null)
 
   // Checks the input while the user types, so we can show ✓ / ✗ and the error line.
@@ -40,6 +51,21 @@ function App() {
     } catch {
       // Storage can be blocked. Nothing to remove then.
     }
+  }, [])
+
+  // Opening a share link (#json=...) or a ?url=... link loads that JSON.
+  useEffect(() => {
+    const hash = window.location.hash.match(/^#json=(.+)$/)
+    const urlParam = new URLSearchParams(window.location.search).get('url')
+    if (hash) {
+      readShareCode(hash[1])
+        .then((text) => formatInto(text, 'Shared JSON opened.'))
+        .catch(() => showError('This share link is broken or incomplete. Please ask for the link again.'))
+    } else if (urlParam) {
+      loadFromUrl(urlParam)
+    }
+    // Runs once when the page opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function getIndent() {
@@ -145,6 +171,7 @@ function App() {
 
   function handleInputChange(text) {
     setJson(text)
+    setShareUrl('')
     setError('')
     setErrorLocation(null)
     setSuccess('')
@@ -211,6 +238,78 @@ function App() {
     showSuccess('JSON downloaded successfully!')
   }
 
+  // Puts text in the input box and, when it can be read, formats it right away.
+  function formatInto(text, message) {
+    handleInputChange(text)
+    try {
+      const { parsed, fixedText, report } = parseWithFix(text)
+      showResult(JSON.stringify(parsed, null, getIndent()), parsed)
+      if (fixedText) setJson(fixedText)
+      showSuccess(report ? `${message} ${describeFixes(report)}` : message)
+    } catch {
+      showSuccess(`${message} It has errors, so please check the red line.`)
+    }
+  }
+
+  // Auto format: pasting JSON into an empty box formats it straight away.
+  function handlePaste(event) {
+    if (!autoFormat || json.trim()) return
+    const text = event.clipboardData?.getData('text') || ''
+    if (!text.trim()) return
+    event.preventDefault()
+    formatInto(text, 'Pasted and formatted automatically.')
+  }
+
+  async function shareLink() {
+    if (!json.trim()) {
+      showError('Please paste your JSON first, then click Share.')
+      return
+    }
+    try {
+      const code = await makeShareCode(result || json)
+      const link = `${window.location.origin}/#json=${code}`
+      if (link.length > MAX_SHARE_LINK) {
+        showError('This JSON is too large to share as a link. Please use Download and send the file instead.')
+        return
+      }
+      setShareUrl(link)
+      let copied = false
+      try {
+        await navigator.clipboard.writeText(link)
+        copied = true
+      } catch {
+        // Some browsers block the clipboard. The link is still shown below to copy by hand.
+      }
+      showSuccess(
+        `${copied ? 'Share link copied!' : 'Share link created. Copy it from the box below.'} Anyone with the link can open this JSON. The data is inside the link itself, not stored on our server.`
+      )
+    } catch {
+      showError('Could not create the share link in this browser.')
+    }
+  }
+
+  async function loadFromUrl(url = urlValue) {
+    if (!url.trim()) {
+      showError('Please enter the link to a JSON file.')
+      return
+    }
+    try {
+      const text = await fetchText(url.trim())
+      setUrlBoxOpen(false)
+      formatInto(text, 'JSON loaded from the link.')
+    } catch (err) {
+      showError(err.message)
+    }
+  }
+
+  function printResult() {
+    try {
+      printText(result, 'Formatted JSON')
+    } catch (err) {
+      showError(err.message)
+    }
+  }
+
   // Puts the result back into the input box, e.g. to keep editing it.
   function useResultAsInput() {
     handleInputChange(result)
@@ -245,6 +344,7 @@ function App() {
             <>
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlBoxOpen(!urlBoxOpen)} title="Load JSON from a link">URL</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
             </>
           }
@@ -252,29 +352,63 @@ function App() {
           statusRight={describeText(json)}
           footer={
             // Main actions, right under the input so they are easy to find on phones too
-            <div className="action-bar">
-              <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
-                Fix &amp; Format JSON
-              </button>
-              <button type="button" className="action-secondary" onClick={minifyJSON}>
-                Minify
-              </button>
-              <label className="indent-select">
-                Indent
-                <select value={indent} onChange={(event) => setIndent(event.target.value)}>
-                  <option value="2">2 spaces</option>
-                  <option value="4">4 spaces</option>
-                  <option value="tab">Tab</option>
-                </select>
-              </label>
-            </div>
+            <>
+              <div className="action-bar">
+                <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
+                  Fix &amp; Format JSON
+                </button>
+                <button type="button" className="action-secondary" onClick={minifyJSON}>
+                  Minify
+                </button>
+                <label className="indent-select">
+                  Indent
+                  <select value={indent} onChange={(event) => setIndent(event.target.value)}>
+                    <option value="2">2 spaces</option>
+                    <option value="3">3 spaces</option>
+                    <option value="4">4 spaces</option>
+                    <option value="tab">Tab</option>
+                  </select>
+                </label>
+              </div>
+              <div className="options-row">
+                <label className="option" title="When the box is empty, pasted JSON is formatted straight away">
+                  <input
+                    type="checkbox"
+                    checked={autoFormat}
+                    onChange={(event) => setAutoFormat(event.target.checked)}
+                  />
+                  Auto-format on paste
+                </label>
+              </div>
+            </>
           }
         >
+          {urlBoxOpen && (
+            <form
+              className="url-box"
+              onSubmit={(event) => {
+                event.preventDefault()
+                loadFromUrl()
+              }}
+            >
+              <input
+                type="url"
+                value={urlValue}
+                onChange={(event) => setUrlValue(event.target.value)}
+                placeholder="https://example.com/data.json"
+                aria-label="Link to a JSON file"
+                autoFocus
+              />
+              <button type="submit" className="tool">Load</button>
+              <button type="button" className="tool" onClick={() => setUrlBoxOpen(false)}>Cancel</button>
+            </form>
+          )}
           <CodeEditor
             value={json}
             placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to fix and format.'}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
+            onPaste={handlePaste}
             errorLine={errorLine}
             onCursor={setCursor}
             onFileDrop={readFile}
@@ -297,9 +431,15 @@ function App() {
             <>
               <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
               <Tool onClick={downloadJSON} disabled={!result}>Download</Tool>
-              <Tool onClick={useResultAsInput} disabled={!result} title="Move the result into the input box">
-                Edit
+              <Tool onClick={shareLink} disabled={!json.trim()} title="Copy a link that opens this JSON">
+                Share
               </Tool>
+              <MoreMenu
+                items={[
+                  { label: 'Use as input (edit)', onClick: useResultAsInput, disabled: !result },
+                  { label: 'Print', onClick: printResult, disabled: !result },
+                ]}
+              />
             </>
           }
           statusLeft={result ? `${result.split('\n').length} lines` : 'No result yet'}
@@ -314,6 +454,13 @@ function App() {
       </div>
 
       <Messages error={error} success={success} location={errorLocation} />
+      {shareUrl && (
+        <div className="share-box">
+          <label htmlFor="share-link">Share link</label>
+          <input id="share-link" readOnly value={shareUrl} onFocus={(event) => event.target.select()} />
+          <button type="button" className="tool" onClick={() => setShareUrl('')}>Close</button>
+        </div>
+      )}
 
       <section className="seo-content">
         <h2>What Is a JSON Formatter?</h2>
@@ -349,6 +496,7 @@ function App() {
           <li>Line numbers, live “Valid / Invalid” check and the error line highlighted in red.</li>
           <li>Colored result with line numbers, plus a Tree view you can expand and collapse.</li>
           <li>Dark mode, full screen editing and drag &amp; drop file upload.</li>
+          <li>Share your JSON with a private link, load JSON from a URL, auto-format on paste and print.</li>
           <li>Copy or download the formatted JSON result.</li>
           <li>Process JSON directly in your browser.</li>
         </ul>

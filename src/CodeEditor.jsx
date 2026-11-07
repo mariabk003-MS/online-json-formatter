@@ -8,8 +8,9 @@ const PADDING_TOP = 14
 // - errorLine: this line number is shown in red, with a red band behind it
 // - onCursor({ line, column }): called when the cursor moves
 // - onFileDrop(file): called when a file is dragged and dropped on the box
+// - onPaste(event): optional, called when text is pasted
 // - Tab key adds two spaces instead of leaving the box
-function CodeEditor({ value, onChange, onKeyDown, errorLine, onCursor, onFileDrop, placeholder }) {
+function CodeEditor({ value, onChange, onKeyDown, onPaste, errorLine, onCursor, onFileDrop, placeholder }) {
   const textareaRef = useRef(null)
   const gutterRef = useRef(null)
   const [scrollTop, setScrollTop] = useState(0)
@@ -98,6 +99,7 @@ function CodeEditor({ value, onChange, onKeyDown, errorLine, onCursor, onFileDro
           aria-label="Input JSON"
           onChange={(event) => onChange(event.target.value)}
           onKeyDown={handleKeyDown}
+          onPaste={onPaste}
           onKeyUp={reportCursor}
           onClick={reportCursor}
           onSelect={reportCursor}

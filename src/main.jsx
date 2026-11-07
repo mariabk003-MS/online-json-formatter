@@ -16,6 +16,13 @@ import HowToOpenJson from './HowToOpenJson.jsx'
 import JsonVsXml from './JsonVsXml.jsx'
 import JsonToExcelGuide from './JsonToExcelGuide.jsx'
 import JsonCompare from './JsonCompare.jsx'
+import JsonSorter from './JsonSorter.jsx'
+import JsonToTypescript from './JsonToTypescript.jsx'
+import XmlFormatter from './XmlFormatter.jsx'
+import YamlFormatter from './YamlFormatter.jsx'
+import Base64Tool from './Base64Tool.jsx'
+import UrlEncodeTool from './UrlEncodeTool.jsx'
+import TextCompare from './TextCompare.jsx'
 import XmlToJson from './XmlToJson.jsx'
 import JsonToYaml from './JsonToYaml.jsx'
 import YamlToJson from './YamlToJson.jsx'
@@ -42,6 +49,13 @@ createRoot(document.getElementById('root')).render(
         <Route path="/json-vs-xml" element={<JsonVsXml />} />
         <Route path="/convert-json-to-excel" element={<JsonToExcelGuide />} />
         <Route path="/json-compare" element={<JsonCompare />} />
+        <Route path="/json-sorter" element={<JsonSorter />} />
+        <Route path="/json-to-typescript" element={<JsonToTypescript />} />
+        <Route path="/xml-formatter" element={<XmlFormatter />} />
+        <Route path="/yaml-formatter" element={<YamlFormatter />} />
+        <Route path="/base64-encode-decode" element={<Base64Tool />} />
+        <Route path="/url-encode-decode" element={<UrlEncodeTool />} />
+        <Route path="/text-compare" element={<TextCompare />} />
         <Route path="/xml-to-json" element={<XmlToJson />} />
         <Route path="/json-to-yaml" element={<JsonToYaml />} />
         <Route path="/yaml-to-json" element={<YamlToJson />} />

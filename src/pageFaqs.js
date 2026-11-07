@@ -38,4 +38,46 @@ export const FAQS = {
     ['What if the JSON cannot be repaired?', 'The tool shows the line and column where the problem is and highlights it, so you can fix the rest by hand.'],
     ['Is my JSON sent to a server?', 'No. The repair runs in your browser. Your JSON stays on your device.'],
   ],
+  'json-sorter': [
+    ["What does a JSON sorter do?", "It puts the keys of every JSON object in alphabetical order, from A to Z or Z to A, at every level. The values stay the same."],
+    ["Why sort JSON keys?", "Sorted keys make JSON easier to read, easier to compare in Git or a diff tool, and make it simple to spot missing or duplicate fields."],
+    ["Are arrays sorted too?", "Array order is kept by default, because order matters in arrays. You can turn on the option to also sort simple arrays of text or numbers."],
+    ["Is my JSON uploaded?", "No. Sorting happens in your browser and your data never leaves your device."],
+  ],
+  'json-to-typescript': [
+    ["What does JSON to TypeScript do?", "It reads sample JSON and writes TypeScript interfaces that describe it, with the right types for strings, numbers, booleans, arrays and nested objects."],
+    ["How are nested objects handled?", "Each nested object gets its own named interface, based on its key name. For example a key called address becomes an Address interface."],
+    ["What about fields that are missing in some items?", "When an array has objects with different keys, keys that do not appear in every item are marked optional with a question mark."],
+    ["Is my JSON sent to a server?", "No. The interfaces are generated in your browser. Your JSON is never uploaded."],
+  ],
+  'xml-formatter': [
+    ["What does an XML formatter do?", "It adds line breaks and indentation to XML so the structure is easy to read. It can also minify XML into one line."],
+    ["Will it check if my XML is valid?", "Yes. If the XML is not well-formed, for example a tag is not closed, the tool shows an error instead of a result."],
+    ["Are comments and CDATA kept?", "Yes. Comments, CDATA sections, attributes and the XML declaration are all kept."],
+    ["Is my XML uploaded?", "No. Formatting runs in your browser. Your XML stays on your device."],
+  ],
+  'yaml-formatter': [
+    ["What does the YAML formatter do?", "It checks your YAML for errors and rewrites it with clean, consistent indentation."],
+    ["How do I validate YAML?", "Paste your YAML and click Validate. If there is a problem, the tool shows the line and column and marks that line in red."],
+    ["Will formatting remove my comments?", "Yes. Formatting rebuilds the YAML from its data, so comments are not kept. Use Validate if you only want to check the YAML and keep it unchanged."],
+    ["Is my YAML uploaded?", "No. Everything runs in your browser."],
+  ],
+  'base64-encode-decode': [
+    ["What is Base64?", "Base64 is a way to write any data using only letters, numbers, + and /. It is used to put data in URLs, emails, JSON fields, data URLs and HTTP headers."],
+    ["Does it support emoji and other languages?", "Yes. Text is converted to UTF-8 first, so emoji and every language encode and decode correctly."],
+    ["What is URL-safe Base64?", "URL-safe Base64 uses - and _ instead of + and / and drops the = padding, so the result can be used in links and file names. Turn on the option to use it."],
+    ["Is my data uploaded?", "No. Encoding and decoding happen in your browser."],
+  ],
+  'url-encode-decode': [
+    ["What is URL encoding?", "URL encoding (percent-encoding) replaces characters that are not allowed in links, like spaces, &, ? and emoji, with codes such as %20, so the link works everywhere."],
+    ["When should I encode a full URL?", "Use the full URL option to keep characters like : / ? and & that give a link its structure. Leave it off to encode a single value, such as a search query."],
+    ["Can it decode + as a space?", "Yes. When decoding, + signs are treated as spaces, as in form data and query strings."],
+    ["Is my data uploaded?", "No. Everything runs in your browser."],
+  ],
+  'text-compare': [
+    ["What does the text compare tool do?", "It compares two texts line by line and shows which lines were added, removed or stayed the same, with line numbers."],
+    ["Can I ignore spaces or upper and lower case?", "Yes. Turn on Ignore spaces or Ignore case to skip differences you do not care about."],
+    ["Is there a size limit?", "It works best with texts up to a few thousand lines each. Very large texts may take a moment to compare."],
+    ["Is my text uploaded?", "No. The comparison runs in your browser and your text never leaves your device."],
+  ],
 }

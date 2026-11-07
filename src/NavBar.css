@@ -242,14 +242,14 @@ body.dark .site-header .site-nav .nav-group-button.active {
 .site-nav .nav-mega {
   left: auto;
   right: -120px;
-  min-width: 560px;
+  min-width: 720px;
   padding: 18px 20px 12px;
   transform: none;
 }
 
 .nav-mega-columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px 22px;
 }
 

@@ -158,3 +158,95 @@ export function parseJsonLenient(text, what = 'input') {
   }
   return { data: undefined, report: null }
 }
+
+// ---------- Share links ----------
+// The JSON is compressed and put after the # in the link. The part after #
+// is never sent to any server, so shared JSON stays private between the
+// people who have the link. Codes start with "z" (compressed) or "b" (plain).
+
+function bytesToBase64Url(bytes) {
+  let binary = ''
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000))
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+function base64UrlToBytes(text) {
+  const base64 = text.replace(/-/g, '+').replace(/_/g, '/')
+  const binary = atob(base64 + '==='.slice((base64.length + 3) % 4))
+  const bytes = new Uint8Array(binary.length)
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i)
+  return bytes
+}
+
+export async function makeShareCode(text) {
+  const bytes = new TextEncoder().encode(text)
+  if (typeof CompressionStream === 'undefined') return 'b' + bytesToBase64Url(bytes)
+  const stream = new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate-raw'))
+  const packed = new Uint8Array(await new Response(stream).arrayBuffer())
+  return 'z' + bytesToBase64Url(packed)
+}
+
+export async function readShareCode(code) {
+  const kind = code[0]
+  const bytes = base64UrlToBytes(code.slice(1))
+  if (kind === 'b') return new TextDecoder().decode(bytes)
+  if (kind !== 'z' || typeof DecompressionStream === 'undefined') {
+    throw new Error('This share link could not be opened in this browser.')
+  }
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))
+  return new TextDecoder().decode(await new Response(stream).arrayBuffer())
+}
+
+// Downloads text from a link (the site must allow it with CORS).
+export async function fetchText(url) {
+  let parsed
+  try {
+    parsed = new URL(url)
+  } catch {
+    throw new Error('Please enter a full link that starts with https://')
+  }
+  if (!/^https?:$/.test(parsed.protocol)) throw new Error('Only http and https links can be loaded.')
+  let response
+  try {
+    response = await fetch(parsed.href)
+  } catch {
+    throw new Error(
+      'Could not load this link. The website may not allow other sites to read it (CORS). Download the file and use Upload instead.'
+    )
+  }
+  if (!response.ok) throw new Error(`The link returned an error (${response.status}).`)
+  return response.text()
+}
+
+// Opens the browser's print dialog for a piece of text.
+export function printText(text, title) {
+  const win = window.open('', '_blank')
+  if (!win) throw new Error('Please allow pop-ups to print.')
+  const safe = text.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  win.document.write(
+    `<!doctype html><title>${title}</title><style>body{font:13px/1.5 Consolas,monospace;margin:24px}pre{white-space:pre-wrap;word-break:break-word}</style><pre>${safe}</pre>`
+  )
+  win.document.close()
+  win.focus()
+  win.print()
+}
+
+// Turns a js-yaml error into an Error with a friendly message and a location,
+// so the page can mark the broken line. Other errors are returned unchanged.
+export function yamlError(err, text) {
+  if (!err?.mark) return err
+  const line = err.mark.line + 1
+  const column = err.mark.column + 1
+  const lineText = (text.split('\n')[line - 1] || '').replace(/\t/g, ' ')
+  const start = Math.max(0, column - 40)
+  const error = new Error(`This is not valid YAML (line ${line}, column ${column}). ${err.reason}.`)
+  error.location = {
+    line,
+    column,
+    snippet: lineText.slice(start, start + 60),
+    pointer: ' '.repeat(Math.max(0, column - 1 - start)) + '^',
+  }
+  return error
+}

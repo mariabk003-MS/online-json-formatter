@@ -83,6 +83,34 @@
     {
       "source": "/tools",
       "destination": "/tools.html"
+    },
+    {
+      "source": "/json-sorter",
+      "destination": "/json-sorter.html"
+    },
+    {
+      "source": "/json-to-typescript",
+      "destination": "/json-to-typescript.html"
+    },
+    {
+      "source": "/xml-formatter",
+      "destination": "/xml-formatter.html"
+    },
+    {
+      "source": "/yaml-formatter",
+      "destination": "/yaml-formatter.html"
+    },
+    {
+      "source": "/base64-encode-decode",
+      "destination": "/base64-encode-decode.html"
+    },
+    {
+      "source": "/url-encode-decode",
+      "destination": "/url-encode-decode.html"
+    },
+    {
+      "source": "/text-compare",
+      "destination": "/text-compare.html"
     }
   ]
 }
