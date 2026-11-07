@@ -312,6 +312,35 @@ function CsvToJson() {
           <li>Click Copy JSON or Download JSON to save the result.</li>
         </ol>
 
+        <h2>What I Found While Testing</h2>
+        <p>
+          When I tested this converter with a small product list, I noticed
+          that some product names came out with extra spaces in front, like
+          "   Notebook" instead of "Notebook". This happens easily when you copy
+          data from Excel, an email, or a website. So I updated the tool to
+          remove extra spaces around each value automatically. Numbers such as
+          prices and quantities are still converted into real numbers.
+        </p>
+        <figure style={{ margin: '1.5rem 0' }}>
+          <img
+            src="/images/csv-to-json-result.png"
+            alt="CSV to JSON Converter result showing clean product names Notebook and Pen with numeric price and quantity values"
+            width="1500"
+            height="820"
+            loading="lazy"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+            }}
+          />
+          <figcaption style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '0.5rem' }}>
+            After the fix: names are clean, and prices and quantities stay as
+            numbers.
+          </figcaption>
+        </figure>
+
         <h2>Features</h2>
         <ul>
           <li>Uses the first row as JSON keys automatically.</li>
