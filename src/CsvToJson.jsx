@@ -66,6 +66,9 @@ function parseCsv(text, delimiter) {
   return rows.filter((r) => !(r.length === 1 && r[0].trim() === ''))
 }
 
+const JSON_INPUT_MESSAGE =
+  'This looks like JSON, not CSV. CSV is plain rows separated by commas, like: name,city'
+
 // Turns "25" into 25, "true" into true, and keeps values like "007" as text.
 // Extra spaces around values (common when copying from Excel or emails) are removed.
 function convertValue(value) {
@@ -151,6 +154,13 @@ function CsvToJson() {
   function convert() {
     if (!csv.trim()) {
       showError('Please paste your CSV first.')
+      return
+    }
+
+    // People sometimes paste JSON here by mistake. Point them to the right tool.
+    const firstChar = csv.trim().charAt(0)
+    if (firstChar === '{' || firstChar === '[') {
+      showError(JSON_INPUT_MESSAGE)
       return
     }
 
@@ -292,6 +302,12 @@ function CsvToJson() {
       </div>
 
       {error && <p className="error">{error}</p>}
+      {error === JSON_INPUT_MESSAGE && (
+        <p>
+          Want to turn JSON into a table? Use our{' '}
+          <a href="/json-to-csv">JSON to CSV Converter</a>.
+        </p>
+      )}
       {success && <p className="success">{success}</p>}
 
       <section className="seo-content">
