@@ -6,6 +6,7 @@ import { safeFix } from './safeFix.js'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
+import { JsonGraph } from './JsonGraph.jsx'
 import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, MoreMenu } from './ToolLayout.jsx'
 import {
   getErrorLocation,
@@ -424,18 +425,19 @@ function App() {
               options={[
                 { value: 'code', label: 'Code' },
                 { value: 'tree', label: 'Tree' },
+                { value: 'graph', label: 'Graph' },
               ]}
             />
           }
           tools={
             <>
               <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
-              <Tool onClick={downloadJSON} disabled={!result}>Download</Tool>
               <Tool onClick={shareLink} disabled={!json.trim()} title="Copy a link that opens this JSON">
                 Share
               </Tool>
               <MoreMenu
                 items={[
+                  { label: 'Download .json', onClick: downloadJSON, disabled: !result },
                   { label: 'Use as input (edit)', onClick: useResultAsInput, disabled: !result },
                   { label: 'Print', onClick: printResult, disabled: !result },
                 ]}
@@ -450,6 +452,7 @@ function App() {
           {result && outputTab === 'tree' && parsed !== undefined && (
             <JsonTreeView key={resultVersion} data={parsed} />
           )}
+          {result && outputTab === 'graph' && parsed !== undefined && <JsonGraph data={parsed} />}
         </ToolPanel>
       </div>
 
@@ -494,7 +497,7 @@ function App() {
           </li>
           <li>See a list of every fix that was made.</li>
           <li>Line numbers, live “Valid / Invalid” check and the error line highlighted in red.</li>
-          <li>Colored result with line numbers, plus a Tree view you can expand and collapse.</li>
+          <li>Colored result with line numbers, a Tree view you can expand and collapse, and a Graph view that draws your JSON as a diagram.</li>
           <li>Dark mode, full screen editing and drag &amp; drop file upload.</li>
           <li>Share your JSON with a private link, load JSON from a URL, auto-format on paste and print.</li>
           <li>Copy or download the formatted JSON result.</li>

@@ -4,7 +4,8 @@ import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
-import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages } from './ToolLayout.jsx'
+import { JsonGraph } from './JsonGraph.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages } from './ToolLayout.jsx'
 import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile } from './toolUtils.js'
 
 const SAMPLE = {
@@ -42,6 +43,7 @@ function JsonViewer() {
   const [errorLocation, setErrorLocation] = useState(null)
   const [success, setSuccess] = useState('')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
+  const [view, setView] = useState('tree')
   const fileInputRef = useRef(null)
   const liveCheck = useLiveJsonCheck(json)
 
@@ -154,12 +156,22 @@ function JsonViewer() {
         </ToolPanel>
 
         <ToolPanel
-          title="Tree View"
+          title="View"
+          tabs={
+            <Tabs
+              value={view}
+              onChange={setView}
+              options={[
+                { value: 'tree', label: 'Tree' },
+                { value: 'graph', label: 'Graph' },
+              ]}
+            />
+          }
           statusLeft={data ? getStats(data.value) : 'No tree yet'}
         >
-          {data ? (
-            <JsonTreeView key={version} data={data.value} />
-          ) : (
+          {data && view === 'tree' && <JsonTreeView key={version} data={data.value} />}
+          {data && view === 'graph' && <JsonGraph data={data.value} />}
+          {!data && (
             <EmptyBox>Your JSON tree will appear here.</EmptyBox>
           )}
         </ToolPanel>
@@ -186,6 +198,7 @@ function JsonViewer() {
         <h2>Features</h2>
         <ul>
           <li>Collapsible tree view for objects and arrays.</li>
+          <li>Graph view that draws your JSON as connected boxes, with zoom.</li>
           <li>Item and key counts for every branch.</li>
           <li>Different colors for text, numbers, true/false, and null values.</li>
           <li>Line numbers and a live Valid / Invalid check while you type.</li>

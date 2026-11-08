@@ -50,7 +50,7 @@
 /* Small, flat buttons used in toolbars */
 .tool-page .tool {
   min-height: 32px;
-  padding: 5px 12px;
+  padding: 5px 10px;
   border: 1px solid #dbe4f2;
   border-radius: 8px;
   background: #fff;
@@ -91,7 +91,7 @@
 
 .tool-page .tabs .tab {
   min-height: 30px;
-  padding: 4px 14px;
+  padding: 4px 11px;
   border: none;
   border-radius: 0;
   background: #fff;
@@ -1321,4 +1321,82 @@ body.dark .tool-page .more-menu-list button:hover {
 
 .text-diff-removed .text-diff-mark {
   color: #f87171;
+}
+
+/* ---------- Graph view (JsonGraph.jsx) ---------- */
+.graph-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+}
+
+.graph-box {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-color: #334155 transparent;
+  scrollbar-width: thin;
+}
+
+.graph-note {
+  align-self: center;
+  margin-left: 6px;
+  color: #7c8aa5;
+  font-size: 12px;
+}
+
+.graph-box svg {
+  display: block;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.jg-edge {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-opacity: 0.55;
+  stroke-width: 1.5;
+}
+
+.jg-box {
+  fill: #0c1424;
+  stroke: #2b3b5c;
+}
+
+.jg-head {
+  fill: #1a2540;
+}
+
+.jg-title {
+  fill: #f1f5f9;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.jg-kind {
+  fill: #7c8aa5;
+  font-size: 11px;
+}
+
+.jg-row {
+  font-size: 12px;
+}
+
+.jg-key { fill: #93c5fd; }
+.jg-colon { fill: #64748b; font-size: 12px; }
+.jg-string { fill: #86efac; }
+.jg-number { fill: #fdba74; }
+.jg-boolean { fill: #c4b5fd; }
+.jg-null { fill: #f87171; }
+.jg-link { fill: #94a3b8; font-style: italic; }
+
+.panel-fullscreen .graph-wrap {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+@media (max-width: 600px) {
+  .graph-wrap {
+    height: 300px;
+  }
 }
