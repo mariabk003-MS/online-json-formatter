@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON in Python: json.loads, json.dumps &amp; Files</title>
+    <meta name="description" content="Learn how to read, write and pretty print JSON in Python with the json module: json.loads, json.dumps, files, errors and dates, with examples." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-in-python" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON in Python: json.loads, json.dumps &amp; Files" />
+    <meta property="og:description" content="Learn how to read, write and pretty print JSON in Python with the json module: json.loads, json.dumps, files, errors and dates, with examples." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-in-python" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON in Python: json.loads, json.dumps &amp; Files" />
+    <meta name="twitter:description" content="Learn how to read, write and pretty print JSON in Python with the json module: json.loads, json.dumps, files, errors and dates, with examples." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "How to Use JSON in Python",
+      "name": "How to Use JSON in Python",
+      "description": "Learn how to read, write and pretty print JSON in Python with the json module: json.loads, json.dumps, files, errors and dates, with examples.",
+      "url": "https://online-json-formatter-ten.vercel.app/json-in-python",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between json.load and json.loads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "json.load reads JSON from a file object, json.loads reads JSON from a string. The same goes for json.dump (to a file) and json.dumps (to a string)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I pretty print JSON in Python?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use json.dumps(data, indent=2), or json.dump(data, file, indent=2) to write a nicely formatted file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do I get 'Object of type datetime is not JSON serializable'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSON has no date type. Convert dates to strings first, for example with date.isoformat(), or pass default=str to json.dumps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I keep non-English characters in the output?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pass ensure_ascii=False to json.dumps, and open files with encoding='utf-8'."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How to Use JSON in Python",
+          "item": "https://online-json-formatter-ten.vercel.app/json-in-python"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

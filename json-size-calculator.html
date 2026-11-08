@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON Size Calculator - Check JSON File Size Free</title>
+    <meta name="description" content="Free online JSON size calculator. See the size of your JSON in bytes and KB, minified and gzipped, and which fields take the most space." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-size-calculator" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON Size Calculator - Check JSON File Size Free" />
+    <meta property="og:description" content="Free online JSON size calculator. See the size of your JSON in bytes and KB, minified and gzipped, and which fields take the most space." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-size-calculator" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON Size Calculator - Check JSON File Size Free" />
+    <meta name="twitter:description" content="Free online JSON size calculator. See the size of your JSON in bytes and KB, minified and gzipped, and which fields take the most space." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON Size Calculator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-size-calculator",
+      "description": "Free online JSON size calculator. See the size of your JSON in bytes and KB, minified and gzipped, and which fields take the most space.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is the gzip size so much smaller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSON repeats the same keys and characters a lot, so it compresses very well. Most web servers send JSON gzipped, so the gzip size is close to what really goes over the network."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does minifying change my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Minifying only removes spaces and line breaks outside of strings. The data stays exactly the same."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the size counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sizes are counted in bytes of UTF-8 text, the same way files and HTTP requests are measured. 1 KB is 1024 bytes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything is measured in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Size Calculator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-size-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

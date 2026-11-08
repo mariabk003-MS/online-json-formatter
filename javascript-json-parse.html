@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON.parse() and JSON.stringify() in JavaScript</title>
+    <meta name="description" content="How to use JSON.parse and JSON.stringify in JavaScript: safe parsing, pretty printing, dates with a reviver, and the most common JSON errors." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/javascript-json-parse" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON.parse() and JSON.stringify() in JavaScript" />
+    <meta property="og:description" content="How to use JSON.parse and JSON.stringify in JavaScript: safe parsing, pretty printing, dates with a reviver, and the most common JSON errors." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/javascript-json-parse" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON.parse() and JSON.stringify() in JavaScript" />
+    <meta name="twitter:description" content="How to use JSON.parse and JSON.stringify in JavaScript: safe parsing, pretty printing, dates with a reviver, and the most common JSON errors." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "JSON.parse and JSON.stringify in JavaScript",
+      "name": "JSON.parse and JSON.stringify in JavaScript",
+      "description": "How to use JSON.parse and JSON.stringify in JavaScript: safe parsing, pretty printing, dates with a reviver, and the most common JSON errors.",
+      "url": "https://online-json-formatter-ten.vercel.app/javascript-json-parse",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between JSON.parse and JSON.stringify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSON.parse turns a JSON string into a JavaScript value. JSON.stringify turns a JavaScript value into a JSON string."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I avoid crashes from bad JSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wrap JSON.parse in try...catch, because it throws a SyntaxError when the text is not valid JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do dates become strings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSON has no date type, so JSON.stringify writes dates as ISO strings. Use a reviver function in JSON.parse to turn them back into Date objects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I pretty print JSON in JavaScript?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use JSON.stringify(value, null, 2). The third argument is the number of spaces to indent."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON.parse and JSON.stringify in JavaScript",
+          "item": "https://online-json-formatter-ten.vercel.app/javascript-json-parse"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON to Python Class Generator - Dataclass &amp; Pydantic</title>
+    <meta name="description" content="Free online JSON to Python converter. Generate dataclasses, Pydantic models or TypedDict with type hints and nested classes from JSON. Private and free." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-python" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON to Python Class Generator - Dataclass &amp; Pydantic" />
+    <meta property="og:description" content="Free online JSON to Python converter. Generate dataclasses, Pydantic models or TypedDict with type hints and nested classes from JSON. Private and free." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-python" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON to Python Class Generator - Dataclass &amp; Pydantic" />
+    <meta name="twitter:description" content="Free online JSON to Python converter. Generate dataclasses, Pydantic models or TypedDict with type hints and nested classes from JSON. Private and free." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON to Python Generator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-python",
+      "description": "Free online JSON to Python converter. Generate dataclasses, Pydantic models or TypedDict with type hints and nested classes from JSON. Private and free.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Python version do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The code uses modern type hints like list[str] and str | None, which work in Python 3.10 and newer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are camelCase keys handled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Field names are turned into snake_case. With Pydantic, an alias keeps the original JSON key, so loading the JSON still works."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between dataclass and Pydantic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dataclasses are built into Python and only store data. Pydantic models also check and convert the data when you load it, which is useful for APIs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The classes are generated in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON to Python Generator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-python"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

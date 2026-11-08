@@ -113,6 +113,86 @@
     {
       "source": "/text-compare",
       "destination": "/text-compare.html"
+    },
+    {
+      "source": "/jwt-decoder",
+      "destination": "/jwt-decoder.html"
+    },
+    {
+      "source": "/json-to-excel",
+      "destination": "/json-to-excel.html"
+    },
+    {
+      "source": "/json-schema-validator",
+      "destination": "/json-schema-validator.html"
+    },
+    {
+      "source": "/json-schema-generator",
+      "destination": "/json-schema-generator.html"
+    },
+    {
+      "source": "/json-to-sql",
+      "destination": "/json-to-sql.html"
+    },
+    {
+      "source": "/sql-to-json",
+      "destination": "/sql-to-json.html"
+    },
+    {
+      "source": "/json-to-python",
+      "destination": "/json-to-python.html"
+    },
+    {
+      "source": "/json-to-java",
+      "destination": "/json-to-java.html"
+    },
+    {
+      "source": "/json-path",
+      "destination": "/json-path.html"
+    },
+    {
+      "source": "/json-size-calculator",
+      "destination": "/json-size-calculator.html"
+    },
+    {
+      "source": "/json-in-python",
+      "destination": "/json-in-python.html"
+    },
+    {
+      "source": "/javascript-json-parse",
+      "destination": "/javascript-json-parse.html"
+    },
+    {
+      "source": "/json-lines",
+      "destination": "/json-lines.html"
+    },
+    {
+      "source": "/json-comments",
+      "destination": "/json-comments.html"
+    },
+    {
+      "source": "/json-syntax-rules",
+      "destination": "/json-syntax-rules.html"
+    },
+    {
+      "source": "/http-status-codes-json",
+      "destination": "/http-status-codes-json.html"
+    },
+    {
+      "source": "/programming-languages-json",
+      "destination": "/programming-languages-json.html"
+    },
+    {
+      "source": "/file-extensions-json",
+      "destination": "/file-extensions-json.html"
+    },
+    {
+      "source": "/package-json-template",
+      "destination": "/package-json-template.html"
+    },
+    {
+      "source": "/tsconfig-json-template",
+      "destination": "/tsconfig-json-template.html"
     }
   ]
 }

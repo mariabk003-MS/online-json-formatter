@@ -9,7 +9,7 @@ import SiteFooter from './SiteFooter.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { ToolPanel, Tool, StatusBadge, EmptyBox, PlainOutput, XmlOutput, Messages } from './ToolLayout.jsx'
-import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, downloadBlob, readTextFile } from './toolUtils.js'
 
 // Colors YAML a little: keys blue, comments grey, "- " list marks grey.
 function YamlOutput({ text }) {
@@ -112,7 +112,8 @@ function ConverterPage({
     setSuccess('')
   }
 
-  function run(action, text = input) {
+  // run() may also return a Promise (e.g. when a library is loaded only when needed).
+  async function run(action, text = input) {
     if (!text.trim()) {
       setOutput('')
       setSuccess('')
@@ -120,7 +121,11 @@ function ConverterPage({
       return
     }
     try {
-      const result = action.run(text)
+      const result = await action.run(text)
+      if (result.download) {
+        // Some tools (like JSON to Excel) create a file instead of text.
+        downloadBlob(result.download.blob, result.download.fileName)
+      }
       setOutput(result.output)
       setResultType(result.type || outputType)
       setError('')

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON Schema Validator Online - Free &amp; Instant</title>
+    <meta name="description" content="Free online JSON Schema validator. Check JSON against draft-07, 2019-09 or 2020-12 schemas and see every error in plain English. Runs in your browser." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-schema-validator" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON Schema Validator Online - Free &amp; Instant" />
+    <meta property="og:description" content="Free online JSON Schema validator. Check JSON against draft-07, 2019-09 or 2020-12 schemas and see every error in plain English. Runs in your browser." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-schema-validator" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON Schema Validator Online - Free &amp; Instant" />
+    <meta name="twitter:description" content="Free online JSON Schema validator. Check JSON against draft-07, 2019-09 or 2020-12 schemas and see every error in plain English. Runs in your browser." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON Schema Validator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-schema-validator",
+      "description": "Free online JSON Schema validator. Check JSON against draft-07, 2019-09 or 2020-12 schemas and see every error in plain English. Runs in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which JSON Schema versions are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Draft-07, draft 2019-09 and draft 2020-12. The version is chosen from the $schema keyword; without it, draft-07 is used."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are formats like email and date checked?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Common formats such as email, date, date-time, time, uri, uuid, hostname, ipv4 and ipv6 are checked."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does it say additionalProperties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The schema has additionalProperties: false, which means fields that are not listed in properties are not allowed. Remove the extra field or add it to the schema."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data sent to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Validation runs in your browser with the Ajv library. Nothing is uploaded."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Schema Validator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-schema-validator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

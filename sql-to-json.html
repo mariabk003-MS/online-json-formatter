@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SQL to JSON Converter - INSERT Statements to JSON</title>
+    <meta name="description" content="Free online SQL to JSON converter. Turn SQL INSERT statements into a clean JSON array with real numbers, NULL and true/false values. Runs in your browser." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/sql-to-json" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="SQL to JSON Converter - INSERT Statements to JSON" />
+    <meta property="og:description" content="Free online SQL to JSON converter. Turn SQL INSERT statements into a clean JSON array with real numbers, NULL and true/false values. Runs in your browser." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/sql-to-json" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="SQL to JSON Converter - INSERT Statements to JSON" />
+    <meta name="twitter:description" content="Free online SQL to JSON converter. Turn SQL INSERT statements into a clean JSON array with real numbers, NULL and true/false values. Runs in your browser." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "SQL to JSON Converter",
+      "url": "https://online-json-formatter-ten.vercel.app/sql-to-json",
+      "description": "Free online SQL to JSON converter. Turn SQL INSERT statements into a clean JSON array with real numbers, NULL and true/false values. Runs in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which SQL can it read?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "INSERT INTO statements with one or many rows, with or without a column list, from MySQL, PostgreSQL, SQLite or SQL Server dumps. Other statements, like CREATE TABLE, are skipped."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are values converted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Numbers become JSON numbers, NULL becomes null, TRUE/FALSE become true/false, and quoted text becomes strings. Function calls like NOW() are kept as text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if there are several tables?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The result is a JSON object with one array per table name."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my SQL uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything runs in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SQL to JSON Converter",
+          "item": "https://online-json-formatter-ten.vercel.app/sql-to-json"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

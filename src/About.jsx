@@ -79,6 +79,28 @@ function About() {
             <a href="/url-encode-decode">URL</a> Encode / Decode: encode text for APIs and links.
           </li>
           <li><a href="/text-compare">Text Compare</a>: compare any two texts line by line.</li>
+          <li>
+            <a href="/json-schema-validator">JSON Schema Validator</a> and{' '}
+            <a href="/json-schema-generator">JSON Schema Generator</a>: check JSON against a schema, or create one.
+          </li>
+          <li>
+            <a href="/json-to-excel">JSON to Excel</a>,{' '}
+            <a href="/json-to-sql">JSON to SQL</a> and <a href="/sql-to-json">SQL to JSON</a>: move data
+            between JSON, spreadsheets and databases.
+          </li>
+          <li>
+            <a href="/json-to-python">JSON to Python</a> and <a href="/json-to-java">JSON to Java</a>:
+            generate typed classes from JSON.
+          </li>
+          <li>
+            <a href="/json-path">JSONPath Tester</a>, <a href="/json-size-calculator">JSON Size Calculator</a>{' '}
+            and <a href="/jwt-decoder">JWT Decoder</a>.
+          </li>
+          <li>
+            Free <a href="/tools">guides and datasets</a>, such as{' '}
+            <a href="/json-in-python">JSON in Python</a> and{' '}
+            <a href="/http-status-codes-json">HTTP status codes in JSON</a>.
+          </li>
           <li><a href="/tools">All Tools</a>: every tool on one page.</li>
           <li>
             <a href="/common-json-errors">Common JSON Errors Guide</a>: wrong

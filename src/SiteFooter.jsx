@@ -1,5 +1,5 @@
 // Footer with links to every tool and guide (used by the newer pages).
-import { TOOL_GROUPS, GUIDES } from './toolsList.js'
+import { TOOL_GROUPS, GUIDES, DATASETS } from './toolsList.js'
 
 function SiteFooter() {
   return (
@@ -16,6 +16,12 @@ function SiteFooter() {
         <h3>Guides</h3>
         {GUIDES.map((guide) => (
           <a key={guide.href} href={guide.href}>{guide.label}</a>
+        ))}
+      </div>
+      <div>
+        <h3>Datasets</h3>
+        {DATASETS.map((item) => (
+          <a key={item.href} href={item.href}>{item.label}</a>
         ))}
       </div>
       <div>

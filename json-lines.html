@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON Lines (JSONL) and NDJSON Explained</title>
+    <meta name="description" content="What JSON Lines (JSONL) and NDJSON are, why they are used for logs and big data, and how to read and write .jsonl files in Python and JavaScript." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-lines" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON Lines (JSONL) and NDJSON Explained" />
+    <meta property="og:description" content="What JSON Lines (JSONL) and NDJSON are, why they are used for logs and big data, and how to read and write .jsonl files in Python and JavaScript." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-lines" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON Lines (JSONL) and NDJSON Explained" />
+    <meta name="twitter:description" content="What JSON Lines (JSONL) and NDJSON are, why they are used for logs and big data, and how to read and write .jsonl files in Python and JavaScript." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "JSON Lines (JSONL) and NDJSON",
+      "name": "JSON Lines (JSONL) and NDJSON",
+      "description": "What JSON Lines (JSONL) and NDJSON are, why they are used for logs and big data, and how to read and write .jsonl files in Python and JavaScript.",
+      "url": "https://online-json-formatter-ten.vercel.app/json-lines",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between JSON Lines and NDJSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are almost the same: one JSON value per line, separated by newline characters. JSON Lines uses the .jsonl extension, NDJSON often uses .ndjson."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why use JSON Lines instead of a JSON array?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each line can be read, written and processed on its own. That makes JSON Lines great for logs, big data exports and streaming, because you never need the whole file in memory."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a JSON Lines file have pretty printed JSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Every record must be on a single line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert JSON Lines to a JSON array?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read the file line by line, parse each non-empty line with JSON.parse or json.loads, and collect the results in a list."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Lines (JSONL) and NDJSON",
+          "item": "https://online-json-formatter-ten.vercel.app/json-lines"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

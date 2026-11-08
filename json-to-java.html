@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON to Java Class Generator - POJO &amp; Records</title>
+    <meta name="description" content="Free online JSON to Java converter. Generate Java classes with getters and setters, or records, with nested types, lists and Jackson annotations." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-java" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON to Java Class Generator - POJO &amp; Records" />
+    <meta property="og:description" content="Free online JSON to Java converter. Generate Java classes with getters and setters, or records, with nested types, lists and Jackson annotations." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-java" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON to Java Class Generator - POJO &amp; Records" />
+    <meta name="twitter:description" content="Free online JSON to Java converter. Generate Java classes with getters and setters, or records, with nested types, lists and Jackson annotations." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON to Java Generator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-java",
+      "description": "Free online JSON to Java converter. Generate Java classes with getters and setters, or records, with nested types, lists and Jackson annotations.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which libraries does the code work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use classes or records?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are some types Long or Boolean instead of long or boolean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Boxed types are used when a value can be missing or null, because primitive types like long cannot hold null."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The code is generated in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON to Java Generator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-java"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

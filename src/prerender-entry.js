@@ -3,13 +3,14 @@
 // Used by scripts/prerender.mjs after "vite build".
 import { StrictMode, createElement } from 'react'
 import { renderToString } from 'react-dom/server'
-import { ROUTES } from './routes.js'
+import { PAGES } from './pages.js'
 
-export { ROUTES }
+export const PATHS = Object.keys(PAGES)
 
-export function render(path) {
-  const route = ROUTES.find(([routePath]) => routePath === path)
-  if (!route) throw new Error(`No page for ${path}`)
+export async function render(path) {
+  const load = PAGES[path]
+  if (!load) throw new Error(`No page for ${path}`)
+  const { default: Page } = await load()
   globalThis.__PRERENDER_PATH__ = path // NavBar uses this to mark the current page
-  return renderToString(createElement(StrictMode, null, createElement(route[1])))
+  return renderToString(createElement(StrictMode, null, createElement(Page)))
 }

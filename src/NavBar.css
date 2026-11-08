@@ -242,7 +242,7 @@ body.dark .site-header .site-nav .nav-group-button.active {
 .site-nav .nav-mega {
   left: auto;
   right: -120px;
-  min-width: 720px;
+  min-width: 640px;
   padding: 18px 20px 12px;
   transform: none;
 }
@@ -359,5 +359,21 @@ body.dark .site-nav .nav-mega a.nav-mega-all {
 
   .site-nav .nav-mega {
     padding: 8px 0;
+  }
+}
+
+/* "Learn" menu: 2 columns, sits under its own button */
+.site-nav .nav-mega.nav-mega-2 {
+  right: -40px;
+  min-width: 480px;
+}
+
+@media (max-width: 760px) {
+  .nav-mega-columns {
+    grid-template-columns: 1fr !important;
+  }
+
+  .site-nav .nav-mega.nav-mega-2 {
+    min-width: 0;
   }
 }

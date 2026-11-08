@@ -2,7 +2,7 @@ import './App.css'
 import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import SiteFooter from './SiteFooter.jsx'
-import { TOOL_GROUPS, GUIDES } from './toolsList.js'
+import { TOOL_GROUPS, GUIDES, DATASETS } from './toolsList.js'
 
 function AllTools() {
   return (
@@ -35,6 +35,18 @@ function AllTools() {
             <a key={guide.href} href={guide.href} className="tool-card">
               <strong>{guide.label}</strong>
               <span>Read the guide →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="tools-group">
+        <h2>Free JSON Datasets</h2>
+        <div className="tools-grid">
+          {DATASETS.map((item) => (
+            <a key={item.href} href={item.href} className="tool-card">
+              <strong>{item.label}</strong>
+              <span>{item.text}</span>
             </a>
           ))}
         </div>

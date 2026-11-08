@@ -250,3 +250,13 @@ export function yamlError(err, text) {
   }
   return error
 }
+
+// Saves a ready-made file (Blob) on the visitor's computer.
+export function downloadBlob(blob, fileName) {
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = fileName
+  link.click()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}

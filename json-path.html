@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSONPath Tester Online - Query JSON Free</title>
+    <meta name="description" content="Free online JSONPath tester. Query JSON with expressions like $.store.book[*].title, with filters, wildcards and deep search. Runs in your browser." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-path" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSONPath Tester Online - Query JSON Free" />
+    <meta property="og:description" content="Free online JSONPath tester. Query JSON with expressions like $.store.book[*].title, with filters, wildcards and deep search. Runs in your browser." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-path" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSONPath Tester Online - Query JSON Free" />
+    <meta name="twitter:description" content="Free online JSONPath tester. Query JSON with expressions like $.store.book[*].title, with filters, wildcards and deep search. Runs in your browser." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSONPath Tester",
+      "url": "https://online-json-formatter-ten.vercel.app/json-path",
+      "description": "Free online JSONPath tester. Query JSON with expressions like $.store.book[*].title, with filters, wildcards and deep search. Runs in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is JSONPath used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSONPath picks values out of JSON, like XPath does for XML. It is used in Postman tests, kubectl, AWS Step Functions and many libraries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support filters?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use [?(@.price < 10)], compare with ==, !=, <, <=, >, >=, combine with && and ||, and check that a field exists with [?(@.isbn)]."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does .. mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two dots search at every level. $..price finds every price, no matter how deep it is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Queries run in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSONPath Tester",
+          "item": "https://online-json-formatter-ten.vercel.app/json-path"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

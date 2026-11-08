@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JWT Decoder Online - Decode JSON Web Tokens Free</title>
+    <meta name="description" content="Free online JWT decoder. See the header and payload of a JSON Web Token as readable JSON, with expiry dates in plain English. Decoded in your browser only." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/jwt-decoder" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JWT Decoder Online - Decode JSON Web Tokens Free" />
+    <meta property="og:description" content="Free online JWT decoder. See the header and payload of a JSON Web Token as readable JSON, with expiry dates in plain English. Decoded in your browser only." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/jwt-decoder" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JWT Decoder Online - Decode JSON Web Tokens Free" />
+    <meta name="twitter:description" content="Free online JWT decoder. See the header and payload of a JSON Web Token as readable JSON, with expiry dates in plain English. Decoded in your browser only." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JWT Decoder",
+      "url": "https://online-json-formatter-ten.vercel.app/jwt-decoder",
+      "description": "Free online JWT decoder. See the header and payload of a JSON Web Token as readable JSON, with expiry dates in plain English. Decoded in your browser only.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it safe to paste my JWT here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The token is decoded only in your browser and is never uploaded. Still, treat real tokens like passwords: avoid sharing production tokens and log out or rotate them if they leak."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool verify the signature?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It only decodes the header and payload so you can read them. Verifying a signature needs the secret or public key, and should be done by your server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does exp mean in a JWT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "exp is the expiry time, written as seconds since 1 January 1970 (Unix time). The tool shows it as a normal date and tells you if the token has already expired."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can anyone read a JWT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The header and payload are only Base64url-encoded, not encrypted. Never put secrets such as passwords inside a JWT payload."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JWT Decoder",
+          "item": "https://online-json-formatter-ten.vercel.app/jwt-decoder"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

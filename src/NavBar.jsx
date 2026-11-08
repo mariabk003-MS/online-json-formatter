@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './NavBar.css'
-import { TOOL_GROUPS, GUIDES } from './toolsList.js'
+import { TOOL_GROUPS, GUIDES, DATASETS } from './toolsList.js'
 
 // The "More Tools" menu shows the Convert / Compare / Clean up groups in columns.
 const moreToolGroups = TOOL_GROUPS.filter((group) => group.title !== 'Format & check')
@@ -13,9 +13,19 @@ const items = [
   {
     label: 'More Tools',
     groups: moreToolGroups,
+    columns: 3,
+    allLink: true,
     children: [...moreToolGroups.flatMap((group) => group.tools), { href: '/tools', label: 'All tools' }],
   },
-  { label: 'Guides', children: GUIDES },
+  {
+    label: 'Learn',
+    groups: [
+      { title: 'Guides', tools: GUIDES },
+      { title: 'Datasets', tools: DATASETS },
+    ],
+    columns: 2,
+    children: [...GUIDES, ...DATASETS],
+  },
   { href: '/about', label: 'About' },
 ]
 
@@ -119,8 +129,8 @@ function NavBar() {
               {item.label} <span aria-hidden="true">▾</span>
             </button>
             {item.groups ? (
-              <div className="nav-dropdown nav-mega">
-                <div className="nav-mega-columns">
+              <div className={'nav-dropdown nav-mega' + (item.columns === 2 ? ' nav-mega-2' : '')}>
+                <div className="nav-mega-columns" style={{ gridTemplateColumns: 'repeat(' + item.columns + ', 1fr)' }}>
                   {item.groups.map((group) => (
                     <div key={group.title} className="nav-mega-column">
                       <p className="nav-mega-title">{group.title}</p>
@@ -137,7 +147,7 @@ function NavBar() {
                     </div>
                   ))}
                 </div>
-                <a href="/tools" className="nav-mega-all">All tools →</a>
+                {item.allLink && <a href="/tools" className="nav-mega-all">All tools →</a>}
               </div>
             ) : (
             <div className="nav-dropdown">

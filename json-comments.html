@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Can JSON Have Comments? What to Do Instead</title>
+    <meta name="description" content="JSON does not allow comments. Learn why, which formats like JSONC and JSON5 accept them, how to remove comments, and the best alternatives." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-comments" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="Can JSON Have Comments? What to Do Instead" />
+    <meta property="og:description" content="JSON does not allow comments. Learn why, which formats like JSONC and JSON5 accept them, how to remove comments, and the best alternatives." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-comments" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Can JSON Have Comments? What to Do Instead" />
+    <meta name="twitter:description" content="JSON does not allow comments. Learn why, which formats like JSONC and JSON5 accept them, how to remove comments, and the best alternatives." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Can JSON Have Comments?",
+      "name": "Can JSON Have Comments?",
+      "description": "JSON does not allow comments. Learn why, which formats like JSONC and JSON5 accept them, how to remove comments, and the best alternatives.",
+      "url": "https://online-json-formatter-ten.vercel.app/json-comments",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does JSON support comments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do some JSON files have comments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I remove comments from JSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste the file into our JSON Formatter or JSON Repair tool. It removes // and /* */ comments automatically and gives you valid JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What can I use instead of comments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add a field such as \"_comment\" or \"description\", keep notes in a README, or use a format that supports comments, like YAML or JSON5, for config files."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Can JSON Have Comments?",
+          "item": "https://online-json-formatter-ten.vercel.app/json-comments"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON Schema Generator - Create Schema from JSON</title>
+    <meta name="description" content="Free online JSON Schema generator. Paste example JSON and get a draft 2020-12 schema with types, required fields and nested objects. Private and free." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-schema-generator" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON Schema Generator - Create Schema from JSON" />
+    <meta property="og:description" content="Free online JSON Schema generator. Paste example JSON and get a draft 2020-12 schema with types, required fields and nested objects. Private and free." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-schema-generator" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JSON Schema Generator - Create Schema from JSON" />
+    <meta name="twitter:description" content="Free online JSON Schema generator. Paste example JSON and get a draft 2020-12 schema with types, required fields and nested objects. Private and free." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "JSON Schema Generator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-schema-generator",
+      "description": "Free online JSON Schema generator. Paste example JSON and get a draft 2020-12 schema with types, required fields and nested objects. Private and free.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which JSON Schema version is generated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The generator writes JSON Schema draft 2020-12, the current version, supported by most validators and API tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the schema be perfect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a strong starting point based on your example. Add rules the example cannot show, such as minimum values, string formats or enums, by hand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are required fields decided?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A field is required when it appears in the example. For arrays of objects, a field is only required if every item has it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The schema is generated in your browser."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Schema Generator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-schema-generator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
