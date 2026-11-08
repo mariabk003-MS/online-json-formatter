@@ -21,6 +21,8 @@ const items = [
 
 // Light or dark: the saved choice, else the computer's setting.
 function getStartTheme() {
+  // While the page HTML is written at build time there is no browser yet.
+  if (typeof window === 'undefined') return 'light'
   let saved = ''
   try {
     saved = localStorage.getItem('theme') || ''
@@ -39,7 +41,10 @@ function getStartTheme() {
 }
 
 function NavBar() {
-  const path = window.location.pathname.replace(/\/$/, '') || '/'
+  // At build time there is no browser, so the prerender step passes the address in.
+  const address =
+    typeof window === 'undefined' ? globalThis.__PRERENDER_PATH__ || '/' : window.location.pathname
+  const path = address.replace(/\/$/, '') || '/'
   const [openMenu, setOpenMenu] = useState(null)
   const [theme, setTheme] = useState(getStartTheme)
   const [mobileOpen, setMobileOpen] = useState(false) // ☰ menu on phones
