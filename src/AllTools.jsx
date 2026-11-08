@@ -41,9 +41,9 @@ function AllTools() {
       </section>
 
       <section className="tools-group">
-        <h2>Free JSON Datasets</h2>
+        <h2>Free JSON Datasets <a className="section-link" href="/datasets">See all →</a></h2>
         <div className="tools-grid">
-          {DATASETS.map((item) => (
+          {DATASETS.filter((item) => item.href !== "/datasets").map((item) => (
             <a key={item.href} href={item.href} className="tool-card">
               <strong>{item.label}</strong>
               <span>{item.text}</span>

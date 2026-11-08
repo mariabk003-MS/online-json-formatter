@@ -195,4 +195,10 @@ export const FAQS = {
     ["Can tsconfig.json have comments?", "Yes. TypeScript reads tsconfig.json as JSONC, so comments and trailing commas are allowed. Other tools may not accept them, so this template is plain JSON."],
     ["Should I turn on strict?", "Yes, for new projects. strict turns on a group of checks that catch many bugs early, such as values that might be null or undefined."],
   ],
+  'datasets': [
+    ["Are these JSON datasets free?", "Yes. Every dataset is free to copy, download and use in personal and commercial projects, tests and tutorials."],
+    ["Is the reference data accurate?", "Reference datasets use official codes, such as ISO 3166 for countries, ISO 4217 for currencies, ISO 639-1 for languages and IATA for airports. Always check critical data against the official source."],
+    ["Is the mock data real?", "No. Mock users, products, orders, todos and posts are made up, so they are safe to use in demos, screenshots and tests."],
+    ["How do I use a dataset in my code?", "Click Download to save the .json file and import it, or Copy and paste it into your project. Click Open to explore it in the JSON Formatter first."],
+  ],
 }

@@ -51,4 +51,5 @@ export const PAGES = {
   '/file-extensions-json': () => import('./DatasetPages.jsx').then((m) => ({ default: m.FileExtensionsPage })),
   '/package-json-template': () => import('./DatasetPages.jsx').then((m) => ({ default: m.PackageJsonPage })),
   '/tsconfig-json-template': () => import('./DatasetPages.jsx').then((m) => ({ default: m.TsconfigPage })),
+  '/datasets': () => import('./DatasetsLibrary.jsx'),
 }

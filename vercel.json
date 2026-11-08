@@ -193,6 +193,10 @@
     {
       "source": "/tsconfig-json-template",
       "destination": "/tsconfig-json-template.html"
+    },
+    {
+      "source": "/datasets",
+      "destination": "/datasets.html"
     }
   ]
 }

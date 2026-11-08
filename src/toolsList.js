@@ -82,6 +82,7 @@ export const GUIDES = [
 ]
 
 export const DATASETS = [
+  { href: '/datasets', label: 'All datasets →', text: 'Browse every free JSON dataset.' },
   { href: '/http-status-codes-json', label: 'HTTP Status Codes', text: 'All HTTP status codes with meanings.' },
   { href: '/programming-languages-json', label: 'Programming Languages', text: 'Popular languages with years and creators.' },
   { href: '/file-extensions-json', label: 'File Extensions & MIME Types', text: 'Content types for common files.' },

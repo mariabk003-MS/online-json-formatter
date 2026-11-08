@@ -56,6 +56,7 @@ export default defineConfig({
         fileExtensionsJson: fileURLToPath(new URL('./file-extensions-json.html', import.meta.url)),
         packageJsonTemplate: fileURLToPath(new URL('./package-json-template.html', import.meta.url)),
         tsconfigJsonTemplate: fileURLToPath(new URL('./tsconfig-json-template.html', import.meta.url)),
+        datasetsLibrary: fileURLToPath(new URL('./datasets.html', import.meta.url)),
       },
     },
   },
