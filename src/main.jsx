@@ -9,6 +9,11 @@ import './ToolPage.css'
 import './JsonViewer.css'
 import './PrivacyPolicy.css'
 import { PAGES } from './pages.js'
+import { inject } from '@vercel/analytics'
+
+// Counts page visits with Vercel Web Analytics: no cookies, and no JSON or
+// other text you type is ever sent. Turn it on in the Vercel dashboard.
+inject()
 
 // Each page's HTML is already written at build time (for Google and other
 // search engines). Here we load only the code for the current page, then

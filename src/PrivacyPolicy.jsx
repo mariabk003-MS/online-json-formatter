@@ -37,7 +37,7 @@ function PrivacyPolicy() {
       <NavBar />
       <main className="privacy-policy">
         <h1>Privacy Policy</h1>
-        <p>Last updated: October 23, 2026</p>
+        <p>Last updated: November 9, 2026</p>
 
         <h2>Your Privacy Matters</h2>
         <p>
@@ -63,10 +63,21 @@ function PrivacyPolicy() {
 
         <h2>Cookies and Analytics</h2>
         <p>
-          This website may use essential technologies or analytics tools
-          in the future to understand website usage and improve the service.
-          If such tools are enabled, their applicable privacy policies
-          will describe how information is handled.
+          We use Vercel Web Analytics to count page visits, so we can see
+          which tools are popular and improve the site. It does not use
+          cookies and does not identify you personally. It records
+          anonymous information such as the page visited, the referring
+          website, the country, and the browser and device type.
+        </p>
+        <p>
+          The JSON, CSV, XML, YAML or other text you type, paste or upload
+          into our tools is never sent to Vercel Analytics or to any other
+          service. It stays in your browser.
+        </p>
+        <p>
+          We only store one small setting in your browser: your light or
+          dark mode choice. You can clear it at any time in your browser
+          settings.
         </p>
 
         <h2>Third-Party Services</h2>
