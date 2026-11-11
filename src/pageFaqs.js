@@ -152,6 +152,18 @@ export const FAQS = {
     ["Why do dates become strings?", "JSON has no date type, so JSON.stringify writes dates as ISO strings. Use a reviver function in JSON.parse to turn them back into Date objects."],
     ["How do I pretty print JSON in JavaScript?", "Use JSON.stringify(value, null, 2). The third argument is the number of spaces to indent."],
   ],
+  'unexpected-token-in-json': [
+    ["What does 'Unexpected token in JSON' mean?", "The JSON parser found a character that is not allowed at that position. The character in the message, such as ' or < or }, tells you what went wrong."],
+    ["Why do I get 'Unexpected token <' when I fetch JSON?", "The server sent HTML instead of JSON, usually an error, login or 404 page. Check the URL and the response status, and log response.text() to see what came back."],
+    ["What does 'Unexpected token u in JSON at position 0' mean?", "You passed undefined to JSON.parse. Check that the value exists before parsing, for example a missing localStorage item."],
+    ["How do I fix the error quickly?", "Paste the JSON into our free JSON Formatter or JSON Repair tool. It shows the exact line of the error and fixes quotes, commas, comments and Python values automatically."],
+  ],
+  'pretty-print-json': [
+    ["How do I pretty print JSON in Python?", "Use json.dumps(data, indent=2). From the command line, run python -m json.tool file.json."],
+    ["How do I pretty print JSON in JavaScript?", "Use JSON.stringify(data, null, 2). The third argument sets the number of spaces."],
+    ["How do I format JSON in VS Code?", "Open the file and press Shift + Alt + F on Windows, Shift + Option + F on Mac or Ctrl + Shift + I on Linux, or right-click and choose Format Document."],
+    ["Does pretty printing change my data?", "No. It only adds spaces and line breaks. The keys, values and order stay exactly the same."],
+  ],
   'json-lines': [
     ["What is the difference between JSON Lines and NDJSON?", "They are almost the same: one JSON value per line, separated by newline characters. JSON Lines uses the .jsonl extension, NDJSON often uses .ndjson."],
     ["Why use JSON Lines instead of a JSON array?", "Each line can be read, written and processed on its own. That makes JSON Lines great for logs, big data exports and streaming, because you never need the whole file in memory."],

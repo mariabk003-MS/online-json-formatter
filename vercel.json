@@ -167,6 +167,14 @@
       "destination": "/json-lines.html"
     },
     {
+      "source": "/unexpected-token-in-json",
+      "destination": "/unexpected-token-in-json.html"
+    },
+    {
+      "source": "/pretty-print-json",
+      "destination": "/pretty-print-json.html"
+    },
+    {
       "source": "/json-comments",
       "destination": "/json-comments.html"
     },

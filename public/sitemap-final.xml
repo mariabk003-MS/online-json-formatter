@@ -146,4 +146,10 @@
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/datasets</loc>
 </url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/unexpected-token-in-json</loc>
+</url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/pretty-print-json</loc>
+</url>
 </urlset>

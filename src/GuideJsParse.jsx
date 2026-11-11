@@ -86,7 +86,8 @@ JSON.stringify(user, (k, v) => (k === 'password' ? undefined : v))   // hide one
       </ul>
       <p>
         Paste broken JSON into the <a href="/">JSON Formatter</a> to see the exact
-        line of the error and fix common mistakes automatically.
+        line of the error and fix common mistakes automatically, or read the full
+        guide to <a href="/unexpected-token-in-json">Unexpected token in JSON</a>.
       </p>
     </ArticlePage>
   )

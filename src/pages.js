@@ -44,6 +44,8 @@ export const PAGES = {
   '/json-in-python': () => import('./GuidePythonJson.jsx'),
   '/javascript-json-parse': () => import('./GuideJsParse.jsx'),
   '/json-lines': () => import('./GuideJsonLines.jsx'),
+  '/unexpected-token-in-json': () => import('./GuideUnexpectedToken.jsx'),
+  '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-comments': () => import('./GuideJsonComments.jsx'),
   '/json-syntax-rules': () => import('./GuideJsonSyntax.jsx'),
   '/http-status-codes-json': () => import('./DatasetPages.jsx').then((m) => ({ default: m.HttpStatusCodesPage })),
