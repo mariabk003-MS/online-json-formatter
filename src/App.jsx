@@ -569,6 +569,10 @@ function App() {
         {' | '}
         <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}
+        <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>
+        {' | '}
+        <a href="/pretty-print-json">How to Pretty Print JSON</a>
+        {' | '}
         <a href="/json-to-xml">JSON to XML Converter</a>
         {' | '}
         <a href="/privacy-policy">Privacy Policy</a>

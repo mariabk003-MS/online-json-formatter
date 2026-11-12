@@ -323,7 +323,9 @@ function JsonValidator() {
         </ul>
         <p>
           See wrong and correct examples for each error in our{' '}
-          <a href="/common-json-errors">Common JSON Errors guide</a>.
+          <a href="/common-json-errors">Common JSON Errors guide</a>, or learn
+          what each message means in{' '}
+          <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

@@ -97,6 +97,7 @@ function JsonToYaml() {
             ['/json-to-xml', 'JSON to XML'],
             ['/', 'JSON Formatter'],
             ['/json-validator', 'JSON Validator'],
+            ['/json-vs-yaml', 'JSON vs YAML'],
           ]}
         />
       </section>

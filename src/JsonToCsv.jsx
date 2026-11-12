@@ -342,6 +342,8 @@ function JsonToCsv() {
         {' | '}
         <a href="/common-json-errors">JSON Errors Guide</a>
         {' | '}
+        <a href="/json-to-csv-python">JSON to CSV in Python</a>
+        {' | '}
         <a href="/privacy-policy">Privacy Policy</a>
       </footer>
     </div>

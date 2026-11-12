@@ -94,6 +94,7 @@ function JsonMinifier() {
             ['/json-repair', 'JSON Repair'],
             ['/json-validator', 'JSON Validator'],
             ['/json-escape', 'JSON Escape'],
+            ['/pretty-print-json', 'How to Pretty Print JSON'],
           ]}
         />
       </section>

@@ -110,6 +110,7 @@ function YamlFormatter() {
             ['/json-to-yaml', 'JSON to YAML'],
             ['/xml-formatter', 'XML Formatter'],
             ['/', 'JSON Formatter'],
+            ['/json-vs-yaml', 'JSON vs YAML'],
           ]}
         />
       </section>

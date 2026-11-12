@@ -120,6 +120,7 @@ function YamlToJson() {
             ['/', 'JSON Formatter'],
             ['/json-viewer', 'JSON Viewer'],
             ['/xml-to-json', 'XML to JSON'],
+            ['/json-vs-yaml', 'JSON vs YAML'],
           ]}
         />
       </section>

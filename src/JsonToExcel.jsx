@@ -121,6 +121,7 @@ function JsonToExcel() {
             ['/csv-to-json', 'CSV to JSON'],
             ['/convert-json-to-excel', 'JSON to Excel guide'],
             ['/', 'JSON Formatter'],
+            ['/json-to-csv-python', 'JSON to CSV in Python'],
           ]}
         />
       </section>

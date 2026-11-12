@@ -123,6 +123,7 @@ function JsonSorter() {
             ['/', 'JSON Formatter'],
             ['/json-minifier', 'JSON Minifier'],
             ['/json-viewer', 'JSON Viewer'],
+            ['/pretty-print-json', 'How to Pretty Print JSON'],
           ]}
         />
       </section>

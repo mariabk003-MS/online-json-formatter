@@ -80,6 +80,7 @@ function JsonRepair() {
             ['/json-validator', 'JSON Validator'],
             ['/common-json-errors', 'Common JSON Errors'],
             ['/json-minifier', 'JSON Minifier'],
+            ['/unexpected-token-in-json', 'Unexpected Token in JSON'],
           ]}
         />
       </section>
