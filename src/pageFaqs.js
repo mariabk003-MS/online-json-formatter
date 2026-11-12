@@ -164,6 +164,18 @@ export const FAQS = {
     ["How do I format JSON in VS Code?", "Open the file and press Shift + Alt + F on Windows, Shift + Option + F on Mac or Ctrl + Shift + I on Linux, or right-click and choose Format Document."],
     ["Does pretty printing change my data?", "No. It only adds spaces and line breaks. The keys, values and order stay exactly the same."],
   ],
+  'json-vs-yaml': [
+    ["What is the main difference between JSON and YAML?", "JSON uses braces, brackets and quotes and is strict, which makes it ideal for programs and APIs. YAML uses indentation, allows comments and needs fewer quotes, which makes it easier for people to read and edit."],
+    ["Is YAML a superset of JSON?", "Yes. Since YAML 1.2, almost every valid JSON document is also valid YAML, so a YAML parser can read JSON."],
+    ["Does YAML support comments?", "Yes, YAML comments start with #. JSON does not support comments at all."],
+    ["Should I use JSON or YAML for config files?", "YAML is popular for config files that people edit by hand, such as Docker Compose, Kubernetes and GitHub Actions. JSON is better for data sent between programs."],
+  ],
+  'json-to-csv-python': [
+    ["What is the easiest way to convert JSON to CSV in Python?", "Use pandas: df = pd.read_json('file.json') and then df.to_csv('file.csv', index=False)."],
+    ["Can I convert JSON to CSV without pandas?", "Yes. Load the file with json.load and write it with csv.DictWriter from the built-in csv module."],
+    ["How do I convert nested JSON to CSV?", "Use pandas.json_normalize, which flattens nested objects into columns like address.city."],
+    ["Why does my CSV have blank lines in Excel?", "Open the output file with newline='' when using the csv module. To show accented letters correctly in Excel, save with encoding='utf-8-sig'."],
+  ],
   'json-lines': [
     ["What is the difference between JSON Lines and NDJSON?", "They are almost the same: one JSON value per line, separated by newline characters. JSON Lines uses the .jsonl extension, NDJSON often uses .ndjson."],
     ["Why use JSON Lines instead of a JSON array?", "Each line can be read, written and processed on its own. That makes JSON Lines great for logs, big data exports and streaming, because you never need the whole file in memory."],

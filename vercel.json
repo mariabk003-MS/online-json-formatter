@@ -175,6 +175,14 @@
       "destination": "/pretty-print-json.html"
     },
     {
+      "source": "/json-vs-yaml",
+      "destination": "/json-vs-yaml.html"
+    },
+    {
+      "source": "/json-to-csv-python",
+      "destination": "/json-to-csv-python.html"
+    },
+    {
       "source": "/json-comments",
       "destination": "/json-comments.html"
     },

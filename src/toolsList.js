@@ -80,6 +80,8 @@ export const GUIDES = [
   { href: '/json-lines', label: 'JSON Lines (JSONL)' },
   { href: '/how-to-open-json-file', label: 'How to Open a JSON File' },
   { href: '/json-vs-xml', label: 'JSON vs XML' },
+  { href: '/json-vs-yaml', label: 'JSON vs YAML' },
+  { href: '/json-to-csv-python', label: 'JSON to CSV in Python' },
   { href: '/convert-json-to-excel', label: 'Convert JSON to Excel' },
 ]
 

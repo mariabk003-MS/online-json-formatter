@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>How to Convert JSON to CSV in Python</title>
+    <meta name="description" content="Convert JSON to CSV in Python with pandas, the built-in csv module or json_normalize for nested JSON. Copy-ready code and fixes for common errors." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-csv-python" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="How to Convert JSON to CSV in Python" />
+    <meta property="og:description" content="Convert JSON to CSV in Python with pandas, the built-in csv module or json_normalize for nested JSON. Copy-ready code and fixes for common errors." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-csv-python" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 30 free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to Convert JSON to CSV in Python" />
+    <meta name="twitter:description" content="Convert JSON to CSV in Python with pandas, the built-in csv module or json_normalize for nested JSON. Copy-ready code and fixes for common errors." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "How to Convert JSON to CSV in Python (pandas and csv module)",
+      "name": "How to Convert JSON to CSV in Python (pandas and csv module)",
+      "description": "Convert JSON to CSV in Python with pandas, the built-in csv module or json_normalize for nested JSON. Copy-ready code and fixes for common errors.",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-csv-python",
+      "datePublished": "2026-11-12",
+      "dateModified": "2026-11-12",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the easiest way to convert JSON to CSV in Python?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use pandas: df = pd.read_json('file.json') and then df.to_csv('file.csv', index=False)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert JSON to CSV without pandas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Load the file with json.load and write it with csv.DictWriter from the built-in csv module."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert nested JSON to CSV?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use pandas.json_normalize, which flattens nested objects into columns like address.city."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my CSV have blank lines in Excel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the output file with newline='' when using the csv module. To show accented letters correctly in Excel, save with encoding='utf-8-sig'."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How to Convert JSON to CSV in Python (pandas and csv module)",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-csv-python"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
