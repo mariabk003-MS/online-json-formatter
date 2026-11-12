@@ -6,7 +6,8 @@ import CodeEditor from './CodeEditor.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
 import { JsonGraph } from './JsonGraph.jsx'
 import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages } from './ToolLayout.jsx'
-import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile } from './toolUtils.js'
+import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, describeFixes } from './toolUtils.js'
+import { safeFix } from './safeFix.js'
 
 const SAMPLE = {
   store: 'City Electronics',
@@ -66,10 +67,21 @@ function JsonViewer() {
       setError('')
       setErrorLocation(null)
     } catch (err) {
-      const location = getErrorLocation(text, err)
-      setData(null)
-      setError(`Invalid JSON: ${err.message}`)
-      setErrorLocation(location)
+      // Try the same safe auto-repair as the other tools (missing commas, quotes, comments…).
+      try {
+        const report = {}
+        const value = JSON.parse(safeFix(text.trim(), report))
+        setData({ value })
+        setVersion((v) => v + 1)
+        setError('')
+        setErrorLocation(null)
+        setSuccess(`${describeFixes(report)} Your input was not changed; use the JSON Formatter or JSON Repair to copy the fixed JSON.`)
+      } catch {
+        const location = getErrorLocation(text, err)
+        setData(null)
+        setError(`Invalid JSON: ${err.message}`)
+        setErrorLocation(location)
+      }
     }
   }
 
@@ -242,9 +254,12 @@ function JsonViewer() {
 
         <h3>What if my JSON has an error?</h3>
         <p>
-          The viewer shows the error and highlights the broken line in red.
-          To repair common mistakes automatically, use our{' '}
-          <a href="/">JSON Formatter</a>, or read the{' '}
+          Common mistakes, like a missing comma, single quotes or comments,
+          are repaired automatically so you can still see the tree, and the
+          viewer lists every fix it made. If the JSON is too broken to repair
+          safely, it shows the error and highlights the line in red. To copy
+          the fixed JSON, use our <a href="/">JSON Formatter</a> or{' '}
+          <a href="/json-repair">JSON Repair</a>, or read the{' '}
           <a href="/common-json-errors">Common JSON Errors guide</a>.
         </p>
 
