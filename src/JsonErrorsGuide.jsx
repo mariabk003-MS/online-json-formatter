@@ -247,6 +247,25 @@ function JsonErrorsGuide() {
           <li>Use the <a href="/">JSON Formatter</a> to make the result easy to read.</li>
         </ol>
 
+        <h2>Python Error Messages</h2>
+        <p>
+          Python&apos;s <code>json</code> module words the same mistakes differently.
+          Here is what each <code>JSONDecodeError</code> usually means:
+        </p>
+        <ul>
+          <li><strong>Expecting property name enclosed in double quotes</strong>: a key has no quotes or single quotes, like <code>{'{name: 1}'}</code> or <code>{"{'a': 1}"}</code>. Older Python versions also show this for a trailing comma.</li>
+          <li><strong>Illegal trailing comma before end of object</strong>: a comma after the last item (Python 3.13 and newer).</li>
+          <li><strong>Expecting &apos;,&apos; delimiter</strong>: a comma is missing between two items.</li>
+          <li><strong>Expecting value: line 1 column 1 (char 0)</strong>: the text is empty, or it is not JSON at all, for example an HTML error page.</li>
+          <li><strong>Extra data</strong>: there is more than one JSON value, often a <a href="/json-lines">JSON Lines</a> file. Read it line by line instead.</li>
+        </ul>
+        <p>
+          For JavaScript messages like &quot;Unexpected token &lt; in JSON at position 0&quot;,
+          see the full guide to <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>.
+          To fix most of these mistakes in one click, paste your JSON into
+          <a href="/json-repair"> JSON Repair</a>.
+        </p>
+
         <h2>Frequently Asked Questions</h2>
 
         <h3>Why does the error point to the wrong line?</h3>

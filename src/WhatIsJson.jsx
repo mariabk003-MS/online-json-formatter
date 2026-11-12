@@ -12,7 +12,7 @@ function WhatIsJson() {
       </p>
 
       <section className="seo-content">
-        <p>Last updated: November 2, 2026</p>
+        <p>Last updated: November 12, 2026</p>
 
         <h2>What Is JSON?</h2>
         <p>
@@ -158,6 +158,16 @@ XML:   <person><name>Ali</name><age>30</age></person>`}</pre>
           <a href="/common-json-errors">Common JSON Errors guide</a> for
           examples and fixes.
         </p>
+
+        <h2>Where to Go Next</h2>
+        <ul>
+          <li>Learn every rule in <a href="/json-syntax-rules">JSON Syntax Rules</a>.</li>
+          <li>Use JSON in code: <a href="/javascript-json-parse">JSON.parse in JavaScript</a> or <a href="/json-in-python">JSON in Python</a>.</li>
+          <li>Make messy JSON readable: <a href="/pretty-print-json">How to Pretty Print JSON</a>.</li>
+          <li>Compare formats: <a href="/json-vs-yaml">JSON vs YAML</a> and <a href="/json-vs-xml">JSON vs XML</a>.</li>
+          <li>Got an error? Read <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>.</li>
+          <li>Practice with real data from the <a href="/datasets">free JSON datasets</a>.</li>
+        </ul>
 
         <h2>Frequently Asked Questions</h2>
 

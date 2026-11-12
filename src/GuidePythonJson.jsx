@@ -5,7 +5,7 @@ function GuidePythonJson() {
     <ArticlePage
       h1="How to Use JSON in Python (json.loads, json.dumps)"
       intro="A practical guide to reading, writing and pretty printing JSON in Python with the built-in json module, with copy-ready examples."
-      updated="November 8, 2026"
+      updated="November 12, 2026"
       faqKey="json-in-python"
       related={[
         ['/json-to-python', 'JSON to Python classes'],
@@ -120,6 +120,25 @@ print(json.dumps(event, default=str))
       <p>
         Want typed classes instead of dictionaries? Generate dataclasses or
         Pydantic models with our <a href="/json-to-python">JSON to Python</a> tool.
+      </p>
+
+      <h2>Save JSON as CSV</h2>
+      <p>
+        A list of dictionaries can be written to a CSV file with the built-in
+        <code> csv</code> module, no extra packages needed:
+      </p>
+      <Code label="Python">{`import csv, json
+
+with open("users.json", encoding="utf-8") as f:
+    rows = json.load(f)
+
+with open("users.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+    writer.writeheader()
+    writer.writerows(rows)`}</Code>
+      <p>
+        For nested JSON and pandas, see
+        <a href="/json-to-csv-python"> How to Convert JSON to CSV in Python</a>.
       </p>
     </ArticlePage>
   )

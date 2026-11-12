@@ -5,7 +5,7 @@ function GuideJsonComments() {
     <ArticlePage
       h1="Can JSON Have Comments? (And What to Do Instead)"
       intro="Standard JSON does not allow comments. Here is why, which file types quietly accept them, and the best ways to add notes to JSON."
-      updated="November 8, 2026"
+      updated="November 12, 2026"
       faqKey="json-comments"
       related={[
         ['/json-repair', 'JSON Repair (removes comments)'],
@@ -74,6 +74,14 @@ function GuideJsonComments() {
 
       <h3>4. Keep notes in the README</h3>
       <p>Document what each field means next to the file, in your project&apos;s README or docs.</p>
+
+      <h3>5. Use YAML for hand-edited config</h3>
+      <p>
+        If people edit the file by hand and need comments, YAML may be a better
+        fit: it supports <code># comments</code> and holds the same data. Convert
+        with <a href="/json-to-yaml">JSON to YAML</a>, and read
+        <a href="/json-vs-yaml"> JSON vs YAML</a> to decide.
+      </p>
     </ArticlePage>
   )
 }

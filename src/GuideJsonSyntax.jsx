@@ -5,7 +5,7 @@ function GuideJsonSyntax() {
     <ArticlePage
       h1="JSON Syntax Rules: Data Types and Format"
       intro="The complete JSON syntax on one page: the six data types, the rules for keys, strings and numbers, and the mistakes that make JSON invalid."
-      updated="November 8, 2026"
+      updated="November 12, 2026"
       faqKey="json-syntax-rules"
       related={[
         ['/json-validator', 'JSON Validator'],
@@ -84,6 +84,16 @@ function GuideJsonSyntax() {
         Spaces, tabs and line breaks between values are ignored, so the same JSON
         can be minified or pretty printed. JSON text should be encoded as UTF-8,
         and the official media type is <code>application/json</code>.
+      </p>
+
+      <h2>Check Your JSON Against These Rules</h2>
+      <p>
+        Paste your JSON into the <a href="/json-validator">JSON Validator</a> to find
+        the exact line and column of any rule that is broken. If a parser shows
+        a message like &quot;Unexpected token&quot;, the guide to
+        <a href="/unexpected-token-in-json"> Unexpected Token in JSON</a> explains
+        which rule it points to, and <a href="/json-repair">JSON Repair</a> fixes the
+        most common ones automatically.
       </p>
     </ArticlePage>
   )

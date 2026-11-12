@@ -12,7 +12,7 @@ function JsonVsXml() {
       </p>
 
       <section className="seo-content">
-        <p>Last updated: November 4, 2026</p>
+        <p>Last updated: November 12, 2026</p>
 
         <h2>Quick Answer</h2>
         <p>
@@ -132,6 +132,16 @@ function JsonVsXml() {
           <a href="/json-to-xml">JSON to XML Converter</a>. Before converting,
           check your JSON with the <a href="/json-validator">JSON Validator</a>{' '}
           or tidy it with the <a href="/">JSON Formatter</a>.
+        </p>
+
+        <h2>What About YAML?</h2>
+        <p>
+          YAML is a third option you will meet in config files such as Docker
+          Compose, Kubernetes and GitHub Actions. It holds the same data as JSON
+          but uses indentation instead of brackets and allows comments. Most
+          teams use JSON for APIs and data exchange, YAML for hand-edited config,
+          and XML where older systems or standards require it. Read the full
+          comparison in <a href="/json-vs-yaml">JSON vs YAML</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

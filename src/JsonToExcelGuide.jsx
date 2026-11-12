@@ -12,7 +12,7 @@ function JsonToExcelGuide() {
       </p>
 
       <section className="seo-content">
-        <p>Last updated: November 5, 2026</p>
+        <p>Last updated: November 12, 2026</p>
 
         <h2>Quick Answer</h2>
         <p>
@@ -147,6 +147,24 @@ Sara     Islamabad  2`}</pre>
         <p>
           To turn a spreadsheet back into JSON, save it as CSV and use our{' '}
           <a href="/csv-to-json">CSV to JSON Converter</a>.
+        </p>
+
+        <h2>Method 4: Use Python (for Many Files)</h2>
+        <p>
+          If you convert JSON files often, a few lines of Python with pandas do
+          it automatically. You need <code>pip install pandas openpyxl</code>.
+        </p>
+        <pre className="result-output">{`import json
+import pandas as pd
+
+with open("data.json", encoding="utf-8") as f:
+    df = pd.json_normalize(json.load(f))
+
+df.to_excel("data.xlsx", index=False)`}</pre>
+        <p>
+          <code>json_normalize</code> turns nested objects into columns like
+          <code> contact.email</code>. For CSV instead of Excel and more examples,
+          see <a href="/json-to-csv-python">How to Convert JSON to CSV in Python</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

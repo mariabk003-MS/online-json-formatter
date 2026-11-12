@@ -5,7 +5,7 @@ function GuideJsonLines() {
     <ArticlePage
       h1="JSON Lines (JSONL) and NDJSON Explained"
       intro="What JSON Lines is, why it is used for logs and big data, and how to read and write .jsonl files in Python and JavaScript."
-      updated="November 8, 2026"
+      updated="November 12, 2026"
       faqKey="json-lines"
       related={[
         ['/', 'JSON Formatter'],
@@ -77,6 +77,17 @@ const users = text
         Parse every line and collect the results in a list, as shown above, then
         save the list with <code>json.dump</code> or <code>JSON.stringify</code>.
         To check a single line, paste it into our <a href="/json-validator">JSON Validator</a>.
+      </p>
+
+      <h2>Convert JSON Lines to CSV</h2>
+      <Code label="Python (pandas)">{`import pandas as pd
+
+df = pd.read_json("events.jsonl", lines=True)
+df.to_csv("events.csv", index=False)`}</Code>
+      <p>
+        <code>lines=True</code> tells pandas to read one JSON object per line.
+        Without it, pandas reports &quot;Trailing data&quot;. More examples are in
+        <a href="/json-to-csv-python"> How to Convert JSON to CSV in Python</a>.
       </p>
     </ArticlePage>
   )

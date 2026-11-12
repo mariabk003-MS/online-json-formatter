@@ -12,7 +12,7 @@ function HowToOpenJson() {
       </p>
 
       <section className="seo-content">
-        <p>Last updated: November 2, 2026</p>
+        <p>Last updated: November 12, 2026</p>
 
         <h2>What Is a JSON File?</h2>
         <p>
@@ -109,6 +109,16 @@ function HowToOpenJson() {
           by hand. Paste it into our <a href="/json-validator">JSON Validator</a>{' '}
           to find the exact line of the problem, and see our{' '}
           <a href="/common-json-errors">Common JSON Errors guide</a> for fixes.
+        </p>
+
+        <h2>Quick Tip: Make It Readable in One Step</h2>
+        <p>
+          If the file opens as one long line, it is just minified. In VS Code,
+          press <strong>Shift + Alt + F</strong> (Windows) or
+          <strong> Shift + Option + F</strong> (Mac) to format it. Online, paste it
+          into the <a href="/">JSON Formatter</a>, or open big files as a tree in the
+          <a href="/json-viewer"> JSON Viewer</a>. For Python, JavaScript and the
+          command line, see <a href="/pretty-print-json">How to Pretty Print JSON</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

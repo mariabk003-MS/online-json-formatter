@@ -5,7 +5,7 @@ function GuideJsParse() {
     <ArticlePage
       h1="JSON.parse() and JSON.stringify() in JavaScript"
       intro="Everything you need to read and write JSON in JavaScript: parsing safely, pretty printing, dates, revivers and the most common errors."
-      updated="November 8, 2026"
+      updated="November 12, 2026"
       faqKey="javascript-json-parse"
       related={[
         ['/', 'JSON Formatter'],
@@ -88,6 +88,18 @@ JSON.stringify(user, (k, v) => (k === 'password' ? undefined : v))   // hide one
         Paste broken JSON into the <a href="/">JSON Formatter</a> to see the exact
         line of the error and fix common mistakes automatically, or read the full
         guide to <a href="/unexpected-token-in-json">Unexpected token in JSON</a>.
+      </p>
+
+      <h2>Reading and Writing JSON Files in Node.js</h2>
+      <Code label="Node.js">{`import { readFile, writeFile } from 'node:fs/promises'
+
+const config = JSON.parse(await readFile('config.json', 'utf8'))
+config.debug = true
+await writeFile('config.json', JSON.stringify(config, null, 2) + '\\n')`}</Code>
+      <p>
+        The <code>&apos;utf8&apos;</code> argument returns text instead of a buffer, and
+        the extra newline at the end keeps editors and Git happy. More options
+        for indentation are in <a href="/pretty-print-json">How to Pretty Print JSON</a>.
       </p>
     </ArticlePage>
   )
