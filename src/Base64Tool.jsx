@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 // Text → UTF-8 bytes → Base64 (works with emoji and every language).
 function encodeBase64(text, urlSafe) {
@@ -119,6 +120,54 @@ function Base64Tool() {
           <li>Formats the result automatically when the decoded text is JSON.</li>
           <li>Runs in your browser. Nothing is uploaded.</li>
         </ul>
+
+        <h2>Examples</h2>
+        <Code label="Text → Base64">{`Hello, World!   →   SGVsbG8sIFdvcmxkIQ==
+Café ☕          →   Q2Fmw6kg4piV
+user:pass123    →   dXNlcjpwYXNzMTIz`}</Code>
+        <p>
+          The last one is what a browser sends in a Basic Auth header:
+          <code> Authorization: Basic dXNlcjpwYXNzMTIz</code>. Anyone can decode
+          it, which is why Basic Auth must only be used over HTTPS.
+        </p>
+
+        <h2>Base64 Is Not Encryption</h2>
+        <p>
+          Base64 only changes how data looks; it does not hide it. Anyone can
+          decode it in one click, so never use Base64 to protect passwords, API
+          keys or personal data. To keep data secret, use real encryption, and
+          to store passwords, use a password hashing function such as bcrypt
+          or Argon2.
+        </p>
+
+        <h2>Standard vs URL-safe Base64</h2>
+        <p>
+          Standard Base64 uses <code>+</code> and <code>/</code>, which have a
+          special meaning in URLs. URL-safe Base64 replaces them with
+          <code> -</code> and <code>_</code> and usually drops the <code>=</code> padding.
+          For example, the text <code>??&gt;&gt;</code> becomes <code>Pz8+Pg==</code> in
+          standard Base64 and <code>Pz8-Pg</code> in URL-safe Base64. JWT tokens use
+          URL-safe Base64; you can read one with the <a href="/jwt-decoder">JWT Decoder</a>.
+        </p>
+
+        <h2>Why Is Base64 Bigger?</h2>
+        <p>
+          Base64 turns every 3 bytes into 4 characters, so encoded data is about
+          33% larger than the original. That is fine for small values, but
+          avoid embedding large images or files as Base64 in JSON or HTML when
+          a normal file link would work.
+        </p>
+
+        <h2>Base64 in Code</h2>
+        <Code label="JavaScript (UTF-8 safe)">{`const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(text)))
+const decoded = new TextDecoder().decode(Uint8Array.from(atob(encoded), (c) => c.charCodeAt(0)))`}</Code>
+        <Code label="Python">{`import base64
+encoded = base64.b64encode(text.encode("utf-8")).decode("ascii")
+decoded = base64.b64decode(encoded).decode("utf-8")`}</Code>
+        <p>
+          Plain <code>btoa(text)</code> fails with an error on emoji and letters
+          like é, which is why the example above encodes to UTF-8 first.
+        </p>
 
         <FaqSection faqs={FAQS['base64-encode-decode']} />
 

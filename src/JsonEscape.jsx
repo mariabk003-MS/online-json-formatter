@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 // Turns any text into an escaped JSON string ("..." with \" \n \\ ...).
 function escapeText(text, keepQuotes) {
@@ -132,6 +133,37 @@ function JsonEscape() {
           <li>Unescapes strings with or without the outer quotes.</li>
           <li>Formats the result automatically when the unescaped text is JSON.</li>
           <li>Runs in your browser. Nothing is uploaded.</li>
+        </ul>
+
+        <h2>When You Need Escaped JSON</h2>
+        <ul>
+          <li><strong>JSON inside JSON:</strong> some APIs and message queues expect a field whose value is a JSON string, for example a <code>payload</code> or <code>metadata</code> field.</li>
+          <li><strong>Code:</strong> putting a JSON example inside a JavaScript, Java or C# string.</li>
+          <li><strong>Environment variables and CLI arguments:</strong> passing a JSON config on one line.</li>
+          <li><strong>Databases and logs:</strong> some systems store JSON as escaped text in a single column or log line.</li>
+        </ul>
+
+        <h2>Escape and Unescape in Code</h2>
+        <Code label="JavaScript">{String.raw`const obj = { user: 'Emily', note: 'Line 1\nLine 2' }
+
+const escaped = JSON.stringify(JSON.stringify(obj))
+// "{\"user\":\"Emily\",\"note\":\"Line 1\\nLine 2\"}"
+
+const back = JSON.parse(JSON.parse(escaped))   // the original object`}</Code>
+        <Code label="Python">{String.raw`import json
+escaped = json.dumps(json.dumps(obj))
+back = json.loads(json.loads(escaped))`}</Code>
+        <p>
+          Calling <code>JSON.stringify</code> twice is the trick: the first call
+          turns the object into JSON text, the second turns that text into a
+          string with every quote and backslash escaped.
+        </p>
+
+        <h2>Common Mistakes</h2>
+        <ul>
+          <li><strong>Double escaping:</strong> if you see <code>\\\&quot;</code> in your data, the JSON was escaped twice. Unescape it once more.</li>
+          <li><strong>Escaping by hand:</strong> replacing quotes yourself easily misses backslashes, tabs or line breaks. Let a tool or <code>JSON.stringify</code> do it.</li>
+          <li><strong>Using it for HTML or URLs:</strong> JSON escaping does not make text safe for HTML pages or links. For links, use <a href="/url-encode-decode">URL Encode</a>.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-escape']} />

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 const escapeText = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const escapeAttr = (text) => escapeText(text).replace(/"/g, '&quot;')
@@ -124,6 +125,37 @@ function XmlFormatter() {
           <li>Minify option to remove all extra spaces.</li>
           <li>Runs in your browser. Your XML is never uploaded.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="Before">{`<order id="7"><customer>Emily Clark</customer><items><item sku="A1">Notebook</item><item sku="B2"/></items></order>`}</Code>
+        <Code label="After (2 spaces)">{`<order id="7">
+  <customer>Emily Clark</customer>
+  <items>
+    <item sku="A1">Notebook</item>
+    <item sku="B2"/>
+  </items>
+</order>`}</Code>
+
+        <h2>What Makes XML Well-Formed?</h2>
+        <p>If the formatter shows an error, check these rules:</p>
+        <ul>
+          <li><strong>One root element</strong> must wrap everything, like <code>&lt;order&gt;…&lt;/order&gt;</code>.</li>
+          <li><strong>Every tag must be closed</strong>: <code>&lt;item&gt;…&lt;/item&gt;</code> or self-closing <code>&lt;item/&gt;</code>.</li>
+          <li><strong>Tags must be nested correctly</strong>: <code>&lt;b&gt;&lt;i&gt;…&lt;/i&gt;&lt;/b&gt;</code>, not <code>&lt;b&gt;&lt;i&gt;…&lt;/b&gt;&lt;/i&gt;</code>.</li>
+          <li><strong>Names are case-sensitive</strong>: <code>&lt;Item&gt;</code> cannot be closed with <code>&lt;/item&gt;</code>.</li>
+          <li><strong>Attribute values need quotes</strong>: <code>id=&quot;7&quot;</code>, not <code>id=7</code>.</li>
+          <li><strong>Special characters must be escaped</strong>: write <code>&amp;amp;</code> for &amp; and <code>&amp;lt;</code> for &lt; in text, or wrap the text in <code>&lt;![CDATA[ … ]]&gt;</code>.</li>
+        </ul>
+
+        <h2>Where You See XML Today</h2>
+        <p>
+          XML is still everywhere: RSS feeds, sitemaps, SOAP APIs, Office files
+          (.docx and .xlsx are zipped XML), Android layouts, Maven pom.xml files
+          and many bank and government data exchanges. If you need the data in a
+          web app, convert it with <a href="/xml-to-json">XML to JSON</a>, or go the
+          other way with <a href="/json-to-xml">JSON to XML</a>. Not sure which format
+          to use? Read <a href="/json-vs-xml">JSON vs XML</a>.
+        </p>
 
         <FaqSection faqs={FAQS['xml-formatter']} />
 
