@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 
 const DIALECTS = {
@@ -148,6 +149,42 @@ function JsonToSql() {
           <li>Quotes are escaped and missing values become NULL.</li>
           <li>One multi-row INSERT, or one INSERT per row.</li>
           <li>Runs in your browser. Your data is never uploaded.</li>
+        </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`[
+  { "id": 1, "name": "Emily O'Neil", "balance": 2500.75, "active": true },
+  { "id": 2, "name": "James Smith", "balance": 12, "active": false, "city": "Leeds" }
+]`}</Code>
+        <Code label="SQL (PostgreSQL)">{`CREATE TABLE "users" (
+  "id" BIGINT,
+  "name" VARCHAR(100),
+  "balance" DOUBLE PRECISION,
+  "active" BOOLEAN,
+  "city" VARCHAR(100)
+);
+
+INSERT INTO "users" ("id", "name", "balance", "active", "city") VALUES
+  (1, 'Emily O''Neil', 2500.75, TRUE, NULL),
+  (2, 'James Smith', 12, FALSE, 'Leeds');`}</Code>
+        <p>
+          Every key found in any row becomes a column, so the first row gets
+          <code> NULL</code> for the missing <code>city</code>. The apostrophe in
+          O&apos;Neil is doubled, which is how SQL escapes quotes safely.
+        </p>
+
+        <h2>Dialect Differences</h2>
+        <ul>
+          <li><strong>MySQL</strong> quotes names with backticks: <code>`users`</code>.</li>
+          <li><strong>PostgreSQL</strong> and <strong>SQLite</strong> use double quotes: <code>&quot;users&quot;</code>. SQLite stores true/false as 1 and 0.</li>
+          <li><strong>SQL Server</strong> uses brackets: <code>[users]</code>, and <code>BIT</code> for booleans.</li>
+        </ul>
+
+        <h2>Before You Run It</h2>
+        <ul>
+          <li>Review the column types and add a <code>PRIMARY KEY</code> (usually on <code>id</code>).</li>
+          <li>Increase <code>VARCHAR</code> lengths if your real data has longer text than the sample.</li>
+          <li>For very large files, split the inserts into batches of a few thousand rows.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-to-sql']} />

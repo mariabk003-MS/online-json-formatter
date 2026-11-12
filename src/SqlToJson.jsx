@@ -1,6 +1,7 @@
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 const unquote = (name) => name.trim().replace(/^[`"[]|[`"\]]$/g, '')
 
@@ -158,6 +159,34 @@ function SqlToJson() {
           <li>Several tables in one file become one JSON object with a list per table.</li>
           <li>Runs in your browser. Your data is never uploaded.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="SQL">{`INSERT INTO users (id, name, active, manager) VALUES
+  (1, 'Emily O''Neil', TRUE, NULL),
+  (2, 'James Smith', FALSE, 1);`}</Code>
+        <Code label="JSON">{`[
+  { "id": 1, "name": "Emily O'Neil", "active": true, "manager": null },
+  { "id": 2, "name": "James Smith", "active": false, "manager": 1 }
+]`}</Code>
+        <p>
+          The doubled quote in <code>O&apos;&apos;Neil</code> (how SQL writes an
+          apostrophe) becomes a normal <code>&apos;</code>, <code>NULL</code> becomes
+          <code> null</code>, and <code>TRUE</code>/<code>FALSE</code> become JSON booleans.
+        </p>
+
+        <h2>When This Is Useful</h2>
+        <ul>
+          <li><strong>Database dumps:</strong> turn a mysqldump or pg_dump INSERT section into JSON test data or seed files.</li>
+          <li><strong>Moving data to a NoSQL database</strong> such as MongoDB or Firestore, which import JSON.</li>
+          <li><strong>Mock APIs:</strong> use real rows as sample responses in front-end development.</li>
+        </ul>
+        <p>
+          This tool reads <code>INSERT</code> statements; it does not run SQL or
+          read <code>SELECT</code> queries. To export query results as JSON, most
+          databases can do it directly, for example <code>json_agg</code> in
+          PostgreSQL or <code>JSON_ARRAYAGG</code> in MySQL. Going the other way?
+          Use <a href="/json-to-sql">JSON to SQL</a>.
+        </p>
 
         <FaqSection faqs={FAQS['sql-to-json']} />
 

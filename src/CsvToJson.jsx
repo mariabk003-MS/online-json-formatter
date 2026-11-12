@@ -4,6 +4,7 @@ import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
+import { Code } from './ArticlePage.jsx'
 import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages } from './ToolLayout.jsx'
 import { describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 
@@ -421,6 +422,45 @@ function CsvToJson() {
           <li>Turns columns like contact.email into nested JSON objects.</li>
           <li>Runs in your browser, so your data is not uploaded to a server.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="CSV">{`id,name,city,contact.email,active
+1,Emily Clark,"Lahore, Pakistan",emily@example.com,true
+2,James Smith,London,,false`}</Code>
+        <Code label="JSON">{`[
+  {
+    "id": 1,
+    "name": "Emily Clark",
+    "city": "Lahore, Pakistan",
+    "contact": { "email": "emily@example.com" },
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "James Smith",
+    "city": "London",
+    "contact": { "email": "" },
+    "active": false
+  }
+]`}</Code>
+        <p>
+          The first row becomes the keys, the quoted city keeps its comma,
+          <code> contact.email</code> becomes a nested object, and <code>1</code> and
+          <code> true</code> become a real number and boolean. An empty cell becomes
+          an empty string.
+        </p>
+
+        <h2>Tips for Clean Results</h2>
+        <ul>
+          <li><strong>Exporting from Excel:</strong> use File → Save As → CSV UTF-8, so letters like é and ü are kept.</li>
+          <li><strong>Semicolons instead of commas?</strong> European Excel often uses semicolons. The separator is detected automatically, or you can pick it yourself.</li>
+          <li><strong>Codes and phone numbers:</strong> values with a leading zero, like <code>00123</code>, always stay text. Turn off type conversion if other number-like codes, such as IDs or phone numbers, must stay text too.</li>
+          <li><strong>Use clear headers:</strong> they become your JSON keys, so <code>first_name</code> works better than <code>First Name (required)</code>.</li>
+        </ul>
+        <p>
+          Need it the other way? Use <a href="/json-to-csv">JSON to CSV</a> or create a
+          real spreadsheet with <a href="/json-to-excel">JSON to Excel</a>.
+        </p>
 
         <h2>Frequently Asked Questions</h2>
 

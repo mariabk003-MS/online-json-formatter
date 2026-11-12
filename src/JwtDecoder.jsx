@@ -1,6 +1,7 @@
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 // Base64url → text (JWT parts use URL-safe Base64 without padding).
 function decodePart(part, name) {
@@ -105,6 +106,53 @@ function JwtDecoder() {
           <strong>Important:</strong> decoding is not the same as verifying. This
           tool does not check the signature, so never trust a token just because
           it decodes. Never share real tokens from production systems.
+        </p>
+
+        <h2>The Three Parts of a JWT</h2>
+        <p>
+          A JWT is three Base64URL-encoded parts joined by dots:
+          <code> header.payload.signature</code>.
+        </p>
+        <Code label="Header">{`{ "alg": "HS256", "typ": "JWT" }`}</Code>
+        <Code label="Payload">{`{
+  "sub": "1024",
+  "name": "Emily Clark",
+  "email": "emily.clark@example.com",
+  "role": "admin",
+  "iat": 1762560000,
+  "exp": 1920326400
+}`}</Code>
+        <p>
+          The <strong>header</strong> says how the token was signed. The
+          <strong> payload</strong> holds the claims: facts about the user and the
+          token. The <strong>signature</strong> proves that the server created the
+          token and that nobody changed it. Only the server, with its secret or
+          private key, can check it.
+        </p>
+
+        <h2>Common Claims</h2>
+        <ul>
+          <li><code>sub</code>: subject, usually the user ID.</li>
+          <li><code>iat</code>: issued at, as a Unix timestamp in seconds. <code>1762560000</code> is 2025-11-08T00:00:00Z.</li>
+          <li><code>exp</code>: expiry time. After this the token must be rejected.</li>
+          <li><code>nbf</code>: not before; the token is not valid until this time.</li>
+          <li><code>iss</code> and <code>aud</code>: who issued the token and who it is meant for.</li>
+        </ul>
+        <p>
+          This decoder turns these timestamps into readable dates and tells you
+          whether the token has expired.
+        </p>
+
+        <h2>JWT Security Tips</h2>
+        <ul>
+          <li><strong>The payload is not secret.</strong> Anyone with the token can read it, so never put passwords or sensitive personal data in it.</li>
+          <li><strong>Always verify the signature on the server</strong> with a trusted library, and check <code>exp</code>, <code>iss</code> and <code>aud</code>.</li>
+          <li><strong>Reject tokens with <code>&quot;alg&quot;: &quot;none&quot;</code></strong> and only accept the algorithm you expect.</li>
+          <li>Keep access tokens short-lived (minutes, not months) and use refresh tokens for longer sessions.</li>
+        </ul>
+        <p>
+          JWT parts use URL-safe Base64. To decode other Base64 text, use the
+          <a href="/base64-encode-decode"> Base64 Decoder</a>.
         </p>
 
         <FaqSection faqs={FAQS['jwt-decoder']} />

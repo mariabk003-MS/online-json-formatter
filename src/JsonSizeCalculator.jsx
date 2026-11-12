@@ -129,6 +129,29 @@ function JsonSizeCalculator() {
         </ul>
         <p>Use the <a href="/json-minifier">JSON Minifier</a> to make your JSON smaller.</p>
 
+        <h2>Why Characters and Bytes Differ</h2>
+        <p>
+          Sizes are measured in bytes of UTF-8 text, the same way files and
+          network requests are counted. English letters and digits take 1 byte
+          each, but many other characters take more: <code>é</code> takes 2 bytes,
+          most Chinese, Arabic and Urdu letters take 2–3 bytes, and an emoji like
+          😀 takes 4 bytes. That is why a short message can be bigger than it looks.
+        </p>
+
+        <h2>Ways to Make JSON Smaller</h2>
+        <ul>
+          <li><strong>Minify</strong> it: removing spaces and line breaks often saves 20–40% on formatted JSON.</li>
+          <li><strong>Compress</strong> it: servers can send JSON with gzip or Brotli, which usually shrinks it by 70–90% because JSON repeats the same keys.</li>
+          <li><strong>Remove unused fields</strong> from API responses, or let clients choose the fields they need.</li>
+          <li><strong>Shorten repeated data:</strong> send IDs instead of full nested objects when the client already has them.</li>
+          <li><strong>Paginate</strong> long lists instead of sending everything at once.</li>
+        </ul>
+        <p>
+          To find which part of your data is the biggest, open it in the
+          <a href="/json-viewer"> JSON Viewer</a>: the item counts on each branch show
+          where the bulk is.
+        </p>
+
         <FaqSection faqs={FAQS['json-size-calculator']} />
 
         <RelatedTools

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 // "42" → 42, "true" → true; other text stays text (also "007").
 function convertValue(text, convertTypes) {
@@ -139,6 +140,39 @@ function XmlToJson() {
           <li>Numbers and true/false become real JSON numbers and booleans (you can turn this off).</li>
           <li>Text next to child elements is kept under &quot;#text&quot;.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="XML">{`<product id="7" currency="GBP">
+  <name>Notebook</name>
+  <price>4.50</price>
+  <tag>paper</tag>
+  <tag>office</tag>
+</product>`}</Code>
+        <Code label="JSON">{`{
+  "product": {
+    "@id": 7,
+    "@currency": "GBP",
+    "name": "Notebook",
+    "price": 4.5,
+    "tag": ["paper", "office"]
+  }
+}`}</Code>
+        <p>
+          The attributes become <code>@id</code> and <code>@currency</code>, the two
+          <code> &lt;tag&gt;</code> elements become an array, and <code>4.50</code> becomes
+          the number 4.5.
+        </p>
+
+        <h2>Things to Watch Out For</h2>
+        <ul>
+          <li><strong>One item or many:</strong> an element that appears once becomes a single value, but twice becomes an array. If your code always expects an array, handle both cases.</li>
+          <li><strong>Codes that look like numbers:</strong> values such as ZIP codes or IDs with leading zeros (<code>00123</code>) stay text, but other numbers are converted. Turn off type conversion to keep every value as text.</li>
+          <li><strong>Namespaces:</strong> prefixed tags like <code>soap:Body</code> keep their prefix in the key name.</li>
+        </ul>
+        <p>
+          Check messy XML first with the <a href="/xml-formatter">XML Formatter</a>, and
+          convert back with <a href="/json-to-xml">JSON to XML</a>.
+        </p>
 
         <FaqSection faqs={FAQS['xml-to-json']} />
 

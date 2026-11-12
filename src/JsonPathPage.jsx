@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 import { queryJsonPath } from './jsonPath.js'
 
@@ -115,6 +116,36 @@ function JsonPathPage() {
               <code>{example}</code>: {label}
             </li>
           ))}
+        </ul>
+
+        <h2>JSONPath Syntax Cheat Sheet</h2>
+        <ul>
+          <li><code>$</code>: the root of the document.</li>
+          <li><code>.key</code> or <code>[&apos;key&apos;]</code>: a child by name. Use the bracket form for keys with spaces or dashes.</li>
+          <li><code>[0]</code>: an array item by position (0 is the first); <code>[-1]</code> is the last.</li>
+          <li><code>[*]</code>: every item or every child.</li>
+          <li><code>..</code>: search at any depth, for example <code>$..price</code>.</li>
+          <li><code>[0:2]</code>: a slice, the first two items.</li>
+          <li><code>[?(@.price &lt; 10)]</code>: a filter; <code>@</code> is the current item.</li>
+        </ul>
+
+        <h2>Worked Example</h2>
+        <Code label="JSON">{`{ "store": { "books": [
+  { "title": "Learn JSON", "price": 12.99, "author": "Emily Clark" },
+  { "title": "XML Basics", "price": 9.5, "author": "James Smith" },
+  { "title": "APIs", "price": 15, "author": "Emily Clark" }
+] } }`}</Code>
+        <Code label="Queries and results">{`$.store.books[0].title                 →  "Learn JSON"
+$.store.books[*].title                 →  "Learn JSON", "XML Basics", "APIs"
+$..author                              →  "Emily Clark", "James Smith", "Emily Clark"
+$.store.books[?(@.price < 13)].title   →  "Learn JSON", "XML Basics"`}</Code>
+
+        <h2>Where JSONPath Is Used</h2>
+        <ul>
+          <li><strong>API testing</strong> in Postman, REST Assured and Karate to check values in responses.</li>
+          <li><strong>Kubernetes:</strong> <code>kubectl get pods -o jsonpath=&apos;&#123;.items[*].metadata.name&#125;&apos;</code>.</li>
+          <li><strong>Data pipelines and no-code tools</strong> that pick fields out of webhook payloads.</li>
+          <li><strong>Databases:</strong> PostgreSQL, MySQL and SQL Server have JSON path functions to query JSON columns.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-path']} />

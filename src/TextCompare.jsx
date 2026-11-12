@@ -283,6 +283,35 @@ function TextCompare() {
           <li>Runs in your browser. Your text is never uploaded.</li>
         </ul>
 
+        <h2>How to Read the Result</h2>
+        <p>
+          Lines that exist only in the original text are marked as removed,
+          lines that exist only in the changed text are marked as added, and
+          lines that are the same in both stay plain. A changed line shows up as
+          a pair: the new version marked as added and the old version marked as
+          removed, right next to each other, so the difference is easy to spot.
+        </p>
+
+        <h2>When to Ignore Case or Spaces</h2>
+        <ul>
+          <li><strong>Ignore extra spaces</strong> when comparing code or text that was re-indented, so only real changes are shown.</li>
+          <li><strong>Ignore case</strong> when comparing lists of names, emails or keywords where <code>Apple</code> and <code>apple</code> mean the same thing.</li>
+          <li>Leave both off when every character matters, for example passwords in a config file or exact legal text.</li>
+        </ul>
+
+        <h2>Common Uses</h2>
+        <ul>
+          <li>Find what changed between two versions of an article, contract or email.</li>
+          <li>Compare two log files to spot a new error.</li>
+          <li>Check a config file on your computer against the one on a server.</li>
+          <li>Review code changes when you are not using Git.</li>
+        </ul>
+        <p>
+          Comparing JSON? Use <a href="/json-compare">JSON Compare</a> instead: it
+          ignores formatting and key order and shows the exact path of each
+          change, which a line-by-line diff cannot do.
+        </p>
+
         <FaqSection faqs={FAQS['text-compare']} />
 
         <RelatedTools
