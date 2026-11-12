@@ -1105,6 +1105,45 @@ body.dark .site-footer-grid a {
   color: #94a3b8;
 }
 
+/* ---------- Simple link footer (older pages) ---------- */
+.site-footer:not(.site-footer-grid) {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid #e4eaf3;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 2.1;
+  text-align: center;
+}
+
+.site-footer:not(.site-footer-grid) a,
+.site-footer:not(.site-footer-grid) a:visited {
+  margin: 0 4px;
+  color: #475569;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-footer:not(.site-footer-grid) a:hover {
+  color: #2458d3;
+  text-decoration: underline;
+}
+
+body.dark .site-footer:not(.site-footer-grid) {
+  border-color: #1f2a3d;
+  color: #94a3b8;
+}
+
+body.dark .site-footer:not(.site-footer-grid) a,
+body.dark .site-footer:not(.site-footer-grid) a:visited {
+  color: #cbd5e1;
+}
+
+body.dark .site-footer:not(.site-footer-grid) a:hover {
+  color: #93b4ff;
+}
+
 /* ---------- Load from URL box (Formatter) ---------- */
 .url-box {
   display: flex;
