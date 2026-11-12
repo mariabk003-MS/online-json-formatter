@@ -176,6 +176,18 @@ export const FAQS = {
     ["How do I convert nested JSON to CSV?", "Use pandas.json_normalize, which flattens nested objects into columns like address.city."],
     ["Why does my CSV have blank lines in Excel?", "Open the output file with newline='' when using the csv module. To show accented letters correctly in Excel, save with encoding='utf-8-sig'."],
   ],
+  'what-is-json-schema': [
+    ["What is JSON Schema used for?", "JSON Schema describes the structure of valid JSON: required fields, value types and allowed values. It is used to validate API requests, document APIs in OpenAPI, check config files in editors and build forms."],
+    ["Is JSON Schema the same as JSON?", "A JSON Schema is written in JSON, but it is a set of rules for other JSON documents. The data is the JSON; the schema describes what that data must look like."],
+    ["Which JSON Schema version should I use?", "Use draft 2020-12 for new projects. Draft-07 is older but still widely supported. The $schema keyword at the top says which version a schema uses."],
+    ["How do I create a JSON Schema quickly?", "Paste a sample of your JSON into our free JSON Schema Generator, then add extra rules like minLength, format or enum, and test it with the JSON Schema Validator."],
+  ],
+  'json-vs-csv': [
+    ["What is the main difference between JSON and CSV?", "CSV is a flat table where every value is text. JSON is a tree that supports nested objects, arrays and real types such as numbers, booleans and null."],
+    ["Is CSV smaller than JSON?", "Usually yes, for flat data, because CSV writes the column names only once while JSON repeats every key in every record. After gzip compression the difference becomes much smaller."],
+    ["Can CSV store nested data?", "Not directly. Nested objects must be flattened into columns like address.city, stored as text in one cell, or moved to a separate file."],
+    ["Should I use JSON or CSV for an API?", "JSON. It keeps data types, supports nested data and is the standard format for web APIs. CSV is better for spreadsheet exports."],
+  ],
   'json-lines': [
     ["What is the difference between JSON Lines and NDJSON?", "They are almost the same: one JSON value per line, separated by newline characters. JSON Lines uses the .jsonl extension, NDJSON often uses .ndjson."],
     ["Why use JSON Lines instead of a JSON array?", "Each line can be read, written and processed on its own. That makes JSON Lines great for logs, big data exports and streaming, because you never need the whole file in memory."],

@@ -48,6 +48,8 @@ export const PAGES = {
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),
+  '/what-is-json-schema': () => import('./GuideJsonSchema.jsx'),
+  '/json-vs-csv': () => import('./GuideJsonVsCsv.jsx'),
   '/json-comments': () => import('./GuideJsonComments.jsx'),
   '/json-syntax-rules': () => import('./GuideJsonSyntax.jsx'),
   '/http-status-codes-json': () => import('./DatasetPages.jsx').then((m) => ({ default: m.HttpStatusCodesPage })),

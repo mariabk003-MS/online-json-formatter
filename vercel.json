@@ -183,6 +183,14 @@
       "destination": "/json-to-csv-python.html"
     },
     {
+      "source": "/what-is-json-schema",
+      "destination": "/what-is-json-schema.html"
+    },
+    {
+      "source": "/json-vs-csv",
+      "destination": "/json-vs-csv.html"
+    },
+    {
       "source": "/json-comments",
       "destination": "/json-comments.html"
     },

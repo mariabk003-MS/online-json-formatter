@@ -133,6 +133,7 @@ function JsonSchemaGenerator() {
             ['/json-to-typescript', 'JSON to TypeScript'],
             ['/json-validator', 'JSON Validator'],
             ['/', 'JSON Formatter'],
+            ['/what-is-json-schema', 'What Is JSON Schema?'],
           ]}
         />
       </section>

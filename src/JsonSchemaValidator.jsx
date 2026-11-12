@@ -293,6 +293,7 @@ function JsonSchemaValidator() {
             ['/json-validator', 'JSON Validator'],
             ['/json-to-typescript', 'JSON to TypeScript'],
             ['/', 'JSON Formatter'],
+            ['/what-is-json-schema', 'What Is JSON Schema?'],
           ]}
         />
       </section>
