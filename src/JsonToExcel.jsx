@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 import { makeXlsx } from './xlsx.js'
 
@@ -111,6 +112,35 @@ function JsonToExcel() {
           <li>Nested objects become columns like contact.email.</li>
           <li>Finds the list automatically, even if it is inside an object like {'{"users": [...]}'}.</li>
           <li>Runs in your browser. Your data is never uploaded.</li>
+        </ul>
+
+        <h2>How Your JSON Becomes a Sheet</h2>
+        <Code label="JSON">{`[
+  { "id": 1, "name": "Emily Clark", "contact": { "email": "emily@example.com" }, "orders": 12 },
+  { "id": 2, "name": "James Smith", "contact": { "email": "james@example.com" }, "orders": 3 }
+]`}</Code>
+        <Code label="Excel sheet">{`id | name        | contact.email     | orders
+1  | Emily Clark | emily@example.com | 12
+2  | James Smith | james@example.com | 3`}</Code>
+        <p>
+          Each object is one row, each key is one column, and the nested
+          <code> contact</code> object becomes the <code>contact.email</code> column.
+          The <code>orders</code> column holds real numbers, so Excel formulas like
+          <code> =SUM(D2:D3)</code> work straight away.
+        </p>
+
+        <h2>Excel or CSV?</h2>
+        <ul>
+          <li><strong>Choose Excel (.xlsx)</strong> when people will open the file: numbers stay numbers, the header is bold and frozen, and letters like é and ü always show correctly.</li>
+          <li><strong>Choose CSV</strong> when another program or database will import the file, or when you need a plain text format. Use <a href="/json-to-csv">JSON to CSV</a>.</li>
+        </ul>
+
+        <h2>Tips</h2>
+        <ul>
+          <li>Excel holds up to 1,048,576 rows and 16,384 columns per sheet. For bigger data, split the file or use a database.</li>
+          <li>Arrays inside a record, like a list of tags, are kept as JSON text in one cell.</li>
+          <li>To open the file in Google Sheets, go to File → Import and upload the .xlsx file.</li>
+          <li>Doing this in code? See <a href="/json-to-csv-python">JSON to CSV in Python</a> or the <a href="/convert-json-to-excel">JSON to Excel guide</a>.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-to-excel']} />

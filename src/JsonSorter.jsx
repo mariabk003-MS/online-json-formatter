@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 
 const compareText = (a, b) => a.localeCompare(b, 'en', { sensitivity: 'base', numeric: true })
@@ -114,6 +115,40 @@ function JsonSorter() {
           <li>Fixes small JSON mistakes automatically before sorting.</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="Before">{`{ "zip": "SW1A", "item10": 1, "Name": "Emily", "item2": 2, "age": 30 }`}</Code>
+        <Code label="After (A to Z)">{`{
+  "age": 30,
+  "item2": 2,
+  "item10": 1,
+  "Name": "Emily",
+  "zip": "SW1A"
+}`}</Code>
+        <p>
+          Sorting ignores upper and lower case, so <code>Name</code> sits between
+          <code> item10</code> and <code>zip</code>, and numbers inside keys are
+          compared as numbers, so <code>item2</code> comes before <code>item10</code>.
+        </p>
+
+        <h2>Why Sort JSON Keys?</h2>
+        <ul>
+          <li><strong>Cleaner Git diffs:</strong> when every file uses the same key order, a diff only shows real changes, not keys that moved around.</li>
+          <li><strong>Easier comparing:</strong> sort two files before comparing them by eye. (The <a href="/json-compare">JSON Compare</a> tool already ignores key order.)</li>
+          <li><strong>Finding keys fast:</strong> in a config with dozens of settings, alphabetical order makes each one easy to find.</li>
+          <li><strong>Translation files:</strong> keeping language files like en.json and de.json in the same order makes missing keys obvious.</li>
+        </ul>
+
+        <h2>Does Key Order Matter in JSON?</h2>
+        <p>
+          No. The JSON standard says an object is an unordered set of keys, so
+          sorting never changes what the data means. Array order is different:
+          <code> [1, 2, 3]</code> and <code>[3, 2, 1]</code> are different values, which
+          is why arrays keep their order unless you turn on sorting for simple
+          arrays.
+        </p>
+        <Code label="Sort keys in code">{`json.dumps(data, sort_keys=True, indent=2)   # Python, every level
+jq -S . data.json                            # command line, every level`}</Code>
 
         <FaqSection faqs={FAQS['json-sorter']} />
 

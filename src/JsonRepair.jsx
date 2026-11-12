@@ -1,6 +1,7 @@
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient, describeFixes } from './toolUtils.js'
 
 // A broken record with many typical mistakes, to show what the tool can fix.
@@ -70,6 +71,46 @@ function JsonRepair() {
         <p>
           Text inside your strings is never changed. If something cannot be
           fixed safely, the broken line is marked in red so you can fix it by hand.
+        </p>
+
+        <h2>Example</h2>
+        <Code label="Broken">{`{
+  name: 'Emily Clark',
+  "active": True,
+  "tags": ["json" "api",],
+}`}</Code>
+        <Code label="Repaired">{`{
+  "name": "Emily Clark",
+  "active": true,
+  "tags": [
+    "json",
+    "api"
+  ]
+}`}</Code>
+        <p>
+          The tool reports exactly what it changed: <em>Fixed 6 problems: quotes
+          added around a key, single quote changed to double quote,
+          True/False/None changed to true/false/null, missing comma added,
+          trailing comma removed (×2).</em>
+        </p>
+
+        <h2>Where Broken JSON Comes From</h2>
+        <ul>
+          <li><strong>JavaScript objects</strong> copied from code or the browser console have unquoted keys, single quotes and trailing commas.</li>
+          <li><strong>Python output</strong> from <code>print(dict)</code> uses single quotes and <code>True</code>, <code>False</code>, <code>None</code>. Use <code>json.dumps()</code> instead of <code>print()</code> to get real JSON.</li>
+          <li><strong>AI chat answers</strong> often add comments, explanations or a missing bracket at the end.</li>
+          <li><strong>Log files and cut-off responses</strong> lose their last characters, so closing brackets are missing.</li>
+          <li><strong>Word processors and chat apps</strong> replace straight quotes with curly quotes (“ ”), which JSON does not accept.</li>
+        </ul>
+
+        <h2>Repair, Then Check</h2>
+        <p>
+          After repairing, read the list of fixes to make sure the result is
+          what you meant, especially when a bracket was added at the end. Then
+          explore the data in the <a href="/json-viewer">JSON Viewer</a> or check it
+          against a schema with the <a href="/json-schema-validator">JSON Schema Validator</a>.
+          To understand a specific error message, see
+          <a href="/unexpected-token-in-json"> Unexpected Token in JSON</a>.
         </p>
 
         <FaqSection faqs={FAQS['json-repair']} />

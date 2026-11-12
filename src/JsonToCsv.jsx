@@ -6,6 +6,7 @@ import CodeEditor from './CodeEditor.jsx'
 import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, PlainOutput, DataTable, Messages } from './ToolLayout.jsx'
 import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
+import { Code } from './ArticlePage.jsx'
 
 // Turns nested objects into flat keys, e.g. { user: { name: 'Ali' } } -> { 'user.name': 'Ali' }
 function flattenObject(obj, prefix = '', output = {}) {
@@ -297,6 +298,41 @@ function JsonToCsv() {
           <li>Downloads a CSV file that opens correctly in Excel.</li>
           <li>Runs in your browser, so your data is not uploaded to a server.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`[
+  {
+    "id": 1,
+    "name": "Clark, Emily",
+    "contact": { "email": "emily@example.com" },
+    "tags": ["admin", "editor"]
+  }
+]`}</Code>
+        <Code label="CSV">{`id,name,contact.email,tags
+1,"Clark, Emily",emily@example.com,"[""admin"",""editor""]"`}</Code>
+        <p>
+          Three things happened here. The nested <code>contact</code> object became
+          the <code>contact.email</code> column. The name contains a comma, so it is
+          wrapped in quotes to keep it in one column. The <code>tags</code> array is
+          kept as JSON text in one cell, with its quotes doubled as the CSV
+          standard requires.
+        </p>
+
+        <h2>Which Separator Should I Use?</h2>
+        <ul>
+          <li><strong>Comma</strong> is the standard and works in most programs.</li>
+          <li><strong>Semicolon</strong> is better if Excel puts everything in one column. Many European versions of Excel expect semicolons because they use the comma as a decimal mark.</li>
+          <li><strong>Tab</strong> is handy for pasting straight into a spreadsheet, and when your values contain lots of commas.</li>
+        </ul>
+
+        <h2>CSV Limits to Know</h2>
+        <p>
+          CSV is a flat table with no types, so every value becomes text and
+          deeply nested data does not fit perfectly. If people will open the
+          file in Excel, a real spreadsheet with numbers and a bold header is
+          often better: try <a href="/json-to-excel">JSON to Excel</a>. To do the
+          conversion in code, see <a href="/json-to-csv-python">JSON to CSV in Python</a>.
+        </p>
 
         <h2>Frequently Asked Questions</h2>
 
