@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 import { inferModel, splitNullable, toCamelCase, toPascalCase } from './typeModel.js'
 
@@ -162,6 +163,53 @@ function JsonToJava() {
           <li>Optional and null values use boxed types like Long and Boolean.</li>
           <li>Java records for modern, immutable data classes.</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
+        </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`{
+  "user_id": 42,
+  "firstName": "Emily",
+  "email": "emily@example.com",
+  "tags": ["admin"],
+  "address": { "city": "London" },
+  "manager": null
+}`}</Code>
+        <Code label="Java (record, with Jackson)">{`public record User(
+    @JsonProperty("user_id") long userId,
+    String firstName,
+    String email,
+    List<String> tags,
+    Address address,
+    Object manager
+) {}
+
+record Address(
+    String city
+) {}`}</Code>
+        <p>
+          <code>user_id</code> becomes the Java-style <code>userId</code>, and
+          <code> @JsonProperty</code> tells Jackson which JSON key to read. Numbers
+          without decimals become <code>long</code> so large IDs never overflow, and
+          <code> manager</code> is <code>Object</code> because the sample only contains
+          <code> null</code>. Change it to the real type if you know it.
+        </p>
+
+        <h2>Reading JSON with Jackson</h2>
+        <Code label="Java">{`ObjectMapper mapper = new ObjectMapper();
+User user = mapper.readValue(jsonText, User.class);
+System.out.println(user.firstName());`}</Code>
+        <p>
+          Jackson supports records from version 2.12. If your JSON may contain
+          fields that are not in the class, add
+          <code> @JsonIgnoreProperties(ignoreUnknown = true)</code> to the class, or
+          configure the mapper with
+          <code> FAIL_ON_UNKNOWN_PROPERTIES</code> turned off.
+        </p>
+
+        <h2>Records or Classes?</h2>
+        <ul>
+          <li><strong>Records</strong> (Java 16+) are short and immutable: perfect for API responses you only read.</li>
+          <li><strong>Classes</strong> with getters and setters work on older Java versions and with frameworks that need to change fields after creating the object.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-to-java']} />

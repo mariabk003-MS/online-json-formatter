@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 import { inferModel, splitNullable, toSnakeCase } from './typeModel.js'
 
@@ -34,9 +35,6 @@ function jsonToPython(data, style, rootName) {
   if (style === 'dataclass') lines.push('from dataclasses import dataclass')
   if (style === 'pydantic') lines.push('from pydantic import BaseModel, Field')
   if (style === 'typeddict') lines.push('from typing import NotRequired, TypedDict')
-  const usesAny = JSON.stringify([...model.classes.values()]).includes('"unknown"')
-  if (usesAny) lines.push('from typing import Any')
-  lines.push('', '')
 
   // Children first, so every class is defined before it is used.
   const classes = [...model.classes].reverse()
@@ -73,7 +71,11 @@ function jsonToPython(data, style, rootName) {
   })
 
   if (model.root.kind !== 'object') blocks.push(`${rootName || 'Root'} = ${pyType(model.root)}`)
-  return lines.join('\n') + blocks.join('\n\n\n') + '\n'
+  // A field that is only ever null (or an empty list) is typed as Any, which needs an import.
+  const code = blocks.join('\n\n\n')
+  if (/\bAny\b/.test(code)) lines.push('from typing import Any')
+  lines.push('', '')
+  return lines.join('\n') + code + '\n'
 }
 
 const SAMPLE = JSON.stringify(
@@ -160,6 +162,52 @@ function JsonToPython() {
           <li><strong>Pydantic</strong>: validates data when you load it. Popular with FastAPI. Keys like firstName are mapped with an alias.</li>
           <li><strong>TypedDict</strong>: keeps your data as normal dictionaries, but adds type hints.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`{
+  "user_id": 42,
+  "firstName": "Emily",
+  "email": "emily@example.com",
+  "tags": ["admin"],
+  "address": { "city": "London" },
+  "manager": null
+}`}</Code>
+        <Code label="Python (dataclass)">{`from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+@dataclass
+class Address:
+    city: str
+
+
+@dataclass
+class User:
+    user_id: int
+    first_name: str  # JSON key: "firstName"
+    email: str
+    tags: list[str]
+    address: Address
+    manager: Any | None`}</Code>
+        <p>
+          <code>firstName</code> becomes the Python-style name <code>first_name</code>, the
+          nested object gets its own <code>Address</code> class, and <code>manager</code> is
+          <code> Any | None</code> because the sample only shows <code>null</code>. Replace
+          <code> Any</code> with the real type if you know it.
+        </p>
+
+        <h2>Loading JSON into the Classes</h2>
+        <Code label="Pydantic">{`user = User.model_validate_json(json_text)   # parses, checks types, uses the aliases
+print(user.first_name)`}</Code>
+        <p>
+          Pydantic converts nested objects and renamed keys for you and raises
+          a clear error when the data does not match. With dataclasses, load the
+          JSON with <code>json.loads</code> first, then build the objects yourself,
+          including the nested ones, because <code>User(**data)</code> does not convert
+          nested dictionaries or renamed keys. More about the json module in
+          <a href="/json-in-python"> JSON in Python</a>.
+        </p>
 
         <FaqSection faqs={FAQS['json-to-python']} />
 

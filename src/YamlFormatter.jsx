@@ -3,6 +3,7 @@ import yaml from 'js-yaml'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { yamlError } from './toolUtils.js'
 
 // Reads every YAML document in the text, or throws an error with a line number.
@@ -100,6 +101,32 @@ function YamlFormatter() {
           <li>Supports files with several documents separated by ---.</li>
           <li>Validate mode keeps your YAML and comments unchanged.</li>
           <li>Runs in your browser. Your YAML is never uploaded.</li>
+        </ul>
+
+        <h2>Validate or Format?</h2>
+        <ul>
+          <li><strong>Validate</strong> only checks the file and leaves it exactly as it is, comments included. Use it for config files you want to keep as they are, such as a GitHub Actions workflow or docker-compose.yml.</li>
+          <li><strong>Format YAML</strong> rewrites the file with clean, consistent indentation. Because it rebuilds the YAML from the data, comments are removed and anchors are written out in full.</li>
+        </ul>
+
+        <h2>Example Error</h2>
+        <Code label="Broken YAML">{`server:
+  port: 8080
+   host: localhost`}</Code>
+        <p>
+          The third line has one extra space, so the formatter reports
+          <em> bad indentation of a mapping entry (3:8)</em>, meaning line 3,
+          column 8. Remove the extra space so <code>host</code> lines up with
+          <code> port</code>.
+        </p>
+
+        <h2>YAML Style Tips</h2>
+        <ul>
+          <li>Use 2 spaces per level. It is the most common style and keeps deep files narrow.</li>
+          <li>Never mix tabs and spaces; YAML does not allow tabs for indentation.</li>
+          <li>Quote values that could be misread, like <code>&quot;yes&quot;</code>, <code>&quot;1.10&quot;</code> or <code>&quot;01234&quot;</code>.</li>
+          <li>Use <code>|</code> for multi-line text such as scripts and long messages.</li>
+          <li>Learn the differences in <a href="/json-vs-yaml">JSON vs YAML</a>, or convert with <a href="/yaml-to-json">YAML to JSON</a>.</li>
         </ul>
 
         <FaqSection faqs={FAQS['yaml-formatter']} />

@@ -3,6 +3,7 @@ import yaml from 'js-yaml'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient, describeFixes } from './toolUtils.js'
 
 const SAMPLE = JSON.stringify(
@@ -88,6 +89,39 @@ function JsonToYaml() {
           <li>Colored YAML result with line numbers, Copy and Download.</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
         </ul>
+
+        <h2>Why Some Values Get Quotes</h2>
+        <p>
+          YAML guesses the type of unquoted values, so the converter adds quotes
+          wherever a guess could change your data:
+        </p>
+        <Code label="JSON">{`{ "country": "NO", "version": "1.10", "zip": "01234", "enabled": true, "note": "Line 1\\nLine 2" }`}</Code>
+        <Code label="YAML">{`country: 'NO'
+version: '1.10'
+zip: '01234'
+enabled: true
+note: |-
+  Line 1
+  Line 2`}</Code>
+        <p>
+          Without quotes, <code>1.10</code> would be read back as the number 1.1 and
+          <code> 01234</code> as 1234, and some older YAML tools read <code>NO</code> as
+          false. Text with line breaks uses the <code>|-</code> block style, which keeps
+          each line readable instead of using <code>\n</code>.
+        </p>
+
+        <h2>Where You Need YAML</h2>
+        <ul>
+          <li><strong>Kubernetes</strong> manifests and Helm values</li>
+          <li><strong>Docker Compose</strong> files (docker-compose.yml)</li>
+          <li><strong>CI/CD pipelines</strong> such as GitHub Actions, GitLab CI and Azure Pipelines</li>
+          <li><strong>OpenAPI / Swagger</strong> specs and app config files</li>
+        </ul>
+        <p>
+          A handy workflow: generate or edit the data as JSON, convert it here,
+          then add comments in the YAML. Read <a href="/json-vs-yaml">JSON vs YAML</a> for
+          a full comparison, and check the result with the <a href="/yaml-formatter">YAML Formatter</a>.
+        </p>
 
         <FaqSection faqs={FAQS['json-to-yaml']} />
 

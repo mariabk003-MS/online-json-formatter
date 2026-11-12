@@ -6,6 +6,7 @@ import CodeEditor from './CodeEditor.jsx'
 import { ToolPanel, Tool, StatusBadge, EmptyBox, XmlOutput, Messages } from './ToolLayout.jsx'
 import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
+import { Code } from './ArticlePage.jsx'
 
 // Makes any JSON key safe to use as an XML tag name.
 function safeTagName(key) {
@@ -304,6 +305,49 @@ function JsonToXml() {
           <li>Fixes invalid key names, such as keys with spaces or starting with numbers.</li>
           <li>Runs in your browser, so your data is not uploaded to a server.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`{
+  "id": 7,
+  "name": "Emily & Co",
+  "tags": ["admin", "editor"],
+  "address": { "city": "London" },
+  "manager": null
+}`}</Code>
+        <Code label="XML">{`<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <id>7</id>
+  <name>Emily &amp; Co</name>
+  <tags>admin</tags>
+  <tags>editor</tags>
+  <address>
+    <city>London</city>
+  </address>
+  <manager/>
+</root>`}</Code>
+
+        <h2>How JSON Maps to XML</h2>
+        <ul>
+          <li><strong>Objects</strong> become nested elements, like <code>address</code> → <code>&lt;address&gt;&lt;city&gt;</code>.</li>
+          <li><strong>Arrays</strong> repeat the tag once per item, so <code>tags</code> becomes two <code>&lt;tags&gt;</code> elements.</li>
+          <li><strong>null</strong> becomes an empty element such as <code>&lt;manager/&gt;</code>.</li>
+          <li><strong>Special characters</strong> are escaped: &amp; becomes <code>&amp;amp;</code>.</li>
+          <li>XML needs <strong>one root element</strong>, so everything is wrapped in <code>&lt;root&gt;</code>. You can change its name.</li>
+        </ul>
+        <p>
+          XML has no data types, so numbers and true/false become plain text. If
+          the receiving system needs types, it usually reads them from an XML
+          Schema (XSD).
+        </p>
+
+        <h2>When You Still Need XML</h2>
+        <p>
+          Many older and enterprise systems only accept XML: SOAP web services,
+          banking and payment formats, government reporting, RSS feeds and
+          some e-commerce product feeds. Convert your JSON here, check the
+          result with the <a href="/xml-formatter">XML Formatter</a>, and go back the other
+          way with <a href="/xml-to-json">XML to JSON</a>.
+        </p>
 
         <h2>Frequently Asked Questions</h2>
 

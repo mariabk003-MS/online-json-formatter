@@ -6,6 +6,7 @@ import SiteFooter from './SiteFooter.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages, FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { useLiveJsonCheck, describeText, parseJsonOrThrow } from './toolUtils.js'
 
 // The validator library (Ajv) is only downloaded when someone clicks Validate,
@@ -246,6 +247,43 @@ function JsonSchemaValidator() {
           <li>Powered by Ajv, the most widely used JSON Schema validator.</li>
           <li>Runs in your browser. Your schema and data are never uploaded.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="Schema">{`{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "email"],
+  "properties": {
+    "id": { "type": "integer", "minimum": 1 },
+    "email": { "type": "string", "format": "email" },
+    "age": { "type": "integer", "maximum": 130 }
+  }
+}`}</Code>
+        <Code label="Data">{`{ "email": "emily@example", "age": 150 }`}</Code>
+        <Code label="Problems found">{`(root)  is missing the required field "id"
+/email  must match format "email"
+/age    must be <= 130`}</Code>
+        <p>
+          The location on the left tells you where each problem is:
+          <code> (root)</code> is the top-level object and <code>/age</code> is the
+          <code> age</code> field. A path like <code>/orders/0/total</code> points to the
+          total of the first order.
+        </p>
+
+        <h2>Most Useful Schema Keywords</h2>
+        <ul>
+          <li><code>type</code>: string, integer, number, boolean, object, array or null.</li>
+          <li><code>required</code>: fields that must be present.</li>
+          <li><code>minimum</code> / <code>maximum</code> and <code>minLength</code> / <code>maxLength</code>: limits for numbers and text.</li>
+          <li><code>enum</code>: a fixed list of allowed values.</li>
+          <li><code>format</code>: email, date, date-time, uri, uuid, ipv4 and more.</li>
+          <li><code>pattern</code>: a regular expression the text must match.</li>
+          <li><code>additionalProperties: false</code>: reject fields that are not listed.</li>
+        </ul>
+        <p>
+          No schema yet? Create one from a sample in seconds with the
+          <a href="/json-schema-generator"> JSON Schema Generator</a>.
+        </p>
 
         <FaqSection faqs={FAQS['json-schema-validator']} />
 

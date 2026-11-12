@@ -3,6 +3,7 @@ import yaml from 'js-yaml'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 
 // Reads YAML. Files with several documents (separated by ---) become an array.
 // Errors get a line/column location so the broken line can be marked.
@@ -111,6 +112,44 @@ function YamlToJson() {
           <li>Choose 2 spaces, 4 spaces or minified JSON.</li>
           <li>Runs in your browser. Your YAML is never uploaded.</li>
         </ul>
+
+        <h2>Anchors and Merge Keys</h2>
+        <p>
+          YAML can reuse a block with an anchor (<code>&amp;</code>) and pull it in with
+          a merge key (<code>&lt;&lt;: *</code>). JSON has no such feature, so the
+          converter writes the values out in full:
+        </p>
+        <Code label="YAML">{`base: &base
+  timeout: 30
+  retries: 3
+prod:
+  <<: *base
+  retries: 5`}</Code>
+        <Code label="JSON">{`{
+  "base": { "timeout": 30, "retries": 3 },
+  "prod": { "timeout": 30, "retries": 5 }
+}`}</Code>
+        <p>Comments are dropped too, because JSON does not allow them.</p>
+
+        <h2>Watch Out for Numbers</h2>
+        <p>
+          Unquoted values become numbers when they look like numbers. That means
+          <code> version: 1.10</code> becomes <code>1.1</code> and <code>zip: 01234</code> becomes
+          <code> 1234</code> in the JSON. If a value must stay text, put it in quotes
+          in the YAML: <code>version: &quot;1.10&quot;</code>.
+        </p>
+
+        <h2>Common YAML Errors</h2>
+        <ul>
+          <li><strong>bad indentation of a mapping entry:</strong> one line has a different number of spaces than its neighbours.</li>
+          <li><strong>Tabs:</strong> YAML only allows spaces for indentation.</li>
+          <li><strong>Missing space after a colon:</strong> write <code>key: value</code>, not <code>key:value</code>.</li>
+          <li><strong>Unquoted special characters:</strong> values starting with <code>@</code>, <code>*</code>, <code>&amp;</code> or containing <code>: </code> need quotes.</li>
+        </ul>
+        <p>
+          The error message shows the line and column, so you can jump straight
+          to the problem. To go the other way, use <a href="/json-to-yaml">JSON to YAML</a>.
+        </p>
 
         <FaqSection faqs={FAQS['yaml-to-json']} />
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 import { inferModel, modelToJsonSchema } from './typeModel.js'
 
@@ -82,6 +83,46 @@ function JsonSchemaGenerator() {
           <li>Fields missing from some array items are not marked as required.</li>
           <li>Mixed values become type lists, like [&quot;string&quot;, &quot;null&quot;].</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
+        </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`{ "id": 1024, "name": "Emily Clark", "email": "emily@example.com", "active": true, "tags": ["admin"] }`}</Code>
+        <Code label="Generated schema">{`{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "email": { "type": "string" },
+    "active": { "type": "boolean" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["id", "name", "email", "active", "tags"]
+}`}</Code>
+
+        <h2>Make the Schema Stricter</h2>
+        <p>
+          A generated schema only knows the types in your sample. Add the rules
+          that matter for your data by hand:
+        </p>
+        <Code label="Extra rules">{`"id":    { "type": "integer", "minimum": 1 },
+"name":  { "type": "string", "minLength": 2 },
+"email": { "type": "string", "format": "email" },
+"plan":  { "enum": ["free", "pro", "business"] }`}</Code>
+        <p>
+          Add <code>&quot;additionalProperties&quot;: false</code> to reject unknown
+          fields, and remove names from <code>required</code> if they are optional.
+          Then test real data against it with the
+          <a href="/json-schema-validator"> JSON Schema Validator</a>.
+        </p>
+
+        <h2>What JSON Schema Is Used For</h2>
+        <ul>
+          <li><strong>API validation:</strong> reject requests with missing or wrong fields before they reach your code.</li>
+          <li><strong>Documentation:</strong> OpenAPI specs describe request and response bodies with JSON Schema.</li>
+          <li><strong>Editor help:</strong> VS Code uses schemas to autocomplete and check config files like package.json.</li>
+          <li><strong>Forms and tests:</strong> generate forms or test data from one shared definition.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-schema-generator']} />
