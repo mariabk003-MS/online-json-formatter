@@ -333,6 +333,41 @@ function JsonCompare() {
           <li>Works in your browser. Your JSON is never uploaded.</li>
         </ul>
 
+        <h2>How to Read the Results</h2>
+        <p>
+          Every difference is shown with its <strong>path</strong>, which tells you
+          exactly where it is. <code>$</code> means the top of the document, a dot
+          goes into an object, and a number in brackets is a position in an
+          array. For example:
+        </p>
+        <ul>
+          <li><code>$.email</code>: the email field at the top level.</li>
+          <li><code>$.address.city</code>: the city inside the address object.</li>
+          <li><code>$.orders[2].total</code>: the total of the third order (arrays start at 0).</li>
+        </ul>
+        <p>
+          <strong>Added</strong> means the value only exists in the modified JSON,
+          <strong> Removed</strong> means it only exists in the original, and
+          <strong> Changed</strong> shows the old value and the new value side by side.
+        </p>
+
+        <h2>Common Uses</h2>
+        <ul>
+          <li><strong>API testing:</strong> compare the response before and after a code change to catch fields that disappeared or changed type.</li>
+          <li><strong>Config files:</strong> see what differs between the settings on your laptop and on the server, for example in package.json or appsettings.json.</li>
+          <li><strong>Data migrations:</strong> check that a record looks the same after it was exported and imported again.</li>
+          <li><strong>Code reviews:</strong> understand a large JSON change faster than reading a text diff line by line.</li>
+        </ul>
+
+        <h2>JSON Compare vs Text Compare</h2>
+        <p>
+          A normal text diff compares line by line, so it reports changes when
+          only the spacing or the key order is different. This tool understands
+          JSON: it ignores formatting and key order and only reports real changes
+          in the data. To compare any other kind of text, such as code or plain
+          text, use <a href="/text-compare">Text Compare</a>.
+        </p>
+
         <h2>Frequently Asked Questions</h2>
 
         <h3>Does the order of keys matter?</h3>

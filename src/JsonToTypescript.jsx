@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
 
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -167,6 +168,57 @@ function JsonToTypescript() {
           <li>Union types such as string | null when values differ.</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
         </ul>
+
+        <h2>Example</h2>
+        <Code label="JSON">{`{
+  "id": 1024,
+  "name": "Emily Clark",
+  "manager": null,
+  "address": { "city": "London", "zip": "SW1A 1AA" },
+  "orders": [
+    { "id": 1, "total": 49.5 },
+    { "id": 2, "total": 12, "coupon": "SAVE10" }
+  ]
+}`}</Code>
+        <Code label="TypeScript">{`export interface Root {
+  id: number
+  name: string
+  manager: null
+  address: Address
+  orders: Order[]
+}
+
+export interface Address {
+  city: string
+  zip: string
+}
+
+export interface Order {
+  id: number
+  total: number
+  coupon?: string
+}`}</Code>
+        <p>
+          The nested object becomes its own <code>Address</code> interface, the
+          array becomes <code>Order[]</code>, and <code>coupon</code> is marked
+          optional with <code>?</code> because only one order has it.
+        </p>
+
+        <h2>Tips for Better Types</h2>
+        <ul>
+          <li><strong>Use a complete sample.</strong> The tool can only see the fields in your example. Include an item with every optional field if you can.</li>
+          <li><strong>Check null values.</strong> A field that is <code>null</code> in your sample becomes <code>null</code>. If it can also be a string, change it to <code>string | null</code>.</li>
+          <li><strong>Types are not checked at runtime.</strong> TypeScript types disappear after compiling. To validate real API data, use a JSON Schema with the <a href="/json-schema-generator">JSON Schema Generator</a> and <a href="/json-schema-validator">JSON Schema Validator</a>, or a library like Zod.</li>
+        </ul>
+
+        <h2>Interface or Type?</h2>
+        <p>
+          Both describe the shape of an object, and for API data they work the
+          same. Interfaces can be extended and merged, and many teams use them for
+          object shapes; <code>type</code> is needed for unions like
+          <code> &apos;admin&apos; | &apos;editor&apos;</code>. Using another language? Try
+          <a href="/json-to-python"> JSON to Python</a> or <a href="/json-to-java">JSON to Java</a>.
+        </p>
 
         <FaqSection faqs={FAQS['json-to-typescript']} />
 

@@ -1,6 +1,7 @@
 import ConverterPage from './ConverterPage.jsx'
 import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient, describeFixes } from './toolUtils.js'
 
 function bytes(text) {
@@ -85,6 +86,40 @@ function JsonMinifier() {
           <li>Beautify button to turn minified JSON back into readable JSON.</li>
           <li>Runs in your browser. Your JSON is never uploaded.</li>
         </ul>
+
+        <h2>Before and After</h2>
+        <Code label="Formatted (103 bytes)">{`{
+  "id": 1024,
+  "name": "Emily Clark",
+  "roles": [
+    "admin",
+    "editor"
+  ],
+  "active": true
+}`}</Code>
+        <Code label="Minified (73 bytes)">{`{"id":1024,"name":"Emily Clark","roles":["admin","editor"],"active":true}`}</Code>
+        <p>
+          The data is identical, but the minified version is about 30% smaller,
+          and the savings grow with deeper nesting. Only spaces and line breaks outside of strings are removed, so
+          the text inside your values, like &quot;Emily Clark&quot;, is never changed.
+        </p>
+
+        <h2>When to Minify JSON (and When Not To)</h2>
+        <ul>
+          <li><strong>Minify</strong> JSON that is sent over the network, stored in a database or cache, embedded in a web page, or saved in large numbers of files.</li>
+          <li><strong>Keep it formatted</strong> in files people read and edit, such as config files in a Git repository, so changes are easy to review.</li>
+          <li>Servers usually also compress responses with gzip or Brotli. Minifying and compressing together give the smallest result. See both sizes with the <a href="/json-size-calculator">JSON Size Calculator</a>.</li>
+        </ul>
+
+        <h2>Minify JSON in Code</h2>
+        <Code label="JavaScript">{`const minified = JSON.stringify(JSON.parse(text))`}</Code>
+        <Code label="Python">{`import json
+minified = json.dumps(data, separators=(",", ":"))`}</Code>
+        <Code label="Command line (jq)">{`jq -c . data.json > data.min.json`}</Code>
+        <p>
+          To do the opposite and make JSON readable again, see
+          <a href="/pretty-print-json"> how to pretty print JSON</a>.
+        </p>
 
         <FaqSection faqs={FAQS['json-minifier']} />
 

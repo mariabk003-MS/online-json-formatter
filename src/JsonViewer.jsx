@@ -206,6 +206,32 @@ function JsonViewer() {
           <li>Works in your browser. Your data is not uploaded.</li>
         </ul>
 
+        <h2>When a JSON Viewer Helps Most</h2>
+        <ul>
+          <li><strong>Reading API responses:</strong> a single response can have hundreds of nested fields. Collapse everything, then open only the branch you need.</li>
+          <li><strong>Debugging:</strong> quickly check whether a field is missing, null, or a string instead of a number. Each type has its own color.</li>
+          <li><strong>Understanding a new data source:</strong> the item counts on every branch show at a glance how many orders, users or records a file contains.</li>
+          <li><strong>Explaining data to others:</strong> the Graph view draws objects as connected boxes, which is easier to show in a meeting than raw text.</li>
+        </ul>
+
+        <h2>Tree View vs Graph View vs Code View</h2>
+        <p>
+          <strong>Tree view</strong> is best for deep data: you open one level at a
+          time, like folders on your computer. <strong>Graph view</strong> is best
+          for seeing how objects relate to each other, for example a user, the
+          user&apos;s address and the user&apos;s orders. <strong>Code view</strong> in
+          the <a href="/">JSON Formatter</a> is best when you want to copy, edit or
+          download the formatted text.
+        </p>
+
+        <h2>Tips for Large JSON Files</h2>
+        <ul>
+          <li>Use <strong>Collapse All</strong> first, then expand only the parts you need.</li>
+          <li>Search inside the tree to jump to a key or value instead of scrolling.</li>
+          <li>If a file is very large, check its size with the <a href="/json-size-calculator">JSON Size Calculator</a>, or pull out just the values you need with the <a href="/json-path">JSONPath Tester</a>.</li>
+          <li>If the viewer reports an error, fix it with <a href="/json-repair">JSON Repair</a> and paste the result back.</li>
+        </ul>
+
         <h2>Frequently Asked Questions</h2>
 
         <h3>Is this JSON viewer free?</h3>
