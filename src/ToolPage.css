@@ -1248,6 +1248,18 @@ body.dark .share-box label {
   color: #cbd5e1;
 }
 
+.share-box .share-note {
+  flex-basis: 100%;
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+body.dark .share-box .share-note {
+  color: #94a3b8;
+}
+
 body.dark .share-box input {
   border-color: #334155;
   background: #0f172a;

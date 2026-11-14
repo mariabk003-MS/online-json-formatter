@@ -462,6 +462,10 @@ function App() {
           <label htmlFor="share-link">Share link</label>
           <input id="share-link" readOnly value={shareUrl} onFocus={(event) => event.target.select()} />
           <button type="button" className="tool" onClick={() => setShareUrl('')}>Close</button>
+          <p className="share-note">
+            Your JSON is stored inside this link (after the #), which browsers never send to any server.
+            Nothing is saved on our side. Anyone with the link can open it.
+          </p>
         </div>
       )}
 
@@ -477,16 +481,16 @@ function App() {
         <h2>How to Use This JSON Formatter</h2>
         <ol>
           <li>Paste your JSON data into the Input box, or click Upload to open a .json or .txt file.</li>
-          <li>Choose 2 spaces, 4 spaces, or Tab indentation.</li>
+          <li>Choose 2, 3 or 4 spaces, or Tab indentation.</li>
           <li>Click Fix &amp; Format JSON to format your data, or Minify to compress it into one line.</li>
           <li>Review the output in the result panel.</li>
-          <li>Click Copy or Download to save your output.</li>
+          <li>Click Copy, or open the ⋯ menu next to Share and choose Download .json to save your output.</li>
         </ol>
 
         <h2>Benefits of Our Online JSON Formatter</h2>
         <ul>
           <li>Format JSON into a readable structure.</li>
-          <li>Choose your preferred indentation: 2 spaces, 4 spaces, or Tab.</li>
+          <li>Choose your preferred indentation: 2, 3 or 4 spaces, or Tab.</li>
           <li>Minify JSON to remove extra spaces and reduce file size.</li>
           <li>Upload JSON files directly from your computer.</li>
           <li>Check JSON syntax and see the exact line and column of any error.</li>
@@ -500,7 +504,7 @@ function App() {
           <li>Colored result with line numbers, a Tree view you can expand and collapse, and a Graph view that draws your JSON as a diagram.</li>
           <li>Dark mode, full screen editing and drag &amp; drop file upload.</li>
           <li>Share your JSON with a private link, load JSON from a URL, auto-format on paste and print.</li>
-          <li>Copy or download the formatted JSON result.</li>
+          <li>Copy the formatted JSON, or download it from the ⋯ menu.</li>
           <li>Process JSON directly in your browser.</li>
         </ul>
 
@@ -533,7 +537,25 @@ function App() {
 
         <h3>Can I download formatted JSON?</h3>
         <p>
-          Yes. Click Download JSON to save the formatted result as a JSON file.
+          Yes. Open the ⋯ menu next to Share and choose Download .json to save
+          the formatted result as a file.
+        </p>
+
+        <h3>How does the Share link work? Is it private?</h3>
+        <p>
+          Your JSON is compressed and placed inside the link itself, after the
+          # sign. Browsers never send that part of a link to any server, so
+          nothing is uploaded or stored on our side. The link keeps working for
+          as long as you keep it, and anyone you give it to can open the JSON,
+          so only share it with people who should see the data.
+        </p>
+
+        <h3>What happens when I load JSON from a URL?</h3>
+        <p>
+          Your browser downloads the file directly from the website you enter.
+          It does not pass through our server. Some websites block this for
+          security reasons (CORS); in that case, download the file and use
+          Upload instead.
         </p>
 
         <h3>Can I convert JSON to CSV?</h3>
