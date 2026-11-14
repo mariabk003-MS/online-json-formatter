@@ -84,6 +84,7 @@ export const GUIDES = [
   { href: '/json-vs-csv', label: 'JSON vs CSV' },
   { href: '/what-is-json-schema', label: 'What Is JSON Schema?' },
   { href: '/json-to-csv-python', label: 'JSON to CSV in Python' },
+  { href: '/import-json-into-database', label: 'Import JSON into a Database' },
   { href: '/convert-json-to-excel', label: 'Convert JSON to Excel' },
 ]
 

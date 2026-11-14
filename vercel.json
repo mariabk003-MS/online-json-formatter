@@ -191,6 +191,10 @@
       "destination": "/json-vs-csv.html"
     },
     {
+      "source": "/import-json-into-database",
+      "destination": "/import-json-into-database.html"
+    },
+    {
       "source": "/json-comments",
       "destination": "/json-comments.html"
     },

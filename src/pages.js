@@ -50,6 +50,7 @@ export const PAGES = {
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),
   '/what-is-json-schema': () => import('./GuideJsonSchema.jsx'),
   '/json-vs-csv': () => import('./GuideJsonVsCsv.jsx'),
+  '/import-json-into-database': () => import('./GuideJsonToDatabase.jsx'),
   '/json-comments': () => import('./GuideJsonComments.jsx'),
   '/json-syntax-rules': () => import('./GuideJsonSyntax.jsx'),
   '/http-status-codes-json': () => import('./DatasetPages.jsx').then((m) => ({ default: m.HttpStatusCodesPage })),

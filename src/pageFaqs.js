@@ -188,6 +188,12 @@ export const FAQS = {
     ["Can CSV store nested data?", "Not directly. Nested objects must be flattened into columns like address.city, stored as text in one cell, or moved to a separate file."],
     ["Should I use JSON or CSV for an API?", "JSON. It keeps data types, supports nested data and is the standard format for web APIs. CSV is better for spreadsheet exports."],
   ],
+  'import-json-into-database': [
+    ["What is the easiest way to import JSON into a database?", "For a one-off import, paste the JSON into our free JSON to SQL converter and run the INSERT statements it generates. For regular imports, use a short script or your database's JSON functions."],
+    ["Can PostgreSQL read JSON directly?", "Yes. json_populate_recordset turns a JSON array into rows that match a table, and the jsonb column type stores JSON that you can query with operators like -> and ->>."],
+    ["How do I import JSON into MySQL?", "In MySQL 8 or newer, use JSON_TABLE to turn a JSON array into rows, then INSERT ... SELECT from it. You can also store whole documents in a JSON column."],
+    ["How do I handle nested JSON objects?", "Either flatten them into separate columns, such as address_city, or keep the nested part in a JSON or jsonb column and query it later."],
+  ],
   'json-lines': [
     ["What is the difference between JSON Lines and NDJSON?", "They are almost the same: one JSON value per line, separated by newline characters. JSON Lines uses the .jsonl extension, NDJSON often uses .ndjson."],
     ["Why use JSON Lines instead of a JSON array?", "Each line can be read, written and processed on its own. That makes JSON Lines great for logs, big data exports and streaming, because you never need the whole file in memory."],

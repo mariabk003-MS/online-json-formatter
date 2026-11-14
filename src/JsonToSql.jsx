@@ -195,6 +195,7 @@ INSERT INTO "users" ("id", "name", "balance", "active", "city") VALUES
             ['/json-to-csv', 'JSON to CSV'],
             ['/json-to-excel', 'JSON to Excel'],
             ['/', 'JSON Formatter'],
+            ['/import-json-into-database', 'Import JSON into a Database'],
           ]}
         />
       </section>

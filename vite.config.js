@@ -55,6 +55,7 @@ export default defineConfig({
         jsonToCsvPython: fileURLToPath(new URL('./json-to-csv-python.html', import.meta.url)),
         whatIsJsonSchema: fileURLToPath(new URL('./what-is-json-schema.html', import.meta.url)),
         jsonVsCsv: fileURLToPath(new URL('./json-vs-csv.html', import.meta.url)),
+        importJsonIntoDatabase: fileURLToPath(new URL('./import-json-into-database.html', import.meta.url)),
         jsonComments: fileURLToPath(new URL('./json-comments.html', import.meta.url)),
         jsonSyntaxRules: fileURLToPath(new URL('./json-syntax-rules.html', import.meta.url)),
         httpStatusCodesJson: fileURLToPath(new URL('./http-status-codes-json.html', import.meta.url)),

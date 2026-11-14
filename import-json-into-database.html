@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>How to Import JSON into MySQL, PostgreSQL &amp; SQLite</title>
+    <meta name="description" content="Import a JSON file into MySQL, PostgreSQL or SQLite: generate INSERT statements, use JSON_TABLE or json_populate_recordset, or load it with Python." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/import-json-into-database" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="How to Import JSON into MySQL, PostgreSQL &amp; SQLite" />
+    <meta property="og:description" content="Import a JSON file into MySQL, PostgreSQL or SQLite: generate INSERT statements, use JSON_TABLE or json_populate_recordset, or load it with Python." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/import-json-into-database" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 30 free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to Import JSON into MySQL, PostgreSQL &amp; SQLite" />
+    <meta name="twitter:description" content="Import a JSON file into MySQL, PostgreSQL or SQLite: generate INSERT statements, use JSON_TABLE or json_populate_recordset, or load it with Python." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "How to Import JSON into a Database (MySQL, PostgreSQL, SQLite)",
+      "name": "How to Import JSON into a Database (MySQL, PostgreSQL, SQLite)",
+      "description": "Import a JSON file into MySQL, PostgreSQL or SQLite: generate INSERT statements, use JSON_TABLE or json_populate_recordset, or load it with Python.",
+      "url": "https://online-json-formatter-ten.vercel.app/import-json-into-database",
+      "datePublished": "2026-11-14",
+      "dateModified": "2026-11-14",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the easiest way to import JSON into a database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a one-off import, paste the JSON into our free JSON to SQL converter and run the INSERT statements it generates. For regular imports, use a short script or your database's JSON functions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can PostgreSQL read JSON directly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. json_populate_recordset turns a JSON array into rows that match a table, and the jsonb column type stores JSON that you can query with operators like -> and ->>."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I import JSON into MySQL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In MySQL 8 or newer, use JSON_TABLE to turn a JSON array into rows, then INSERT ... SELECT from it. You can also store whole documents in a JSON column."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle nested JSON objects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Either flatten them into separate columns, such as address_city, or keep the nested part in a JSON or jsonb column and query it later."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How to Import JSON into a Database (MySQL, PostgreSQL, SQLite)",
+          "item": "https://online-json-formatter-ten.vercel.app/import-json-into-database"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
