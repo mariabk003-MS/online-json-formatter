@@ -5,7 +5,7 @@ function GuideJsonLines() {
     <ArticlePage
       h1="JSON Lines (JSONL) and NDJSON Explained"
       intro="What JSON Lines is, why it is used for logs and big data, and how to read and write .jsonl files in Python and JavaScript."
-      updated="November 12, 2026"
+      updated="November 14, 2026"
       faqKey="json-lines"
       related={[
         ['/', 'JSON Formatter'],
@@ -63,6 +63,34 @@ with open("users.jsonl", encoding="utf-8") as f:
         if line.strip():
             user = json.loads(line)
             print(user["name"])`}</Code>
+
+      <h2>Find the Broken Line in a Big JSONL File</h2>
+      <p>
+        One bad line stops the whole loop with an error like
+        <code> Expecting value: line 1 column 14</code>. Because every line is parsed
+        on its own, &quot;line 1&quot; there means the first line of that record,
+        not of the file. Count the lines yourself to find the real one, and keep
+        going instead of crashing:
+      </p>
+      <Code label="Python">{`import json
+
+with open("questions.jsonl", encoding="utf-8") as f:
+    for number, line in enumerate(f, start=1):
+        if not line.strip():
+            continue                      # skip empty lines
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError as error:
+            print(f"Line {number} is not valid JSON: {error}")
+            continue
+        print(item["question"])`}</Code>
+      <p>
+        If the third line of the file is <code>{'{"question": broken}'}</code> (the
+        text is missing its quotes), this prints the good records and
+        <code> Line 3 is not valid JSON: Expecting value: line 1 column 14 (char 13)</code>.
+        Paste the bad line into the <a href="/json-validator">JSON Validator</a> to see
+        exactly what is wrong with it.
+      </p>
 
       <h2>Read JSONL in JavaScript</h2>
       <Code label="JavaScript">{`const text = await (await fetch('/users.jsonl')).text()

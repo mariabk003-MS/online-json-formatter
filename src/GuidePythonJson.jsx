@@ -5,7 +5,7 @@ function GuidePythonJson() {
     <ArticlePage
       h1="How to Use JSON in Python (json.loads, json.dumps)"
       intro="A practical guide to reading, writing and pretty printing JSON in Python with the built-in json module, with copy-ready examples."
-      updated="November 12, 2026"
+      updated="November 14, 2026"
       faqKey="json-in-python"
       related={[
         ['/json-to-python', 'JSON to Python classes'],
@@ -79,6 +79,43 @@ data["city"] = "Manchester"
 # Write (pretty, and keep characters like é and 😊 as they are)
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=2, ensure_ascii=False)`}</Code>
+
+      <h2>Loop Over the Items in a JSON File</h2>
+      <p>
+        Most JSON files hold a list of objects. After loading, it is a normal
+        Python list of dictionaries:
+      </p>
+      <Code label="Python">{`import json
+
+with open("groups.json", "r", encoding="utf-8") as f:
+    groups = json.load(f)
+
+for group in groups:
+    print(group["name"], len(group.get("members", [])))`}</Code>
+      <p>
+        <code>group.get(&quot;members&quot;, [])</code> returns an empty list instead
+        of crashing with a <code>KeyError</code> when a record has no
+        <code> members</code> field.
+      </p>
+
+      <h2>Errors When Reading JSON Files</h2>
+      <table>
+        <thead>
+          <tr><th>Error</th><th>Cause and fix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>FileNotFoundError: [Errno 2] No such file or directory</code></td><td>The path is wrong, or the script runs from another folder. Use a full path, or build it with <code>pathlib.Path(__file__).parent / &quot;data.json&quot;</code>.</td></tr>
+          <tr><td><code>UnicodeDecodeError: &apos;charmap&apos; codec can&apos;t decode byte 0x81...</code></td><td>On Windows, <code>open()</code> without an encoding uses an old code page. Always pass <code>encoding=&quot;utf-8&quot;</code>.</td></tr>
+          <tr><td><code>JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig)</code></td><td>The file was saved with a byte order mark, common from Excel and Notepad. Open it with <code>encoding=&quot;utf-8-sig&quot;</code>.</td></tr>
+          <tr><td><code>JSONDecodeError: Expecting value: line 1 column 1 (char 0)</code></td><td>The file is empty, or it is not JSON at all (for example an HTML page you downloaded by mistake).</td></tr>
+          <tr><td><code>JSONDecodeError: Extra data: line 2 column 1</code></td><td>The file has one JSON object per line. That is <a href="/json-lines">JSON Lines</a>: read it line by line with <code>json.loads</code>.</td></tr>
+        </tbody>
+      </table>
+      <p>
+        For other syntax errors, such as a missing comma or a trailing comma,
+        see <a href="/common-json-errors">Common JSON Errors</a>, or fix the file
+        automatically with <a href="/json-repair">JSON Repair</a>.
+      </p>
 
       <h2>Handle Invalid JSON</h2>
       <p>
