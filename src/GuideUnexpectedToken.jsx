@@ -5,7 +5,7 @@ function GuideUnexpectedToken() {
     <ArticlePage
       h1="Unexpected Token in JSON: What It Means and How to Fix It"
       intro="&quot;SyntaxError: Unexpected token&quot; is the most common JSON error. Here is what each version of the message means, how to find the exact cause, and how to fix it in seconds."
-      updated="November 14, 2026"
+      updated="November 15, 2026"
       faqKey="unexpected-token-in-json"
       related={[
         ['/json-repair', 'JSON Repair'],
@@ -83,6 +83,8 @@ console.log(text.slice(0, 200))       // see what really came back`}</Code>
           <tr><td><code>&apos;F&apos;, &quot;Forbidden&quot;</code></td><td>HTTP 403: missing permission, API key or login</td></tr>
           <tr><td><code>&apos;T&apos;, &quot;Too Many Requests&quot;</code></td><td>HTTP 429: you hit a rate limit</td></tr>
           <tr><td><code>&apos;R&apos;, &quot;Request En&quot;...</code></td><td>&quot;Request Entity Too Large&quot; (HTTP 413): the request body is over the server&apos;s size limit</td></tr>
+          <tr><td><code>&apos;t&apos;, &quot;too large&quot;</code> (Chrome shows <code>&apos;o&apos;</code>)</td><td>A short size-limit message. The request or file is bigger than the server or service allows. Chrome names the <code>o</code> because it first reads the <code>t</code> as the start of <code>true</code>.</td></tr>
+          <tr><td>An invisible or strange character, like <code>&apos;\u001f&apos;</code>, followed by garbled text</td><td>Compressed or binary data, not text. Gzip data always starts with the byte <code>1F</code>. See the next section.</td></tr>
           <tr><td><code>&apos;&lt;&apos;, &quot;&lt;html&gt; &lt;he&quot;...</code></td><td>An HTML error page, often a 502 or 504 page from nginx or a CDN</td></tr>
         </tbody>
       </table>
@@ -102,6 +104,24 @@ const data = JSON.parse(text)`}</Code>
         Then fix the real cause: a backend that is down, a wrong URL, a missing
         API key, a rate limit, or a payload that is too big.
       </p>
+
+      <h2>Unexpected Token with Garbled Characters: Compressed or Binary Data</h2>
+      <p>
+        If the error shows symbols like <code>�</code>, <code>×</code> or empty boxes,
+        your code is reading bytes that are not text at all. The most common
+        cause is gzip: the response or file is compressed, but it was read as
+        plain text. A gzip stream always starts with the bytes <code>1F 8B</code>,
+        so the first &quot;token&quot; is the invisible character <code>\u001f</code>.
+      </p>
+      <ul>
+        <li><strong>From an API:</strong> the server compressed the body but did not send <code>Content-Encoding: gzip</code>, or it compressed it twice. Browsers and <code>fetch</code> decompress automatically only when that header is correct, so fix the server or proxy configuration.</li>
+        <li><strong>From a file:</strong> you may be opening <code>data.json.gz</code> or a binary file by mistake. Decompress it first.</li>
+        <li><strong>Encrypted or encoded data:</strong> Base64, protobuf or encrypted payloads also look like gibberish. Decode them with the right tool; for Base64, try the <a href="/base64-encode-decode">Base64 Decoder</a>.</li>
+      </ul>
+      <Code label="Node.js: read a gzipped JSON file">{`import { readFileSync } from 'node:fs'
+import { gunzipSync } from 'node:zlib'
+
+const data = JSON.parse(gunzipSync(readFileSync('data.json.gz')).toString('utf8'))`}</Code>
 
       <h2>Unexpected token {'}'} or ] (trailing comma)</h2>
       <p>A comma after the last item is not allowed in JSON.</p>
