@@ -228,6 +228,8 @@ export interface Order {
             ['/json-validator', 'JSON Validator'],
             ['/json-viewer', 'JSON Viewer'],
             ['/json-to-yaml', 'JSON to YAML'],
+            ['/json-to-go', 'JSON to Go'],
+            ['/json-to-csharp', 'JSON to C#'],
           ]}
         />
       </section>

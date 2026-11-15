@@ -122,6 +122,18 @@ export const FAQS = {
     ["What is the difference between dataclass and Pydantic?", "Dataclasses are built into Python and only store data. Pydantic models also check and convert the data when you load it, which is useful for APIs."],
     ["Is my JSON uploaded?", "No. The classes are generated in your browser."],
   ],
+  'json-to-go': [
+    ["How do I convert JSON to a Go struct?", "Paste a sample of your JSON into the converter and click Generate Go. It writes Go structs with json tags, nested types and slices that you can decode with encoding/json."],
+    ["Why are numbers int64 and float64?", "Whole numbers become int64 so large IDs never overflow, and numbers with decimals become float64, the type encoding/json uses for floating-point values."],
+    ["What does omitempty do?", "With omitempty, a field that has its zero value is left out when you encode the struct back to JSON. The converter adds it to fields that are missing from some objects in your sample."],
+    ["Is my JSON uploaded?", "No. The Go code is generated in your browser and your JSON never leaves your device."],
+  ],
+  'json-to-csharp': [
+    ["How do I convert JSON to C# classes?", "Paste a sample of your JSON into the converter and click Generate C#. It writes classes or records with nested types, List<T> and System.Text.Json or Newtonsoft.Json attributes."],
+    ["Should I use System.Text.Json or Newtonsoft.Json?", "System.Text.Json is built into .NET Core 3.0 and newer and is fast and the default for new projects. Newtonsoft.Json is older, very flexible and common in existing and .NET Framework projects. The converter supports both."],
+    ["Why does every property have a JsonPropertyName attribute?", "System.Text.Json matches names case-sensitively by default, so a key like first_name only maps to a FirstName property when the attribute says so."],
+    ["Is my JSON uploaded?", "No. The C# code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],

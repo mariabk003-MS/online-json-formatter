@@ -29,6 +29,8 @@ export const TOOL_GROUPS = [
       { href: '/json-to-typescript', label: 'JSON to TypeScript', text: 'Generate TypeScript interfaces from JSON.' },
       { href: '/json-to-python', label: 'JSON to Python', text: 'Generate dataclasses or Pydantic models.' },
       { href: '/json-to-java', label: 'JSON to Java', text: 'Generate Java classes or records.' },
+      { href: '/json-to-go', label: 'JSON to Go', text: 'Generate Go structs with json tags.' },
+      { href: '/json-to-csharp', label: 'JSON to C#', text: 'Generate C# classes or records.' },
       { href: '/json-schema-generator', label: 'JSON Schema Generator', text: 'Create a JSON Schema from an example.' },
     ],
   },

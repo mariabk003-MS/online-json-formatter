@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON to Go Struct Converter - Free &amp; Private</title>
+    <meta name="description" content="Convert JSON to Go structs with json tags, nested types, slices and Go-style names like UserID. Includes decoding examples and tips. Free, runs in your browser." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-go" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON to Go Struct Converter - Free &amp; Private" />
+    <meta property="og:description" content="Convert JSON to Go structs with json tags, nested types, slices and Go-style names like UserID. Includes decoding examples and tips. Free, runs in your browser." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-go" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 30 free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON to Go Struct Converter - Free &amp; Private" />
+    <meta name="twitter:description" content="Convert JSON to Go structs with json tags, nested types, slices and Go-style names like UserID. Includes decoding examples and tips. Free, runs in your browser." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "dateModified": "2026-11-15",
+      "name": "JSON to Go Converter",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-go",
+      "description": "Convert JSON to Go structs with json tags, nested types, slices and Go-style names like UserID. Includes decoding examples and tips. Free, runs in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert JSON to a Go struct?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste a sample of your JSON into the converter and click Generate Go. It writes Go structs with json tags, nested types and slices that you can decode with encoding/json."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are numbers int64 and float64?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whole numbers become int64 so large IDs never overflow, and numbers with decimals become float64, the type encoding/json uses for floating-point values."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does omitempty do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With omitempty, a field that has its zero value is left out when you encode the struct back to JSON. The converter adds it to fields that are missing from some objects in your sample."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Go code is generated in your browser and your JSON never leaves your device."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON to Go Converter",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-go"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -147,6 +147,14 @@
       "destination": "/json-to-java.html"
     },
     {
+      "source": "/json-to-go",
+      "destination": "/json-to-go.html"
+    },
+    {
+      "source": "/json-to-csharp",
+      "destination": "/json-to-csharp.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

@@ -218,6 +218,8 @@ print(user.first_name)`}</Code>
             ['/json-to-typescript', 'JSON to TypeScript'],
             ['/json-schema-generator', 'JSON Schema Generator'],
             ['/json-to-csv-python', 'JSON to CSV in Python'],
+            ['/json-to-go', 'JSON to Go'],
+            ['/json-to-csharp', 'JSON to C#'],
           ]}
         />
       </section>

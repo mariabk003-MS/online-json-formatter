@@ -220,6 +220,8 @@ System.out.println(user.firstName());`}</Code>
             ['/json-to-typescript', 'JSON to TypeScript'],
             ['/json-schema-generator', 'JSON Schema Generator'],
             ['/', 'JSON Formatter'],
+            ['/json-to-go', 'JSON to Go'],
+            ['/json-to-csharp', 'JSON to C#'],
           ]}
         />
       </section>

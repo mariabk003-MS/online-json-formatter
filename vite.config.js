@@ -44,6 +44,8 @@ export default defineConfig({
         sqlToJson: fileURLToPath(new URL('./sql-to-json.html', import.meta.url)),
         jsonToPython: fileURLToPath(new URL('./json-to-python.html', import.meta.url)),
         jsonToJava: fileURLToPath(new URL('./json-to-java.html', import.meta.url)),
+        jsonToGo: fileURLToPath(new URL('./json-to-go.html', import.meta.url)),
+        jsonToCsharp: fileURLToPath(new URL('./json-to-csharp.html', import.meta.url)),
         jsonPath: fileURLToPath(new URL('./json-path.html', import.meta.url)),
         jsonSizeCalculator: fileURLToPath(new URL('./json-size-calculator.html', import.meta.url)),
         jsonInPython: fileURLToPath(new URL('./json-in-python.html', import.meta.url)),
