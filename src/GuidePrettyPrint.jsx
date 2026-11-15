@@ -5,7 +5,7 @@ function GuidePrettyPrint() {
     <ArticlePage
       h1="How to Pretty Print JSON (Python, JavaScript, Command Line and VS Code)"
       intro="Turn one long line of JSON into clean, indented text that is easy to read. Copy-ready examples for every popular language and tool, plus the fastest way online."
-      updated="November 11, 2026"
+      updated="November 15, 2026"
       faqKey="pretty-print-json"
       related={[
         ['/', 'JSON Formatter'],
@@ -86,6 +86,27 @@ curl -s https://api.example.com/users/1 | jq .`}</Code>
         If the text is not in a .json file, first set the language to JSON in the
         bottom-right corner of the window.
       </p>
+
+      <h2>Notepad++</h2>
+      <p>Notepad++ needs a free plugin to format JSON:</p>
+      <ol>
+        <li>Open <strong>Plugins → Plugins Admin</strong>.</li>
+        <li>Search for <strong>JSON Viewer</strong>, tick it and click <strong>Install</strong>. Notepad++ restarts.</li>
+        <li>Open your file and choose <strong>Plugins → JSON Viewer → Format JSON</strong>.</li>
+      </ol>
+      <p>
+        The plugin also has a <strong>Show JSON Viewer</strong> panel that shows the data as a
+        tree. No plugin, or plain Windows Notepad? Paste the text into the
+        <a href="/"> JSON Formatter</a> instead.
+      </p>
+
+      <h2>Other Editors</h2>
+      <ul>
+        <li><strong>IntelliJ IDEA, PyCharm, WebStorm:</strong> Code → Reformat Code (<strong>Ctrl + Alt + L</strong>, or <strong>Cmd + Option + L</strong> on Mac).</li>
+        <li><strong>Sublime Text:</strong> install the <strong>Pretty JSON</strong> package with Package Control, then run &quot;Pretty JSON: Format JSON&quot; from the Command Palette.</li>
+        <li><strong>Vim:</strong> run <code>:%!jq .</code> (needs jq) or <code>:%!python -m json.tool</code>.</li>
+        <li><strong>Browsers:</strong> Firefox formats JSON automatically when you open a .json URL. In Chrome and Edge, use a JSON viewer extension or paste the response into the <a href="/json-viewer">JSON Viewer</a>.</li>
+      </ul>
 
       <h2>Other Languages</h2>
       <Code label="PHP">{`echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);`}</Code>
