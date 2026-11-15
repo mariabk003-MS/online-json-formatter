@@ -32,6 +32,37 @@ SyntaxError: Unexpected end of JSON input`}</Code>
         but the meaning is the same.
       </p>
 
+      <h2>The Same Error in Chrome, Firefox and Safari</h2>
+      <p>
+        Every browser words the error differently, so it helps to know which
+        message belongs to which mistake. Chrome, Edge and Node.js share the
+        same engine:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Mistake</th><th>Chrome, Edge, Node.js</th><th>Firefox</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>HTML page instead of JSON</td><td><code>Unexpected token &apos;&lt;&apos;, &quot;&lt;!DOCTYPE &quot;... is not valid JSON</code></td><td><code>JSON.parse: unexpected character at line 1 column 1 of the JSON data</code></td></tr>
+          <tr><td>Empty or cut-off response</td><td><code>Unexpected end of JSON input</code></td><td><code>JSON.parse: unexpected end of data at line 1 column 1 of the JSON data</code></td></tr>
+          <tr><td>Key without quotes</td><td><code>Expected property name or &apos;{'}'}&apos; in JSON at position 1 (line 1 column 2)</code></td><td><code>JSON.parse: expected property name or &apos;{'}'}&apos; at line 1 column 2 of the JSON data</code></td></tr>
+          <tr><td>Trailing comma</td><td><code>Expected double-quoted property name in JSON at position 7 (line 1 column 8)</code></td><td><code>JSON.parse: expected double-quoted property name at line 1 column 8 of the JSON data</code></td></tr>
+          <tr><td>Missing comma</td><td><code>Expected &apos;,&apos; or &apos;{'}'}&apos; after property value in JSON at position 7 (line 1 column 8)</code></td><td><code>JSON.parse: expected &apos;,&apos; or &apos;{'}'}&apos; after property value in object at line 1 column 8 of the JSON data</code></td></tr>
+          <tr><td>Extra text after the JSON</td><td><code>Unexpected non-whitespace character after JSON at position 7 (line 1 column 8)</code></td><td><code>JSON.parse: unexpected non-whitespace character after JSON data at line 1 column 8 of the JSON data</code></td></tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Safari</strong> uses shorter messages: <code>JSON Parse error: Unrecognized token &apos;&lt;&apos;</code> means
+        HTML instead of JSON, and <code>JSON Parse error: Unexpected EOF</code> means the
+        text is empty or cut off. Using Python? Its messages are listed in
+        <a href="/common-json-errors"> Common JSON Errors</a>.
+      </p>
+      <p>
+        Whatever the wording, the line and column point to the problem. Paste
+        the JSON into the <a href="/json-validator">JSON Validator</a> to see that spot
+        highlighted.
+      </p>
+
       <h2>Fix It Fast</h2>
       <p>
         Paste your JSON into the <a href="/">JSON Formatter</a>. It shows the exact
