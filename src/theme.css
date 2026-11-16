@@ -261,3 +261,35 @@ body.dark .status-ok {
     transition: none !important;
   }
 }
+
+/* Privacy policy: follow the page colors (it stayed white in dark mode) */
+.privacy-policy {
+  background: transparent;
+  color: var(--ink);
+}
+
+.privacy-policy h2,
+.privacy-policy a {
+  color: var(--pine);
+}
+
+.privacy-policy a:hover {
+  color: var(--pine-dark);
+}
+
+body.dark .dataset-search::placeholder {
+  color: #a39d92;
+}
+
+/* Text for screen readers only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

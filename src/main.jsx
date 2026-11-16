@@ -19,7 +19,11 @@ inject()
 // Each page's HTML is already written at build time (for Google and other
 // search engines). Here we load only the code for the current page, then
 // React takes over and makes it interactive.
-const path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/'
+// The 404 page is served for any unknown address, so it names its page itself.
+const path =
+  document.getElementById('root').dataset.page ||
+  window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') ||
+  '/'
 const loadPage = PAGES[path] || PAGES['/']
 
 loadPage().then(({ default: Page }) => {

@@ -17,11 +17,12 @@ let count = 0
 for (const path of PATHS) {
   const file = `${root}dist/${path === '/' ? 'index' : path.slice(1)}.html`
   let html = readFileSync(file, 'utf8')
-  if (!html.includes('<main id="root"></main>')) {
+  const shell = html.match(/<main id="root"( data-page="[^"]*")?><\/main>/)
+  if (!shell) {
     throw new Error(`${file} has no empty <main id="root"></main> to fill`)
   }
   html = html
-    .replace('<main id="root"></main>', `<main id="root">${await render(path)}</main>`)
+    .replace(shell[0], `<main id="root"${shell[1] || ''}>${await render(path)}</main>`)
     .replace('<body>', `<body>\n    ${themeScript}`)
   writeFileSync(file, html)
   count++

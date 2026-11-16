@@ -9,10 +9,11 @@ const PADDING_TOP = 14
 // - onCursor({ line, column }): called when the cursor moves
 // - onFileDrop(file): called when a file is dragged and dropped on the box
 // - onPaste(event): optional, called when text is pasted
-// - Tab key adds two spaces instead of leaving the box
+// - Tab key adds two spaces instead of leaving the box (press Esc first, then Tab, to move on)
 function CodeEditor({ value, onChange, onKeyDown, onPaste, errorLine, onCursor, onFileDrop, placeholder }) {
   const textareaRef = useRef(null)
   const gutterRef = useRef(null)
+  const escapedRef = useRef(false)
   const [scrollTop, setScrollTop] = useState(0)
   const [dragging, setDragging] = useState(false)
 
@@ -36,7 +37,15 @@ function CodeEditor({ value, onChange, onKeyDown, onPaste, errorLine, onCursor, 
   }
 
   function handleKeyDown(event) {
-    if (event.key === 'Tab' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+    // Keyboard users: Esc, then Tab, leaves the box instead of typing spaces.
+    if (event.key === 'Escape') {
+      escapedRef.current = true
+      onKeyDown?.(event)
+      return
+    }
+    const leaving = escapedRef.current
+    escapedRef.current = false
+    if (event.key === 'Tab' && !leaving && !event.ctrlKey && !event.altKey && !event.metaKey) {
       event.preventDefault()
       const box = event.target
       const start = box.selectionStart
@@ -97,6 +106,7 @@ function CodeEditor({ value, onChange, onKeyDown, onPaste, errorLine, onCursor, 
           spellCheck={false}
           wrap="off"
           aria-label="Input JSON"
+          aria-description="Tab adds two spaces. Press Esc, then Tab, to move to the next button."
           onChange={(event) => onChange(event.target.value)}
           onKeyDown={handleKeyDown}
           onPaste={onPaste}

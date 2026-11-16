@@ -108,6 +108,7 @@ function DatasetsLibrary() {
         </div>
       </div>
 
+      <h2 className="sr-only">Datasets</h2>
       <div className="dataset-grid">
         {shown.map((dataset) => (
           <DatasetCard key={dataset.id} dataset={dataset} />

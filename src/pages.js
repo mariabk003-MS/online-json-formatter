@@ -7,6 +7,7 @@ export const PAGES = {
   '/privacy-policy': () => import('./PrivacyPolicy.jsx'),
   '/json-to-csv': () => import('./JsonToCsv.jsx'),
   '/about': () => import('./About.jsx'),
+  '/404': () => import('./NotFound.jsx'),
   '/csv-to-json': () => import('./CsvToJson.jsx'),
   '/json-validator': () => import('./JsonValidator.jsx'),
   '/common-json-errors': () => import('./JsonErrorsGuide.jsx'),
