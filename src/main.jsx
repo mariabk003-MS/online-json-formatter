@@ -8,6 +8,7 @@ import './NavBar.css'
 import './ToolPage.css'
 import './JsonViewer.css'
 import './PrivacyPolicy.css'
+import './theme.css'
 import { PAGES } from './pages.js'
 import { inject } from '@vercel/analytics'
 

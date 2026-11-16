@@ -7,14 +7,14 @@
   gap: 10px 18px;
   margin: -8px 0 28px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e7e3da;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #0f172a;
+  color: #1c1a17;
   text-decoration: none;
 }
 
@@ -25,7 +25,7 @@
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: #1e293b;
+  background: #2b2824;
   color: #fff;
   font-family: Consolas, "Courier New", monospace;
   font-size: 15px;
@@ -39,7 +39,7 @@
 }
 
 .brand-accent {
-  color: #2458d3;
+  color: #1f6b52;
 }
 
 /* The menu inside the header: no own border, aligned to the right */
@@ -53,21 +53,21 @@
 
 .site-header .site-nav a,
 .site-header .site-nav .nav-group-button {
-  color: #334155;
+  color: #45403a;
   font-size: 14px;
   font-weight: 600;
 }
 
 .site-header .site-nav a:hover,
 .site-header .site-nav .nav-group-button:hover {
-  color: #2458d3;
+  color: #1f6b52;
   text-decoration: none;
 }
 
 .site-header .site-nav a.active,
 .site-header .site-nav .nav-group-button.active {
-  color: #2458d3;
-  border-bottom: 2px solid #2458d3;
+  color: #1f6b52;
+  border-bottom: 2px solid #1f6b52;
 }
 
 .site-header .site-nav .nav-dropdown a {
@@ -84,7 +84,7 @@
   height: 36px;
   margin-left: -8px;
   padding: 0;
-  border: 1px solid #dbe4f2;
+  border: 1px solid #ddd7ca;
   border-radius: 9px;
   background: #fff;
   font-size: 16px;
@@ -92,14 +92,14 @@
 }
 
 .site-header .theme-switch:hover {
-  background: #f1f5f9;
+  background: #f4f2ec;
   transform: none;
 }
 
 body.dark .site-header .theme-switch {
-  border-color: #334155;
-  background: #1a2335;
-  color: #f1f5f9;
+  border-color: #45403a;
+  background: #23221e;
+  color: #f4f2ec;
 }
 
 .site-header .site-nav {
@@ -119,30 +119,30 @@ body.dark .site-header .theme-switch {
 
 /* Dark mode (only the formatter page turns this on) */
 body.dark .site-header {
-  border-color: #1f2a3d;
+  border-color: #2b2925;
 }
 
 body.dark .brand {
-  color: #f1f5f9;
+  color: #f4f2ec;
 }
 
 body.dark .brand-mark {
-  background: #2458d3;
+  background: #1f6b52;
 }
 
 body.dark .brand-accent {
-  color: #93b4ff;
+  color: #8fd0b3;
 }
 
 body.dark .site-header .site-nav a,
 body.dark .site-header .site-nav .nav-group-button {
-  color: #cbd5e1;
+  color: #d6d1c7;
 }
 
 body.dark .site-header .site-nav a.active,
 body.dark .site-header .site-nav .nav-group-button.active {
-  color: #93b4ff;
-  border-color: #93b4ff;
+  color: #8fd0b3;
+  border-color: #8fd0b3;
 }
 
 .site-nav .nav-group {
@@ -154,7 +154,7 @@ body.dark .site-header .site-nav .nav-group-button.active {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  color: #1d4ed8;
+  color: #1a5c46;
   cursor: pointer;
   font: inherit;
   font-weight: 600;
@@ -168,14 +168,14 @@ body.dark .site-header .site-nav .nav-group-button.active {
 
 .site-nav .nav-group-button:hover {
   background: none;
-  color: #1d4ed8;
+  color: #1a5c46;
   text-decoration: underline;
   transform: none;
 }
 
 .site-nav .nav-group-button.active {
-  color: #111827;
-  border-bottom: 2px solid #1d4ed8;
+  color: #1c1a17;
+  border-bottom: 2px solid #1a5c46;
 }
 
 .site-nav .nav-dropdown {
@@ -187,9 +187,9 @@ body.dark .site-header .site-nav .nav-group-button.active {
   min-width: 220px;
   padding: 6px;
   background: #ffffff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e7e3da;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 25px rgba(28, 26, 23, 0.12);
   text-align: left;
   z-index: 50;
 }
@@ -212,12 +212,12 @@ body.dark .site-header .site-nav .nav-group-button.active {
 }
 
 .site-nav .nav-dropdown a:hover {
-  background: #eff6ff;
+  background: #eef4ef;
   text-decoration: none;
 }
 
 .site-nav .nav-dropdown a.active {
-  background: #eff6ff;
+  background: #eef4ef;
   border-bottom: none;
 }
 
@@ -257,7 +257,7 @@ body.dark .site-header .site-nav .nav-group-button.active {
 .site-nav .nav-mega-title {
   margin: 0 0 6px;
   padding: 0 12px;
-  color: #94a3b8;
+  color: #a39d92;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.2px;
@@ -268,15 +268,15 @@ body.dark .site-header .site-nav .nav-group-button.active {
 .site-nav .nav-mega a.nav-mega-all {
   margin-top: 10px;
   padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #e7e3da;
   border-radius: 0;
-  color: #2458d3;
+  color: #1f6b52;
   font-weight: 700;
 }
 
 body.dark .site-nav .nav-mega a.nav-mega-all {
-  border-color: #334155;
-  color: #93b4ff;
+  border-color: #45403a;
+  color: #8fd0b3;
 }
 
 @media (max-width: 760px) {
@@ -313,18 +313,18 @@ body.dark .site-nav .nav-mega a.nav-mega-all {
     min-height: 38px;
     margin: 0;
     padding: 0;
-    border: 1px solid #dbe4f2;
+    border: 1px solid #ddd7ca;
     border-radius: 9px;
     background: #fff;
-    color: #0f172a;
+    color: #1c1a17;
     font-size: 17px;
     transform: none;
   }
 
   body.dark .site-header .menu-button {
-    border-color: #334155;
-    background: #1a2335;
-    color: #f1f5f9;
+    border-color: #45403a;
+    background: #23221e;
+    color: #f4f2ec;
   }
 
   /* The menu is hidden until ☰ is pressed, then shows as a list */
@@ -345,13 +345,13 @@ body.dark .site-nav .nav-mega a.nav-mega-all {
   .site-header .site-nav .nav-group-button {
     width: 100%;
     padding: 10px 4px;
-    border-bottom: 1px solid #eef2f7 !important;
+    border-bottom: 1px solid #efece5 !important;
     text-align: left;
   }
 
   body.dark .site-header .site-nav > a,
   body.dark .site-header .site-nav .nav-group-button {
-    border-color: #1f2a3d !important;
+    border-color: #2b2925 !important;
   }
 
   .site-header .site-nav .nav-group.is-open {

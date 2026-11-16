@@ -80,11 +80,11 @@ Sara     Islamabad  2`}</pre>
             style={{
               maxWidth: '100%',
               height: 'auto',
-              border: '1px solid #e2e8f0',
+              border: '1px solid #e7e3da',
               borderRadius: '12px',
             }}
           />
-          <figcaption style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '0.5rem' }}>
+          <figcaption style={{ fontSize: '0.9rem', color: '#736d64', marginTop: '0.5rem' }}>
             Example: three JSON records converted to CSV with our tool. Click
             Download CSV, then open the file in Excel.
           </figcaption>
