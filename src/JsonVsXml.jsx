@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './NavBar.jsx'
+import QuickAnswer from './QuickAnswer.jsx'
 
 function JsonVsXml() {
   return (
@@ -13,6 +14,7 @@ function JsonVsXml() {
 
       <section className="seo-content">
         <p>Last updated: November 12, 2026</p>
+        <QuickAnswer slug="json-vs-xml" />
 
         <h2>Quick Answer</h2>
         <p>

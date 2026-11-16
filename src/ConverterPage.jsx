@@ -78,6 +78,15 @@ const OUTPUTS = {
 //   download                  { fileName, mimeType }
 //   options                   optional extra controls shown under the action buttons
 //   children                  the SEO text section shown under the tool
+// "Generate Schema" → "generate schema", but names stay as they are: "Generate C#", "Format XML", "Generate Python".
+const KEEP_CASE = new Set(['Go', 'Java', 'Python', 'Excel', 'TypeScript'])
+function tipVerb(label) {
+  return label
+    .split(' ')
+    .map((word) => (/^[A-Z][a-z]+$/.test(word) && !KEEP_CASE.has(word) ? word.toLowerCase() : word))
+    .join(' ')
+}
+
 function ConverterPage({
   h1,
   intro,
@@ -236,7 +245,7 @@ function ConverterPage({
         >
           <CodeEditor
             value={input}
-            placeholder={`${inputPlaceholder}\n\nTip: press Ctrl + Enter to ${primary.label.toLowerCase()}.`}
+            placeholder={`${inputPlaceholder}\n\nTip: press Ctrl + Enter to ${tipVerb(primary.label)}.`}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             errorLine={(inputIsJson && liveCheck?.location?.line) || errorLocation?.line || null}

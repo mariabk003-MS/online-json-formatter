@@ -342,3 +342,43 @@ pre {
   color: #111827;
   border-bottom: 2px solid #1d4ed8;
 }
+
+/* "Quick answer" box at the top of each guide */
+.quick-answer {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border: 1px solid #c7d7f2;
+  border-left: 4px solid #2457c5;
+  border-radius: 8px;
+  background: #f4f8ff;
+  text-align: left;
+}
+
+.quick-answer strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #173b8f;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.seo-content .quick-answer p {
+  margin: 0;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+body.dark .quick-answer {
+  border-color: #2b3d63;
+  border-left-color: #6d9cff;
+  background: #142038;
+}
+
+body.dark .quick-answer strong {
+  color: #9dbcff;
+}
+
+body.dark .seo-content .quick-answer p {
+  color: #dbe4f3;
+}

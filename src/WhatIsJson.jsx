@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './NavBar.jsx'
+import QuickAnswer from './QuickAnswer.jsx'
 
 function WhatIsJson() {
   return (
@@ -13,6 +14,7 @@ function WhatIsJson() {
 
       <section className="seo-content">
         <p>Last updated: November 12, 2026</p>
+        <QuickAnswer slug="what-is-json" />
 
         <h2>What Is JSON?</h2>
         <p>

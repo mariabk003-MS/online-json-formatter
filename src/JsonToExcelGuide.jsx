@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './NavBar.jsx'
+import QuickAnswer from './QuickAnswer.jsx'
 
 function JsonToExcelGuide() {
   return (
@@ -13,6 +14,7 @@ function JsonToExcelGuide() {
 
       <section className="seo-content">
         <p>Last updated: November 12, 2026</p>
+        <QuickAnswer slug="convert-json-to-excel" />
 
         <h2>Quick Answer</h2>
         <p>

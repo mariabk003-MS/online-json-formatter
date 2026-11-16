@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './NavBar.jsx'
+import QuickAnswer from './QuickAnswer.jsx'
 
 function ErrorExample({ wrong, right }) {
   return (
@@ -20,6 +21,7 @@ function JsonErrorsGuide() {
       <p>Clear examples of the mistakes that break JSON, and the quick fix for each one.</p>
 
       <section className="seo-content">
+        <QuickAnswer slug="common-json-errors" />
         <p>
           JSON looks simple, but one small mistake makes the whole file
           invalid. Most errors come from the same few problems. This guide

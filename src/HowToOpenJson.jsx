@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './NavBar.jsx'
+import QuickAnswer from './QuickAnswer.jsx'
 
 function HowToOpenJson() {
   return (
@@ -13,6 +14,7 @@ function HowToOpenJson() {
 
       <section className="seo-content">
         <p>Last updated: November 12, 2026</p>
+        <QuickAnswer slug="how-to-open-json-file" />
 
         <h2>What Is a JSON File?</h2>
         <p>

@@ -8,6 +8,7 @@ import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
 import { ToolPanel, Tool, Tabs, FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
+import QuickAnswer from './QuickAnswer.jsx'
 import { formatSize, downloadText } from './toolUtils.js'
 
 // A code example inside a guide. Write the code as a plain string.
@@ -29,6 +30,7 @@ export function ArticlePage({ h1, intro, updated, faqKey, related, children }) {
       <p>{intro}</p>
       <article className="seo-content article-body">
         {updated && <p className="article-meta">Last updated: {updated}</p>}
+        {faqKey && <QuickAnswer slug={faqKey} />}
         {children}
         {faqKey && FAQS[faqKey] && <FaqSection faqs={FAQS[faqKey]} />}
         {related && <RelatedTools links={related} />}
