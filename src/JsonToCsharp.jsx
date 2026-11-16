@@ -7,25 +7,13 @@ import { parseJsonLenient } from './toolUtils.js'
 import { jsonToCSharp } from './goCsharpGen.js'
 
 const SAMPLE = JSON.stringify(
-  {
-    id: 1024,
-    first_name: 'Emily',
-    email: 'emily@example.com',
-    is_active: true,
-    balance: 2500.75,
-    manager: null,
-    address: { city: 'London', postcode: 'SW1A 1AA' },
-    orders: [
-      { order_id: 'A-100', total: 49.99 },
-      { order_id: 'A-101', total: 19.5, coupon: 'SAVE10' },
-    ],
-  },
+  {"order_id":"A-2045","created_at":"2026-11-15T09:30:00Z","is_paid":true,"total":89.97,"discount":null,"customer":{"name":"James Smith","email":"james@example.com"},"items":[{"sku":"KB-01","quantity":1,"price":59.99},{"sku":"MS-02","quantity":2,"price":14.99,"gift_wrap":true}]},
   null,
   2
 )
 
 function JsonToCsharp() {
-  const [rootName, setRootName] = useState('Customer')
+  const [rootName, setRootName] = useState('Order')
   const [style, setStyle] = useState('class')
   const [library, setLibrary] = useState('system')
 
@@ -94,68 +82,85 @@ function JsonToCsharp() {
 
         <h2>Example</h2>
         <Code label="JSON">{`{
-  "id": 1024,
-  "first_name": "Emily",
-  "email": "emily@example.com",
-  "is_active": true,
-  "balance": 2500.75,
-  "manager": null,
-  "address": { "city": "London", "postcode": "SW1A 1AA" },
-  "orders": [
-    { "order_id": "A-100", "total": 49.99 },
-    { "order_id": "A-101", "total": 19.5, "coupon": "SAVE10" }
+  "order_id": "A-2045",
+  "created_at": "2026-11-15T09:30:00Z",
+  "is_paid": true,
+  "total": 89.97,
+  "discount": null,
+  "customer": {
+    "name": "James Smith",
+    "email": "james@example.com"
+  },
+  "items": [
+    {
+      "sku": "KB-01",
+      "quantity": 1,
+      "price": 59.99
+    },
+    {
+      "sku": "MS-02",
+      "quantity": 2,
+      "price": 14.99,
+      "gift_wrap": true
+    }
   ]
 }`}</Code>
         <Code label="C# (class, System.Text.Json)">{`using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
-public class Customer
-{
-    [JsonPropertyName("id")]
-    public long Id { get; set; }
-
-    [JsonPropertyName("first_name")]
-    public string FirstName { get; set; } = "";
-
-    [JsonPropertyName("email")]
-    public string Email { get; set; } = "";
-
-    [JsonPropertyName("is_active")]
-    public bool IsActive { get; set; }
-
-    [JsonPropertyName("balance")]
-    public double Balance { get; set; }
-
-    [JsonPropertyName("manager")]
-    public object? Manager { get; set; }
-
-    [JsonPropertyName("address")]
-    public Address Address { get; set; } = new();
-
-    [JsonPropertyName("orders")]
-    public List<Order> Orders { get; set; } = new();
-}
-
-public class Address
-{
-    [JsonPropertyName("city")]
-    public string City { get; set; } = "";
-
-    [JsonPropertyName("postcode")]
-    public string Postcode { get; set; } = "";
-}
 
 public class Order
 {
     [JsonPropertyName("order_id")]
     public string OrderId { get; set; } = "";
 
+    [JsonPropertyName("created_at")]
+    public string CreatedAt { get; set; } = "";
+
+    [JsonPropertyName("is_paid")]
+    public bool IsPaid { get; set; }
+
     [JsonPropertyName("total")]
     public double Total { get; set; }
 
-    [JsonPropertyName("coupon")]
-    public string? Coupon { get; set; }
+    [JsonPropertyName("discount")]
+    public object? Discount { get; set; }
+
+    [JsonPropertyName("customer")]
+    public Customer Customer { get; set; } = new();
+
+    [JsonPropertyName("items")]
+    public List<Item> Items { get; set; } = new();
+}
+
+public class Customer
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = "";
+
+    [JsonPropertyName("email")]
+    public string Email { get; set; } = "";
+}
+
+public class Item
+{
+    [JsonPropertyName("sku")]
+    public string Sku { get; set; } = "";
+
+    [JsonPropertyName("quantity")]
+    public long Quantity { get; set; }
+
+    [JsonPropertyName("price")]
+    public double Price { get; set; }
+
+    [JsonPropertyName("gift_wrap")]
+    public bool? GiftWrap { get; set; }
 }`}</Code>
+        <p>
+          The nested <code>customer</code> object becomes its own <code>Customer</code> class, the
+          <code> items</code> array becomes <code>List&lt;Item&gt;</code>, and <code>gift_wrap</code> is
+          <code> bool?</code> because only one item has it. <code>created_at</code> stays a
+          <code> string</code>: change it to <code>DateTimeOffset</code> to get a real date (see the tips below).
+        </p>
 
         <h2>How the Types Are Chosen</h2>
         <table>
@@ -182,10 +187,10 @@ public class Order
         <h2>Deserialize JSON in C#</h2>
         <Code label="System.Text.Json (.NET 6+)">{`using System.Text.Json;
 
-string json = File.ReadAllText("customer.json");
-Customer? customer = JsonSerializer.Deserialize<Customer>(json);
+string json = File.ReadAllText("order.json");
+Order? order = JsonSerializer.Deserialize<Order>(json);
 
-Console.WriteLine(customer?.FirstName);   // Emily`}</Code>
+Console.WriteLine(order?.Customer.Name);   // James Smith`}</Code>
         <p>
           System.Text.Json matches property names <strong>case-sensitively</strong> by
           default, which is why the generator adds <code>[JsonPropertyName]</code> to every
@@ -197,10 +202,10 @@ Console.WriteLine(customer?.FirstName);   // Emily`}</Code>
         <Code label="Newtonsoft.Json">{`// dotnet add package Newtonsoft.Json
 using Newtonsoft.Json;
 
-Customer? customer = JsonConvert.DeserializeObject<Customer>(json);`}</Code>
+Order? order = JsonConvert.DeserializeObject<Order>(json);`}</Code>
         <p>
           If the JSON is an array at the top level, deserialize it as
-          <code> List&lt;Customer&gt;</code>.
+          <code> List&lt;Order&gt;</code>.
         </p>
 
         <h2>Classes or Records?</h2>
