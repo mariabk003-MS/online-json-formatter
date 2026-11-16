@@ -5,7 +5,7 @@ function GuideUnexpectedToken() {
     <ArticlePage
       h1="Unexpected Token in JSON: What It Means and How to Fix It"
       intro="&quot;SyntaxError: Unexpected token&quot; is the most common JSON error. Here is what each version of the message means, how to find the exact cause, and how to fix it in seconds."
-      updated="November 15, 2026"
+      updated="November 16, 2026"
       faqKey="unexpected-token-in-json"
       related={[
         ['/json-repair', 'JSON Repair'],
@@ -90,6 +90,29 @@ console.log(text.slice(0, 200))       // see what really came back`}</Code>
       <p>
         Check the URL, the status code and that the server sends
         <code> Content-Type: application/json</code>.
+      </p>
+
+      <h3>It starts with &lt;?xml: the server sent XML</h3>
+      <p>
+        If the message reads
+        <code> Unexpected token &apos;&lt;&apos;, &quot;&lt;?xml vers&quot;... is not valid JSON</code>,
+        the response is an XML document, not an HTML page. Some APIs (older
+        REST and SOAP services, RSS feeds, many error pages from gateways)
+        answer in XML unless you ask for JSON.
+      </p>
+      <Code label="Ask for JSON">{`const response = await fetch(url, {
+  headers: { Accept: 'application/json' },
+})`}</Code>
+      <p>
+        If the API only speaks XML, read it as XML instead of calling
+        <code> JSON.parse</code>:
+      </p>
+      <Code label="Read XML in the browser">{`const text = await response.text()
+const xml = new DOMParser().parseFromString(text, 'application/xml')
+console.log(xml.querySelector('name')?.textContent)`}</Code>
+      <p>
+        Or paste the XML into <a href="/xml-to-json">XML to JSON</a> to turn it
+        into JSON you can work with.
       </p>
 
       <h2>Unexpected token Followed by a Word: the Server Sent a Text Error</h2>
@@ -194,6 +217,22 @@ const settings = saved ? JSON.parse(saved) : {}`}</Code>
         not JSON. Use <code>true</code>, <code>false</code> and <code>null</code>,
         or create the text with <code>json.dumps()</code> instead of
         <code> str()</code>.
+      </p>
+
+      <h2>Unexpected Token in a MongoDB Query</h2>
+      <p>
+        A query like <code>db.movies.find({'{'}rating{'{'}$gt:80{'}'}{'}'})</code> is
+        JavaScript, not JSON, but the cause is the same kind of typo: the colon
+        after <code>rating</code> is missing. The MongoDB shell (mongosh) reads
+        queries with the Babel parser, so it reports the spot as line:column:
+      </p>
+      <Code label="Error">{`SyntaxError: Unexpected token, expected "," (1:22)`}</Code>
+      <Code label="Wrong">{`db.movies.find({rating{$gt:80}})`}</Code>
+      <Code label="Right">{`db.movies.find({ rating: { $gt: 80 } })`}</Code>
+      <p>
+        Babel counts columns from 0, so column 22 is the 23rd character: the
+        second <code>{'{'}</code>, right where the colon should be. Every field in a filter needs <code>name: value</code>, and operators
+        like <code>$gt</code> sit inside their own braces.
       </p>
 
       <h2>Unexpected token / (comments)</h2>
