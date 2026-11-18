@@ -49,6 +49,7 @@ export default defineConfig({
         jsonToCsharp: fileURLToPath(new URL('./json-to-csharp.html', import.meta.url)),
         jsonToKotlin: fileURLToPath(new URL('./json-to-kotlin.html', import.meta.url)),
         jsonToDart: fileURLToPath(new URL('./json-to-dart.html', import.meta.url)),
+        jsonToSwift: fileURLToPath(new URL('./json-to-swift.html', import.meta.url)),
         jsonPath: fileURLToPath(new URL('./json-path.html', import.meta.url)),
         jsonSizeCalculator: fileURLToPath(new URL('./json-size-calculator.html', import.meta.url)),
         jsonInPython: fileURLToPath(new URL('./json-in-python.html', import.meta.url)),

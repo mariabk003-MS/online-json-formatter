@@ -163,6 +163,10 @@
       "destination": "/json-to-dart.html"
     },
     {
+      "source": "/json-to-swift",
+      "destination": "/json-to-swift.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

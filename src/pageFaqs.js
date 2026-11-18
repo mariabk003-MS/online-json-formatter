@@ -146,6 +146,12 @@ export const FAQS = {
     ["Why is a double read with (value as num).toDouble()?", "Dart decodes a JSON number without a decimal point, like 5, as an int, so casting it with as double would throw. Reading it as num and calling toDouble() works for both 5 and 5.5."],
     ["Is my JSON uploaded?", "No. The Dart code is generated in your browser and your JSON never leaves your device."],
   ],
+  'json-to-swift': [
+    ["How do I convert JSON to a Swift struct?", "Paste a sample of your JSON into the converter and click Generate Swift. It writes Codable structs with nested types, arrays, optionals and CodingKeys that you can decode with JSONDecoder."],
+    ["What are CodingKeys for?", "CodingKeys map a Swift property name to a different JSON key, such as tempC to temp_c. The converter adds them whenever a key is not already a valid camelCase Swift name."],
+    ["Why did my data object become DataModel?", "A struct named Data would hide Foundation's Data type and break code that uses it, so names that clash with Swift or Foundation types get a Model suffix. You can rename it to anything else."],
+    ["Is my JSON uploaded?", "No. The Swift code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],
