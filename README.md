@@ -2,9 +2,9 @@
 
 **Live site: [online-json-formatter-ten.vercel.app](https://online-json-formatter-ten.vercel.app/)**
 
-30 free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
+35+ free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
 
-![Online JSON Formatter: 30 free JSON tools in your browser](docs/cover.png)
+![Online JSON Formatter: 35+ free JSON tools in your browser](docs/cover.png)
 
 ## Why use it
 
@@ -47,6 +47,12 @@
 | [JSON to TypeScript](https://online-json-formatter-ten.vercel.app/json-to-typescript) | Generate TypeScript interfaces from JSON. |
 | [JSON to Python](https://online-json-formatter-ten.vercel.app/json-to-python) | Generate dataclasses or Pydantic models. |
 | [JSON to Java](https://online-json-formatter-ten.vercel.app/json-to-java) | Generate Java classes or records. |
+| [JSON to Go](https://online-json-formatter-ten.vercel.app/json-to-go) | Generate Go structs with json tags. |
+| [JSON to C#](https://online-json-formatter-ten.vercel.app/json-to-csharp) | Generate C# classes or records. |
+| [JSON to Kotlin](https://online-json-formatter-ten.vercel.app/json-to-kotlin) | Generate Kotlin data classes. |
+| [JSON to Dart](https://online-json-formatter-ten.vercel.app/json-to-dart) | Generate Dart models for Flutter. |
+| [JSON to Swift](https://online-json-formatter-ten.vercel.app/json-to-swift) | Generate Swift Codable structs. |
+| [JSON to Rust](https://online-json-formatter-ten.vercel.app/json-to-rust) | Generate Rust structs for serde. |
 | [JSON Schema Generator](https://online-json-formatter-ten.vercel.app/json-schema-generator) | Create a JSON Schema from an example. |
 
 ### Check & query
