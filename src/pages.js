@@ -42,6 +42,7 @@ export const PAGES = {
   '/json-to-java': () => import('./JsonToJava.jsx'),
   '/json-to-go': () => import('./JsonToGo.jsx'),
   '/json-to-csharp': () => import('./JsonToCsharp.jsx'),
+  '/json-to-kotlin': () => import('./JsonToKotlin.jsx'),
   '/json-path': () => import('./JsonPathPage.jsx'),
   '/json-size-calculator': () => import('./JsonSizeCalculator.jsx'),
   '/json-in-python': () => import('./GuidePythonJson.jsx'),

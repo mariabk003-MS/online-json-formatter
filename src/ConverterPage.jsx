@@ -79,7 +79,7 @@ const OUTPUTS = {
 //   options                   optional extra controls shown under the action buttons
 //   children                  the SEO text section shown under the tool
 // "Generate Schema" → "generate schema", but names stay as they are: "Generate C#", "Format XML", "Generate Python".
-const KEEP_CASE = new Set(['Go', 'Java', 'Python', 'Excel', 'TypeScript'])
+const KEEP_CASE = new Set(['Go', 'Java', 'Python', 'Excel', 'TypeScript', 'Kotlin', 'Dart'])
 function tipVerb(label) {
   return label
     .split(' ')

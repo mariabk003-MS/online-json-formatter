@@ -155,6 +155,10 @@
       "destination": "/json-to-csharp.html"
     },
     {
+      "source": "/json-to-kotlin",
+      "destination": "/json-to-kotlin.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

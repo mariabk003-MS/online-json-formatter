@@ -134,6 +134,12 @@ export const FAQS = {
     ["Why does every property have a JsonPropertyName attribute?", "System.Text.Json matches names case-sensitively by default, so a key like first_name only maps to a FirstName property when the attribute says so."],
     ["Is my JSON uploaded?", "No. The C# code is generated in your browser and your JSON never leaves your device."],
   ],
+  'json-to-kotlin': [
+    ["How do I convert JSON to a Kotlin data class?", "Paste a sample of your JSON into the converter and click Generate Kotlin. It writes data classes with nested types, List<T> and nullable fields, plus kotlinx.serialization, Gson or Moshi annotations."],
+    ["Which library should I use: kotlinx.serialization, Gson or Moshi?", "kotlinx.serialization is a good default for new projects and works on Kotlin Multiplatform. Moshi is popular with Retrofit on Android. Gson is common in older projects but ignores Kotlin default values and null safety."],
+    ["Why are whole numbers Long instead of Int?", "Long holds IDs larger than 2,147,483,647 without overflowing. If you know your values are small, change the type to Int."],
+    ["Is my JSON uploaded?", "No. The Kotlin code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],

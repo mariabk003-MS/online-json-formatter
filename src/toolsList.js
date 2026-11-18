@@ -31,6 +31,7 @@ export const TOOL_GROUPS = [
       { href: '/json-to-java', label: 'JSON to Java', text: 'Generate Java classes or records.' },
       { href: '/json-to-go', label: 'JSON to Go', text: 'Generate Go structs with json tags.' },
       { href: '/json-to-csharp', label: 'JSON to C#', text: 'Generate C# classes or records.' },
+      { href: '/json-to-kotlin', label: 'JSON to Kotlin', text: 'Generate Kotlin data classes.' },
       { href: '/json-schema-generator', label: 'JSON Schema Generator', text: 'Create a JSON Schema from an example.' },
     ],
   },
