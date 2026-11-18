@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON to Rust Struct Generator for serde - Free &amp; Private</title>
+    <meta name="description" content="Generate Rust structs from JSON with serde derives, Vec&lt;T&gt;, Option&lt;T&gt; and rename attributes for serde_json. Free, private, runs in your browser." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-rust" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON to Rust Struct Generator for serde - Free &amp; Private" />
+    <meta property="og:description" content="Generate Rust structs from JSON with serde derives, Vec&lt;T&gt;, Option&lt;T&gt; and rename attributes for serde_json. Free, private, runs in your browser." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-rust" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 30 free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON to Rust Struct Generator for serde - Free &amp; Private" />
+    <meta name="twitter:description" content="Generate Rust structs from JSON with serde derives, Vec&lt;T&gt;, Option&lt;T&gt; and rename attributes for serde_json. Free, private, runs in your browser." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "dateModified": "2026-11-18",
+      "name": "JSON to Rust Generator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-rust",
+      "description": "Generate Rust structs from JSON with serde derives, Vec<T>, Option<T> and rename attributes for serde_json. Free, private, runs in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert JSON to a Rust struct?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste a sample of your JSON into the converter and click Generate Rust. It writes structs with serde Serialize and Deserialize derives, Vec<T>, Option<T> and rename attributes, ready for serde_json::from_str."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which crates do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add serde with the derive feature and serde_json to Cargo.toml: serde = { version = \"1\", features = [\"derive\"] } and serde_json = \"1\"."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are keys like type or userName handled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rust keywords become raw identifiers such as r#type, which serde still reads as \"type\". camelCase keys become snake_case fields with #[serde(rename)] so they match the JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Rust code is generated in your browser and your JSON never leaves your device."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON to Rust Generator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-rust"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

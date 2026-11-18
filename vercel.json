@@ -167,6 +167,10 @@
       "destination": "/json-to-swift.html"
     },
     {
+      "source": "/json-to-rust",
+      "destination": "/json-to-rust.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

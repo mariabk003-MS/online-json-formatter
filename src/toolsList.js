@@ -34,6 +34,7 @@ export const TOOL_GROUPS = [
       { href: '/json-to-kotlin', label: 'JSON to Kotlin', text: 'Generate Kotlin data classes.' },
       { href: '/json-to-dart', label: 'JSON to Dart', text: 'Generate Dart models for Flutter.' },
       { href: '/json-to-swift', label: 'JSON to Swift', text: 'Generate Swift Codable structs.' },
+      { href: '/json-to-rust', label: 'JSON to Rust', text: 'Generate Rust structs for serde.' },
       { href: '/json-schema-generator', label: 'JSON Schema Generator', text: 'Create a JSON Schema from an example.' },
     ],
   },

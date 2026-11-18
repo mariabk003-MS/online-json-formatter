@@ -152,6 +152,12 @@ export const FAQS = {
     ["Why did my data object become DataModel?", "A struct named Data would hide Foundation's Data type and break code that uses it, so names that clash with Swift or Foundation types get a Model suffix. You can rename it to anything else."],
     ["Is my JSON uploaded?", "No. The Swift code is generated in your browser and your JSON never leaves your device."],
   ],
+  'json-to-rust': [
+    ["How do I convert JSON to a Rust struct?", "Paste a sample of your JSON into the converter and click Generate Rust. It writes structs with serde Serialize and Deserialize derives, Vec<T>, Option<T> and rename attributes, ready for serde_json::from_str."],
+    ["Which crates do I need?", "Add serde with the derive feature and serde_json to Cargo.toml: serde = { version = \"1\", features = [\"derive\"] } and serde_json = \"1\"."],
+    ["How are keys like type or userName handled?", "Rust keywords become raw identifiers such as r#type, which serde still reads as \"type\". camelCase keys become snake_case fields with #[serde(rename)] so they match the JSON."],
+    ["Is my JSON uploaded?", "No. The Rust code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],
