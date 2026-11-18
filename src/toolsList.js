@@ -32,6 +32,7 @@ export const TOOL_GROUPS = [
       { href: '/json-to-go', label: 'JSON to Go', text: 'Generate Go structs with json tags.' },
       { href: '/json-to-csharp', label: 'JSON to C#', text: 'Generate C# classes or records.' },
       { href: '/json-to-kotlin', label: 'JSON to Kotlin', text: 'Generate Kotlin data classes.' },
+      { href: '/json-to-dart', label: 'JSON to Dart', text: 'Generate Dart models for Flutter.' },
       { href: '/json-schema-generator', label: 'JSON Schema Generator', text: 'Create a JSON Schema from an example.' },
     ],
   },

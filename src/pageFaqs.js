@@ -140,6 +140,12 @@ export const FAQS = {
     ["Why are whole numbers Long instead of Int?", "Long holds IDs larger than 2,147,483,647 without overflowing. If you know your values are small, change the type to Int."],
     ["Is my JSON uploaded?", "No. The Kotlin code is generated in your browser and your JSON never leaves your device."],
   ],
+  'json-to-dart': [
+    ["How do I convert JSON to a Dart class?", "Paste a sample of your JSON into the converter and click Generate Dart. It writes null-safe Dart classes with fromJson and toJson, nested models and List<T>, ready for a Flutter app."],
+    ["Should I write fromJson by hand or use json_serializable?", "Hand-written fromJson and toJson need no packages or build step, which suits small apps. json_serializable generates the code with build_runner, which saves work when you have many models. The converter can write either style."],
+    ["Why is a double read with (value as num).toDouble()?", "Dart decodes a JSON number without a decimal point, like 5, as an int, so casting it with as double would throw. Reading it as num and calling toDouble() works for both 5 and 5.5."],
+    ["Is my JSON uploaded?", "No. The Dart code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],

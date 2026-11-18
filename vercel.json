@@ -159,6 +159,10 @@
       "destination": "/json-to-kotlin.html"
     },
     {
+      "source": "/json-to-dart",
+      "destination": "/json-to-dart.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

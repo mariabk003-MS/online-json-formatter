@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON to Dart Model Generator - Flutter fromJson &amp; toJson</title>
+    <meta name="description" content="Generate null-safe Dart classes from JSON with fromJson, toJson, nested models and List&lt;T&gt;, plain or for json_serializable. Free and private." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/json-to-dart" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON to Dart Model Generator - Flutter fromJson &amp; toJson" />
+    <meta property="og:description" content="Generate null-safe Dart classes from JSON with fromJson, toJson, nested models and List&lt;T&gt;, plain or for json_serializable. Free and private." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/json-to-dart" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 30 free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON to Dart Model Generator - Flutter fromJson &amp; toJson" />
+    <meta name="twitter:description" content="Generate null-safe Dart classes from JSON with fromJson, toJson, nested models and List&lt;T&gt;, plain or for json_serializable. Free and private." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "dateModified": "2026-11-18",
+      "name": "JSON to Dart Generator",
+      "url": "https://online-json-formatter-ten.vercel.app/json-to-dart",
+      "description": "Generate null-safe Dart classes from JSON with fromJson, toJson, nested models and List<T>, plain or for json_serializable. Free and private.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert JSON to a Dart class?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste a sample of your JSON into the converter and click Generate Dart. It writes null-safe Dart classes with fromJson and toJson, nested models and List<T>, ready for a Flutter app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I write fromJson by hand or use json_serializable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hand-written fromJson and toJson need no packages or build step, which suits small apps. json_serializable generates the code with build_runner, which saves work when you have many models. The converter can write either style."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is a double read with (value as num).toDouble()?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dart decodes a JSON number without a decimal point, like 5, as an int, so casting it with as double would throw. Reading it as num and calling toDouble() works for both 5 and 5.5."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my JSON uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Dart code is generated in your browser and your JSON never leaves your device."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON to Dart Generator",
+          "item": "https://online-json-formatter-ten.vercel.app/json-to-dart"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
