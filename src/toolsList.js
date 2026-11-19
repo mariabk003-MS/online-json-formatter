@@ -79,6 +79,7 @@ export const GUIDES = [
   { href: '/json-syntax-rules', label: 'JSON Syntax Rules' },
   { href: '/common-json-errors', label: 'Common JSON Errors' },
   { href: '/unexpected-token-in-json', label: 'Unexpected Token in JSON' },
+  { href: '/curl-post-json', label: 'Send JSON with curl' },
   { href: '/pretty-print-json', label: 'How to Pretty Print JSON' },
   { href: '/json-comments', label: 'JSON Comments' },
   { href: '/json-in-python', label: 'JSON in Python' },

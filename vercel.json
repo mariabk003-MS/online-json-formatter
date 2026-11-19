@@ -171,6 +171,10 @@
       "destination": "/json-to-rust.html"
     },
     {
+      "source": "/curl-post-json",
+      "destination": "/curl-post-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

@@ -33,6 +33,8 @@ export const QUICK_ANSWERS = {
     'With pandas: pd.read_json("data.json").to_csv("data.csv", index=False). Without pandas, load the file with json.load and write it with csv.DictWriter. For nested JSON, flatten it first with pd.json_normalize.',
   'import-json-into-database':
     'For a one-off import, turn the JSON into INSERT statements and run them. For repeated imports, let the database read the JSON (json_populate_recordset in PostgreSQL, JSON_TABLE in MySQL 8, json_each in SQLite) or load it with a short script.',
+  'curl-post-json':
+    "Add the header -H \"Content-Type: application/json\" and pass the JSON with -d: curl -H \"Content-Type: application/json\" -d '{\"name\":\"Emily\"}' URL. curl 7.82+ can use --json instead. On Windows, escape the inner quotes as \\\" or send a file with --data-binary @file.json.",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

@@ -236,6 +236,12 @@ export const FAQS = {
     ["Can a JSON Lines file have pretty printed JSON?", "No. Every record must be on a single line."],
     ["How do I convert JSON Lines to a JSON array?", "Read the file line by line, parse each non-empty line with JSON.parse or json.loads, and collect the results in a list."],
   ],
+  'curl-post-json': [
+    ["How do I send JSON with curl?", "Use -d with the JSON and add the header -H \"Content-Type: application/json\", for example: curl -H \"Content-Type: application/json\" -d '{\"name\":\"Emily\"}' https://api.example.com/users. With curl 7.82 or newer, curl --json '{\"name\":\"Emily\"}' URL does the same."],
+    ["Why does the server not see my JSON body?", "Without the Content-Type: application/json header, curl sends the body as application/x-www-form-urlencoded, and many frameworks then ignore it or return 400 or 415. Add the header or use --json."],
+    ["Why does curl send invalid JSON on Windows?", "Windows PowerShell 5.1 strips the double quotes inside single-quoted JSON, and cmd.exe does not treat single quotes as quotes at all. Escape each double quote as \\\" or send the JSON from a file with --data-binary @file.json."],
+    ["How do I send a JSON file with curl?", "Put @ before the file name: curl -H \"Content-Type: application/json\" --data-binary @data.json URL, or curl --json @data.json URL. --data-binary keeps the file exactly as written, while -d removes line breaks."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

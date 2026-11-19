@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>How to Send JSON with curl: POST, Files &amp; Windows</title>
+    <meta name="description" content="Send JSON with curl: the Content-Type header, --json, posting a file, PUT and auth headers, and the quoting fix for PowerShell and cmd on Windows." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/curl-post-json" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="How to Send JSON with curl: POST, Files &amp; Windows" />
+    <meta property="og:description" content="Send JSON with curl: the Content-Type header, --json, posting a file, PUT and auth headers, and the quoting fix for PowerShell and cmd on Windows." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/curl-post-json" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 35+ free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to Send JSON with curl: POST, Files &amp; Windows" />
+    <meta name="twitter:description" content="Send JSON with curl: the Content-Type header, --json, posting a file, PUT and auth headers, and the quoting fix for PowerShell and cmd on Windows." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "How to Send JSON with curl",
+      "name": "How to Send JSON with curl",
+      "description": "Send JSON with curl: the Content-Type header, --json, posting a file, PUT and auth headers, and the quoting fix for PowerShell and cmd on Windows.",
+      "url": "https://online-json-formatter-ten.vercel.app/curl-post-json",
+      "datePublished": "2026-11-19",
+      "dateModified": "2026-11-19",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I send JSON with curl?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use -d with the JSON and add the header -H \"Content-Type: application/json\", for example: curl -H \"Content-Type: application/json\" -d '{\"name\":\"Emily\"}' https://api.example.com/users. With curl 7.82 or newer, curl --json '{\"name\":\"Emily\"}' URL does the same."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the server not see my JSON body?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Without the Content-Type: application/json header, curl sends the body as application/x-www-form-urlencoded, and many frameworks then ignore it or return 400 or 415. Add the header or use --json."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does curl send invalid JSON on Windows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Windows PowerShell 5.1 strips the double quotes inside single-quoted JSON, and cmd.exe does not treat single quotes as quotes at all. Escape each double quote as \\\" or send the JSON from a file with --data-binary @file.json."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I send a JSON file with curl?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Put @ before the file name: curl -H \"Content-Type: application/json\" --data-binary @data.json URL, or curl --json @data.json URL. --data-binary keeps the file exactly as written, while -d removes line breaks."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How to Send JSON with curl",
+          "item": "https://online-json-formatter-ten.vercel.app/curl-post-json"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

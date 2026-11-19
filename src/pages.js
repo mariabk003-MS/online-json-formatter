@@ -52,6 +52,7 @@ export const PAGES = {
   '/javascript-json-parse': () => import('./GuideJsParse.jsx'),
   '/json-lines': () => import('./GuideJsonLines.jsx'),
   '/unexpected-token-in-json': () => import('./GuideUnexpectedToken.jsx'),
+  '/curl-post-json': () => import('./GuideCurlJson.jsx'),
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),

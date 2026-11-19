@@ -76,6 +76,11 @@ SyntaxError: Unexpected end of JSON input`}</Code>
       <p>JSON only allows double quotes around keys and strings.</p>
       <Code label="Wrong">{`{'name': 'Emily'}`}</Code>
       <Code label="Right">{`{"name": "Emily"}`}</Code>
+      <p>
+        Seeing this from an API after sending a request with curl on Windows? cmd.exe sends
+        single quotes as part of the body, so the server gets <code>&apos;{'{'}...{'}'}&apos;</code>. See
+        <a href="/curl-post-json"> how to send JSON with curl</a> for the fix.
+      </p>
 
       <h2>Unexpected token &lt; (HTML instead of JSON)</h2>
       <p>
