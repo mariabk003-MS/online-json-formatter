@@ -242,6 +242,12 @@ export const FAQS = {
     ["Why does curl send invalid JSON on Windows?", "Windows PowerShell 5.1 strips the double quotes inside single-quoted JSON, and cmd.exe does not treat single quotes as quotes at all. Escape each double quote as \\\" or send the JSON from a file with --data-binary @file.json."],
     ["How do I send a JSON file with curl?", "Put @ before the file name: curl -H \"Content-Type: application/json\" --data-binary @data.json URL, or curl --json @data.json URL. --data-binary keeps the file exactly as written, while -d removes line breaks."],
   ],
+  'read-json-file-nodejs': [
+    ["How do I read a JSON file in Node.js?", "Read it as text and parse it: JSON.parse(fs.readFileSync('data.json', 'utf8')). In async code use readFile from node:fs/promises. require('./data.json') and import data from './data.json' with { type: 'json' } also work, but they read the file only once."],
+    ["How do I write JSON to a file in Node.js?", "Turn the object into text with JSON.stringify(data, null, 2) and save it with fs.writeFileSync('data.json', text) or await writeFile from node:fs/promises. The 2 indents the file so it is easy to read."],
+    ["Why do I get ENOENT when the file exists?", "A relative path is resolved from the folder you run node in, not the folder of the script. Build the path with path.join(__dirname, 'data.json') in CommonJS or new URL('./data.json', import.meta.url) in ES modules."],
+    ["Why does JSON.parse fail on the first character of a valid-looking file?", "The file probably starts with an invisible byte order mark (BOM) added by some Windows editors. Remove it with text.replace(/^\ufeff/, '') before parsing, or re-save the file as UTF-8 without BOM."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

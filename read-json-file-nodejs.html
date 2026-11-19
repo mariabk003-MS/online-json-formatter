@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Read &amp; Write a JSON File in Node.js (fs, require, import)</title>
+    <meta name="description" content="Read and write JSON files in Node.js with fs, fs/promises, require and import, plus fixes for ENOENT, the hidden BOM and invalid JSON errors." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/read-json-file-nodejs" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="Read &amp; Write a JSON File in Node.js (fs, require, import)" />
+    <meta property="og:description" content="Read and write JSON files in Node.js with fs, fs/promises, require and import, plus fixes for ENOENT, the hidden BOM and invalid JSON errors." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/read-json-file-nodejs" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 35+ free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Read &amp; Write a JSON File in Node.js (fs, require, import)" />
+    <meta name="twitter:description" content="Read and write JSON files in Node.js with fs, fs/promises, require and import, plus fixes for ENOENT, the hidden BOM and invalid JSON errors." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "How to Read and Write a JSON File in Node.js",
+      "name": "How to Read and Write a JSON File in Node.js",
+      "description": "Read and write JSON files in Node.js with fs, fs/promises, require and import, plus fixes for ENOENT, the hidden BOM and invalid JSON errors.",
+      "url": "https://online-json-formatter-ten.vercel.app/read-json-file-nodejs",
+      "datePublished": "2026-11-19",
+      "dateModified": "2026-11-19",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I read a JSON file in Node.js?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read it as text and parse it: JSON.parse(fs.readFileSync('data.json', 'utf8')). In async code use readFile from node:fs/promises. require('./data.json') and import data from './data.json' with { type: 'json' } also work, but they read the file only once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I write JSON to a file in Node.js?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turn the object into text with JSON.stringify(data, null, 2) and save it with fs.writeFileSync('data.json', text) or await writeFile from node:fs/promises. The 2 indents the file so it is easy to read."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do I get ENOENT when the file exists?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A relative path is resolved from the folder you run node in, not the folder of the script. Build the path with path.join(__dirname, 'data.json') in CommonJS or new URL('./data.json', import.meta.url) in ES modules."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does JSON.parse fail on the first character of a valid-looking file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The file probably starts with an invisible byte order mark (BOM) added by some Windows editors. Remove it with text.replace(/^\ufeff/, '') before parsing, or re-save the file as UTF-8 without BOM."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How to Read and Write a JSON File in Node.js",
+          "item": "https://online-json-formatter-ten.vercel.app/read-json-file-nodejs"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

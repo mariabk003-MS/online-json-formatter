@@ -84,6 +84,7 @@ export const GUIDES = [
   { href: '/json-comments', label: 'JSON Comments' },
   { href: '/json-in-python', label: 'JSON in Python' },
   { href: '/javascript-json-parse', label: 'JSON.parse in JavaScript' },
+  { href: '/read-json-file-nodejs', label: 'Read a JSON File in Node.js' },
   { href: '/json-lines', label: 'JSON Lines (JSONL)' },
   { href: '/how-to-open-json-file', label: 'How to Open a JSON File' },
   { href: '/json-vs-xml', label: 'JSON vs XML' },

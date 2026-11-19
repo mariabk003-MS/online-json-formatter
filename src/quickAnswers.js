@@ -35,6 +35,8 @@ export const QUICK_ANSWERS = {
     'For a one-off import, turn the JSON into INSERT statements and run them. For repeated imports, let the database read the JSON (json_populate_recordset in PostgreSQL, JSON_TABLE in MySQL 8, json_each in SQLite) or load it with a short script.',
   'curl-post-json':
     "Add the header -H \"Content-Type: application/json\" and pass the JSON with -d: curl -H \"Content-Type: application/json\" -d '{\"name\":\"Emily\"}' URL. curl 7.82+ can use --json instead. On Windows, escape the inner quotes as \\\" or send a file with --data-binary @file.json.",
+  'read-json-file-nodejs':
+    "Read the file as text and parse it: JSON.parse(fs.readFileSync('data.json', 'utf8')), or use readFile from node:fs/promises in async code. To save, use fs.writeFileSync('data.json', JSON.stringify(data, null, 2)). require() and import also load JSON but cache it.",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

@@ -100,6 +100,8 @@ await writeFile('config.json', JSON.stringify(config, null, 2) + '\\n')`}</Code>
         The <code>&apos;utf8&apos;</code> argument returns text instead of a buffer, and
         the extra newline at the end keeps editors and Git happy. More options
         for indentation are in <a href="/pretty-print-json">How to Pretty Print JSON</a>.
+        For require, import, ENOENT and BOM errors, see
+        <a href="/read-json-file-nodejs"> how to read and write a JSON file in Node.js</a>.
       </p>
     </ArticlePage>
   )

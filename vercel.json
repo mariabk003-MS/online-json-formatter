@@ -175,6 +175,10 @@
       "destination": "/curl-post-json.html"
     },
     {
+      "source": "/read-json-file-nodejs",
+      "destination": "/read-json-file-nodejs.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
