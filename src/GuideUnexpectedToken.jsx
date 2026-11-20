@@ -5,7 +5,7 @@ function GuideUnexpectedToken() {
     <ArticlePage
       h1="Unexpected Token in JSON: What It Means and How to Fix It"
       intro="&quot;SyntaxError: Unexpected token&quot; is the most common JSON error. Here is what each version of the message means, how to find the exact cause, and how to fix it in seconds."
-      updated="November 16, 2026"
+      updated="November 20, 2026"
       faqKey="unexpected-token-in-json"
       related={[
         ['/json-repair', 'JSON Repair'],
@@ -143,6 +143,8 @@ console.log(xml.querySelector('name')?.textContent)`}</Code>
           <tr><td><code>&apos;T&apos;, &quot;Too Many Requests&quot;</code></td><td>HTTP 429: you hit a rate limit</td></tr>
           <tr><td><code>&apos;R&apos;, &quot;Request En&quot;...</code></td><td>&quot;Request Entity Too Large&quot; (HTTP 413): the request body is over the server&apos;s size limit</td></tr>
           <tr><td><code>&apos;t&apos;, &quot;too large&quot;</code> (Chrome shows <code>&apos;o&apos;</code>)</td><td>A short size-limit message. The request or file is bigger than the server or service allows. Chrome names the <code>o</code> because it first reads the <code>t</code> as the start of <code>true</code>.</td></tr>
+          <tr><td><code>&apos;d&apos;, &quot;denied.&quot;</code> or <code>&apos;A&apos;, &quot;Access denied.&quot;</code></td><td>An access-denied message (often HTTP 401 or 403) from the server, a firewall or a web application firewall that blocked the request. Check the API key, login and IP allow-list.</td></tr>
+          <tr><td><code>&apos;f&apos;, &quot;failed to fetch&quot;</code> (Chrome shows <code>&apos;i&apos;</code>)</td><td>The server could not get data from another service and returned that error as plain text. This is not the browser&apos;s own <code>TypeError: Failed to fetch</code>, which means no response arrived at all (network or CORS) and happens before any JSON parsing.</td></tr>
           <tr><td>An invisible or strange character, like <code>&apos;\u001f&apos;</code>, followed by garbled text</td><td>Compressed or binary data, not text. Gzip data always starts with the byte <code>1F</code>. See the next section.</td></tr>
           <tr><td><code>&apos;&lt;&apos;, &quot;&lt;html&gt; &lt;he&quot;...</code></td><td>An HTML error page, often a 502 or 504 page from nginx or a CDN</td></tr>
         </tbody>
@@ -162,6 +164,37 @@ const data = JSON.parse(text)`}</Code>
       <p>
         Then fix the real cause: a backend that is down, a wrong URL, a missing
         API key, a rate limit, or a payload that is too big.
+      </p>
+
+      <h2>Unexpected Token from a PHP Backend</h2>
+      <p>
+        PHP sends everything a script prints, so debug output or a warning ends up in
+        front of the JSON. The first characters give it away:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Error you see</th><th>What PHP printed before the JSON</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Unexpected token &apos;s&apos;, &quot;string(3) &quot;...</code></td><td>A leftover <code>var_dump()</code>, which prints <code>string(3) &quot;out&quot;</code></td></tr>
+          <tr><td><code>Unexpected token &apos;A&apos;, &quot;Array (&quot;...</code></td><td>A leftover <code>print_r()</code> of an array</td></tr>
+          <tr><td><code>Unexpected token &apos;&lt;&apos;, &quot;&lt;br /&gt; &lt;b&gt;&quot;...</code></td><td>A PHP warning or notice, such as <code>Undefined variable</code>, printed as HTML</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Remove the debug lines, keep warnings out of the response, and send only the
+        JSON:
+      </p>
+      <Code label="PHP">{`<?php
+ini_set('display_errors', '0');   // log errors instead of printing them
+header('Content-Type: application/json');
+
+echo json_encode($data);
+exit;`}</Code>
+      <p>
+        Also check for a blank line or spaces before <code>&lt;?php</code> in any included
+        file, and a closing <code>?&gt;</code> followed by a newline: both add text to the
+        response. Open the API URL directly in the browser to see exactly what it returns.
       </p>
 
       <h2>Unexpected Token with Garbled Characters: Compressed or Binary Data</h2>
