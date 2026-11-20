@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Unexpected End of JSON Input: Causes &amp; Fixes</title>
+    <meta name="description" content="Fix 'Unexpected end of JSON input' in JavaScript: empty and 204 responses, JSON.parse(''), localStorage and cut-off JSON, with tested examples." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/unexpected-end-of-json-input" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="Unexpected End of JSON Input: Causes &amp; Fixes" />
+    <meta property="og:description" content="Fix 'Unexpected end of JSON input' in JavaScript: empty and 204 responses, JSON.parse(''), localStorage and cut-off JSON, with tested examples." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/unexpected-end-of-json-input" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 35+ free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Unexpected End of JSON Input: Causes &amp; Fixes" />
+    <meta name="twitter:description" content="Fix 'Unexpected end of JSON input' in JavaScript: empty and 204 responses, JSON.parse(''), localStorage and cut-off JSON, with tested examples." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "SyntaxError: Unexpected End of JSON Input (How to Fix It)",
+      "name": "SyntaxError: Unexpected End of JSON Input (How to Fix It)",
+      "description": "Fix 'Unexpected end of JSON input' in JavaScript: empty and 204 responses, JSON.parse(''), localStorage and cut-off JSON, with tested examples.",
+      "url": "https://online-json-formatter-ten.vercel.app/unexpected-end-of-json-input",
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does Unexpected end of JSON input mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JavaScript reached the end of the text before the JSON was complete. Most often the text is empty, for example a 204 No Content response or an API that returned an empty body."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does response.json() throw Unexpected end of JSON input?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The response has no body. A 204 response never has one, and some servers end the response without sending JSON. Read it with response.text() and only call JSON.parse when the text is not empty."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does JSON.parse(null) throw an error?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. JSON.parse(null) returns null, so a missing localStorage key does not throw. JSON.parse('') throws Unexpected end of JSON input, and JSON.parse(undefined) throws \"undefined\" is not valid JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know if my JSON was cut off?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If the position in the error equals the length of the text, the JSON stops early. Compare the Content-Length header with what you received, or check that the text ends with } or ]."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SyntaxError: Unexpected End of JSON Input (How to Fix It)",
+          "item": "https://online-json-formatter-ten.vercel.app/unexpected-end-of-json-input"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

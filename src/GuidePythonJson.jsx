@@ -159,7 +159,7 @@ user = response.json()`}</Code>
           <tr><td><code>FileNotFoundError: [Errno 2] No such file or directory</code></td><td>The path is wrong, or the script runs from another folder. Use a full path, or build it with <code>pathlib.Path(__file__).parent / &quot;data.json&quot;</code>.</td></tr>
           <tr><td><code>UnicodeDecodeError: &apos;charmap&apos; codec can&apos;t decode byte 0x81...</code></td><td>On Windows, <code>open()</code> without an encoding uses an old code page. Always pass <code>encoding=&quot;utf-8&quot;</code>.</td></tr>
           <tr><td><code>JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig)</code></td><td>The file was saved with a byte order mark, common from Excel and Notepad. Open it with <code>encoding=&quot;utf-8-sig&quot;</code>.</td></tr>
-          <tr><td><code>JSONDecodeError: Expecting value: line 1 column 1 (char 0)</code></td><td>The file is empty, or it is not JSON at all (for example an HTML page you downloaded by mistake).</td></tr>
+          <tr><td><code>JSONDecodeError: Expecting value: line 1 column 1 (char 0)</code></td><td>The file is empty, or it is not JSON at all (for example an HTML page you downloaded by mistake). See <a href="/jsondecodeerror-expecting-value">JSONDecodeError: Expecting value</a> for every cause.</td></tr>
           <tr><td><code>JSONDecodeError: Extra data: line 2 column 1</code></td><td>The file has one JSON object per line. That is <a href="/json-lines">JSON Lines</a>: read it line by line with <code>json.loads</code>.</td></tr>
         </tbody>
       </table>

@@ -37,6 +37,10 @@ export const QUICK_ANSWERS = {
     "Add the header -H \"Content-Type: application/json\" and pass the JSON with -d: curl -H \"Content-Type: application/json\" -d '{\"name\":\"Emily\"}' URL. curl 7.82+ can use --json instead. On Windows, escape the inner quotes as \\\" or send a file with --data-binary @file.json.",
   'read-json-file-nodejs':
     "Read the file as text and parse it: JSON.parse(fs.readFileSync('data.json', 'utf8')), or use readFile from node:fs/promises in async code. To save, use fs.writeFileSync('data.json', JSON.stringify(data, null, 2)). require() and import also load JSON but cache it.",
+  'jsondecodeerror-expecting-value':
+    "It means json.loads() failed on the first character: the text is empty or is not JSON, usually an empty API response or an HTML error page. Print the status code and the first 200 characters of the response, fix the request, and only then parse it.",
+  'unexpected-end-of-json-input':
+    "The JSON text ended before it was complete, usually because it was empty: a 204 response, an API that sent no body, or JSON.parse(''). Read the response with response.text(), parse only when the text is not empty, and make the server send JSON on every path.",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

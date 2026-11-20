@@ -54,8 +54,8 @@ SyntaxError: Unexpected end of JSON input`}</Code>
       <p>
         <strong>Safari</strong> uses shorter messages: <code>JSON Parse error: Unrecognized token &apos;&lt;&apos;</code> means
         HTML instead of JSON, and <code>JSON Parse error: Unexpected EOF</code> means the
-        text is empty or cut off. Using Python? Its messages are listed in
-        <a href="/common-json-errors"> Common JSON Errors</a>.
+        text is empty or cut off. Using Python? See <a href="/jsondecodeerror-expecting-value">JSONDecodeError: Expecting value</a>,
+        or the full list in <a href="/common-json-errors">Common JSON Errors</a>.
       </p>
       <p>
         Whatever the wording, the line and column point to the problem. Paste
@@ -286,7 +286,7 @@ const settings = saved ? JSON.parse(saved) : {}`}</Code>
         <code> ]</code>, an empty response body, or a file that was not fully
         written. Check that the server really sends a body and that every
         bracket is closed.
-      </p>
+       Full guide: <a href="/unexpected-end-of-json-input">Unexpected End of JSON Input</a>.</p>
 
       <h2>Use the Position Number</h2>
       <p>

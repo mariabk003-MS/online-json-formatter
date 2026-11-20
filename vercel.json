@@ -179,6 +179,14 @@
       "destination": "/read-json-file-nodejs.html"
     },
     {
+      "source": "/jsondecodeerror-expecting-value",
+      "destination": "/jsondecodeerror-expecting-value.html"
+    },
+    {
+      "source": "/unexpected-end-of-json-input",
+      "destination": "/unexpected-end-of-json-input.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

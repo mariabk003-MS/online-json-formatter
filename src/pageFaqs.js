@@ -248,6 +248,18 @@ export const FAQS = {
     ["Why do I get ENOENT when the file exists?", "A relative path is resolved from the folder you run node in, not the folder of the script. Build the path with path.join(__dirname, 'data.json') in CommonJS or new URL('./data.json', import.meta.url) in ES modules."],
     ["Why does JSON.parse fail on the first character of a valid-looking file?", "The file probably starts with an invisible byte order mark (BOM) added by some Windows editors. Remove it with text.replace(/^\ufeff/, '') before parsing, or re-save the file as UTF-8 without BOM."],
   ],
+  'jsondecodeerror-expecting-value': [
+    ["What does JSONDecodeError: Expecting value: line 1 column 1 (char 0) mean?", "Python failed on the very first character, so the text is empty or is not JSON at all. Usually an API returned an empty body or an HTML error page, or a file is empty."],
+    ["How do I fix JSONDecodeError when using requests?", "Print response.status_code and response.text[:200] to see what the server really sent. Call response.raise_for_status() before response.json(), and fix the URL, API key or request that caused the error page."],
+    ["Why does json.loads fail on a Python dictionary string?", "str() and print() write Python syntax with single quotes and True, False and None, which is not JSON. Create the text with json.dumps(), or read the Python-style text with ast.literal_eval()."],
+    ["Is JSONDecodeError a ValueError?", "Yes. json.JSONDecodeError is a subclass of ValueError, so except ValueError also catches it. It has lineno, colno and pos attributes that show where parsing stopped."],
+  ],
+  'unexpected-end-of-json-input': [
+    ["What does Unexpected end of JSON input mean?", "JavaScript reached the end of the text before the JSON was complete. Most often the text is empty, for example a 204 No Content response or an API that returned an empty body."],
+    ["Why does response.json() throw Unexpected end of JSON input?", "The response has no body. A 204 response never has one, and some servers end the response without sending JSON. Read it with response.text() and only call JSON.parse when the text is not empty."],
+    ["Does JSON.parse(null) throw an error?", "No. JSON.parse(null) returns null, so a missing localStorage key does not throw. JSON.parse('') throws Unexpected end of JSON input, and JSON.parse(undefined) throws \"undefined\" is not valid JSON."],
+    ["How do I know if my JSON was cut off?", "If the position in the error equals the length of the text, the JSON stops early. Compare the Content-Length header with what you received, or check that the text ends with } or ]."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],
