@@ -260,6 +260,12 @@ export const FAQS = {
     ["Does JSON.parse(null) throw an error?", "No. JSON.parse(null) returns null, so a missing localStorage key does not throw. JSON.parse('') throws Unexpected end of JSON input, and JSON.parse(undefined) throws \"undefined\" is not valid JSON."],
     ["How do I know if my JSON was cut off?", "If the position in the error equals the length of the text, the JSON stops early. Compare the Content-Length header with what you received, or check that the text ends with } or ]."],
   ],
+  'object-is-not-json-serializable': [
+    ["What does Object of type datetime is not JSON serializable mean?", "json.dumps() only converts dicts, lists, tuples, strings, numbers, booleans and None. A datetime is none of these, so it stops. Convert it to an ISO string with value.isoformat(), or pass a default= function that does it."],
+    ["Is default=str a good fix?", "It removes the error but is not ideal for data: dates become strings with a space instead of the ISO T, and a set becomes text like \"{'new'}\" instead of a list. Write a small default function that converts each type properly."],
+    ["How do I serialize a Decimal to JSON?", "Use str(value) to keep every digit exactly, or float(value) if a JSON number is required and small rounding errors are acceptable. Handle it in a default= function or a JSONEncoder subclass."],
+    ["How do I convert my own class or dataclass to JSON?", "For a dataclass use json.dumps(dataclasses.asdict(obj)). For other classes add a to_dict() method that returns the fields you want to share, or use vars(obj) if every attribute is safe to include."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

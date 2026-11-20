@@ -198,6 +198,11 @@ from datetime import datetime
 event = {"title": "Launch", "starts": datetime(2026, 11, 8, 9, 30)}
 print(json.dumps(event, default=str))
 # {"title": "Launch", "starts": "2026-11-08 09:30:00"}`}</Code>
+      <p>
+        <code>default=str</code> is fine for logs, but it writes dates with a space instead of the
+        ISO <code>T</code> and turns sets into text. The proper fix for each type is in
+        <a href="/object-is-not-json-serializable"> Object of type X is not JSON serializable</a>.
+      </p>
 
       <h2>Useful Options</h2>
       <ul>

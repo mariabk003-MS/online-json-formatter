@@ -41,6 +41,8 @@ export const QUICK_ANSWERS = {
     "It means json.loads() failed on the first character: the text is empty or is not JSON, usually an empty API response or an HTML error page. Print the status code and the first 200 characters of the response, fix the request, and only then parse it.",
   'unexpected-end-of-json-input':
     "The JSON text ended before it was complete, usually because it was empty: a 204 response, an API that sent no body, or JSON.parse(''). Read the response with response.text(), parse only when the text is not empty, and make the server send JSON on every path.",
+  'object-is-not-json-serializable':
+    "json.dumps() only handles dicts, lists, strings, numbers, booleans and None. Convert the value first: datetime.isoformat(), str() for Decimal and UUID, list or sorted() for a set, dataclasses.asdict() for a dataclass, or pass json.dumps(data, default=your_function).",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

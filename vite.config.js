@@ -61,6 +61,7 @@ export default defineConfig({
         readJsonFileNodejs: fileURLToPath(new URL('./read-json-file-nodejs.html', import.meta.url)),
         jsonDecodeError: fileURLToPath(new URL('./jsondecodeerror-expecting-value.html', import.meta.url)),
         unexpectedEnd: fileURLToPath(new URL('./unexpected-end-of-json-input.html', import.meta.url)),
+        notSerializable: fileURLToPath(new URL('./object-is-not-json-serializable.html', import.meta.url)),
         prettyPrintJson: fileURLToPath(new URL('./pretty-print-json.html', import.meta.url)),
         jsonVsYaml: fileURLToPath(new URL('./json-vs-yaml.html', import.meta.url)),
         jsonToCsvPython: fileURLToPath(new URL('./json-to-csv-python.html', import.meta.url)),

@@ -187,6 +187,10 @@
       "destination": "/unexpected-end-of-json-input.html"
     },
     {
+      "source": "/object-is-not-json-serializable",
+      "destination": "/object-is-not-json-serializable.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
