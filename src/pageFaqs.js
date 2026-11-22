@@ -284,6 +284,12 @@ export const FAQS = {
     ["Is the HTML safe to paste into my page?", "Yes. Every value is HTML-escaped, so characters like < > & and quotes are shown as text and cannot inject tags or scripts into your page."],
     ["Is my JSON uploaded?", "No. The table is created in your browser and your JSON never leaves your device."],
   ],
+  'json-editor': [
+    ["How do I edit JSON online?", "Paste your JSON into the editor and click Format & Load. Then click any value or key in the tree, type the new text and press Enter. The JSON text updates as you edit, ready to copy or download."],
+    ["Can I add, delete and reorder items?", "Yes. Use + to add a key or array item, the duplicate button to copy an item, the arrow buttons to move array items, and the delete button to remove them. Undo and redo are available for every change."],
+    ["Will the editor break my JSON?", "No. The tree always writes valid JSON, and duplicate keys are refused. Values that are not numbers cannot be saved in a number field; change the type to string instead."],
+    ["Is my JSON uploaded?", "No. The editor runs in your browser and your JSON never leaves your device. Nothing is saved, so download the file when you are done."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

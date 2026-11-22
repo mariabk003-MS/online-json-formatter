@@ -6,6 +6,7 @@ export const TOOL_GROUPS = [
     tools: [
       { href: '/', label: 'JSON Formatter', text: 'Beautify JSON and auto-fix common mistakes.' },
       { href: '/json-viewer', label: 'JSON Viewer', text: 'Explore JSON as a collapsible tree.' },
+      { href: '/json-editor', label: 'JSON Editor', text: 'Edit JSON as a tree, with undo.' },
       { href: '/json-validator', label: 'JSON Validator', text: 'Find the exact line and column of any error.' },
     ],
   },

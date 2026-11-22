@@ -2,8 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import './NavBar.css'
 import { TOOL_GROUPS, GUIDES, DATASETS } from './toolsList.js'
 
-// The "More Tools" menu shows the Convert / Compare / Clean up groups in columns.
-const moreToolGroups = TOOL_GROUPS.filter((group) => group.title !== 'Format & check')
+// The "More Tools" menu shows the tool groups in columns. Tools that already have
+// their own link in the bar (Formatter, Viewer, Validator) are left out of it.
+const BAR_LINKS = new Set(['/', '/json-viewer', '/json-validator'])
+const moreToolGroups = TOOL_GROUPS.map((group) =>
+  group.title === 'Format & check' ? { ...group, tools: group.tools.filter((tool) => !BAR_LINKS.has(tool.href)) } : group
+).filter((group) => group.tools.length)
 
 const items = [
   { href: '/', label: 'JSON Formatter' },

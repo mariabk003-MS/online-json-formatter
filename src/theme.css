@@ -361,3 +361,150 @@ body.dark .dataset-search::placeholder {
   margin: 0;
   padding-left: 18px;
 }
+
+/* JSON Editor: the editable tree */
+.je-tree {
+  height: 380px;
+  overflow: auto;
+  padding: 8px 0;
+  background: #1d1c19;
+  color: #e7e3da;
+  font: 13px/1.5 Consolas, "Courier New", monospace;
+  text-align: left;
+}
+
+.je-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+
+.je-row:hover,
+.je-row:focus-within {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.je-toggle,
+.je-btn,
+.je-more {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a39d92;
+  font: inherit;
+  cursor: pointer;
+}
+
+.je-toggle {
+  width: 20px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.je-toggle-space {
+  display: inline-block;
+  width: 20px;
+}
+
+.je-toggle:hover,
+.je-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: none;
+}
+
+.je-key,
+.je-value,
+.je-type {
+  min-height: 0;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+}
+
+.je-key { color: #93c5fd; }
+.je-string { color: #86efac; }
+.je-number { color: #fdba74; }
+.je-boolean { color: #c4b5fd; }
+.je-null { color: #f87171; padding: 0 6px; }
+.je-index { color: #918a7e; min-width: 18px; text-align: right; }
+.je-colon { color: #918a7e; }
+.je-summary { color: #918a7e; padding-left: 4px; }
+
+textarea.je-value {
+  min-width: 260px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.je-key:hover,
+.je-value:hover {
+  border-color: #3b3830;
+}
+
+.je-key:focus,
+.je-value:focus,
+.je-type:focus {
+  border-color: #6fbf9c;
+  outline: none;
+  background: #151412;
+}
+
+.je-boolean option,
+.je-type option {
+  color: #1c1a17;
+}
+
+.je-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.je-row:hover .je-actions,
+.je-row:focus-within .je-actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .je-actions { opacity: 1; }
+}
+
+.je-type {
+  color: #918a7e;
+  font-size: 12px;
+}
+
+.je-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.je-delete:hover {
+  color: #fca5a5;
+  background: rgba(248, 113, 113, 0.15);
+}
+
+.je-more {
+  margin: 4px 0;
+  padding: 2px 8px;
+  border: 1px dashed #3b3830;
+  border-radius: 4px;
+  color: #8fd0b3;
+}
+
+.je-empty {
+  min-height: 26px;
+  color: #918a7e;
+  font-style: italic;
+}

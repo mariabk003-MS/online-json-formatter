@@ -203,6 +203,10 @@
       "destination": "/json-to-html-table.html"
     },
     {
+      "source": "/json-editor",
+      "destination": "/json-editor.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
