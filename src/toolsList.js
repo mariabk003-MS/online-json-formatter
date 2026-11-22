@@ -15,6 +15,7 @@ export const TOOL_GROUPS = [
       { href: '/json-to-csv', label: 'JSON to CSV', text: 'Turn JSON into a spreadsheet file.' },
       { href: '/csv-to-json', label: 'CSV to JSON', text: 'Turn spreadsheet rows into clean JSON.' },
       { href: '/json-to-excel', label: 'JSON to Excel', text: 'Download JSON as a real .xlsx file.' },
+      { href: '/excel-to-json', label: 'Excel to JSON', text: 'Turn an .xlsx spreadsheet into JSON.' },
       { href: '/json-to-xml', label: 'JSON to XML', text: 'Convert JSON into well-formed XML.' },
       { href: '/xml-to-json', label: 'XML to JSON', text: 'Convert XML documents into JSON.' },
       { href: '/json-to-yaml', label: 'JSON to YAML', text: 'Convert JSON into readable YAML.' },

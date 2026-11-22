@@ -104,7 +104,7 @@ const config = JSON.parse(readFileSync(file, 'utf8'))`}</Code>
         Windows editors add it when saving as &quot;UTF-8 with BOM&quot;. This is the error Node 24 gave
         us for <code>{'{'}&quot;name&quot;: &quot;Emily&quot;{'}'}</code> saved with a BOM:
       </p>
-      <Code label="Error">{`SyntaxError: Unexpected token '﻿', "﻿{"name": "Emily"}" is not valid JSON`}</Code>
+      <Code label="Error">{`SyntaxError: Unexpected token '\uFEFF', "\uFEFF{"name": "Emily"}" is not valid JSON`}</Code>
       <p>
         The quoted character looks empty because it is invisible. Remove it before parsing:
       </p>

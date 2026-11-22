@@ -195,6 +195,10 @@
       "destination": "/powershell-json.html"
     },
     {
+      "source": "/excel-to-json",
+      "destination": "/excel-to-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

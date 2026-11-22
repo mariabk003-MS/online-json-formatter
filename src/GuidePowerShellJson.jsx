@@ -114,7 +114,7 @@ ConvertTo-Json -InputObject @(1) -Compress      # [1]`}</Code>
         </thead>
         <tbody>
           <tr><td><code>... | ConvertTo-Json &gt; data.json</code></td><td><code>FF FE</code> (UTF-16)</td><td>Python: <code>UnicodeDecodeError: &apos;utf-8&apos; codec can&apos;t decode byte 0xff</code></td></tr>
-          <tr><td><code>... | Set-Content -Encoding utf8 data.json</code></td><td><code>EF BB BF</code> (UTF-8 with BOM)</td><td>Node.js: <code>Unexpected token &apos;﻿&apos;</code> (the invisible BOM)</td></tr>
+          <tr><td><code>... | Set-Content -Encoding utf8 data.json</code></td><td><code>EF BB BF</code> (UTF-8 with BOM)</td><td>Node.js: <code>{"Unexpected token '\uFEFF'"}</code> (the invisible BOM)</td></tr>
           <tr><td><code>... | Set-Content data.json</code></td><td>ANSI code page</td><td>Fine for plain English, but <code>José</code> failed in Python with <code>UnicodeDecodeError</code></td></tr>
         </tbody>
       </table>

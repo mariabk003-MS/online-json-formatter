@@ -147,6 +147,7 @@ function JsonToExcel() {
 
         <RelatedTools
           links={[
+            ['/excel-to-json', 'Excel to JSON'],
             ['/json-to-csv', 'JSON to CSV'],
             ['/csv-to-json', 'CSV to JSON'],
             ['/convert-json-to-excel', 'JSON to Excel guide'],

@@ -293,3 +293,26 @@ body.dark .dataset-search::placeholder {
   white-space: nowrap;
   border: 0;
 }
+
+/* Excel to JSON: the file drop area */
+.excel-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  cursor: pointer;
+  line-height: 1.9;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.excel-drop:hover,
+.excel-drop:focus-visible,
+.excel-drop-active {
+  background: rgba(31, 107, 82, 0.07);
+}
+
+.excel-drop-active {
+  outline: 2px dashed var(--pine);
+  outline-offset: -14px;
+}

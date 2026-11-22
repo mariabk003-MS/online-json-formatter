@@ -272,6 +272,12 @@ export const FAQS = {
     ["Why does my one-item array become a single value?", "Piping sends array items one by one, so a single item loses its array. Use ConvertTo-Json -InputObject @($item) instead of the pipeline to keep the brackets."],
     ["Why can't Python or Node.js read my PowerShell JSON file?", "In Windows PowerShell 5.1, > writes UTF-16 and -Encoding utf8 adds a BOM. Save with [System.IO.File]::WriteAllText(path, $json, (New-Object System.Text.UTF8Encoding $false)) to get UTF-8 without a BOM."],
   ],
+  'excel-to-json': [
+    ["How do I convert Excel to JSON?", "Drop your .xlsx file on the converter. It reads the sheet in your browser and turns every row into a JSON object, using the first row as keys. Copy the JSON or download it as a .json file."],
+    ["Are dates converted correctly?", "Yes. Excel stores dates as serial numbers; the converter reads the cell format and writes dates as YYYY-MM-DD, date and time as YYYY-MM-DDTHH:MM:SS and times as HH:MM:SS."],
+    ["Can it convert all sheets at once?", "Yes. If the workbook has more than one sheet, choose All sheets to get one JSON object with a key for each sheet name."],
+    ["Is my Excel file uploaded?", "No. The file is read with JavaScript in your browser and never sent to a server."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],
