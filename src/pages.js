@@ -59,6 +59,7 @@ export const PAGES = {
   '/object-is-not-json-serializable': () => import('./GuideNotSerializable.jsx'),
   '/powershell-json': () => import('./GuidePowerShellJson.jsx'),
   '/excel-to-json': () => import('./ExcelToJson.jsx'),
+  '/json-to-html-table': () => import('./JsonToHtmlTable.jsx'),
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),

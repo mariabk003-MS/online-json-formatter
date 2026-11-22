@@ -199,6 +199,10 @@
       "destination": "/excel-to-json.html"
     },
     {
+      "source": "/json-to-html-table",
+      "destination": "/json-to-html-table.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

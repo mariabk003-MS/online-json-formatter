@@ -316,3 +316,48 @@ body.dark .dataset-search::placeholder {
   outline: 2px dashed var(--pine);
   outline-offset: -14px;
 }
+
+/* JSON to HTML Table: live preview of the generated table */
+.html-preview {
+  margin-top: 22px;
+}
+
+.html-preview h2 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.html-preview-box {
+  max-height: 460px;
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1c1a17;
+  text-align: left;
+}
+
+.html-preview-box table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.html-preview-box th,
+.html-preview-box td {
+  padding: 6px 10px;
+  border: 1px solid #d6d1c7;
+  text-align: left;
+  vertical-align: top;
+}
+
+.html-preview-box th {
+  background: #f4f2ec;
+}
+
+.html-preview-box ul {
+  margin: 0;
+  padding-left: 18px;
+}

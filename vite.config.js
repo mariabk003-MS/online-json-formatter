@@ -64,6 +64,7 @@ export default defineConfig({
         notSerializable: fileURLToPath(new URL('./object-is-not-json-serializable.html', import.meta.url)),
         powershellJson: fileURLToPath(new URL('./powershell-json.html', import.meta.url)),
         excelToJson: fileURLToPath(new URL('./excel-to-json.html', import.meta.url)),
+        jsonToHtmlTable: fileURLToPath(new URL('./json-to-html-table.html', import.meta.url)),
         prettyPrintJson: fileURLToPath(new URL('./pretty-print-json.html', import.meta.url)),
         jsonVsYaml: fileURLToPath(new URL('./json-vs-yaml.html', import.meta.url)),
         jsonToCsvPython: fileURLToPath(new URL('./json-to-csv-python.html', import.meta.url)),

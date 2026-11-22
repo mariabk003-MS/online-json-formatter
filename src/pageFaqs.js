@@ -278,6 +278,12 @@ export const FAQS = {
     ["Can it convert all sheets at once?", "Yes. If the workbook has more than one sheet, choose All sheets to get one JSON object with a key for each sheet name."],
     ["Is my Excel file uploaded?", "No. The file is read with JavaScript in your browser and never sent to a server."],
   ],
+  'json-to-html-table': [
+    ["How do I convert JSON to an HTML table?", "Paste a JSON array of objects into the converter and click Convert to HTML. It writes a <table> with a header row from the keys and one row per item, shows a live preview, and lets you copy or download the code."],
+    ["How are nested objects shown?", "Choose Extra columns to turn nested objects into columns such as address.city, or Tables inside cells to show each nested object as a small table inside its cell."],
+    ["Is the HTML safe to paste into my page?", "Yes. Every value is HTML-escaped, so characters like < > & and quotes are shown as text and cannot inject tags or scripts into your page."],
+    ["Is my JSON uploaded?", "No. The table is created in your browser and your JSON never leaves your device."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

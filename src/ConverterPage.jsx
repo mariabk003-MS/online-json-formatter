@@ -77,6 +77,7 @@ const OUTPUTS = {
 //   outputType                'json' | 'yaml' | 'xml' | 'plain'
 //   download                  { fileName, mimeType }
 //   options                   optional extra controls shown under the action buttons
+//   preview                   optional: (output) => safe HTML string shown under the result (JSON to HTML Table)
 //   children                  the SEO text section shown under the tool
 // "Generate Schema" → "generate schema", but names stay as they are: "Generate C#", "Format XML", "Generate Python".
 const KEEP_CASE = new Set(['Go', 'Java', 'Python', 'Excel', 'TypeScript', 'Kotlin', 'Dart', 'Swift', 'Rust'])
@@ -100,6 +101,7 @@ function ConverterPage({
   outputType = 'json',
   download,
   options,
+  preview,
   children,
 }) {
   const [input, setInput] = useState('')
@@ -273,6 +275,14 @@ function ConverterPage({
       </div>
 
       <Messages error={error} success={success} location={errorLocation} />
+
+      {preview && output && (
+        <section className="html-preview" aria-label="Preview">
+          <h2>Preview</h2>
+          {/* The generator escapes every value, so this markup contains no user HTML. */}
+          <div className="html-preview-box" dangerouslySetInnerHTML={{ __html: preview(output) }} />
+        </section>
+      )}
 
       {children}
 
