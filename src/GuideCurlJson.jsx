@@ -115,7 +115,8 @@ curl --json @user.json https://api.example.com/users`}</Code>
         as written, so single quotes work there.
       </p>
       <p>
-        In PowerShell you can also skip curl and let PowerShell build the JSON:
+        In PowerShell you can also skip curl and let PowerShell build the JSON (more in
+        <a href="/powershell-json">JSON in PowerShell</a>):
       </p>
       <Code label="PowerShell without curl">{`$body = @{ name = 'Emily'; age = 30 } | ConvertTo-Json
 Invoke-RestMethod -Uri https://api.example.com/users -Method Post -ContentType 'application/json' -Body $body`}</Code>

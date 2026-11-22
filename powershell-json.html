@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON in PowerShell: ConvertFrom-Json &amp; ConvertTo-Json -Depth</title>
+    <meta name="description" content="Read and write JSON in PowerShell with ConvertFrom-Json and ConvertTo-Json, and fix the -Depth limit, single-item arrays, dates and file encoding problems." />
+    <link rel="canonical" href="https://online-json-formatter-ten.vercel.app/powershell-json" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Online JSON Formatter" />
+    <meta property="og:title" content="JSON in PowerShell: ConvertFrom-Json &amp; ConvertTo-Json -Depth" />
+    <meta property="og:description" content="Read and write JSON in PowerShell with ConvertFrom-Json and ConvertTo-Json, and fix the -Depth limit, single-item arrays, dates and file encoding problems." />
+    <meta property="og:url" content="https://online-json-formatter-ten.vercel.app/powershell-json" />
+    <meta property="og:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OnlineJSON – 35+ free JSON tools in your browser" />
+    <meta name="twitter:image" content="https://online-json-formatter-ten.vercel.app/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON in PowerShell: ConvertFrom-Json &amp; ConvertTo-Json -Depth" />
+    <meta name="twitter:description" content="Read and write JSON in PowerShell with ConvertFrom-Json and ConvertTo-Json, and fix the -Depth limit, single-item arrays, dates and file encoding problems." />
+
+    <!-- Structured data for Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "JSON in PowerShell: ConvertFrom-Json, ConvertTo-Json and the Depth Trap",
+      "name": "JSON in PowerShell: ConvertFrom-Json, ConvertTo-Json and the Depth Trap",
+      "description": "Read and write JSON in PowerShell with ConvertFrom-Json and ConvertTo-Json, and fix the -Depth limit, single-item arrays, dates and file encoding problems.",
+      "url": "https://online-json-formatter-ten.vercel.app/powershell-json",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online JSON Formatter",
+        "url": "https://online-json-formatter-ten.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I read a JSON file in PowerShell?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use Get-Content .\\data.json -Raw -Encoding UTF8 | ConvertFrom-Json. -Raw passes the whole file as one string, and -Encoding UTF8 stops Windows PowerShell 5.1 from misreading non-English characters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does ConvertTo-Json show System.Collections.Hashtable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ConvertTo-Json only converts 2 levels deep by default and replaces deeper data with its type name. Add -Depth 10 (or higher, up to 100) to convert the whole object."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my one-item array become a single value?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Piping sends array items one by one, so a single item loses its array. Use ConvertTo-Json -InputObject @($item) instead of the pipeline to keep the brackets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can't Python or Node.js read my PowerShell JSON file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Windows PowerShell 5.1, > writes UTF-16 and -Encoding utf8 adds a BOM. Save with [System.IO.File]::WriteAllText(path, $json, (New-Object System.Text.UTF8Encoding $false)) to get UTF-8 without a BOM."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://online-json-formatter-ten.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON in PowerShell: ConvertFrom-Json, ConvertTo-Json and the Depth Trap",
+          "item": "https://online-json-formatter-ten.vercel.app/powershell-json"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body>
+    <main id="root"></main>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

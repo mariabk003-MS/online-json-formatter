@@ -43,6 +43,8 @@ export const QUICK_ANSWERS = {
     "The JSON text ended before it was complete, usually because it was empty: a 204 response, an API that sent no body, or JSON.parse(''). Read the response with response.text(), parse only when the text is not empty, and make the server send JSON on every path.",
   'object-is-not-json-serializable':
     "json.dumps() only handles dicts, lists, strings, numbers, booleans and None. Convert the value first: datetime.isoformat(), str() for Decimal and UUID, list or sorted() for a set, dataclasses.asdict() for a dataclass, or pass json.dumps(data, default=your_function).",
+  'powershell-json':
+    "Use ConvertFrom-Json to read JSON (Get-Content file.json -Raw -Encoding UTF8 | ConvertFrom-Json) and ConvertTo-Json -Depth 10 to write it. Always set -Depth, because the default of 2 silently replaces deeper data with type names, and save files as UTF-8 without a BOM.",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

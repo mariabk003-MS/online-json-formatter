@@ -266,6 +266,12 @@ export const FAQS = {
     ["How do I serialize a Decimal to JSON?", "Use str(value) to keep every digit exactly, or float(value) if a JSON number is required and small rounding errors are acceptable. Handle it in a default= function or a JSONEncoder subclass."],
     ["How do I convert my own class or dataclass to JSON?", "For a dataclass use json.dumps(dataclasses.asdict(obj)). For other classes add a to_dict() method that returns the fields you want to share, or use vars(obj) if every attribute is safe to include."],
   ],
+  'powershell-json': [
+    ["How do I read a JSON file in PowerShell?", "Use Get-Content .\\data.json -Raw -Encoding UTF8 | ConvertFrom-Json. -Raw passes the whole file as one string, and -Encoding UTF8 stops Windows PowerShell 5.1 from misreading non-English characters."],
+    ["Why does ConvertTo-Json show System.Collections.Hashtable?", "ConvertTo-Json only converts 2 levels deep by default and replaces deeper data with its type name. Add -Depth 10 (or higher, up to 100) to convert the whole object."],
+    ["Why does my one-item array become a single value?", "Piping sends array items one by one, so a single item loses its array. Use ConvertTo-Json -InputObject @($item) instead of the pipeline to keep the brackets."],
+    ["Why can't Python or Node.js read my PowerShell JSON file?", "In Windows PowerShell 5.1, > writes UTF-16 and -Encoding utf8 adds a BOM. Save with [System.IO.File]::WriteAllText(path, $json, (New-Object System.Text.UTF8Encoding $false)) to get UTF-8 without a BOM."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

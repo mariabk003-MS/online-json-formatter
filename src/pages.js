@@ -57,6 +57,7 @@ export const PAGES = {
   '/jsondecodeerror-expecting-value': () => import('./GuideJsonDecodeError.jsx'),
   '/unexpected-end-of-json-input': () => import('./GuideUnexpectedEnd.jsx'),
   '/object-is-not-json-serializable': () => import('./GuideNotSerializable.jsx'),
+  '/powershell-json': () => import('./GuidePowerShellJson.jsx'),
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),

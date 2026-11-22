@@ -191,6 +191,10 @@
       "destination": "/object-is-not-json-serializable.html"
     },
     {
+      "source": "/powershell-json",
+      "destination": "/powershell-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

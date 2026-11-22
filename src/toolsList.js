@@ -81,6 +81,7 @@ export const GUIDES = [
   { href: '/unexpected-token-in-json', label: 'Unexpected Token in JSON' },
   { href: '/unexpected-end-of-json-input', label: 'Unexpected End of JSON Input' },
   { href: '/curl-post-json', label: 'Send JSON with curl' },
+  { href: '/powershell-json', label: 'JSON in PowerShell' },
   { href: '/pretty-print-json', label: 'How to Pretty Print JSON' },
   { href: '/json-comments', label: 'JSON Comments' },
   { href: '/json-in-python', label: 'JSON in Python' },
