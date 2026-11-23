@@ -66,6 +66,7 @@ export default defineConfig({
         excelToJson: fileURLToPath(new URL('./excel-to-json.html', import.meta.url)),
         jsonToHtmlTable: fileURLToPath(new URL('./json-to-html-table.html', import.meta.url)),
         jsonEditor: fileURLToPath(new URL('./json-editor.html', import.meta.url)),
+        jsonToPhp: fileURLToPath(new URL('./json-to-php.html', import.meta.url)),
         prettyPrintJson: fileURLToPath(new URL('./pretty-print-json.html', import.meta.url)),
         jsonVsYaml: fileURLToPath(new URL('./json-vs-yaml.html', import.meta.url)),
         jsonToCsvPython: fileURLToPath(new URL('./json-to-csv-python.html', import.meta.url)),

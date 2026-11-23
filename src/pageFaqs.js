@@ -158,6 +158,12 @@ export const FAQS = {
     ["How are keys like type or userName handled?", "Rust keywords become raw identifiers such as r#type, which serde still reads as \"type\". camelCase keys become snake_case fields with #[serde(rename)] so they match the JSON."],
     ["Is my JSON uploaded?", "No. The Rust code is generated in your browser and your JSON never leaves your device."],
   ],
+  'json-to-php': [
+    ["How do I convert JSON to a PHP array?", "Paste your JSON and click Convert to PHP. The tool writes a PHP array literal with => for object keys, lists for JSON arrays, and true, false and null kept as they are, with every string escaped correctly."],
+    ["What is the difference between json_decode($json) and json_decode($json, true)?", "Without the second argument, json_decode returns stdClass objects that you read with ->. With true, it returns associative arrays that you read with ['key']. This tool writes the array form."],
+    ["Can it generate PHP classes?", "Yes. Choose PHP 8 classes to get typed final classes with constructor property promotion and a fromArray() factory that maps snake_case keys to camelCase properties."],
+    ["Is my JSON uploaded?", "No. The PHP code is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-java': [
     ["Which libraries does the code work with?", "The classes are plain Java and work with Jackson, Gson and Spring. The optional @JsonProperty annotations are from Jackson."],
     ["Should I use classes or records?", "Records (Java 16+) are short and immutable, which is ideal for API data. Classes with getters and setters work with older Java versions and frameworks that need setters."],

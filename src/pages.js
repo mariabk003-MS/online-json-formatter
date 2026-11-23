@@ -61,6 +61,7 @@ export const PAGES = {
   '/excel-to-json': () => import('./ExcelToJson.jsx'),
   '/json-to-html-table': () => import('./JsonToHtmlTable.jsx'),
   '/json-editor': () => import('./JsonEditor.jsx'),
+  '/json-to-php': () => import('./JsonToPhp.jsx'),
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),

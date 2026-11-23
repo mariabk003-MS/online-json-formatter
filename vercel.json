@@ -207,6 +207,10 @@
       "destination": "/json-editor.html"
     },
     {
+      "source": "/json-to-php",
+      "destination": "/json-to-php.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
