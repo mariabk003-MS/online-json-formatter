@@ -84,6 +84,7 @@ export const GUIDES = [
   { href: '/common-json-errors', label: 'Common JSON Errors' },
   { href: '/unexpected-token-in-json', label: 'Unexpected Token in JSON' },
   { href: '/unexpected-end-of-json-input', label: 'Unexpected End of JSON Input' },
+  { href: '/converting-circular-structure-to-json', label: 'Circular Structure to JSON' },
   { href: '/curl-post-json', label: 'Send JSON with curl' },
   { href: '/powershell-json', label: 'JSON in PowerShell' },
   { href: '/pretty-print-json', label: 'How to Pretty Print JSON' },

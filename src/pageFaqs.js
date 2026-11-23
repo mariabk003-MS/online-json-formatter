@@ -296,6 +296,12 @@ export const FAQS = {
     ["Will the editor break my JSON?", "No. The tree always writes valid JSON, and duplicate keys are refused. Values that are not numbers cannot be saved in a number field; change the type to string instead."],
     ["Is my JSON uploaded?", "No. The editor runs in your browser and your JSON never leaves your device. Nothing is saved, so download the file when you are done."],
   ],
+  'converting-circular-structure-to-json': [
+    ["What does Converting circular structure to JSON mean?", "The object you passed to JSON.stringify points back to itself or to one of its parents. JSON cannot represent a loop, so JSON.stringify throws a TypeError. Chrome and Node.js show the property that closes the circle."],
+    ["How do I fix TypeError: Converting circular structure to JSON?", "Stringify only the plain data you need, drop the looping key with a replacer function, or use a replacer that writes \"[Circular]\" for real loops. For logging, console.log or util.inspect handle loops without JSON."],
+    ["Why does a WeakSet replacer mark non-circular objects as [Circular]?", "A WeakSet remembers every object already written, so an object used in two places is marked the second time even without a loop. Track only the chain of parent objects to mark real loops."],
+    ["How do I stringify a BigInt?", "JSON has no BigInt type, so JSON.stringify throws Do not know how to serialize a BigInt. Use a replacer that returns value.toString() for bigint values to keep every digit."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

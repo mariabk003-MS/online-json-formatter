@@ -45,6 +45,8 @@ export const QUICK_ANSWERS = {
     "json.dumps() only handles dicts, lists, strings, numbers, booleans and None. Convert the value first: datetime.isoformat(), str() for Decimal and UUID, list or sorted() for a set, dataclasses.asdict() for a dataclass, or pass json.dumps(data, default=your_function).",
   'powershell-json':
     "Use ConvertFrom-Json to read JSON (Get-Content file.json -Raw -Encoding UTF8 | ConvertFrom-Json) and ConvertTo-Json -Depth 10 to write it. Always set -Depth, because the default of 2 silently replaces deeper data with type names, and save files as UTF-8 without a BOM.",
+  'converting-circular-structure-to-json':
+    "The object points back to itself or a parent, so JSON.stringify would loop forever and throws instead. Read the error to find the property that closes the circle, then stringify only the data you need, drop that key with a replacer, or replace real loops with \"[Circular]\".",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

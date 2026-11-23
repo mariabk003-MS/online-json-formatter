@@ -211,6 +211,10 @@
       "destination": "/json-to-php.html"
     },
     {
+      "source": "/converting-circular-structure-to-json",
+      "destination": "/converting-circular-structure-to-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
