@@ -215,6 +215,10 @@
       "destination": "/converting-circular-structure-to-json.html"
     },
     {
+      "source": "/bad-escaped-character-in-json",
+      "destination": "/bad-escaped-character-in-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

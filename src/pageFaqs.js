@@ -302,6 +302,12 @@ export const FAQS = {
     ["Why does a WeakSet replacer mark non-circular objects as [Circular]?", "A WeakSet remembers every object already written, so an object used in two places is marked the second time even without a loop. Track only the chain of parent objects to mark real loops."],
     ["How do I stringify a BigInt?", "JSON has no BigInt type, so JSON.stringify throws Do not know how to serialize a BigInt. Use a replacer that returns value.toString() for bigint values to keep every digit."],
   ],
+  'bad-escaped-character-in-json': [
+    ["What does Bad escaped character in JSON mean?", "A backslash in a JSON string is followed by a character that is not a valid escape, most often a Windows path like C:\\Users. Double every backslash (C:\\\\Users) or use forward slashes."],
+    ["What does Bad control character in string literal mean?", "A string contains a real line break or tab between its quotes. Write them as \\n and \\t, or create the JSON with JSON.stringify or json.dumps so they are escaped for you."],
+    ["Which escapes are allowed in JSON?", "Only \\\" \\\\ \\/ \\b \\f \\n \\r \\t and \\u followed by exactly four hex digits. Anything else after a backslash makes the JSON invalid."],
+    ["Can Python read JSON with raw line breaks in strings?", "Yes. json.loads(text, strict=False) accepts control characters such as line breaks inside strings. JavaScript's JSON.parse has no such option."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

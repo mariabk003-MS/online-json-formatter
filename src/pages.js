@@ -63,6 +63,7 @@ export const PAGES = {
   '/json-editor': () => import('./JsonEditor.jsx'),
   '/json-to-php': () => import('./JsonToPhp.jsx'),
   '/converting-circular-structure-to-json': () => import('./GuideCircularJson.jsx'),
+  '/bad-escaped-character-in-json': () => import('./GuideBadEscape.jsx'),
   '/pretty-print-json': () => import('./GuidePrettyPrint.jsx'),
   '/json-vs-yaml': () => import('./GuideJsonVsYaml.jsx'),
   '/json-to-csv-python': () => import('./GuideJsonToCsvPython.jsx'),

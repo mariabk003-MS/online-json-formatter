@@ -47,6 +47,8 @@ export const QUICK_ANSWERS = {
     "Use ConvertFrom-Json to read JSON (Get-Content file.json -Raw -Encoding UTF8 | ConvertFrom-Json) and ConvertTo-Json -Depth 10 to write it. Always set -Depth, because the default of 2 silently replaces deeper data with type names, and save files as UTF-8 without a BOM.",
   'converting-circular-structure-to-json':
     "The object points back to itself or a parent, so JSON.stringify would loop forever and throws instead. Read the error to find the property that closes the circle, then stringify only the data you need, drop that key with a replacer, or replace real loops with \"[Circular]\".",
+  'bad-escaped-character-in-json':
+    "A backslash in a JSON string is followed by an invalid escape (often a Windows path like C:\\Users), or a real line break or tab sits inside the quotes. Double the backslashes or use forward slashes, write line breaks as \\n, and generate JSON with JSON.stringify or json.dumps.",
   'convert-json-to-excel':
     'The fastest way is an online converter that downloads a real .xlsx file. In Excel itself, use Data → Get Data → From File → From JSON (Power Query). For many files, use Python with pandas: pd.json_normalize(data).to_excel("data.xlsx").',
 }

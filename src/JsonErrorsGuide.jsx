@@ -218,7 +218,7 @@ function JsonErrorsGuide() {
           A text value contains a real line break or tab. Inside JSON
           strings, write a new line as <code>{'\\n'}</code> and a tab as{' '}
           <code>{'\\t'}</code>.
-        </p>
+         More on this and on Windows paths: <a href="/bad-escaped-character-in-json">Bad Escaped Character in JSON</a>.</p>
 
         <h3>{"Python: Expecting value: line 1 column 1 (char 0)"}</h3>
         <p>
