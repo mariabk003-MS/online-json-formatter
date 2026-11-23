@@ -4,9 +4,9 @@ import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import SiteFooter from './SiteFooter.jsx'
 import CodeEditor from './CodeEditor.jsx'
-import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages, FaqSection, RelatedTools } from './ToolLayout.jsx'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages, FaqSection, RelatedTools, OpenInMenu } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
-import { useLiveJsonCheck, describeText, downloadText, readTextFile, parseJsonLenient } from './toolUtils.js'
+import { useLiveJsonCheck, describeText, downloadText, readTextFile, parseJsonLenient, useJsonHandoff } from './toolUtils.js'
 import { typeOf, setIn, deleteIn, renameKey, addChild, duplicate, moveItem, convertType, pathToString, countNodes } from './jsonEdit.js'
 
 const SAMPLE = {
@@ -259,6 +259,15 @@ function JsonEditor() {
     setSuccess(message)
   }
 
+  useJsonHandoff((value, message) => {
+    try {
+      load(parseJsonLenient(value, 'JSON').data, `${message} Click any value in the tree to edit it.`)
+    } catch (err) {
+      setText(value)
+      setError(err.message)
+    }
+  })
+
   // Applies a tree edit and remembers the previous version for Undo.
   function edit(next) {
     if (next === data) return
@@ -415,6 +424,7 @@ function JsonEditor() {
               <Tool onClick={() => load(structuredClone(SAMPLE), 'Sample loaded. Click any value in the tree to edit it.')}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
               <Tool onClick={() => { setText(''); setData(undefined); setPast([]); setFuture([]); setError(''); setSuccess('') }}>Clear</Tool>
+              <OpenInMenu getText={() => text} disabled={!text.trim()} onError={setError} />
             </>
           }
           statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}

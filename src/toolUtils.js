@@ -1,5 +1,5 @@
 // Small helpers shared by all tool pages (Formatter, Viewer, Validator, converters).
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { safeFix } from './safeFix.js'
 
 // Finds the line and column of a JSON.parse error, and the text of that line.
@@ -259,4 +259,47 @@ export function downloadBlob(blob, fileName) {
   link.download = fileName
   link.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
+// ---------- "Open in": send JSON from one tool to another ----------
+// The JSON goes into sessionStorage for this tab only, is read once by the next
+// page and removed straight away. Nothing is sent to a server.
+const HANDOFF_KEY = 'json-handoff'
+
+// "/json-viewer.html", "/json-viewer/" and "/json-viewer" are the same page.
+export function pagePath(path = window.location.pathname) {
+  const clean = path.replace(/\.html$/, '').replace(/\/+$/, '')
+  return clean === '' || clean === '/index' ? '/' : clean
+}
+
+// Returns false when the browser cannot hold the text (blocked storage or too large).
+export function sendJsonTo(href, text, fromLabel) {
+  try {
+    sessionStorage.setItem(HANDOFF_KEY, JSON.stringify({ to: href, from: fromLabel, text, at: Date.now() }))
+  } catch {
+    return false
+  }
+  window.location.assign(href)
+  return true
+}
+
+// Calls onReceive(text, message) once, when this page was opened with "Open in".
+export function useJsonHandoff(onReceive) {
+  useEffect(() => {
+    let handoff
+    try {
+      const raw = sessionStorage.getItem(HANDOFF_KEY)
+      if (!raw) return
+      sessionStorage.removeItem(HANDOFF_KEY)
+      handoff = JSON.parse(raw)
+    } catch {
+      return
+    }
+    const fresh = Date.now() - handoff.at < 5 * 60 * 1000
+    if (fresh && handoff.to === pagePath() && typeof handoff.text === 'string') {
+      onReceive(handoff.text, `JSON opened from ${handoff.from || 'another tool'}.`)
+    }
+    // Runs once when the page opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 }

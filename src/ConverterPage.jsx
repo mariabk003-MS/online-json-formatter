@@ -8,8 +8,8 @@ import NavBar from './NavBar.jsx'
 import SiteFooter from './SiteFooter.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
-import { ToolPanel, Tool, StatusBadge, EmptyBox, PlainOutput, XmlOutput, Messages } from './ToolLayout.jsx'
-import { useLiveJsonCheck, describeText, formatSize, downloadText, downloadBlob, readTextFile } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, PlainOutput, XmlOutput, Messages, OpenInMenu } from './ToolLayout.jsx'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, downloadBlob, readTextFile, useJsonHandoff } from './toolUtils.js'
 
 // Colors YAML a little: keys blue, comments grey, "- " list marks grey.
 function YamlOutput({ text }) {
@@ -77,6 +77,7 @@ const OUTPUTS = {
 //   outputType                'json' | 'yaml' | 'xml' | 'plain'
 //   download                  { fileName, mimeType }
 //   options                   optional extra controls shown under the action buttons
+//   autoRun                   run the main action on JSON sent with "Open in" (false when it downloads a file)
 //   preview                   optional: (output) => safe HTML string shown under the result (JSON to HTML Table)
 //   children                  the SEO text section shown under the tool
 // "Generate Schema" → "generate schema", but names stay as they are: "Generate C#", "Format XML", "Generate Python".
@@ -102,6 +103,7 @@ function ConverterPage({
   download,
   options,
   preview,
+  autoRun = true,
   children,
 }) {
   const [input, setInput] = useState('')
@@ -149,6 +151,14 @@ function ConverterPage({
       setErrorLocation(err.location || null)
     }
   }
+
+  // JSON sent from another tool with "Open in".
+  useJsonHandoff((text, message) => {
+    if (!inputIsJson) return
+    handleInputChange(text)
+    if (autoRun) run(actions[0], text)
+    else setSuccess(`${message} Click ${actions[0].label}.`)
+  })
 
   async function readFile(file) {
     try {
@@ -265,6 +275,7 @@ function ConverterPage({
               <Tool onClick={useResultAsInput} disabled={!output} title="Move the result into the input box">
                 Edit
               </Tool>
+              {resultType === 'json' && <OpenInMenu getText={() => output} disabled={!output} onError={setError} />}
             </>
           }
           statusLeft={output ? `${output.split('\n').length} lines` : 'No result yet'}

@@ -7,7 +7,7 @@ import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
 import { JsonGraph } from './JsonGraph.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, MoreMenu } from './ToolLayout.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, MoreMenu, OpenInMenu } from './ToolLayout.jsx'
 import {
   getErrorLocation,
   useLiveJsonCheck,
@@ -20,6 +20,7 @@ import {
   readShareCode,
   fetchText,
   printText,
+  useJsonHandoff,
 } from './toolUtils.js'
 
 // Links longer than this may not work in every browser or chat app.
@@ -53,6 +54,9 @@ function App() {
       // Storage can be blocked. Nothing to remove then.
     }
   }, [])
+
+  // JSON sent from another tool with "Open in".
+  useJsonHandoff((text, message) => formatInto(text, message))
 
   // Opening a share link (#json=...) or a ?url=... link loads that JSON.
   useEffect(() => {
@@ -435,6 +439,7 @@ function App() {
               <Tool onClick={shareLink} disabled={!json.trim()} title="Copy a link that opens this JSON">
                 Share
               </Tool>
+              <OpenInMenu getText={() => result} disabled={!result} onError={showError} />
               <MoreMenu
                 items={[
                   { label: 'Download .json', onClick: downloadJSON, disabled: !result },
@@ -505,6 +510,7 @@ function App() {
           <li>Dark mode, full screen editing and drag &amp; drop file upload.</li>
           <li>Share your JSON with a private link, load JSON from a URL, auto-format on paste and print.</li>
           <li>Copy the formatted JSON, or download it from the ⋯ menu.</li>
+          <li>Open the result in the JSON Viewer, Editor, Validator or a converter with one click, using Open in.</li>
           <li>Process JSON directly in your browser.</li>
         </ul>
 

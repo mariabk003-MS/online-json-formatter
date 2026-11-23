@@ -5,7 +5,7 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { Code } from './ArticlePage.jsx'
-import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages } from './ToolLayout.jsx'
+import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages, OpenInMenu } from './ToolLayout.jsx'
 import { describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
 
 // Picks the separator that appears most in the first line.
@@ -347,6 +347,7 @@ function CsvToJson() {
             <>
               <Tool onClick={copyResult} disabled={!result}>Copy</Tool>
               <Tool onClick={downloadJson} disabled={!result}>Download</Tool>
+              <OpenInMenu getText={() => result} disabled={!result} onError={showError} />
             </>
           }
           statusLeft={records ? `${records.length} records` : 'No result yet'}

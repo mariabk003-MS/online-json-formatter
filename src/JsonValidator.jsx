@@ -5,13 +5,14 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox } from './ToolLayout.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, OpenInMenu } from './ToolLayout.jsx'
 import {
   getErrorLocation,
   useLiveJsonCheck,
   describeText,
   formatSize,
   readTextFile,
+  useJsonHandoff,
 } from './toolUtils.js'
 
 // Gives a simple tip for the most common JSON mistakes.
@@ -107,6 +108,11 @@ function JsonValidator() {
     }
   }
 
+  useJsonHandoff((text) => {
+    handleInputChange(text)
+    validate(text)
+  })
+
   function loadSample() {
     handleInputChange(SAMPLE)
   }
@@ -176,6 +182,11 @@ function JsonValidator() {
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
+              <OpenInMenu
+                getText={() => json}
+                disabled={!json.trim()}
+                onError={(message) => setStatus({ valid: false, message, location: null, hint: '' })}
+              />
             </>
           }
           statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}

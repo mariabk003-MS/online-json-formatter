@@ -4,7 +4,7 @@ import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, PlainOutput, DataTable, Messages } from './ToolLayout.jsx'
-import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile, useJsonHandoff } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
 import { Code } from './ArticlePage.jsx'
 
@@ -138,6 +138,12 @@ function JsonToCsv() {
       showError(err.message)
     }
   }
+
+  useJsonHandoff((text, message) => {
+    handleInputChange(text)
+    convert(text)
+    setSuccess((current) => current && `${message} ${current}`)
+  })
 
   function loadSample() {
     const sample = [

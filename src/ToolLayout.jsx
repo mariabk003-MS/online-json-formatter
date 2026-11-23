@@ -1,5 +1,7 @@
 // Shared building blocks for all tool pages, so every tool looks the same.
 import { useEffect, useState } from 'react'
+import { TOOL_GROUPS } from './toolsList.js'
+import { pagePath, sendJsonTo } from './toolUtils.js'
 
 // One side of a tool: a title row with small buttons, a dark box, and a
 // status bar at the bottom of the box. Has its own full screen button.
@@ -66,7 +68,8 @@ export function Tool({ children, ...props }) {
 
 // A "⋯" button that opens a small list of extra actions.
 // items: [{ label, onClick, disabled }]
-export function MoreMenu({ items }) {
+// label: optional text for the button (shown as "label ▾") instead of "⋯".
+export function MoreMenu({ items, label, title = 'More actions', disabled = false }) {
   const [open, setOpen] = useState(false)
 
   // Close when clicking anywhere else.
@@ -81,16 +84,18 @@ export function MoreMenu({ items }) {
     <span className="more-menu">
       <button
         type="button"
-        className="tool tool-icon"
-        aria-label="More actions"
+        className={label ? 'tool' : 'tool tool-icon'}
+        aria-label={label ? undefined : title}
+        aria-haspopup="menu"
         aria-expanded={open}
-        title="More actions"
+        title={title}
+        disabled={disabled}
         onClick={(event) => {
           event.stopPropagation()
           setOpen(!open)
         }}
       >
-        ⋯
+        {label ? `${label} ▾` : '⋯'}
       </button>
       {open && (
         <span className="more-menu-list" role="menu">
@@ -112,6 +117,29 @@ export function MoreMenu({ items }) {
       )}
     </span>
   )
+}
+
+// The tools that can open JSON sent with "Open in".
+const OPEN_IN_TARGETS = [
+  '/', '/json-viewer', '/json-editor', '/json-validator', '/json-to-csv', '/json-to-excel',
+  '/json-to-html-table', '/json-to-typescript', '/json-to-python', '/json-schema-generator', '/json-path',
+]
+const TOOL_LABELS = new Map(TOOL_GROUPS.flatMap((group) => group.tools).map((tool) => [tool.href, tool.label]))
+
+// "Open in ▾": sends the JSON to another tool in one click, no copy and paste.
+// getText() returns the JSON to send; onError(message) shows a problem.
+export function OpenInMenu({ getText, disabled, onError }) {
+  const here = typeof window === 'undefined' ? '' : pagePath()
+  const items = OPEN_IN_TARGETS.filter((href) => href !== here).map((href) => ({
+    label: TOOL_LABELS.get(href),
+    onClick: () => {
+      const from = TOOL_LABELS.get(here) || 'another tool'
+      if (!sendJsonTo(href, getText(), from)) {
+        onError('This JSON is too large to send to another tool. Please copy it, or download it and upload the file there.')
+      }
+    },
+  }))
+  return <MoreMenu label="Open in" title="Open this JSON in another tool" items={items} disabled={disabled} />
 }
 
 // ✓ Valid JSON / ✗ Invalid JSON – line 4  (check comes from useLiveJsonCheck)

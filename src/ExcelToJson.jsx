@@ -4,7 +4,7 @@ import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import SiteFooter from './SiteFooter.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
-import { ToolPanel, Tool, EmptyBox, Messages, FaqSection, RelatedTools } from './ToolLayout.jsx'
+import { ToolPanel, Tool, EmptyBox, Messages, FaqSection, RelatedTools, OpenInMenu } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
 import { Code } from './ArticlePage.jsx'
 import { formatSize, downloadText } from './toolUtils.js'
@@ -232,6 +232,7 @@ function ExcelToJson() {
               >
                 Download
               </Tool>
+              <OpenInMenu getText={() => output} disabled={!output} onError={setError} />
             </>
           }
           statusLeft={output ? `${output.split('\n').length} lines` : 'No result yet'}

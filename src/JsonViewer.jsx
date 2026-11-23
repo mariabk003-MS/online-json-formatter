@@ -5,8 +5,8 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
 import { JsonGraph } from './JsonGraph.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages } from './ToolLayout.jsx'
-import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, describeFixes } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, OpenInMenu } from './ToolLayout.jsx'
+import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, describeFixes, useJsonHandoff } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
 
 const SAMPLE = {
@@ -47,6 +47,12 @@ function JsonViewer() {
   const [view, setView] = useState('tree')
   const fileInputRef = useRef(null)
   const liveCheck = useLiveJsonCheck(json)
+
+  useJsonHandoff((text, message) => {
+    handleInputChange(text)
+    showTree(text)
+    setSuccess(message)
+  })
 
   function handleInputChange(text) {
     setJson(text)
@@ -144,6 +150,7 @@ function JsonViewer() {
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
+              <OpenInMenu getText={() => json} disabled={!json.trim()} onError={setError} />
             </>
           }
           statusLeft={`Ln ${cursor.line}, Col ${cursor.column}`}

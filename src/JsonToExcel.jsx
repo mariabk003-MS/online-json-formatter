@@ -58,6 +58,7 @@ function JsonToExcel() {
 
   return (
     <ConverterPage
+      autoRun={false}
       h1="JSON to Excel Converter – Download .xlsx"
       intro="Turn JSON into a real Excel spreadsheet (.xlsx) with a bold header row, frozen headers and proper numbers. No upload, no sign-up."
       inputTitle="JSON Input"

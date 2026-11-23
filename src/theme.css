@@ -212,6 +212,10 @@ body.dark .status-ok {
 /* Page enters: the tool slides up a little (no fade, so it shows at once) */
 .editor-layout {
   animation: lift 0.6s var(--ease) both;
+  /* The animation makes its own layer; keep it above the messages below so
+     open menus (Open in, ⋯) are not hidden behind them. */
+  position: relative;
+  z-index: 2;
 }
 
 /* Sections fade in as you scroll (browsers that support scroll timelines) */

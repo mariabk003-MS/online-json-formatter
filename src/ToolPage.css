@@ -1297,6 +1297,7 @@ body.dark .share-box input {
   font-size: 13px;
   font-weight: 600;
   text-align: left;
+  white-space: nowrap;
   transform: none;
 }
 
