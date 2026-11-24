@@ -34,6 +34,7 @@ function UrlEncodeTool() {
 
   return (
     <ConverterPage
+      urlInput={false}
       h1="URL Encode & Decode Online"
       intro="Percent-encode text so it is safe to use in links and query strings, or decode %20-style text back to normal."
       inputTitle="Text Input"

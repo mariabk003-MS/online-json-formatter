@@ -42,6 +42,7 @@ function JsonEscape() {
 
   return (
     <ConverterPage
+      urlInput={false}
       h1="JSON Escape / Unescape Online"
       intro="Escape JSON into a safe string for code, APIs and config values, or unescape a JSON string back to normal JSON."
       inputTitle="Text Input"

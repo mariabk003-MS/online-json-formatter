@@ -303,3 +303,16 @@ export function useJsonHandoff(onReceive) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
+
+// Opening a page with ?url=https://... loads that file, like the Formatter does.
+export function useUrlParam(onLoad, onError) {
+  useEffect(() => {
+    const url = new URLSearchParams(window.location.search).get('url')
+    if (!url) return
+    fetchText(url)
+      .then(onLoad)
+      .catch((err) => onError(err.message))
+    // Runs once when the page opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}

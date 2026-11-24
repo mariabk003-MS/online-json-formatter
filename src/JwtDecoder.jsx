@@ -65,6 +65,7 @@ const SAMPLE =
 function JwtDecoder() {
   return (
     <ConverterPage
+      urlInput={false}
       h1="JWT Decoder – Decode JSON Web Tokens Online"
       intro="Paste a JWT to see its header and payload as readable JSON, with expiry dates in plain English. Decoding happens only in your browser."
       inputTitle="JWT Input"

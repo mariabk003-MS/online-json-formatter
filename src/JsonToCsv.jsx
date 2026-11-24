@@ -3,8 +3,8 @@ import './App.css'
 import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, PlainOutput, DataTable, Messages } from './ToolLayout.jsx'
-import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile, useJsonHandoff } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, PlainOutput, DataTable, Messages, UrlBox } from './ToolLayout.jsx'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, readTextFile, useJsonHandoff, useUrlParam } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
 import { Code } from './ArticlePage.jsx'
 
@@ -88,6 +88,7 @@ function JsonToCsv() {
   const [delimiter, setDelimiter] = useState(',')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const fileInputRef = useRef(null)
+  const [urlOpen, setUrlOpen] = useState(false)
   const liveCheck = useLiveJsonCheck(json)
 
   function showError(message) {
@@ -158,6 +159,13 @@ function JsonToCsv() {
     handleInputChange('')
   }
 
+  function loadFromLink(text) {
+    setUrlOpen(false)
+    handleInputChange(text)
+    showSuccess('JSON loaded from the link. Click Convert to CSV.')
+  }
+  useUrlParam(loadFromLink, showError)
+
   async function readFile(file) {
     try {
       const text = await readTextFile(file)
@@ -217,6 +225,7 @@ function JsonToCsv() {
             <>
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(!urlOpen)} title="Load a file from a link">URL</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
             </>
           }
@@ -238,6 +247,9 @@ function JsonToCsv() {
             </div>
           }
         >
+          {urlOpen && (
+            <UrlBox what="JSON" example="https://example.com/data.json" onLoad={loadFromLink} onError={showError} onClose={() => setUrlOpen(false)} />
+          )}
           <CodeEditor
             value={json}
             placeholder={'Paste your JSON here, for example:\n[{"name": "Emily", "city": "London"}]\n\nTip: press Ctrl + Enter to convert.'}

@@ -43,6 +43,7 @@ function Base64Tool() {
 
   return (
     <ConverterPage
+      urlInput={false}
       h1="Base64 Encode & Decode Online"
       intro="Encode text or JSON to Base64, or decode Base64 back to readable text. Supports emoji and URL-safe Base64."
       inputTitle="Text Input"

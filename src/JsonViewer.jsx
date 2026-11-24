@@ -5,8 +5,8 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
 import { JsonGraph } from './JsonGraph.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, OpenInMenu } from './ToolLayout.jsx'
-import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, describeFixes, useJsonHandoff } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, Messages, OpenInMenu, UrlBox } from './ToolLayout.jsx'
+import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, describeFixes, useJsonHandoff, useUrlParam } from './toolUtils.js'
 import { safeFix } from './safeFix.js'
 
 const SAMPLE = {
@@ -46,6 +46,7 @@ function JsonViewer() {
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const [view, setView] = useState('tree')
   const fileInputRef = useRef(null)
+  const [urlOpen, setUrlOpen] = useState(false)
   const liveCheck = useLiveJsonCheck(json)
 
   useJsonHandoff((text, message) => {
@@ -102,6 +103,14 @@ function JsonViewer() {
     setData(null)
   }
 
+  function loadFromLink(text) {
+    setUrlOpen(false)
+    handleInputChange(text)
+    showTree(text)
+    setSuccess('JSON loaded from the link.')
+  }
+  useUrlParam(loadFromLink, setError)
+
   async function readFile(file) {
     try {
       const text = await readTextFile(file)
@@ -149,6 +158,7 @@ function JsonViewer() {
             <>
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(!urlOpen)} title="Load a file from a link">URL</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
               <OpenInMenu getText={() => json} disabled={!json.trim()} onError={setError} />
             </>
@@ -163,6 +173,9 @@ function JsonViewer() {
             </div>
           }
         >
+          {urlOpen && (
+            <UrlBox what="JSON" example="https://example.com/data.json" onLoad={loadFromLink} onError={setError} onClose={() => setUrlOpen(false)} />
+          )}
           <CodeEditor
             value={json}
             placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to view the tree.'}

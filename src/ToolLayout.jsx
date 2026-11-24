@@ -1,7 +1,7 @@
 // Shared building blocks for all tool pages, so every tool looks the same.
 import { useEffect, useState } from 'react'
 import { TOOL_GROUPS } from './toolsList.js'
-import { pagePath, sendJsonTo } from './toolUtils.js'
+import { pagePath, sendJsonTo, fetchText } from './toolUtils.js'
 
 // One side of a tool: a title row with small buttons, a dark box, and a
 // status bar at the bottom of the box. Has its own full screen button.
@@ -140,6 +140,46 @@ export function OpenInMenu({ getText, disabled, onError }) {
     },
   }))
   return <MoreMenu label="Open in" title="Open this JSON in another tool" items={items} disabled={disabled} />
+}
+
+// The "Load from a link" bar shown above an input box.
+//   what      "JSON", "CSV", "XML" ... used in the texts
+//   onLoad(text)  called with the file's text; onError(message); onClose()
+export function UrlBox({ what = 'JSON', example = 'https://example.com/data.json', onLoad, onError, onClose }) {
+  const [value, setValue] = useState('')
+  const [busy, setBusy] = useState(false)
+  const file = `${/^(XML|SQL)$/.test(what) ? 'an' : 'a'} ${what} file` // "an XML file", "a CSV file"
+
+  async function submit(event) {
+    event.preventDefault()
+    if (!value.trim()) {
+      onError(`Please enter the link to ${file}.`)
+      return
+    }
+    setBusy(true)
+    try {
+      onLoad(await fetchText(value.trim()))
+    } catch (err) {
+      onError(err.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <form className="url-box" onSubmit={submit}>
+      <input
+        type="url"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder={example}
+        aria-label={`Link to ${file}`}
+        autoFocus
+      />
+      <button type="submit" className="tool" disabled={busy}>{busy ? 'Loading…' : 'Load'}</button>
+      <button type="button" className="tool" onClick={onClose}>Cancel</button>
+    </form>
+  )
 }
 
 // ✓ Valid JSON / ✗ Invalid JSON – line 4  (check comes from useLiveJsonCheck)

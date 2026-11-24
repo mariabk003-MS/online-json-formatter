@@ -8,8 +8,8 @@ import NavBar from './NavBar.jsx'
 import SiteFooter from './SiteFooter.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
-import { ToolPanel, Tool, StatusBadge, EmptyBox, PlainOutput, XmlOutput, Messages, OpenInMenu } from './ToolLayout.jsx'
-import { useLiveJsonCheck, describeText, formatSize, downloadText, downloadBlob, readTextFile, useJsonHandoff } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, PlainOutput, XmlOutput, Messages, OpenInMenu, UrlBox } from './ToolLayout.jsx'
+import { useLiveJsonCheck, describeText, formatSize, downloadText, downloadBlob, readTextFile, useJsonHandoff, useUrlParam } from './toolUtils.js'
 
 // Colors YAML a little: keys blue, comments grey, "- " list marks grey.
 function YamlOutput({ text }) {
@@ -77,6 +77,7 @@ const OUTPUTS = {
 //   outputType                'json' | 'yaml' | 'xml' | 'plain'
 //   download                  { fileName, mimeType }
 //   options                   optional extra controls shown under the action buttons
+//   urlInput                  show the URL button (off for plain text tools like Base64)
 //   autoRun                   run the main action on JSON sent with "Open in" (false when it downloads a file)
 //   preview                   optional: (output) => safe HTML string shown under the result (JSON to HTML Table)
 //   children                  the SEO text section shown under the tool
@@ -104,6 +105,7 @@ function ConverterPage({
   options,
   preview,
   autoRun = true,
+  urlInput = true,
   children,
 }) {
   const [input, setInput] = useState('')
@@ -114,6 +116,9 @@ function ConverterPage({
   const [success, setSuccess] = useState('')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const fileInputRef = useRef(null)
+  const [urlOpen, setUrlOpen] = useState(false)
+  // "XML Input" → "XML", "Broken JSON" → "JSON"
+  const what = inputTitle.replace(/ input$/i, '').replace(/^Broken /, '')
   const liveCheck = useLiveJsonCheck(inputIsJson ? input : '')
   const Output = OUTPUTS[resultType] || PlainOutput
 
@@ -159,6 +164,13 @@ function ConverterPage({
     if (autoRun) run(actions[0], text)
     else setSuccess(`${message} Click ${actions[0].label}.`)
   })
+
+  function loadFromLink(text) {
+    setUrlOpen(false)
+    handleInputChange(text)
+    setSuccess(`${what} loaded from the link. Click ${actions[0].label}.`)
+  }
+  useUrlParam((text) => urlInput && loadFromLink(text), setError)
 
   async function readFile(file) {
     try {
@@ -224,6 +236,7 @@ function ConverterPage({
             <>
               <Tool onClick={() => handleInputChange(sample)}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              {urlInput && <Tool onClick={() => setUrlOpen(!urlOpen)} title="Load a file from a link">URL</Tool>}
               <Tool onClick={() => handleInputChange('')}>Clear</Tool>
             </>
           }
@@ -255,6 +268,15 @@ function ConverterPage({
             </>
           }
         >
+          {urlOpen && (
+            <UrlBox
+              what={what}
+              example={`https://example.com/data.${what === 'YAML' ? 'yaml' : what.toLowerCase()}`}
+              onLoad={loadFromLink}
+              onError={setError}
+              onClose={() => setUrlOpen(false)}
+            />
+          )}
           <CodeEditor
             value={input}
             placeholder={`${inputPlaceholder}\n\nTip: press Ctrl + Enter to ${tipVerb(primary.label)}.`}

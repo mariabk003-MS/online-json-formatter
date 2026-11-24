@@ -5,8 +5,8 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { Code } from './ArticlePage.jsx'
-import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages, OpenInMenu } from './ToolLayout.jsx'
-import { describeText, formatSize, downloadText, readTextFile } from './toolUtils.js'
+import { ToolPanel, Tool, Tabs, EmptyBox, DataTable, Messages, OpenInMenu, UrlBox } from './ToolLayout.jsx'
+import { describeText, formatSize, downloadText, readTextFile, useUrlParam } from './toolUtils.js'
 
 // Picks the separator that appears most in the first line.
 function detectDelimiter(text) {
@@ -149,6 +149,7 @@ function CsvToJson() {
   const [nestKeys, setNestKeys] = useState(true)
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const fileInputRef = useRef(null)
+  const [urlOpen, setUrlOpen] = useState(false)
 
   function showError(message) {
     setResult('')
@@ -208,6 +209,13 @@ function CsvToJson() {
   function clearAll() {
     handleInputChange('')
   }
+
+  function loadFromLink(text) {
+    setUrlOpen(false)
+    handleInputChange(text)
+    showSuccess('CSV loaded from the link. Click Convert to JSON.')
+  }
+  useUrlParam(loadFromLink, showError)
 
   async function readFile(file) {
     try {
@@ -279,6 +287,7 @@ function CsvToJson() {
             <>
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(!urlOpen)} title="Load a file from a link">URL</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
             </>
           }
@@ -321,6 +330,9 @@ function CsvToJson() {
             </>
           }
         >
+          {urlOpen && (
+            <UrlBox what="CSV" example="https://example.com/data.csv" onLoad={loadFromLink} onError={showError} onClose={() => setUrlOpen(false)} />
+          )}
           <CodeEditor
             value={csv}
             placeholder={'Paste your CSV here, or drop a .csv file. For example:\nname,city\nEmily,London\n\nTip: press Ctrl + Enter to convert.'}

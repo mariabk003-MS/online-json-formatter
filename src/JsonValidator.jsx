@@ -5,7 +5,7 @@ import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
-import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, OpenInMenu } from './ToolLayout.jsx'
+import { ToolPanel, Tool, StatusBadge, Tabs, EmptyBox, OpenInMenu, UrlBox } from './ToolLayout.jsx'
 import {
   getErrorLocation,
   useLiveJsonCheck,
@@ -13,6 +13,7 @@ import {
   formatSize,
   readTextFile,
   useJsonHandoff,
+  useUrlParam,
 } from './toolUtils.js'
 
 // Gives a simple tip for the most common JSON mistakes.
@@ -69,6 +70,7 @@ function JsonValidator() {
   const [tab, setTab] = useState('report')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const fileInputRef = useRef(null)
+  const [urlOpen, setUrlOpen] = useState(false)
   const liveCheck = useLiveJsonCheck(json)
 
   function handleInputChange(text) {
@@ -120,6 +122,14 @@ function JsonValidator() {
   function clearAll() {
     handleInputChange('')
   }
+
+  function loadFromLink(text) {
+    setUrlOpen(false)
+    handleInputChange(text)
+    validate(text)
+  }
+  const showLinkError = (message) => setStatus({ valid: false, message, location: null, hint: '' })
+  useUrlParam(loadFromLink, showLinkError)
 
   async function readFile(file) {
     try {
@@ -181,6 +191,7 @@ function JsonValidator() {
             <>
               <Tool onClick={loadSample}>Sample</Tool>
               <Tool onClick={() => fileInputRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(!urlOpen)} title="Load a file from a link">URL</Tool>
               <Tool onClick={clearAll}>Clear</Tool>
               <OpenInMenu
                 getText={() => json}
@@ -202,6 +213,9 @@ function JsonValidator() {
             </div>
           }
         >
+          {urlOpen && (
+            <UrlBox what="JSON" onLoad={loadFromLink} onError={showLinkError} onClose={() => setUrlOpen(false)} />
+          )}
           <CodeEditor
             value={json}
             placeholder={'Paste your JSON here, or drop a .json file...\n\nTip: press Ctrl + Enter to validate.'}
