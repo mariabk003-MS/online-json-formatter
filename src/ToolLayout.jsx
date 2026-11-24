@@ -122,7 +122,7 @@ export function MoreMenu({ items, label, title = 'More actions', disabled = fals
 // The tools that can open JSON sent with "Open in".
 const OPEN_IN_TARGETS = [
   '/', '/json-viewer', '/json-editor', '/json-validator', '/json-to-csv', '/json-to-excel',
-  '/json-to-html-table', '/json-to-typescript', '/json-to-python', '/json-schema-generator', '/json-path',
+  '/json-to-html-table', '/json-to-markdown-table', '/json-to-typescript', '/json-to-python', '/json-schema-generator', '/json-path',
 ]
 const TOOL_LABELS = new Map(TOOL_GROUPS.flatMap((group) => group.tools).map((tool) => [tool.href, tool.label]))
 

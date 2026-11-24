@@ -65,6 +65,7 @@ export default defineConfig({
         powershellJson: fileURLToPath(new URL('./powershell-json.html', import.meta.url)),
         excelToJson: fileURLToPath(new URL('./excel-to-json.html', import.meta.url)),
         jsonToHtmlTable: fileURLToPath(new URL('./json-to-html-table.html', import.meta.url)),
+        jsonToMarkdownTable: fileURLToPath(new URL('./json-to-markdown-table.html', import.meta.url)),
         jsonEditor: fileURLToPath(new URL('./json-editor.html', import.meta.url)),
         jsonToPhp: fileURLToPath(new URL('./json-to-php.html', import.meta.url)),
         circularJson: fileURLToPath(new URL('./converting-circular-structure-to-json.html', import.meta.url)),

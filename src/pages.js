@@ -60,6 +60,7 @@ export const PAGES = {
   '/powershell-json': () => import('./GuidePowerShellJson.jsx'),
   '/excel-to-json': () => import('./ExcelToJson.jsx'),
   '/json-to-html-table': () => import('./JsonToHtmlTable.jsx'),
+  '/json-to-markdown-table': () => import('./JsonToMarkdownTable.jsx'),
   '/json-editor': () => import('./JsonEditor.jsx'),
   '/json-to-php': () => import('./JsonToPhp.jsx'),
   '/converting-circular-structure-to-json': () => import('./GuideCircularJson.jsx'),

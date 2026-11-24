@@ -284,6 +284,12 @@ export const FAQS = {
     ["Can it convert all sheets at once?", "Yes. If the workbook has more than one sheet, choose All sheets to get one JSON object with a key for each sheet name."],
     ["Is my Excel file uploaded?", "No. The file is read with JavaScript in your browser and never sent to a server."],
   ],
+  'json-to-markdown-table': [
+    ["How do I convert JSON to a Markdown table?", "Paste a JSON array of objects and click Convert to Markdown. The converter writes a header row from the keys, the | --- | delimiter row and one row per item, shows a live preview, and lets you copy the table or download a .md file."],
+    ["Does the table work on GitHub?", "Yes. The output is a GitHub Flavored Markdown table, so it renders in README files, issues, pull requests and wikis on GitHub and GitLab, and in most Markdown editors."],
+    ["What happens to pipes and line breaks in my values?", "They are escaped so the table does not break: | becomes \\|, a backslash becomes \\\\ and a line break becomes <br>."],
+    ["Is my JSON uploaded?", "No. The table is created in your browser and your JSON never leaves your device."],
+  ],
   'json-to-html-table': [
     ["How do I convert JSON to an HTML table?", "Paste a JSON array of objects into the converter and click Convert to HTML. It writes a <table> with a header row from the keys and one row per item, shows a live preview, and lets you copy or download the code."],
     ["How are nested objects shown?", "Choose Extra columns to turn nested objects into columns such as address.city, or Tables inside cells to show each nested object as a small table inside its cell."],

@@ -219,6 +219,10 @@
       "destination": "/bad-escaped-character-in-json.html"
     },
     {
+      "source": "/json-to-markdown-table",
+      "destination": "/json-to-markdown-table.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

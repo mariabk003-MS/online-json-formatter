@@ -20,6 +20,7 @@ export const TOOL_GROUPS = [
       { href: '/json-to-xml', label: 'JSON to XML', text: 'Convert JSON into well-formed XML.' },
       { href: '/xml-to-json', label: 'XML to JSON', text: 'Convert XML documents into JSON.' },
       { href: '/json-to-html-table', label: 'JSON to HTML Table', text: 'Turn JSON into an HTML table with preview.' },
+      { href: '/json-to-markdown-table', label: 'JSON to Markdown Table', text: 'Make a GitHub Markdown table from JSON.' },
       { href: '/json-to-yaml', label: 'JSON to YAML', text: 'Convert JSON into readable YAML.' },
       { href: '/yaml-to-json', label: 'YAML to JSON', text: 'Convert YAML config files into JSON.' },
       { href: '/json-to-sql', label: 'JSON to SQL', text: 'Create CREATE TABLE and INSERT statements.' },
