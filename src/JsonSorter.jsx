@@ -4,32 +4,7 @@ import { FaqSection, RelatedTools } from './ToolLayout.jsx'
 import { FAQS } from './pageFaqs.js'
 import { Code } from './ArticlePage.jsx'
 import { parseJsonLenient } from './toolUtils.js'
-
-const compareText = (a, b) => a.localeCompare(b, 'en', { sensitivity: 'base', numeric: true })
-
-// Sorts the keys of every object. Arrays keep their order unless sortArrays is on
-// (then only arrays of plain text/numbers are sorted).
-function sortJson(value, descending, sortArrays) {
-  if (Array.isArray(value)) {
-    const items = value.map((item) => sortJson(item, descending, sortArrays))
-    const simple = items.every((item) => typeof item === 'string' || typeof item === 'number')
-    if (sortArrays && simple) {
-      items.sort((a, b) =>
-        typeof a === 'number' && typeof b === 'number' ? a - b : compareText(String(a), String(b))
-      )
-      if (descending) items.reverse()
-    }
-    return items
-  }
-  if (value && typeof value === 'object') {
-    const keys = Object.keys(value).sort(compareText)
-    if (descending) keys.reverse()
-    const sorted = {}
-    for (const key of keys) sorted[key] = sortJson(value[key], descending, sortArrays)
-    return sorted
-  }
-  return value
-}
+import { sortJson } from './jsonTransform.js'
 
 const SAMPLE = JSON.stringify(
   {

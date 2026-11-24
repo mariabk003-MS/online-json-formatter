@@ -3,6 +3,7 @@ import './App.css'
 import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import { safeFix } from './safeFix.js'
+import { sortJson, removeNulls } from './jsonTransform.js'
 import CodeEditor from './CodeEditor.jsx'
 import JsonHighlight from './JsonHighlight.jsx'
 import { JsonTreeView } from './JsonTree.jsx'
@@ -38,6 +39,10 @@ function App() {
   const [outputTab, setOutputTab] = useState('code')
   const [cursor, setCursor] = useState({ line: 1, column: 1 })
   const [autoFormat, setAutoFormat] = useState(true)
+  const [sortKeys, setSortKeys] = useState(false)
+  const [dropNulls, setDropNulls] = useState(false)
+  // 'format' or 'minify': the last button used, so changing an option can redo it.
+  const lastAction = useRef('format')
   const [urlBoxOpen, setUrlBoxOpen] = useState(false)
   const [urlValue, setUrlValue] = useState('')
   const [shareUrl, setShareUrl] = useState('')
@@ -97,6 +102,26 @@ function App() {
     setResultVersion((v) => v + 1)
   }
 
+  // Applies the Sort keys / Remove nulls options to the result (never to the input),
+  // shows it, and returns a short note such as "Keys sorted A to Z." ('' when off).
+  function showCleaned(data, minify, options = { sortKeys, dropNulls }) {
+    let value = data
+    const notes = []
+    if (options.dropNulls) {
+      const cleaned = removeNulls(value)
+      value = cleaned.value
+      notes.push(cleaned.removed === 1 ? '1 null value removed.' : `${cleaned.removed} null values removed.`)
+    }
+    if (options.sortKeys) {
+      value = sortJson(value)
+      notes.push('Keys sorted A to Z.')
+    }
+    showResult(minify ? JSON.stringify(value) : JSON.stringify(value, null, getIndent()), value)
+    return notes.join(' ')
+  }
+
+  const withNote = (message, note) => (note ? `${message} ${note}` : message)
+
   function parseWithFix(text) {
     try {
       return { parsed: JSON.parse(text), fixedText: null, report: null }
@@ -128,38 +153,40 @@ function App() {
     )
   }
 
-  function fixAndFormatJSON() {
+  function fixAndFormatJSON(options) {
     if (!json.trim()) {
       showError('Please paste your JSON first.')
       return
     }
 
+    lastAction.current = 'format'
     try {
       const { parsed, fixedText, report } = parseWithFix(json)
-      showResult(JSON.stringify(parsed, null, getIndent()), parsed)
+      const note = showCleaned(parsed, false, options)
 
       if (fixedText) {
         setJson(fixedText)
-        showSuccess(describeFixes(report))
+        showSuccess(withNote(describeFixes(report), note))
       } else {
-        showSuccess('Valid JSON! Formatted successfully.')
+        showSuccess(withNote('Valid JSON! Formatted successfully.', note))
       }
     } catch {
       showParseError('Could not safely fix this JSON')
     }
   }
 
-  function minifyJSON() {
+  function minifyJSON(options) {
     if (!json.trim()) {
       showError('Please paste your JSON first.')
       return
     }
 
+    lastAction.current = 'minify'
     try {
       const { parsed, report } = parseWithFix(json)
-      showResult(JSON.stringify(parsed), parsed)
+      const note = showCleaned(parsed, true, options)
       showSuccess(
-        report ? `JSON minified. ${describeFixes(report)}` : 'JSON minified successfully!'
+        withNote(report ? `JSON minified. ${describeFixes(report)}` : 'JSON minified successfully!', note)
       )
     } catch {
       showParseError('Could not minify this JSON')
@@ -167,6 +194,16 @@ function App() {
   }
 
   // Ctrl + Enter (or Cmd + Enter on Mac) runs Fix & Format.
+  // Ticking an option updates a result that is already shown.
+  function changeOption(change) {
+    const options = { sortKeys, dropNulls, ...change }
+    setSortKeys(options.sortKeys)
+    setDropNulls(options.dropNulls)
+    if (!result) return
+    if (lastAction.current === 'minify') minifyJSON(options)
+    else fixAndFormatJSON(options)
+  }
+
   function handleKeyDown(event) {
     if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault()
@@ -248,9 +285,10 @@ function App() {
     handleInputChange(text)
     try {
       const { parsed, fixedText, report } = parseWithFix(text)
-      showResult(JSON.stringify(parsed, null, getIndent()), parsed)
+      lastAction.current = 'format'
+      const note = showCleaned(parsed, false)
       if (fixedText) setJson(fixedText)
-      showSuccess(report ? `${message} ${describeFixes(report)}` : message)
+      showSuccess(withNote(report ? `${message} ${describeFixes(report)}` : message, note))
     } catch {
       showSuccess(`${message} It has errors, so please check the red line.`)
     }
@@ -359,10 +397,10 @@ function App() {
             // Main actions, right under the input so they are easy to find on phones too
             <>
               <div className="action-bar">
-                <button type="button" className="action-primary" onClick={fixAndFormatJSON} title="Shortcut: Ctrl + Enter">
+                <button type="button" className="action-primary" onClick={() => fixAndFormatJSON()} title="Shortcut: Ctrl + Enter">
                   Fix &amp; Format JSON
                 </button>
-                <button type="button" className="action-secondary" onClick={minifyJSON}>
+                <button type="button" className="action-secondary" onClick={() => minifyJSON()}>
                   Minify
                 </button>
                 <label className="indent-select">
@@ -383,6 +421,14 @@ function App() {
                     onChange={(event) => setAutoFormat(event.target.checked)}
                   />
                   Auto-format on paste
+                </label>
+                <label className="option" title="Sort the keys of every object from A to Z in the result">
+                  <input type="checkbox" checked={sortKeys} onChange={(event) => changeOption({ sortKeys: event.target.checked })} />
+                  Sort keys
+                </label>
+                <label className="option" title="Leave out every key whose value is null in the result">
+                  <input type="checkbox" checked={dropNulls} onChange={(event) => changeOption({ dropNulls: event.target.checked })} />
+                  Remove nulls
                 </label>
               </div>
             </>
@@ -497,6 +543,7 @@ function App() {
           <li>Format JSON into a readable structure.</li>
           <li>Choose your preferred indentation: 2, 3 or 4 spaces, or Tab.</li>
           <li>Minify JSON to remove extra spaces and reduce file size.</li>
+          <li>Sort keys from A to Z and remove null values while you format, without changing your input.</li>
           <li>Upload JSON files directly from your computer.</li>
           <li>Check JSON syntax and see the exact line and column of any error.</li>
           <li>
@@ -539,6 +586,15 @@ function App() {
         <h3>Is my uploaded JSON file sent to a server?</h3>
         <p>
           No. Uploaded files are read and processed inside your browser.
+        </p>
+
+        <h3>Can I sort JSON keys or remove null values?</h3>
+        <p>
+          Yes. Tick Sort keys to order the keys of every object from A to Z,
+          or Remove nulls to leave out every key whose value is null. Both
+          work with Fix &amp; Format and Minify and change only the result.
+          Null items inside arrays are kept so list positions stay the same.
+          For more sorting choices, use the <a href="/json-sorter">JSON Sorter</a>.
         </p>
 
         <h3>Can I download formatted JSON?</h3>
