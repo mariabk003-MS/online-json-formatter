@@ -33,6 +33,8 @@ export default defineConfig({
         xmlToJson: fileURLToPath(new URL('./xml-to-json.html', import.meta.url)),
         jsonToYaml: fileURLToPath(new URL('./json-to-yaml.html', import.meta.url)),
         yamlToJson: fileURLToPath(new URL('./yaml-to-json.html', import.meta.url)),
+        jsonToToml: fileURLToPath(new URL('./json-to-toml.html', import.meta.url)),
+        tomlToJson: fileURLToPath(new URL('./toml-to-json.html', import.meta.url)),
         jsonEscape: fileURLToPath(new URL('./json-escape.html', import.meta.url)),
         jsonMinifier: fileURLToPath(new URL('./json-minifier.html', import.meta.url)),
         jsonRepair: fileURLToPath(new URL('./json-repair.html', import.meta.url)),

@@ -300,4 +300,12 @@
 <loc>https://online-json-formatter-ten.vercel.app/json-to-markdown-table</loc>
 <lastmod>2026-11-24</lastmod>
 </url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/toml-to-json</loc>
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/json-to-toml</loc>
+<lastmod>2026-11-24</lastmod>
+</url>
 </urlset>

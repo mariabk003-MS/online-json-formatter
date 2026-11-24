@@ -223,6 +223,14 @@
       "destination": "/json-to-markdown-table.html"
     },
     {
+      "source": "/toml-to-json",
+      "destination": "/toml-to-json.html"
+    },
+    {
+      "source": "/json-to-toml",
+      "destination": "/json-to-toml.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

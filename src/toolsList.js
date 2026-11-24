@@ -23,6 +23,8 @@ export const TOOL_GROUPS = [
       { href: '/json-to-markdown-table', label: 'JSON to Markdown Table', text: 'Make a GitHub Markdown table from JSON.' },
       { href: '/json-to-yaml', label: 'JSON to YAML', text: 'Convert JSON into readable YAML.' },
       { href: '/yaml-to-json', label: 'YAML to JSON', text: 'Convert YAML config files into JSON.' },
+      { href: '/json-to-toml', label: 'JSON to TOML', text: 'Turn JSON into a TOML config file.' },
+      { href: '/toml-to-json', label: 'TOML to JSON', text: 'Convert TOML config files into JSON.' },
       { href: '/json-to-sql', label: 'JSON to SQL', text: 'Create CREATE TABLE and INSERT statements.' },
       { href: '/sql-to-json', label: 'SQL to JSON', text: 'Turn SQL INSERT statements into JSON.' },
     ],

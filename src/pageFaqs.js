@@ -14,6 +14,18 @@ export const FAQS = {
     ['Does the converter keep my data types?', 'Yes. Numbers, true/false, null, lists and nested objects are all kept. Text that could be mistaken for a number or a boolean is put in quotes.'],
     ['Is my JSON sent to a server?', 'No. Your JSON is converted inside your browser and never uploaded.'],
   ],
+  'toml-to-json': [
+    ["How do I convert TOML to JSON?", "Paste your TOML or drop a .toml file into the converter and click Convert to JSON. Tables become objects, arrays of tables become arrays of objects, and the result can be copied or downloaded."],
+    ["What happens to TOML dates?", "JSON has no date type, so TOML dates and times become strings in the same format, for example \"1979-05-27\" or \"07:32:00\"."],
+    ["Are large integers kept exactly?", "Yes. Integers larger than JavaScript can hold safely keep every digit in the JSON output instead of being rounded."],
+    ["Is my TOML uploaded?", "No. The conversion runs in your browser and your file never leaves your device."],
+  ],
+  'json-to-toml': [
+    ["How do I convert JSON to TOML?", "Paste a JSON object and click Convert to TOML. Nested objects become [tables], arrays of objects become [[arrays of tables]], and you can copy the result or download a .toml file."],
+    ["What happens to null values?", "TOML has no null, so keys with a null value are left out. The message under the tool tells you how many were removed."],
+    ["Can I convert a JSON array to TOML?", "Yes. A TOML file must start with a table, so a top-level array is placed under a key, items by default, which you can change."],
+    ["Is my JSON uploaded?", "No. The conversion runs in your browser and your data never leaves your device."],
+  ],
   'yaml-to-json': [
     ['Is this YAML to JSON converter free?', 'Yes. It is free, with no sign-up and no limits.'],
     ['Can it read files with several YAML documents?', 'Yes. If your YAML has more than one document separated by ---, the result is a JSON array with one item per document.'],
