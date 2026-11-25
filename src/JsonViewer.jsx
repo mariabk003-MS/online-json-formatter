@@ -262,6 +262,7 @@ function JsonViewer() {
           <li>Search inside the tree to jump to a key or value instead of scrolling.</li>
           <li>If a file is very large, check its size with the <a href="/json-size-calculator">JSON Size Calculator</a>, or pull out just the values you need with the <a href="/json-path">JSONPath Tester</a>.</li>
           <li>If the viewer reports an error, fix it with <a href="/json-repair">JSON Repair</a> and paste the result back.</li>
+          <li>To change values, rename keys or delete items, open the data in the <a href="/json-editor">JSON Editor</a>.</li>
         </ul>
 
         <h2>Frequently Asked Questions</h2>

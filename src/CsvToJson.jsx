@@ -472,7 +472,9 @@ function CsvToJson() {
         </ul>
         <p>
           Need it the other way? Use <a href="/json-to-csv">JSON to CSV</a> or create a
-          real spreadsheet with <a href="/json-to-excel">JSON to Excel</a>.
+          real spreadsheet with <a href="/json-to-excel">JSON to Excel</a>. Starting from an .xlsx file?
+          <a href="/excel-to-json"> Excel to JSON</a> reads it directly, no CSV export needed. When to use
+          which format is explained in <a href="/json-vs-csv">JSON vs CSV</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

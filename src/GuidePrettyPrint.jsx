@@ -75,6 +75,13 @@ node -e "console.log(JSON.stringify(require('./data.json'), null, 2))"
 
 # format the response of an API
 curl -s https://api.example.com/users/1 | jq .`}</Code>
+      <p>
+        On Windows, PowerShell can do it without extra tools:
+        <code> Get-Content data.json -Raw | ConvertFrom-Json | ConvertTo-Json -Depth 10</code>. The
+        <code> -Depth</code> matters, because nested data is cut off without it; see
+        <a href="/powershell-json"> PowerShell JSON</a> for the details, and
+        <a href="/curl-post-json"> curl POST JSON</a> for sending JSON to an API.
+      </p>
 
       <h2>VS Code</h2>
       <ol>

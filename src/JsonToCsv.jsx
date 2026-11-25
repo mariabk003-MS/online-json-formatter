@@ -350,6 +350,8 @@ function JsonToCsv() {
           file in Excel, a real spreadsheet with numbers and a bold header is
           often better: try <a href="/json-to-excel">JSON to Excel</a>. To do the
           conversion in code, see <a href="/json-to-csv-python">JSON to CSV in Python</a>.
+          For a table in a README or a GitHub issue, use <a href="/json-to-markdown-table">JSON to Markdown Table</a>,
+          and read <a href="/json-vs-csv">JSON vs CSV</a> to choose the right format.
         </p>
 
         <h2>Frequently Asked Questions</h2>

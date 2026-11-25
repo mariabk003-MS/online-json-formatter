@@ -211,6 +211,10 @@ System.out.println(user.firstName());`}</Code>
           <li><strong>Records</strong> (Java 16+) are short and immutable: perfect for API responses you only read.</li>
           <li><strong>Classes</strong> with getters and setters work on older Java versions and with frameworks that need to change fields after creating the object.</li>
         </ul>
+        <p>
+          Building an Android or Flutter app? <a href="/json-to-kotlin">JSON to Kotlin</a> writes Kotlin
+          data classes, and <a href="/json-to-dart">JSON to Dart</a> writes Flutter models.
+        </p>
 
         <FaqSection faqs={FAQS['json-to-java']} />
 

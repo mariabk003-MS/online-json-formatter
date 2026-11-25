@@ -185,7 +185,8 @@ function SqlToJson() {
           read <code>SELECT</code> queries. To export query results as JSON, most
           databases can do it directly, for example <code>json_agg</code> in
           PostgreSQL or <code>JSON_ARRAYAGG</code> in MySQL. Going the other way?
-          Use <a href="/json-to-sql">JSON to SQL</a>.
+          Use <a href="/json-to-sql">JSON to SQL</a>, or see
+          <a href="/import-json-into-database"> How to Import JSON into a Database</a>.
         </p>
 
         <FaqSection faqs={FAQS['sql-to-json']} />

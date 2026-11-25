@@ -80,9 +80,10 @@ JSON.stringify(user, (k, v) => (k === 'password' ? undefined : v))   // hide one
       <h2>Common Errors</h2>
       <ul>
         <li><strong>Unexpected token &apos; in JSON</strong>: single quotes; JSON needs double quotes.</li>
-        <li><strong>Unexpected end of JSON input</strong>: the text is empty or cut off.</li>
+        <li><strong><a href="/unexpected-end-of-json-input">Unexpected end of JSON input</a></strong>: the text is empty or cut off.</li>
         <li><strong>Unexpected token &lt; in JSON</strong>: the server sent HTML (often an error page) instead of JSON.</li>
-        <li><strong>Converting circular structure to JSON</strong>: an object refers to itself and cannot be stringified.</li>
+        <li><strong><a href="/converting-circular-structure-to-json">Converting circular structure to JSON</a></strong>: an object refers to itself and cannot be stringified.</li>
+        <li><strong><a href="/bad-escaped-character-in-json">Bad escaped character in JSON</a></strong>: a backslash in a string, often in a Windows path, is not a valid escape.</li>
       </ul>
       <p>
         Paste broken JSON into the <a href="/">JSON Formatter</a> to see the exact

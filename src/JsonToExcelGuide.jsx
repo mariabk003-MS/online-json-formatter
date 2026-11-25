@@ -147,7 +147,8 @@ Sara     Islamabad  2`}</pre>
 
         <h2>Need to Go the Other Way?</h2>
         <p>
-          To turn a spreadsheet back into JSON, save it as CSV and use our{' '}
+          To turn a spreadsheet back into JSON, use our <a href="/excel-to-json">Excel to JSON Converter</a>,
+          which reads .xlsx files directly, or save it as CSV and use our{' '}
           <a href="/csv-to-json">CSV to JSON Converter</a>.
         </p>
 

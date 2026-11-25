@@ -149,6 +149,7 @@ prod:
         <p>
           The error message shows the line and column, so you can jump straight
           to the problem. To go the other way, use <a href="/json-to-yaml">JSON to YAML</a>.
+          Have a TOML config such as Cargo.toml or pyproject.toml? Use <a href="/toml-to-json">TOML to JSON</a>.
         </p>
 
         <FaqSection faqs={FAQS['yaml-to-json']} />

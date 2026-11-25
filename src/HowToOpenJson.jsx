@@ -120,7 +120,8 @@ function HowToOpenJson() {
           <strong> Shift + Option + F</strong> (Mac) to format it. Online, paste it
           into the <a href="/">JSON Formatter</a>, or open big files as a tree in the
           <a href="/json-viewer"> JSON Viewer</a>. For Python, JavaScript and the
-          command line, see <a href="/pretty-print-json">How to Pretty Print JSON</a>.
+          command line, see <a href="/pretty-print-json">How to Pretty Print JSON</a>. To change values
+          without touching the raw text, use the <a href="/json-editor">JSON Editor</a>.
         </p>
 
         <h2>Frequently Asked Questions</h2>

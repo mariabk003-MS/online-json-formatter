@@ -544,6 +544,7 @@ function App() {
           <li>Choose your preferred indentation: 2, 3 or 4 spaces, or Tab.</li>
           <li>Minify JSON to remove extra spaces and reduce file size.</li>
           <li>Sort keys from A to Z and remove null values while you format, without changing your input.</li>
+          <li>Need to change values? Edit JSON as a tree, with undo, in the <a href="/json-editor">JSON Editor</a>.</li>
           <li>Upload JSON files directly from your computer.</li>
           <li>Check JSON syntax and see the exact line and column of any error.</li>
           <li>

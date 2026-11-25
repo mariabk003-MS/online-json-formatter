@@ -94,6 +94,10 @@ df.to_csv("users.csv", index=False)`}</Code>
         with <code>encoding=&quot;utf-8-sig&quot;</code> to fix it:
       </p>
       <Code label="Python">{`df.to_csv("users.csv", index=False, encoding="utf-8-sig")`}</Code>
+      <p>
+        Only need a spreadsheet once? The <a href="/convert-json-to-excel">JSON to Excel guide</a> shows ways
+        without Python. Not sure CSV is the right format? Read <a href="/json-vs-csv">JSON vs CSV</a>.
+      </p>
 
       <h2>Common Errors</h2>
       <ul>

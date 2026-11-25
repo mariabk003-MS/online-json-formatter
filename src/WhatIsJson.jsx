@@ -166,7 +166,8 @@ XML:   <person><name>Ali</name><age>30</age></person>`}</pre>
           <li>Learn every rule in <a href="/json-syntax-rules">JSON Syntax Rules</a>.</li>
           <li>Use JSON in code: <a href="/javascript-json-parse">JSON.parse in JavaScript</a> or <a href="/json-in-python">JSON in Python</a>.</li>
           <li>Make messy JSON readable: <a href="/pretty-print-json">How to Pretty Print JSON</a>.</li>
-          <li>Compare formats: <a href="/json-vs-yaml">JSON vs YAML</a> and <a href="/json-vs-xml">JSON vs XML</a>.</li>
+          <li>Compare formats: <a href="/json-vs-yaml">JSON vs YAML</a>, <a href="/json-vs-xml">JSON vs XML</a> and <a href="/json-vs-csv">JSON vs CSV</a>.</li>
+          <li>Opening a .json file on your computer? See <a href="/how-to-open-json-file">How to Open a JSON File</a>.</li>
           <li>Got an error? Read <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>.</li>
           <li>Practice with real data from the <a href="/datasets">free JSON datasets</a>.</li>
         </ul>

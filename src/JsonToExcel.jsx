@@ -134,6 +134,7 @@ function JsonToExcel() {
         <ul>
           <li><strong>Choose Excel (.xlsx)</strong> when people will open the file: numbers stay numbers, the header is bold and frozen, and letters like é and ü always show correctly.</li>
           <li><strong>Choose CSV</strong> when another program or database will import the file, or when you need a plain text format. Use <a href="/json-to-csv">JSON to CSV</a>.</li>
+          <li><strong>Need a table for a web page or a README?</strong> Use <a href="/json-to-html-table">JSON to HTML Table</a> or <a href="/json-to-markdown-table">JSON to Markdown Table</a>.</li>
         </ul>
 
         <h2>Tips</h2>
@@ -142,6 +143,7 @@ function JsonToExcel() {
           <li>Arrays inside a record, like a list of tags, are kept as JSON text in one cell.</li>
           <li>To open the file in Google Sheets, go to File → Import and upload the .xlsx file.</li>
           <li>Doing this in code? See <a href="/json-to-csv-python">JSON to CSV in Python</a> or the <a href="/convert-json-to-excel">JSON to Excel guide</a>.</li>
+          <li>Have an Excel file and need JSON? Use <a href="/excel-to-json">Excel to JSON</a>.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-to-excel']} />

@@ -121,6 +121,8 @@ note: |-
           A handy workflow: generate or edit the data as JSON, convert it here,
           then add comments in the YAML. Read <a href="/json-vs-yaml">JSON vs YAML</a> for
           a full comparison, and check the result with the <a href="/yaml-formatter">YAML Formatter</a>.
+          Some tools, like Rust&apos;s Cargo and Python&apos;s pyproject.toml, use TOML instead:
+          convert with <a href="/json-to-toml">JSON to TOML</a>.
         </p>
 
         <FaqSection faqs={FAQS['json-to-yaml']} />

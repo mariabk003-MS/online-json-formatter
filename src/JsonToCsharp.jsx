@@ -223,7 +223,7 @@ Order? order = JsonConvert.DeserializeObject<Order>(json);`}</Code>
         <p>
           Your JSON never leaves your browser, so it is safe to paste real API
           responses. Need another language? Try <a href="/json-to-go">JSON to Go</a>,
-          <a href="/json-to-java"> JSON to Java</a> or <a href="/json-to-typescript">JSON to TypeScript</a>.
+          <a href="/json-to-java"> JSON to Java</a>, <a href="/json-to-typescript">JSON to TypeScript</a> or <a href="/json-to-php">JSON to PHP</a>.
         </p>
 
         <FaqSection faqs={FAQS['json-to-csharp']} />

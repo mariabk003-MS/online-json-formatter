@@ -165,6 +165,12 @@ console.log('errors:', errors)`}</Code>
           <tr><td>Very large data</td><td>JSON Lines and <code>readline</code></td></tr>
         </tbody>
       </table>
+      <p>
+        Saving data back with <code>JSON.stringify</code>? If an object refers to itself, see
+        <a href="/converting-circular-structure-to-json"> Converting Circular Structure to JSON</a>. If a file
+        is empty or was cut off while writing, reading it fails with
+        <a href="/unexpected-end-of-json-input"> Unexpected End of JSON Input</a>.
+      </p>
     </ArticlePage>
   )
 }

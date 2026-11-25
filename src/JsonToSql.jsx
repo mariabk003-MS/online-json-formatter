@@ -185,6 +185,7 @@ INSERT INTO "users" ("id", "name", "balance", "active", "city") VALUES
           <li>Review the column types and add a <code>PRIMARY KEY</code> (usually on <code>id</code>).</li>
           <li>Increase <code>VARCHAR</code> lengths if your real data has longer text than the sample.</li>
           <li>For very large files, split the inserts into batches of a few thousand rows.</li>
+          <li>To load a JSON file with SQL itself in PostgreSQL, MySQL, SQLite or SQL Server, see <a href="/import-json-into-database">How to Import JSON into a Database</a>.</li>
         </ul>
 
         <FaqSection faqs={FAQS['json-to-sql']} />

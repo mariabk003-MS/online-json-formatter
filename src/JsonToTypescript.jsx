@@ -208,7 +208,7 @@ export interface Order {
         <ul>
           <li><strong>Use a complete sample.</strong> The tool can only see the fields in your example. Include an item with every optional field if you can.</li>
           <li><strong>Check null values.</strong> A field that is <code>null</code> in your sample becomes <code>null</code>. If it can also be a string, change it to <code>string | null</code>.</li>
-          <li><strong>Types are not checked at runtime.</strong> TypeScript types disappear after compiling. To validate real API data, use a JSON Schema with the <a href="/json-schema-generator">JSON Schema Generator</a> and <a href="/json-schema-validator">JSON Schema Validator</a>, or a library like Zod.</li>
+          <li><strong>Types are not checked at runtime.</strong> TypeScript types disappear after compiling. To validate real API data, use a JSON Schema with the <a href="/json-schema-generator">JSON Schema Generator</a> and <a href="/json-schema-validator">JSON Schema Validator</a>, or create a Zod schema with <a href="/json-to-zod">JSON to Zod</a>.</li>
         </ul>
 
         <h2>Interface or Type?</h2>
@@ -217,7 +217,7 @@ export interface Order {
           same. Interfaces can be extended and merged, and many teams use them for
           object shapes; <code>type</code> is needed for unions like
           <code> &apos;admin&apos; | &apos;editor&apos;</code>. Using another language? Try
-          <a href="/json-to-python"> JSON to Python</a> or <a href="/json-to-java">JSON to Java</a>.
+          <a href="/json-to-python"> JSON to Python</a>, <a href="/json-to-java">JSON to Java</a>, <a href="/json-to-kotlin">JSON to Kotlin</a>, <a href="/json-to-swift">JSON to Swift</a> or <a href="/json-to-rust">JSON to Rust</a>.
         </p>
 
         <FaqSection faqs={FAQS['json-to-typescript']} />

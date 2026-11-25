@@ -114,7 +114,8 @@ function JsonSchemaGenerator() {
           Add <code>&quot;additionalProperties&quot;: false</code> to reject unknown
           fields, and remove names from <code>required</code> if they are optional.
           Then test real data against it with the
-          <a href="/json-schema-validator"> JSON Schema Validator</a>.
+          <a href="/json-schema-validator"> JSON Schema Validator</a>. In a TypeScript project,
+          <a href="/json-to-zod"> JSON to Zod</a> writes the same kind of checks as a Zod schema.
         </p>
 
         <h2>What JSON Schema Is Used For</h2>

@@ -128,7 +128,7 @@ function JsonToHtmlTable() {
 
         <h2>Tips</h2>
         <ul>
-          <li><strong>Big tables:</strong> for thousands of rows, a spreadsheet is easier to read. Use <a href="/json-to-excel">JSON to Excel</a> or <a href="/json-to-csv">JSON to CSV</a>.</li>
+          <li><strong>Big tables:</strong> for thousands of rows, a spreadsheet is easier to read. Use <a href="/json-to-excel">JSON to Excel</a> or <a href="/json-to-csv">JSON to CSV</a>. For README files and GitHub, <a href="/json-to-markdown-table">JSON to Markdown Table</a> writes the same table in Markdown.</li>
           <li><strong>Find the list first:</strong> if your rows are inside an object, such as <code>{'{'} &quot;data&quot;: [ ... ] {'}'}</code>, paste only the array, or pick it out with the <a href="/json-path">JSONPath Tester</a> (<code>$.data</code>).</li>
           <li><strong>Broken JSON?</strong> Fix it first with <a href="/json-repair">JSON Repair</a>.</li>
         </ul>

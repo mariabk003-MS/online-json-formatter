@@ -306,7 +306,8 @@ const settings = saved ? JSON.parse(saved) : {}`}</Code>
         <li>Every <code>{'{'}</code> and <code>[</code> is closed</li>
       </ul>
       <p>
-        See all other mistakes in <a href="/common-json-errors">Common JSON Errors</a>.
+        See all other mistakes in <a href="/common-json-errors">Common JSON Errors</a>. Backslashes and
+        line breaks inside strings have their own guide: <a href="/bad-escaped-character-in-json">Bad Escaped Character in JSON</a>.
       </p>
     </ArticlePage>
   )

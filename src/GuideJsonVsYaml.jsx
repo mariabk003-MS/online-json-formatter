@@ -82,6 +82,7 @@ address:
       <ul>
         <li><strong>Use JSON</strong> when programs talk to each other: APIs, web apps, databases, log files and anything sent over the network.</li>
         <li><strong>Use YAML</strong> when people edit the file by hand: Docker Compose, Kubernetes, GitHub Actions, and app settings where comments help.</li>
+        <li><strong>Consider TOML</strong> for small config files: Rust&apos;s Cargo and Python&apos;s pyproject.toml use it. Convert with <a href="/toml-to-json">TOML to JSON</a> and <a href="/json-to-toml">JSON to TOML</a>.</li>
       </ul>
 
       <h2>Convert Between Them</h2>

@@ -263,7 +263,11 @@ function JsonErrorsGuide() {
         </ul>
         <p>
           For JavaScript messages like &quot;Unexpected token &lt; in JSON at position 0&quot;,
-          see the full guide to <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>.
+          see the full guide to <a href="/unexpected-token-in-json">Unexpected Token in JSON</a>; empty or
+          cut-off text is covered in <a href="/unexpected-end-of-json-input">Unexpected End of JSON Input</a>.
+          Errors while <em>writing</em> JSON have their own guides:
+          <a href="/converting-circular-structure-to-json"> Converting Circular Structure to JSON</a> (JavaScript) and
+          <a href="/object-is-not-json-serializable"> Object Is Not JSON Serializable</a> (Python).
           To fix most of these mistakes in one click, paste your JSON into
           <a href="/json-repair"> JSON Repair</a>.
         </p>
