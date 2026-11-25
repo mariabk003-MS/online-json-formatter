@@ -2,9 +2,9 @@
 
 **Live site: [online-json-formatter-ten.vercel.app](https://online-json-formatter-ten.vercel.app/)**
 
-35+ free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
+40+ free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
 
-![Online JSON Formatter: 35+ free JSON tools in your browser](docs/cover.png)
+![Online JSON Formatter: 40+ free JSON tools in your browser](docs/cover.png)
 
 ## Why use it
 
@@ -24,6 +24,7 @@
 |---|---|
 | [JSON Formatter](https://online-json-formatter-ten.vercel.app/) | Beautify JSON and auto-fix common mistakes. |
 | [JSON Viewer](https://online-json-formatter-ten.vercel.app/json-viewer) | Explore JSON as a collapsible tree. |
+| [JSON Editor](https://online-json-formatter-ten.vercel.app/json-editor) | Edit JSON as a tree, with undo. |
 | [JSON Validator](https://online-json-formatter-ten.vercel.app/json-validator) | Find the exact line and column of any error. |
 
 ### Convert
@@ -33,10 +34,15 @@
 | [JSON to CSV](https://online-json-formatter-ten.vercel.app/json-to-csv) | Turn JSON into a spreadsheet file. |
 | [CSV to JSON](https://online-json-formatter-ten.vercel.app/csv-to-json) | Turn spreadsheet rows into clean JSON. |
 | [JSON to Excel](https://online-json-formatter-ten.vercel.app/json-to-excel) | Download JSON as a real .xlsx file. |
+| [Excel to JSON](https://online-json-formatter-ten.vercel.app/excel-to-json) | Turn an .xlsx spreadsheet into JSON. |
 | [JSON to XML](https://online-json-formatter-ten.vercel.app/json-to-xml) | Convert JSON into well-formed XML. |
 | [XML to JSON](https://online-json-formatter-ten.vercel.app/xml-to-json) | Convert XML documents into JSON. |
+| [JSON to HTML Table](https://online-json-formatter-ten.vercel.app/json-to-html-table) | Turn JSON into an HTML table with preview. |
+| [JSON to Markdown Table](https://online-json-formatter-ten.vercel.app/json-to-markdown-table) | Make a GitHub Markdown table from JSON. |
 | [JSON to YAML](https://online-json-formatter-ten.vercel.app/json-to-yaml) | Convert JSON into readable YAML. |
 | [YAML to JSON](https://online-json-formatter-ten.vercel.app/yaml-to-json) | Convert YAML config files into JSON. |
+| [JSON to TOML](https://online-json-formatter-ten.vercel.app/json-to-toml) | Turn JSON into a TOML config file. |
+| [TOML to JSON](https://online-json-formatter-ten.vercel.app/toml-to-json) | Convert TOML config files into JSON. |
 | [JSON to SQL](https://online-json-formatter-ten.vercel.app/json-to-sql) | Create CREATE TABLE and INSERT statements. |
 | [SQL to JSON](https://online-json-formatter-ten.vercel.app/sql-to-json) | Turn SQL INSERT statements into JSON. |
 
@@ -45,6 +51,7 @@
 | Tool | What it does |
 |---|---|
 | [JSON to TypeScript](https://online-json-formatter-ten.vercel.app/json-to-typescript) | Generate TypeScript interfaces from JSON. |
+| [JSON to Zod](https://online-json-formatter-ten.vercel.app/json-to-zod) | Generate a Zod schema with types from JSON. |
 | [JSON to Python](https://online-json-formatter-ten.vercel.app/json-to-python) | Generate dataclasses or Pydantic models. |
 | [JSON to Java](https://online-json-formatter-ten.vercel.app/json-to-java) | Generate Java classes or records. |
 | [JSON to Go](https://online-json-formatter-ten.vercel.app/json-to-go) | Generate Go structs with json tags. |
@@ -53,6 +60,7 @@
 | [JSON to Dart](https://online-json-formatter-ten.vercel.app/json-to-dart) | Generate Dart models for Flutter. |
 | [JSON to Swift](https://online-json-formatter-ten.vercel.app/json-to-swift) | Generate Swift Codable structs. |
 | [JSON to Rust](https://online-json-formatter-ten.vercel.app/json-to-rust) | Generate Rust structs for serde. |
+| [JSON to PHP](https://online-json-formatter-ten.vercel.app/json-to-php) | Convert JSON to a PHP array or classes. |
 | [JSON Schema Generator](https://online-json-formatter-ten.vercel.app/json-schema-generator) | Create a JSON Schema from an example. |
 
 ### Check & query
@@ -97,15 +105,26 @@
 - [JSON Syntax Rules](https://online-json-formatter-ten.vercel.app/json-syntax-rules)
 - [Common JSON Errors](https://online-json-formatter-ten.vercel.app/common-json-errors)
 - [Unexpected Token in JSON](https://online-json-formatter-ten.vercel.app/unexpected-token-in-json)
+- [Unexpected End of JSON Input](https://online-json-formatter-ten.vercel.app/unexpected-end-of-json-input)
+- [Circular Structure to JSON](https://online-json-formatter-ten.vercel.app/converting-circular-structure-to-json)
+- [Bad Escaped Character in JSON](https://online-json-formatter-ten.vercel.app/bad-escaped-character-in-json)
+- [Send JSON with curl](https://online-json-formatter-ten.vercel.app/curl-post-json)
+- [JSON in PowerShell](https://online-json-formatter-ten.vercel.app/powershell-json)
 - [How to Pretty Print JSON](https://online-json-formatter-ten.vercel.app/pretty-print-json)
 - [JSON Comments](https://online-json-formatter-ten.vercel.app/json-comments)
 - [JSON in Python](https://online-json-formatter-ten.vercel.app/json-in-python)
+- [JSONDecodeError in Python](https://online-json-formatter-ten.vercel.app/jsondecodeerror-expecting-value)
+- [Not JSON Serializable (Python)](https://online-json-formatter-ten.vercel.app/object-is-not-json-serializable)
 - [JSON.parse in JavaScript](https://online-json-formatter-ten.vercel.app/javascript-json-parse)
+- [Read a JSON File in Node.js](https://online-json-formatter-ten.vercel.app/read-json-file-nodejs)
 - [JSON Lines (JSONL)](https://online-json-formatter-ten.vercel.app/json-lines)
 - [How to Open a JSON File](https://online-json-formatter-ten.vercel.app/how-to-open-json-file)
 - [JSON vs XML](https://online-json-formatter-ten.vercel.app/json-vs-xml)
 - [JSON vs YAML](https://online-json-formatter-ten.vercel.app/json-vs-yaml)
+- [JSON vs CSV](https://online-json-formatter-ten.vercel.app/json-vs-csv)
+- [What Is JSON Schema?](https://online-json-formatter-ten.vercel.app/what-is-json-schema)
 - [JSON to CSV in Python](https://online-json-formatter-ten.vercel.app/json-to-csv-python)
+- [Import JSON into a Database](https://online-json-formatter-ten.vercel.app/import-json-into-database)
 - [Convert JSON to Excel](https://online-json-formatter-ten.vercel.app/convert-json-to-excel)
 
 ## Free JSON datasets

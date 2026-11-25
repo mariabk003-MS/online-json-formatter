@@ -1,6 +1,6 @@
 // Tells Bing (and other IndexNow search engines like Yandex and Seznam) about
 // every page in the sitemap, so new and changed pages are crawled quickly.
-// Run after a deploy:  npm.cmd run indexnow
+// Run after a deploy:  npm.cmd run indexnow   (also pings the WebSub hub for feed.xml)
 // The key file public/<key>.txt must already be live on the website.
 import { readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -27,3 +27,12 @@ if (response.status >= 400) {
   console.log(await response.text())
   process.exitCode = 1
 }
+
+// WebSub: tell Google's public hub that feed.xml changed, so subscribers
+// (including Google) fetch it again. 204 = accepted.
+const hub = await fetch('https://pubsubhubbub.appspot.com/', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({ 'hub.mode': 'publish', 'hub.url': `https://${host}/feed.xml` }),
+})
+console.log(`WebSub ping for feed.xml: response ${hub.status} ${hub.statusText}`)
