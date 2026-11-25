@@ -20,6 +20,7 @@ export const PAGES = {
   '/json-compare': () => import('./JsonCompare.jsx'),
   '/json-sorter': () => import('./JsonSorter.jsx'),
   '/json-to-typescript': () => import('./JsonToTypescript.jsx'),
+  '/json-to-zod': () => import('./JsonToZod.jsx'),
   '/xml-formatter': () => import('./XmlFormatter.jsx'),
   '/yaml-formatter': () => import('./YamlFormatter.jsx'),
   '/base64-encode-decode': () => import('./Base64Tool.jsx'),

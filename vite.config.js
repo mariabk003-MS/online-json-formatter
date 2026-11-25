@@ -25,6 +25,7 @@ export default defineConfig({
         jsonCompare: fileURLToPath(new URL('./json-compare.html', import.meta.url)),
         jsonSorter: fileURLToPath(new URL('./json-sorter.html', import.meta.url)),
         jsonToTypescript: fileURLToPath(new URL('./json-to-typescript.html', import.meta.url)),
+        jsonToZod: fileURLToPath(new URL('./json-to-zod.html', import.meta.url)),
         xmlFormatter: fileURLToPath(new URL('./xml-formatter.html', import.meta.url)),
         yamlFormatter: fileURLToPath(new URL('./yaml-formatter.html', import.meta.url)),
         base64Tool: fileURLToPath(new URL('./base64-encode-decode.html', import.meta.url)),

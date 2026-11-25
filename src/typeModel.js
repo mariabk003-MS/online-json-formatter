@@ -38,8 +38,23 @@ function singular(text) {
   return text + 'Item'
 }
 
+// When every string of a field looks the same, the string type also gets a
+// format: 'email' | 'url' | 'uuid' | 'datetime' | 'date' (used by JSON to Zod).
+const STRING_FORMATS = [
+  ['uuid', /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i],
+  ['datetime', /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/],
+  ['date', /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/],
+  ['email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/],
+  ['url', /^https?:\/\/[^\s]+$/],
+]
+function stringFormat(strings) {
+  for (const [format, pattern] of STRING_FORMATS) if (strings.every((s) => pattern.test(s))) return format
+  return undefined
+}
+
 // A type is one of:
-//   { kind: 'string' | 'integer' | 'number' | 'boolean' | 'null' | 'unknown' }
+//   { kind: 'string', format? }
+//   { kind: 'integer' | 'number' | 'boolean' | 'null' | 'unknown' }
 //   { kind: 'object', name }            (fields are in model.classes[name])
 //   { kind: 'array', items: <type> }
 //   { kind: 'union', types: [<type>, ...] }
@@ -85,9 +100,11 @@ export function inferModel(data, rootName = 'Root') {
     }
     let hasInteger = false
     let hasFloat = false
+    const strings = values.filter((value) => typeof value === 'string')
+    const format = strings.length ? stringFormat(strings) : undefined
     for (const value of values) {
       if (value === null) add({ kind: 'null' })
-      else if (typeof value === 'string') add({ kind: 'string' })
+      else if (typeof value === 'string') add(format ? { kind: 'string', format } : { kind: 'string' })
       else if (typeof value === 'boolean') add({ kind: 'boolean' })
       else if (typeof value === 'number') {
         if (Number.isInteger(value)) hasInteger = true

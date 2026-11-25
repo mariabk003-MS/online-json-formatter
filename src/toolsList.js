@@ -33,6 +33,7 @@ export const TOOL_GROUPS = [
     title: 'Generate code',
     tools: [
       { href: '/json-to-typescript', label: 'JSON to TypeScript', text: 'Generate TypeScript interfaces from JSON.' },
+      { href: '/json-to-zod', label: 'JSON to Zod', text: 'Generate a Zod schema with types from JSON.' },
       { href: '/json-to-python', label: 'JSON to Python', text: 'Generate dataclasses or Pydantic models.' },
       { href: '/json-to-java', label: 'JSON to Java', text: 'Generate Java classes or records.' },
       { href: '/json-to-go', label: 'JSON to Go', text: 'Generate Go structs with json tags.' },

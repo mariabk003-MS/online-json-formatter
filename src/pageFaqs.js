@@ -56,6 +56,12 @@ export const FAQS = {
     ["Are arrays sorted too?", "Array order is kept by default, because order matters in arrays. You can turn on the option to also sort simple arrays of text or numbers."],
     ["Is my JSON uploaded?", "No. Sorting happens in your browser and your data never leaves your device."],
   ],
+  'json-to-zod': [
+    ["How do I create a Zod schema from JSON?", "Paste an example of your JSON, such as an API response, choose Zod 4 or Zod 3 and click Generate Zod. You get one schema per object, z.infer TypeScript types, and optional and nullable fields marked for you."],
+    ["Does it support Zod 4?", "Yes. Zod 4 output uses the new top-level checks such as z.email(), z.url(), z.uuid() and z.iso.datetime(). Choose Zod 3 to get z.string().email() and the other older forms."],
+    ["Why use Zod instead of a TypeScript interface?", "TypeScript types are removed when the code is compiled, so they cannot check data at runtime. A Zod schema checks the real data with schema.parse() and still gives you the TypeScript type through z.infer."],
+    ["Is my JSON uploaded?", "No. The schema is generated in your browser and your JSON never leaves your device."],
+  ],
   'json-to-typescript': [
     ["What does JSON to TypeScript do?", "It reads sample JSON and writes TypeScript interfaces that describe it, with the right types for strings, numbers, booleans, arrays and nested objects."],
     ["How are nested objects handled?", "Each nested object gets its own named interface, based on its key name. For example a key called address becomes an Address interface."],

@@ -231,6 +231,10 @@
       "destination": "/json-to-toml.html"
     },
     {
+      "source": "/json-to-zod",
+      "destination": "/json-to-zod.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },
