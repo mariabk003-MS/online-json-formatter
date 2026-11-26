@@ -574,7 +574,9 @@ function App() {
           comments, real line breaks inside strings, Python True/False/None and
           missing closing brackets. After fixing, it tells you exactly what was
           changed. If something cannot be fixed safely, it shows the line and
-          column of the error so you can correct it yourself.
+          column of the error so you can correct it yourself. To format a file
+          and keep its comments, such as tsconfig.json, use the
+          <a href="/json5-formatter"> JSON5 and JSONC Formatter</a>.
         </p>
 
         <h3>What does Minify JSON do?</h3>

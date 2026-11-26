@@ -28,6 +28,7 @@ export default defineConfig({
         jsonToZod: fileURLToPath(new URL('./json-to-zod.html', import.meta.url)),
         xmlFormatter: fileURLToPath(new URL('./xml-formatter.html', import.meta.url)),
         yamlFormatter: fileURLToPath(new URL('./yaml-formatter.html', import.meta.url)),
+        json5Formatter: fileURLToPath(new URL('./json5-formatter.html', import.meta.url)),
         base64Tool: fileURLToPath(new URL('./base64-encode-decode.html', import.meta.url)),
         urlEncodeTool: fileURLToPath(new URL('./url-encode-decode.html', import.meta.url)),
         textCompare: fileURLToPath(new URL('./text-compare.html', import.meta.url)),

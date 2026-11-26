@@ -39,7 +39,8 @@ function GuideJsonComments() {
       </ul>
       <p>
         These files only work with tools that expect them. If you send them to
-        a normal JSON parser or an API, they will fail.
+        a normal JSON parser or an API, they will fail. To tidy up such a file
+        without losing its comments, use the <a href="/json5-formatter">JSON5 and JSONC Formatter</a>.
       </p>
 
       <h2>How to Remove Comments from JSON</h2>

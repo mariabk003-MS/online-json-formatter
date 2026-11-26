@@ -74,6 +74,12 @@ export const FAQS = {
     ["Are comments and CDATA kept?", "Yes. Comments, CDATA sections, attributes and the XML declaration are all kept."],
     ["Is my XML uploaded?", "No. Formatting runs in your browser. Your XML stays on your device."],
   ],
+  'json5-formatter': [
+    ["How do I format JSON with comments?", "Paste the file into the JSON5 and JSONC Formatter and click Format. It fixes the indentation and checks the syntax while every // and /* */ comment, end-of-line note and blank line between groups stays in place."],
+    ["What is the difference between JSONC and JSON5?", "JSONC is normal JSON plus comments, and most tools also accept trailing commas. JSON5 goes further: unquoted keys, single-quoted strings, hex numbers, Infinity and NaN, and strings over several lines."],
+    ["Can I convert JSON5 to JSON?", "Yes. Choose JSONC to keep the comments and get standard JSON keys and values, or Plain JSON to remove the comments as well. Infinity and NaN cannot be converted, because JSON has no such numbers."],
+    ["Is my file uploaded?", "No. Formatting runs in your browser and your file never leaves your device."],
+  ],
   'yaml-formatter': [
     ["What does the YAML formatter do?", "It checks your YAML for errors and rewrites it with clean, consistent indentation."],
     ["How do I validate YAML?", "Paste your YAML and click Validate. If there is a problem, the tool shows the line and column and marks that line in red."],

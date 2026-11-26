@@ -235,6 +235,10 @@
       "destination": "/json-to-zod.html"
     },
     {
+      "source": "/json5-formatter",
+      "destination": "/json5-formatter.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

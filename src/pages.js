@@ -23,6 +23,7 @@ export const PAGES = {
   '/json-to-zod': () => import('./JsonToZod.jsx'),
   '/xml-formatter': () => import('./XmlFormatter.jsx'),
   '/yaml-formatter': () => import('./YamlFormatter.jsx'),
+  '/json5-formatter': () => import('./Json5Formatter.jsx'),
   '/base64-encode-decode': () => import('./Base64Tool.jsx'),
   '/url-encode-decode': () => import('./UrlEncodeTool.jsx'),
   '/text-compare': () => import('./TextCompare.jsx'),

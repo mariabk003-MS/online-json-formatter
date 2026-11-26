@@ -2,9 +2,9 @@
 
 **Live site: [online-json-formatter-ten.vercel.app](https://online-json-formatter-ten.vercel.app/)**
 
-40+ free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
+45+ free JSON tools that run entirely in your browser: format, validate, repair, compare and convert JSON. No uploads, no sign-up, no ads in the way.
 
-![Online JSON Formatter: 40+ free JSON tools in your browser](docs/cover.png)
+![Online JSON Formatter: 45+ free JSON tools in your browser](docs/cover.png)
 
 ## Why use it
 
@@ -87,6 +87,7 @@
 | [JSON Sorter](https://online-json-formatter-ten.vercel.app/json-sorter) | Sort JSON keys from A to Z. |
 | [XML Formatter](https://online-json-formatter-ten.vercel.app/xml-formatter) | Beautify, validate or minify XML. |
 | [YAML Formatter](https://online-json-formatter-ten.vercel.app/yaml-formatter) | Validate and beautify YAML. |
+| [JSON5 / JSONC Formatter](https://online-json-formatter-ten.vercel.app/json5-formatter) | Format JSON with comments and keep them. |
 
 ### Encode & decode
 

@@ -232,7 +232,8 @@ export function TsconfigPage() {
         <li>
           tsconfig.json may contain comments (it is read as JSONC), but plain JSON
           like this template works with every tool. Read more in our{' '}
-          <a href="/json-comments">JSON comments guide</a>.
+          <a href="/json-comments">JSON comments guide</a>, and format a tsconfig.json
+          that has comments with the <a href="/json5-formatter">JSON5 and JSONC Formatter</a>.
         </li>
       </ul>
     </DatasetPage>

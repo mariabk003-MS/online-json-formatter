@@ -69,6 +69,7 @@ export const TOOL_GROUPS = [
       { href: '/json-sorter', label: 'JSON Sorter', text: 'Sort JSON keys from A to Z.' },
       { href: '/xml-formatter', label: 'XML Formatter', text: 'Beautify, validate or minify XML.' },
       { href: '/yaml-formatter', label: 'YAML Formatter', text: 'Validate and beautify YAML.' },
+      { href: '/json5-formatter', label: 'JSON5 / JSONC Formatter', text: 'Format JSON with comments and keep them.' },
     ],
   },
   {
