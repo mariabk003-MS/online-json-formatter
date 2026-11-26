@@ -26,7 +26,7 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/csv-to-json</loc>
-<lastmod>2026-11-25</lastmod>
+<lastmod>2026-11-26</lastmod>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/what-is-json</loc>
@@ -298,7 +298,7 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json-to-markdown-table</loc>
-<lastmod>2026-11-24</lastmod>
+<lastmod>2026-11-26</lastmod>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/toml-to-json</loc>
@@ -314,6 +314,10 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json5-formatter</loc>
+<lastmod>2026-11-26</lastmod>
+</url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/markdown-table-to-json</loc>
 <lastmod>2026-11-26</lastmod>
 </url>
 </urlset>

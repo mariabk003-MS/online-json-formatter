@@ -128,6 +128,7 @@ function JsonToMarkdownTable() {
           <li><strong>Wide tables:</strong> Markdown has no column widths. If a table has many columns, consider fewer keys, or use <a href="/json-to-html-table">JSON to HTML Table</a> or <a href="/json-to-excel">JSON to Excel</a>.</li>
           <li><strong>Find the list first:</strong> if your rows sit inside an object such as <code>{'{'} &quot;data&quot;: [ ... ] {'}'}</code>, paste only the array, or pick it out with the <a href="/json-path">JSONPath Tester</a> (<code>$.data</code>).</li>
           <li><strong>AI prompts:</strong> a Markdown table is shorter than the same data as pretty JSON and is easy for both people and AI assistants to read, which makes it handy for sharing tabular examples in a prompt.</li>
+          <li><strong>Have a table and need JSON?</strong> <a href="/markdown-table-to-json">Markdown Table to JSON</a> does the opposite.</li>
           <li><strong>Broken JSON?</strong> The converter repairs common mistakes like trailing commas and single quotes. For anything else, use <a href="/json-repair">JSON Repair</a>.</li>
         </ul>
 

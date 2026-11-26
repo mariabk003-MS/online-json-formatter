@@ -111,7 +111,7 @@ const escapeHtml = (value) =>
   value.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch])
 
 // Splits "| a | b \| c |" into ["a", "b | c"], honoring \| and \\ escapes.
-function splitRow(line) {
+export function splitRow(line) {
   const cells = []
   let current = ''
   const text = line.trim().replace(/^\|/, '').replace(/\|$/, '')

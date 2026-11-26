@@ -471,6 +471,7 @@ function CsvToJson() {
           <li><strong>Use clear headers:</strong> they become your JSON keys, so <code>first_name</code> works better than <code>First Name (required)</code>.</li>
         </ul>
         <p>
+          Copying a table from a README or a chat answer? Use <a href="/markdown-table-to-json">Markdown Table to JSON</a>.
           Need it the other way? Use <a href="/json-to-csv">JSON to CSV</a> or create a
           real spreadsheet with <a href="/json-to-excel">JSON to Excel</a>. Starting from an .xlsx file?
           <a href="/excel-to-json"> Excel to JSON</a> reads it directly, no CSV export needed. When to use

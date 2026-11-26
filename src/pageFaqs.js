@@ -308,6 +308,12 @@ export const FAQS = {
     ["Can it convert all sheets at once?", "Yes. If the workbook has more than one sheet, choose All sheets to get one JSON object with a key for each sheet name."],
     ["Is my Excel file uploaded?", "No. The file is read with JavaScript in your browser and never sent to a server."],
   ],
+  'markdown-table-to-json': [
+    ["How do I convert a Markdown table to JSON?", "Paste the table, or a whole Markdown document, and click Convert to JSON. Each row becomes an object with the header row as keys, and numbers and true / false become real JSON values."],
+    ["Can it read several tables at once?", "Yes. The converter finds every table in the text and ignores the writing around them. With more than one table, the result is an array that holds one array of rows per table."],
+    ["What happens to empty cells and short rows?", "Missing cells count as empty. You can write empty cells as an empty string, as null, or leave the key out of that row."],
+    ["Is my text uploaded?", "No. The conversion runs in your browser and your text never leaves your device."],
+  ],
   'json-to-markdown-table': [
     ["How do I convert JSON to a Markdown table?", "Paste a JSON array of objects and click Convert to Markdown. The converter writes a header row from the keys, the | --- | delimiter row and one row per item, shows a live preview, and lets you copy the table or download a .md file."],
     ["Does the table work on GitHub?", "Yes. The output is a GitHub Flavored Markdown table, so it renders in README files, issues, pull requests and wikis on GitHub and GitLab, and in most Markdown editors."],

@@ -239,6 +239,10 @@
       "destination": "/json5-formatter.html"
     },
     {
+      "source": "/markdown-table-to-json",
+      "destination": "/markdown-table-to-json.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

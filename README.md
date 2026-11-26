@@ -39,6 +39,7 @@
 | [XML to JSON](https://online-json-formatter-ten.vercel.app/xml-to-json) | Convert XML documents into JSON. |
 | [JSON to HTML Table](https://online-json-formatter-ten.vercel.app/json-to-html-table) | Turn JSON into an HTML table with preview. |
 | [JSON to Markdown Table](https://online-json-formatter-ten.vercel.app/json-to-markdown-table) | Make a GitHub Markdown table from JSON. |
+| [Markdown Table to JSON](https://online-json-formatter-ten.vercel.app/markdown-table-to-json) | Turn Markdown tables into JSON rows. |
 | [JSON to YAML](https://online-json-formatter-ten.vercel.app/json-to-yaml) | Convert JSON into readable YAML. |
 | [YAML to JSON](https://online-json-formatter-ten.vercel.app/yaml-to-json) | Convert YAML config files into JSON. |
 | [JSON to TOML](https://online-json-formatter-ten.vercel.app/json-to-toml) | Turn JSON into a TOML config file. |

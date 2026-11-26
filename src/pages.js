@@ -65,6 +65,7 @@ export const PAGES = {
   '/excel-to-json': () => import('./ExcelToJson.jsx'),
   '/json-to-html-table': () => import('./JsonToHtmlTable.jsx'),
   '/json-to-markdown-table': () => import('./JsonToMarkdownTable.jsx'),
+  '/markdown-table-to-json': () => import('./MarkdownTableToJson.jsx'),
   '/json-editor': () => import('./JsonEditor.jsx'),
   '/json-to-php': () => import('./JsonToPhp.jsx'),
   '/converting-circular-structure-to-json': () => import('./GuideCircularJson.jsx'),
