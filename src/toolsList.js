@@ -100,6 +100,7 @@ export const GUIDES = [
   { href: '/jsondecodeerror-expecting-value', label: 'JSONDecodeError in Python' },
   { href: '/object-is-not-json-serializable', label: 'Not JSON Serializable (Python)' },
   { href: '/javascript-json-parse', label: 'JSON.parse in JavaScript' },
+  { href: '/json-in-typescript', label: 'JSON in TypeScript' },
   { href: '/read-json-file-nodejs', label: 'Read a JSON File in Node.js' },
   { href: '/json-lines', label: 'JSON Lines (JSONL)' },
   { href: '/how-to-open-json-file', label: 'How to Open a JSON File' },

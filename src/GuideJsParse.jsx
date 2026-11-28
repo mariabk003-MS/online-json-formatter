@@ -88,7 +88,8 @@ JSON.stringify(user, (k, v) => (k === 'password' ? undefined : v))   // hide one
       <p>
         Paste broken JSON into the <a href="/">JSON Formatter</a> to see the exact
         line of the error and fix common mistakes automatically, or read the full
-        guide to <a href="/unexpected-token-in-json">Unexpected token in JSON</a>.
+        guide to <a href="/unexpected-token-in-json">Unexpected token in JSON</a>. Using TypeScript? Read
+        <a href="/json-in-typescript"> JSON in TypeScript</a> to type the parsed value safely.
       </p>
 
       <h2>Reading and Writing JSON Files in Node.js</h2>

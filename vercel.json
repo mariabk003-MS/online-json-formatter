@@ -243,6 +243,10 @@
       "destination": "/markdown-table-to-json.html"
     },
     {
+      "source": "/json-in-typescript",
+      "destination": "/json-in-typescript.html"
+    },
+    {
       "source": "/json-path",
       "destination": "/json-path.html"
     },

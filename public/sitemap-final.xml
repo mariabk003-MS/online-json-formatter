@@ -90,7 +90,7 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json-to-typescript</loc>
-<lastmod>2026-11-25</lastmod>
+<lastmod>2026-11-28</lastmod>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/xml-formatter</loc>
@@ -158,7 +158,7 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/javascript-json-parse</loc>
-<lastmod>2026-11-25</lastmod>
+<lastmod>2026-11-28</lastmod>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json-lines</loc>
@@ -310,7 +310,7 @@
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json-to-zod</loc>
-<lastmod>2026-11-25</lastmod>
+<lastmod>2026-11-28</lastmod>
 </url>
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/json5-formatter</loc>
@@ -319,5 +319,9 @@
 <url>
 <loc>https://online-json-formatter-ten.vercel.app/markdown-table-to-json</loc>
 <lastmod>2026-11-26</lastmod>
+</url>
+<url>
+<loc>https://online-json-formatter-ten.vercel.app/json-in-typescript</loc>
+<lastmod>2026-11-28</lastmod>
 </url>
 </urlset>

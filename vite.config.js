@@ -59,6 +59,7 @@ export default defineConfig({
         jsonSizeCalculator: fileURLToPath(new URL('./json-size-calculator.html', import.meta.url)),
         jsonInPython: fileURLToPath(new URL('./json-in-python.html', import.meta.url)),
         javascriptJsonParse: fileURLToPath(new URL('./javascript-json-parse.html', import.meta.url)),
+        typescriptJson: fileURLToPath(new URL('./json-in-typescript.html', import.meta.url)),
         jsonLines: fileURLToPath(new URL('./json-lines.html', import.meta.url)),
         unexpectedTokenInJson: fileURLToPath(new URL('./unexpected-token-in-json.html', import.meta.url)),
         curlPostJson: fileURLToPath(new URL('./curl-post-json.html', import.meta.url)),

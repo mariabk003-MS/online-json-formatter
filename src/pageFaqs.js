@@ -344,6 +344,12 @@ export const FAQS = {
     ["Which escapes are allowed in JSON?", "Only \\\" \\\\ \\/ \\b \\f \\n \\r \\t and \\u followed by exactly four hex digits. Anything else after a backslash makes the JSON invalid."],
     ["Can Python read JSON with raw line breaks in strings?", "Yes. json.loads(text, strict=False) accepts control characters such as line breaks inside strings. JavaScript's JSON.parse has no such option."],
   ],
+  'json-in-typescript': [
+    ["What type does JSON.parse return in TypeScript?", "It returns any, which turns type checking off. A cast such as JSON.parse(text) as User compiles, but nothing checks the data at runtime."],
+    ["How do I safely type parsed JSON?", "Parse into unknown and check it, either with a type guard function or, for real API data, with a Zod schema. A schema checks the data at runtime and gives you the TypeScript type through z.infer."],
+    ["Why is my Date a string after JSON.parse?", "JSON has no date type. JSON.stringify writes dates as ISO text and JSON.parse returns that text. Convert it back, for example with z.coerce.date() in a Zod schema."],
+    ["How do I import a .json file in TypeScript?", "Turn on resolveJsonModule in tsconfig.json; TypeScript then types the import from the file. In Node.js ES modules, write import data from './data.json' with { type: 'json' }."],
+  ],
   'json-comments': [
     ["Does JSON support comments?", "No. Standard JSON (RFC 8259) does not allow // or /* */ comments. A strict parser will reject them."],
     ["Why do some JSON files have comments?", "Some tools accept extended formats such as JSONC (used by VS Code and tsconfig.json) or JSON5. These are not plain JSON."],

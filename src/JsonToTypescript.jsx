@@ -209,6 +209,7 @@ export interface Order {
           <li><strong>Use a complete sample.</strong> The tool can only see the fields in your example. Include an item with every optional field if you can.</li>
           <li><strong>Check null values.</strong> A field that is <code>null</code> in your sample becomes <code>null</code>. If it can also be a string, change it to <code>string | null</code>.</li>
           <li><strong>Types are not checked at runtime.</strong> TypeScript types disappear after compiling. To validate real API data, use a JSON Schema with the <a href="/json-schema-generator">JSON Schema Generator</a> and <a href="/json-schema-validator">JSON Schema Validator</a>, or create a Zod schema with <a href="/json-to-zod">JSON to Zod</a>.</li>
+          <li><strong>Typing JSON.parse and fetch results:</strong> see <a href="/json-in-typescript">JSON in TypeScript</a> for why <code>as User</code> is unsafe and what to use instead.</li>
         </ul>
 
         <h2>Interface or Type?</h2>

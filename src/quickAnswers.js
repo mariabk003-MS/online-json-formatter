@@ -17,6 +17,8 @@ export const QUICK_ANSWERS = {
     'Use the built-in json module: json.loads(text) turns a JSON string into Python objects, json.load(f) reads a file, and json.dumps(obj, indent=2) or json.dump(obj, f) writes JSON. Open files with encoding="utf-8".',
   'javascript-json-parse':
     'Use JSON.parse(text) to turn a JSON string into a JavaScript value, and JSON.stringify(value, null, 2) to turn a value into formatted JSON text. Wrap JSON.parse in try...catch, because it throws a SyntaxError for invalid JSON.',
+  'json-in-typescript':
+    "JSON.parse returns any, so a cast like as User checks nothing. Parse into unknown and validate it, with a type guard or a Zod schema (schema.parse(data)), which also gives you the type through z.infer. Dates come back as strings.",
   'json-lines':
     'JSON Lines (JSONL) is a text format with one complete JSON value per line, usually one object per record. It is used for logs, data exports and streaming, because each line can be read and written on its own.',
   'how-to-open-json-file':

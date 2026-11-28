@@ -154,6 +154,7 @@ export type User = z.infer<typeof UserSchema>`}</Code>
           <li><strong>Use several examples:</strong> paste an array with a few real items. Fields missing from some items become optional, and a field that is <code>null</code> in one item becomes nullable.</li>
           <li><strong>A field that is only ever null</strong> in your example becomes <code>z.null()</code>. Replace it with the real type once you know it.</li>
           <li><strong>Zod 3 or 4?</strong> Check <code>zod</code> in your package.json: version 4.x uses the Zod 4 output. The Zod 3 option writes the older <code>z.string().email()</code> style.</li>
+          <li><strong>New to runtime validation?</strong> <a href="/json-in-typescript">JSON in TypeScript</a> compares casts, type guards and Zod with tested examples.</li>
           <li>Only need types, no runtime checks? Use <a href="/json-to-typescript">JSON to TypeScript</a>. Need a standard schema for other languages? Use the <a href="/json-schema-generator">JSON Schema Generator</a>.</li>
         </ul>
 

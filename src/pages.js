@@ -54,6 +54,7 @@ export const PAGES = {
   '/json-size-calculator': () => import('./JsonSizeCalculator.jsx'),
   '/json-in-python': () => import('./GuidePythonJson.jsx'),
   '/javascript-json-parse': () => import('./GuideJsParse.jsx'),
+  '/json-in-typescript': () => import('./GuideTypescriptJson.jsx'),
   '/json-lines': () => import('./GuideJsonLines.jsx'),
   '/unexpected-token-in-json': () => import('./GuideUnexpectedToken.jsx'),
   '/curl-post-json': () => import('./GuideCurlJson.jsx'),

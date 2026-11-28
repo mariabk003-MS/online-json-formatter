@@ -118,6 +118,7 @@
 - [JSONDecodeError in Python](https://online-json-formatter-ten.vercel.app/jsondecodeerror-expecting-value)
 - [Not JSON Serializable (Python)](https://online-json-formatter-ten.vercel.app/object-is-not-json-serializable)
 - [JSON.parse in JavaScript](https://online-json-formatter-ten.vercel.app/javascript-json-parse)
+- [JSON in TypeScript](https://online-json-formatter-ten.vercel.app/json-in-typescript)
 - [Read a JSON File in Node.js](https://online-json-formatter-ten.vercel.app/read-json-file-nodejs)
 - [JSON Lines (JSONL)](https://online-json-formatter-ten.vercel.app/json-lines)
 - [How to Open a JSON File](https://online-json-formatter-ten.vercel.app/how-to-open-json-file)
