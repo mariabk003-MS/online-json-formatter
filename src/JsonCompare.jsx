@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import './ToolPage.css'
 import NavBar from './NavBar.jsx'
 import CodeEditor from './CodeEditor.jsx'
 import { safeFix } from './safeFix.js'
-import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages } from './ToolLayout.jsx'
-import { getErrorLocation, useLiveJsonCheck, describeText } from './toolUtils.js'
+import { ToolPanel, Tool, StatusBadge, EmptyBox, Messages, UrlBox } from './ToolLayout.jsx'
+import { getErrorLocation, useLiveJsonCheck, describeText, readTextFile, fetchText, useJsonHandoff } from './toolUtils.js'
 
 // Parses JSON, and quietly repairs small mistakes (like trailing commas) if needed.
 function parseWithFix(text) {
@@ -99,6 +99,10 @@ function JsonCompare() {
   const [filter, setFilter] = useState('all')
   const [error, setError] = useState('')
   const [errorLocation, setErrorLocation] = useState(null)
+  const [success, setSuccess] = useState('')
+  const [urlOpen, setUrlOpen] = useState(null) // 'left' | 'right' | null
+  const leftFileRef = useRef(null)
+  const rightFileRef = useRef(null)
   const leftCheck = useLiveJsonCheck(left)
   const rightCheck = useLiveJsonCheck(right)
 
@@ -106,6 +110,61 @@ function JsonCompare() {
     setDiffs(null)
     setError('')
     setErrorLocation(null)
+    setSuccess('')
+  }
+
+  const NAMES = { left: 'Original', right: 'Modified' }
+
+  // Puts text into one side (left = Original, right = Modified).
+  function setSide(side, text, message) {
+    if (side === 'left') setLeft(text)
+    else setRight(text)
+    resetResult()
+    if (message) setSuccess(message)
+  }
+
+  async function readFile(side, file) {
+    try {
+      setSide(side, await readTextFile(file), `"${file.name}" loaded into ${NAMES[side]}.`)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  // JSON sent with "Open in" goes into Original; the changed version is pasted next to it.
+  useJsonHandoff((text, message) =>
+    setSide('left', text, `${message} Now paste or load the changed version into Modified, then click Compare JSON.`)
+  )
+
+  // ?url=…&url2=… loads both files, so a comparison can be shared as one link.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const links = [['left', params.get('url')], ['right', params.get('url2')]].filter(([, url]) => url)
+    if (!links.length) return
+    Promise.all(links.map(([side, url]) => fetchText(url).then((text) => [side, text])))
+      .then((loaded) => {
+        for (const [side, text] of loaded) setSide(side, text)
+        setSuccess(loaded.length === 2 ? 'Both files loaded from the links. Click Compare JSON.' : 'File loaded from the link.')
+      })
+      .catch((err) => setError(err.message))
+    // Runs once when the page opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function urlBox(side) {
+    return (
+      urlOpen === side && (
+        <UrlBox
+          what="JSON"
+          onLoad={(text) => {
+            setUrlOpen(null)
+            setSide(side, text, `JSON loaded from the link into ${NAMES[side]}.`)
+          }}
+          onError={setError}
+          onClose={() => setUrlOpen(null)}
+        />
+      )
+    )
   }
 
   function parseSide(text, name) {
@@ -188,13 +247,36 @@ function JsonCompare() {
         changed. Key order is ignored. Your data never leaves your browser.
       </p>
 
+      {[['left', leftFileRef], ['right', rightFileRef]].map(([side, ref]) => (
+        <input
+          key={side}
+          ref={ref}
+          type="file"
+          accept=".json,.txt,application/json,text/plain"
+          hidden
+          aria-label={`Upload the ${NAMES[side]} JSON file`}
+          onChange={(event) => {
+            const file = event.target.files?.[0]
+            if (file) readFile(side, file)
+            event.target.value = ''
+          }}
+        />
+      ))}
+
       <div className="editor-layout">
         <ToolPanel
           title="Original"
           badge={<StatusBadge check={leftCheck} />}
-          tools={<Tool onClick={() => { setLeft(''); resetResult() }}>Clear</Tool>}
+          tools={
+            <>
+              <Tool onClick={() => leftFileRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(urlOpen === 'left' ? null : 'left')} title="Load a file from a link">URL</Tool>
+              <Tool onClick={() => setSide('left', '')}>Clear</Tool>
+            </>
+          }
           statusRight={describeText(left)}
         >
+          {urlBox('left')}
           <CodeEditor
             value={left}
             placeholder={'Paste the original JSON here...'}
@@ -204,19 +286,23 @@ function JsonCompare() {
             }}
             onKeyDown={handleKeyDown}
             errorLine={leftCheck?.location?.line || null}
-            onFileDrop={async (file) => {
-              setLeft(await file.text())
-              resetResult()
-            }}
+            onFileDrop={(file) => readFile('left', file)}
           />
         </ToolPanel>
 
         <ToolPanel
           title="Modified"
           badge={<StatusBadge check={rightCheck} />}
-          tools={<Tool onClick={() => { setRight(''); resetResult() }}>Clear</Tool>}
+          tools={
+            <>
+              <Tool onClick={() => rightFileRef.current?.click()}>Upload</Tool>
+              <Tool onClick={() => setUrlOpen(urlOpen === 'right' ? null : 'right')} title="Load a file from a link">URL</Tool>
+              <Tool onClick={() => setSide('right', '')}>Clear</Tool>
+            </>
+          }
           statusRight={describeText(right)}
         >
+          {urlBox('right')}
           <CodeEditor
             value={right}
             placeholder={'Paste the changed JSON here...\n\nTip: press Ctrl + Enter to compare.'}
@@ -226,10 +312,7 @@ function JsonCompare() {
             }}
             onKeyDown={handleKeyDown}
             errorLine={rightCheck?.location?.line || null}
-            onFileDrop={async (file) => {
-              setRight(await file.text())
-              resetResult()
-            }}
+            onFileDrop={(file) => readFile('right', file)}
           />
         </ToolPanel>
       </div>
@@ -245,7 +328,7 @@ function JsonCompare() {
         <Tool onClick={clearAll}>Clear all</Tool>
       </div>
 
-      <Messages error={error} location={errorLocation} />
+      <Messages error={error} success={success} location={errorLocation} />
 
       <ToolPanel
         title="Differences"
@@ -318,7 +401,7 @@ function JsonCompare() {
 
         <h2>How to Compare Two JSON Files</h2>
         <ol>
-          <li>Paste the original JSON into the left box and the changed JSON into the right box. You can also drop a .json file on each box.</li>
+          <li>Paste the original JSON into the left box and the changed JSON into the right box. You can also drop a .json file on each box, click Upload, or load a file from a link with URL.</li>
           <li>Click Compare JSON, or press Ctrl + Enter.</li>
           <li>Read the list of differences. Use the Added, Removed and Changed tabs to filter it.</li>
           <li>Click Swap to compare in the other direction.</li>
@@ -330,6 +413,7 @@ function JsonCompare() {
           <li>Ignores key order, so {'{"a":1,"b":2}'} and {'{"b":2,"a":1}'} count as the same.</li>
           <li>Compares nested objects and arrays at any depth.</li>
           <li>Repairs small mistakes like trailing commas automatically before comparing.</li>
+          <li>Share a comparison of two online files as one link: <code>/json-compare?url=FIRST&amp;url2=SECOND</code> opens both. Or send JSON here from the Formatter or Viewer with Open in.</li>
           <li>Works in your browser. Your JSON is never uploaded.</li>
         </ul>
 
